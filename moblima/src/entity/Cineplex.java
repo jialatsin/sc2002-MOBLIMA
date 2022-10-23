@@ -1,8 +1,9 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Cineplex {
+public class Cineplex implements Serializable {
     private String name;
     private String location;
     private String vendor;

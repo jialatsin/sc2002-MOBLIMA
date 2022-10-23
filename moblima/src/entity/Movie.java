@@ -1,9 +1,10 @@
 package entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Movie {
+public class Movie implements Serializable {
     public enum ContentRating {
         G, PG, PG13, R, NC17
     };

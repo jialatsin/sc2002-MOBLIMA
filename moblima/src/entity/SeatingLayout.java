@@ -1,8 +1,10 @@
 package entity;
 
+import java.io.Serializable;
+
 import entity.Seat.SeatStatus;
 
-public class SeatingLayout {
+public class SeatingLayout implements Serializable {
     Seat[][] seats;
     int rows;
     int columns;

@@ -1,6 +1,8 @@
 package entity;
 
-public class Seat {
+import java.io.Serializable;
+
+public class Seat implements Serializable {
     public enum SeatStatus {
         UNOCCUPIED, OCCUPIED, NOTEXIST
     };

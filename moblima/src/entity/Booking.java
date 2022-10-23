@@ -1,9 +1,10 @@
 package entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Booking {
+public class Booking implements Serializable {
     private String transactionID;
     private MovieGoer customer;
     private ArrayList<Ticket> tickets;

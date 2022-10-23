@@ -1,6 +1,8 @@
 package entity;
 
-public class Cinema {
+import java.io.Serializable;
+
+public class Cinema implements Serializable {
     public enum CinemaClass {
         PLATINUM, GOLD
     };

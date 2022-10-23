@@ -1,8 +1,9 @@
 package entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Showing {
+public class Showing implements Serializable {
     private int id;
     private SeatingLayout seatingAvailablity;
     private Movie movie;

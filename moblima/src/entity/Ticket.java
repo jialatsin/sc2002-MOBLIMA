@@ -1,6 +1,8 @@
 package entity;
 
-public class Ticket {
+import java.io.Serializable;
+
+public class Ticket implements Serializable {
     public enum Age {
         ADULT, SENIOR, CHILD
     };
