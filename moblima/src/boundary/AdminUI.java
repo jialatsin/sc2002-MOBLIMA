@@ -1,27 +1,13 @@
 package boundary;
 
+import java.util.ArrayList;
+
+import control.AdminController;
 import entity.Admin;
 
 public class AdminUI {
     public static void main() {
-        // TODO: Better login
-        Admin admin = new Admin("admin", "bofa");
-        boolean isLoggedIn = false;
-
-        System.out.println("===== ADMIN LOGIN =====");
-        do {
-            System.out.println("Enter username:");
-            String usernameInput = InputHandler.scanString();
-            System.out.println("Enter password:");
-            String passwordInput = InputHandler.scanString();
-            if (usernameInput.equals(admin.getUsername()) &&
-                    passwordInput.equals(admin.getPassword())) {
-                isLoggedIn = true;
-                System.out.println("Login successful!");
-            } else {
-                System.out.println("Failed to login!");
-            }
-        } while (!isLoggedIn);
+        login();
 
         int selection;
         do {
@@ -43,6 +29,34 @@ public class AdminUI {
                     return;
             }
         } while (true);
+    }
+
+    private static void login() {
+        // TODO: Better login
+        // Admin admin = new Admin("admin", "bofa");
+        // AdminController.create(admin);
+        ArrayList<Admin> adminData = AdminController.readFromDatabase();
+        boolean isLoggedIn = false;
+
+        System.out.println("===== ADMIN LOGIN =====");
+        do {
+            System.out.println("Enter username:");
+            String usernameInput = InputHandler.scanString();
+            System.out.println("Enter password:");
+            String passwordInput = InputHandler.scanString();
+            for (Admin admin : adminData) {
+                // Input username and password is in Admin database
+                if (usernameInput.equals(admin.getUsername()) &&
+                        passwordInput.equals(admin.getPassword())) {
+                    isLoggedIn = true;
+                    System.out.println("Login successful!");
+                    break;
+                }
+            }
+            if (!isLoggedIn) {
+                System.out.println("Login failed!");
+            }
+        } while (!isLoggedIn);
     }
 
 }
