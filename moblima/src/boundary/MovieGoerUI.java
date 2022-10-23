@@ -1,6 +1,6 @@
 package boundary;
 
-public class MovieGoerUI extends UserInterface {
+public class MovieGoerUI {
     public static void main() {
         int selection;
         do {
@@ -14,7 +14,7 @@ public class MovieGoerUI extends UserInterface {
             System.out.println("7. Add Review");
             System.out.println("8. Return to Main Menu");
 
-            selection = scanInt();
+            selection = InputHandler.scanInt();
             switch (selection) {
                 case 1:
                     break;

@@ -1,9 +1,27 @@
 package boundary;
 
-public class AdminUI extends UserInterface {
+import entity.Admin;
+
+public class AdminUI {
     public static void main() {
-        // TODO: Handle Login
+        // TODO: Better login
+        Admin admin = new Admin("admin", "bofa");
+        boolean isLoggedIn = false;
+
         System.out.println("===== ADMIN LOGIN =====");
+        do {
+            System.out.println("Enter username:");
+            String usernameInput = InputHandler.scanString();
+            System.out.println("Enter password:");
+            String passwordInput = InputHandler.scanString();
+            if (usernameInput.equals(admin.getUsername()) &&
+                    passwordInput.equals(admin.getPassword())) {
+                isLoggedIn = true;
+                System.out.println("Login successful!");
+            } else {
+                System.out.println("Failed to login!");
+            }
+        } while (!isLoggedIn);
 
         int selection;
         do {
@@ -13,7 +31,7 @@ public class AdminUI extends UserInterface {
             System.out.println("3. Configure System Settings");
             System.out.println("4. Return to Main Menu");
 
-            selection = scanInt();
+            selection = InputHandler.scanInt();
             switch (selection) {
                 case 1:
                     break;
@@ -26,4 +44,5 @@ public class AdminUI extends UserInterface {
             }
         } while (true);
     }
+
 }

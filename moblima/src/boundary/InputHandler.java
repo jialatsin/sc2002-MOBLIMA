@@ -3,8 +3,9 @@ package boundary;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public abstract class UserInterface {
-    public static Scanner sc = new Scanner(System.in);
+public class InputHandler {
+    // Scanner must only be initialized once
+    private static Scanner sc = new Scanner(System.in);
 
     public static int scanInt() {
         int input;
@@ -14,8 +15,9 @@ public abstract class UserInterface {
                 break;
             } catch (InputMismatchException e) {
                 System.out.println("Wrong input!");
+            } finally {
+                sc.nextLine();
             }
-            sc.nextLine();
         }
         return input;
     }
@@ -23,13 +25,12 @@ public abstract class UserInterface {
     public static String scanString() {
         String input = "";
         while (true) {
+            input = sc.nextLine();
             if (!input.equals("")) {
-                input = sc.next();
                 break;
             } else {
-                System.out.println("Wrong input!");
+                System.out.println("Input must not be empty!");
             }
-            sc.nextLine();
         }
         return input;
     }

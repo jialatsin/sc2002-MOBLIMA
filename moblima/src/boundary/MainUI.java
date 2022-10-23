@@ -2,7 +2,7 @@ package boundary;
 
 import control.MainController;
 
-public class MainUI extends UserInterface {
+public class MainUI {
     public static void main() {
         MainController.start();
 
@@ -13,7 +13,7 @@ public class MainUI extends UserInterface {
             System.out.println("2. Admin");
             System.out.println("3. Exit");
 
-            selection = scanInt();
+            selection = InputHandler.scanInt();
             switch (selection) {
                 case 1:
                     MovieGoerUI.main();
