@@ -4,6 +4,7 @@ import java.util.*;
 import entity.Movie;
 import entity.Movie.*;
 
+import java.nio.file.attribute.FileStoreAttributeView;
 import java.time.LocalDate;
 
 public class MovieSearchController {
@@ -26,8 +27,52 @@ public class MovieSearchController {
         ArrayList<Movie> MovieList = new ArrayList<Movie>();
         MovieList.add(thor);
         MovieList.add(meninblack);
+        int movieFound = 0;
         for (Movie i : MovieList) {
             if ((movieTitle.toLowerCase()).compareTo(i.getTitle().toLowerCase()) == 0) {
+                movieFound = 1;
+                System.out.println("\n=================================================");
+                System.out.println("Movie: " + i.getTitle());
+                System.out.println("Release Date: " + i.getReleaseDate());
+                System.out.printf("Genres: ");
+                for (String k : i.getGenres())
+                    System.out.printf(k + ", ");
+                System.out.printf("\n");
+                System.out.println("Showing Status: " + i.getShowingStatus());
+                System.out.println("=================================================\n");
+            }
+        }
+        if (movieFound == 0) {
+            System.out.println("Movie not found");
+        }
+    }
+
+    public static void listAll() {
+        ArrayList<Movie> MovieList = new ArrayList<Movie>();
+        MovieList.add(thor);
+        MovieList.add(meninblack);
+        System.out.println();
+        for (Movie i : MovieList) {
+            System.out.println("=================================================");
+            System.out.println("Movie: " + i.getTitle());
+            System.out.println("Release Date: " + i.getReleaseDate());
+            System.out.printf("Genres: ");
+            for (String k : i.getGenres())
+                System.out.printf(k + ", ");
+                System.out.printf("\n");
+            System.out.println("Showing Status: " + i.getShowingStatus());
+        }
+        System.out.println("=================================================\n");
+    }
+
+    public static void fullMovieDetails(String movieTitle) {
+        ArrayList<Movie> MovieList = new ArrayList<Movie>();
+        MovieList.add(thor);
+        MovieList.add(meninblack);
+        int movieFound = 0;
+        for (Movie i : MovieList) {
+            if ((movieTitle.toLowerCase()).compareTo(i.getTitle().toLowerCase()) == 0) {
+                movieFound = 1;
                 System.out.println("\n=================================================");
                 System.out.println("Movie: " + i.getTitle());
                 System.out.println("id: " + i.getId());
@@ -48,32 +93,8 @@ public class MovieSearchController {
                 System.out.println("=================================================\n");
             }
         }
-
-    }
-
-    public static void listAll() {
-        ArrayList<Movie> MovieList = new ArrayList<Movie>();
-        MovieList.add(thor);
-        MovieList.add(meninblack);
-        for (Movie i : MovieList) {
-            System.out.println("\n=================================================\n");
-            System.out.println("Movie: " + i.getTitle());
-            System.out.println("id: " + i.getId());
-            System.out.println("Synopsis: " + i.getSynopsis());
-            System.out.println("Director: " + i.getDirector());
-            System.out.printf("Cast: ");
-            for (String j : i.getCast())
-                System.out.printf(j + ", ");
-            System.out.printf("\n");
-            System.out.printf("Genres: ");
-            for (String k : i.getGenres())
-                System.out.printf(k + ", ");
-            System.out.printf("\n");
-            System.out.println("Release Date: " + i.getReleaseDate());
-            System.out.println("Content Rating: " + i.getContentRating());
-            System.out.println("Movie Type: " + i.getMovieType());
-            System.out.println("Showing Status: " + i.getShowingStatus());
+        if (movieFound == 0) {
+            System.out.println("Movie not found");
         }
-        System.out.println("\n=================================================\n");
     }
 }
