@@ -32,9 +32,7 @@ public class AdminUI {
     }
 
     private static void login() {
-        // TODO: Better login
-        // Admin admin = new Admin("admin", "bofa");
-        // AdminController.create(admin);
+        // TODO: Better login validation?
         ArrayList<Admin> adminData = AdminController.readFromDatabase();
         boolean isLoggedIn = false;
 
@@ -44,8 +42,8 @@ public class AdminUI {
             String usernameInput = InputHandler.scanString();
             System.out.println("Enter password:");
             String passwordInput = InputHandler.scanString();
+            // Search for input username and password in Admin database
             for (Admin admin : adminData) {
-                // Input username and password is in Admin database
                 if (usernameInput.equals(admin.getUsername()) &&
                         passwordInput.equals(admin.getPassword())) {
                     isLoggedIn = true;
@@ -58,5 +56,4 @@ public class AdminUI {
             }
         } while (!isLoggedIn);
     }
-
 }
