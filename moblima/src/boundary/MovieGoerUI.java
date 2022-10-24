@@ -1,5 +1,7 @@
 package boundary;
 
+import control.MovieSearchController;
+
 public class MovieGoerUI {
     public static void main() {
         int selection;
@@ -17,6 +19,7 @@ public class MovieGoerUI {
             selection = InputHandler.scanInt();
             switch (selection) {
                 case 1:
+                    SearchMovie();
                     break;
                 case 2:
                     break;
@@ -34,5 +37,26 @@ public class MovieGoerUI {
                     return;
             }
         } while (true);
+    }
+
+    public static void SearchMovie() {
+        do {
+            System.out.println("===== SEARCH/LIST MOVIE =====");
+            System.out.println("1. Search By Title");
+            System.out.println("2. List All Movies");
+            int choice = InputHandler.scanInt();
+            switch (choice) {
+                case 1:
+                    String title = InputHandler.scanString();
+                    MovieSearchController.searchTitle(title);
+                    break;
+                case 2:
+                    MovieSearchController.listAll();
+                    break;
+                default:
+                    System.out.println("Wrong input");
+            }
+        } while (true);
+
     }
 }
