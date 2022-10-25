@@ -21,6 +21,12 @@ public class Review implements Serializable {
 
     @Override
     public String toString() {
-        return "Review [rating=" + rating + ", reviewText=" + reviewText + "]";
+            StringBuffer stars = new StringBuffer();
+            int solidStars = rating;
+            for (int s=0; s<5; s++) {
+                if (solidStars-->0) stars.insert(s, "★");
+                else stars.insert(s, "☆");
+            }
+        return " [rating=" + stars.toString() + ", reviewText=" + reviewText + "]";
     }
 }

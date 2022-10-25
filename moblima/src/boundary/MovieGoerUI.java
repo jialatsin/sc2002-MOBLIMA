@@ -142,13 +142,14 @@ public class MovieGoerUI {
         System.out.println("Movie Type: " + i.getMovieType());
         System.out.println("Showing Status: " + i.getShowingStatus());
         System.out.println();
-        System.out.println("Average Review Rating: " + i.getAverageReviewRating());
-        int numReviews = i.getReviews().size(), j = 0;
+        System.out.println("Average Review Rating: " + i.getAverageReviewRating() + "★");
+        //print reviews
+        int numReviews = i.getReviews().size(), j = 1;
         if (numReviews > 0)
             System.out.println("Reviews: ");
-        while (numReviews > 0) {
-            System.out.println("\tReview " + (j + 1) + ": " + i.getReviews().get(j).getReviewText());
-            numReviews--;
+        ArrayList<Review> reviewList = i.getReviews();
+        for (Review R : reviewList) {
+            System.out.println("Review " + j + R);
             j++;
         }
 
