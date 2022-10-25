@@ -2,11 +2,9 @@ package entity;
 
 import java.io.Serializable;
 
-public class Cinema implements Serializable {
-    public enum CinemaClass {
-        PLATINUM, GOLD
-    };
+import entity.Constants.CinemaClass;
 
+public class Cinema implements Serializable {
     private String code;
     private SeatingLayout seatingLayout;
     private CinemaClass cinemaClass;

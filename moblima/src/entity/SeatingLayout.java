@@ -2,7 +2,7 @@ package entity;
 
 import java.io.Serializable;
 
-import entity.Seat.SeatStatus;
+import entity.Constants.SeatStatus;
 
 public class SeatingLayout implements Serializable {
     Seat[][] seats;

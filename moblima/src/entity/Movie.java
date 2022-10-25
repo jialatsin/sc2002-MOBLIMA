@@ -4,18 +4,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import entity.Constants.ContentRating;
+import entity.Constants.MovieType;
+import entity.Constants.ShowingStatus;
+
 public class Movie implements Serializable {
-    public enum ContentRating {
-        G, PG, PG13, R, NC17
-    };
-
-    public enum MovieType {
-        REGULAR_TWO_D, REGULAR_THREE_D, BLOCKBUSTER_TWO_D, BLOCKBUSTER_THREE_D
-    };
-
-    public enum ShowingStatus {
-        COMING_SOON, PREVIEW, NOW_SHOWING, END_OF_SHOWING
-    };
 
     private int id;
     private String title;

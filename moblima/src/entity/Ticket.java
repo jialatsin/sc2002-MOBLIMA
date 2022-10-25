@@ -2,10 +2,9 @@ package entity;
 
 import java.io.Serializable;
 
+import entity.Constants.Age;
+
 public class Ticket implements Serializable {
-    public enum Age {
-        ADULT, SENIOR, CHILD
-    };
 
     private Seat seat;
     private Age age;
