@@ -1,6 +1,7 @@
 package boundary;
 
 import control.MovieSearchController;
+import control.ReviewController;
 
 public class MovieGoerUI {
     public static void main() {
@@ -22,7 +23,7 @@ public class MovieGoerUI {
                     SearchMovie();
                     break;
                 case 2:
-                    viewDetails();
+                    ViewDetails();
                     break;
                 case 3:
                     break;
@@ -33,6 +34,7 @@ public class MovieGoerUI {
                 case 6:
                     break;
                 case 7:
+                    AddReview();
                     break;
                 case 8:
                     return;
@@ -64,9 +66,15 @@ public class MovieGoerUI {
         } while (true);
     }
 
-    public static void viewDetails() {
+    public static void ViewDetails() {
         System.out.printf("Input movie title: ");
         String title = InputHandler.scanString();
         MovieSearchController.fullMovieDetails(title);
+    }
+
+    public static void AddReview() {
+        System.out.printf("Input movie title to review: ");
+        String title = InputHandler.scanString();
+        ReviewController.addReview(title);
     }
 }
