@@ -23,7 +23,7 @@ public class Movie implements Serializable {
 
     private ShowingStatus showingStatus = ShowingStatus.COMING_SOON;
     private ArrayList<Review> reviews = new ArrayList<Review>();
-    private double reviewRating = 0;
+    private double averageReviewRating = 0;
     private int ticketSales = 0;
 
     public Movie(int id, String title, String synopsis, String director, ArrayList<String> cast,
@@ -44,7 +44,7 @@ public class Movie implements Serializable {
         return "Movie [id=" + id + ", title=" + title + ", synopsis=" + synopsis + ", director=" + director + ", cast="
                 + cast + ", genres=" + genres + ", releaseDate=" + releaseDate + ", contentRating=" + contentRating
                 + ", movieType=" + movieType + ", showingStatus=" + showingStatus + ", reviews=" + reviews
-                + ", reviewRating=" + reviewRating + ", ticketSales=" + ticketSales + "]";
+                + ", reviewRating=" + averageReviewRating + ", ticketSales=" + ticketSales + "]";
     }
 
     public int getId() {
@@ -111,12 +111,12 @@ public class Movie implements Serializable {
         this.reviews = reviews;
     }
 
-    public double getReviewRating() {
-        return reviewRating;
+    public double getAverageReviewRating() {
+        return averageReviewRating;
     }
 
-    public void setReviewRating(double reviewRating) {
-        this.reviewRating = reviewRating;
+    public void setAverageReviewRating(double reviewRating) {
+        this.averageReviewRating = reviewRating;
     }
 
     public int getTicketSales() {
