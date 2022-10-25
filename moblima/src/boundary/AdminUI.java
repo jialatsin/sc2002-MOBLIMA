@@ -11,15 +11,16 @@ public class AdminUI {
 
         int selection;
         do {
-            System.out.println("===== ADMIN =====");
-            System.out.println("1. Create/Update/Remove Movie Listing");
-            System.out.println("2. Create/Update/Remove Movie Showings");
-            System.out.println("3. Configure System Settings");
-            System.out.println("4. Return to Main Menu");
+            System.out.println("\n===== ADMIN =====\n"
+                    + "1. Create/Update/Remove Movie Listing\n"
+                    + "2. Create/Update/Remove Movie Showings\n"
+                    + "3. Configure System Settings\n"
+                    + "4. Logout to Main Menu\n");
 
             selection = InputHandler.scanInt();
             switch (selection) {
                 case 1:
+                    MovieListingCUR.main();
                     break;
                 case 2:
                     break;
@@ -32,9 +33,7 @@ public class AdminUI {
     }
 
     private static void login() {
-        // TODO: Better login
-        // Admin admin = new Admin("admin", "bofa");
-        // AdminController.create(admin);
+        // TODO: Better login validation?
         ArrayList<Admin> adminData = AdminController.readFromDatabase();
         boolean isLoggedIn = false;
 
@@ -44,8 +43,8 @@ public class AdminUI {
             String usernameInput = InputHandler.scanString();
             System.out.println("Enter password:");
             String passwordInput = InputHandler.scanString();
+            // Search for input username and password in Admin database
             for (Admin admin : adminData) {
-                // Input username and password is in Admin database
                 if (usernameInput.equals(admin.getUsername()) &&
                         passwordInput.equals(admin.getPassword())) {
                     isLoggedIn = true;
@@ -58,5 +57,4 @@ public class AdminUI {
             }
         } while (!isLoggedIn);
     }
-
 }

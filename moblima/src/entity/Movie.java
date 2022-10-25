@@ -1,9 +1,8 @@
 package entity;
 
 import java.io.Serializable;
-import java.time.LocalDate; 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Movie implements Serializable {
     public enum ContentRating {
@@ -11,7 +10,7 @@ public class Movie implements Serializable {
     };
 
     public enum MovieType {
-        BLOCKBUSTER, TWO_D, THREE_D
+        REGULAR_TWO_D, REGULAR_THREE_D, BLOCKBUSTER_TWO_D, BLOCKBUSTER_THREE_D
     };
 
     public enum ShowingStatus {
@@ -26,30 +25,33 @@ public class Movie implements Serializable {
     private ArrayList<String> genres;
     private LocalDate releaseDate;
 
-    private ArrayList<Review> reviews;
-    private double reviewRating;
-    private int ticketSales;
-
     private ContentRating contentRating;
     private MovieType movieType;
-    private ShowingStatus showingStatus;
 
-    public Movie(int id, String title, String synopsis, String director, ArrayList<String> cast2,
-            ArrayList<String> genres2, LocalDate releaseDate, ContentRating contentRating, MovieType movieType,
-            ShowingStatus showingStatus) {
+    private ShowingStatus showingStatus = ShowingStatus.COMING_SOON;
+    private ArrayList<Review> reviews = new ArrayList<Review>();
+    private double reviewRating = 0;
+    private int ticketSales = 0;
+
+    public Movie(int id, String title, String synopsis, String director, ArrayList<String> cast,
+            ArrayList<String> genres, LocalDate releaseDate, ContentRating contentRating, MovieType movieType) {
         this.id = id;
         this.title = title;
         this.synopsis = synopsis;
         this.director = director;
-        this.cast = cast2;
-        this.genres = genres2;
+        this.cast = cast;
+        this.genres = genres;
         this.releaseDate = releaseDate;
-        this.reviews = new ArrayList<Review>();
-        this.reviewRating = 0;
-        this.ticketSales = 0;
         this.contentRating = contentRating;
         this.movieType = movieType;
-        this.showingStatus = showingStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "Movie [id=" + id + ", title=" + title + ", synopsis=" + synopsis + ", director=" + director + ", cast="
+                + cast + ", genres=" + genres + ", releaseDate=" + releaseDate + ", contentRating=" + contentRating
+                + ", movieType=" + movieType + ", showingStatus=" + showingStatus + ", reviews=" + reviews
+                + ", reviewRating=" + reviewRating + ", ticketSales=" + ticketSales + "]";
     }
 
     public int getId() {

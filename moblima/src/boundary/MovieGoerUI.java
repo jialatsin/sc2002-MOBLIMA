@@ -7,15 +7,15 @@ public class MovieGoerUI {
     public static void main() {
         int selection;
         do {
-            System.out.println("===== MOVIE GOER =====");
-            System.out.println("1. Search/List Movie");
-            System.out.println("2. View Movie Details");
-            System.out.println("3. Check Seat Availabilty");
-            System.out.println("4. Book and Purchase Ticket");
-            System.out.println("5. View Booking History");
-            System.out.println("6. List Top 5 Ranking Movies");
-            System.out.println("7. Add Review");
-            System.out.println("8. Return to Main Menu");
+            System.out.println("\n===== MOVIE GOER =====\n"
+                    + "1. Search/List Movies\n"
+                    + "2. View Movie Details\n"
+                    + "3. Check Seat Availabilty\n"
+                    + "4. Book and Purchase Ticket\n"
+                    + "5. View Booking History\n"
+                    + "6. List Top 5 Ranking Movies\n"
+                    + "7. Add Review\n"
+                    + "8. Return to Main Menu\n");
 
             selection = InputHandler.scanInt();
             switch (selection) {
