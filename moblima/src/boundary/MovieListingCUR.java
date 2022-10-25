@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import control.MovieController;
 import entity.Movie;
+import entity.Constants.ContentRating;
+import entity.Constants.MovieType;
 
 public class MovieListingCUR {
     public static void main() {
@@ -78,7 +80,7 @@ public class MovieListingCUR {
         System.out.println("\nEnter release date (dd/MM/yyyy):");
         LocalDate releaseDate = InputHandler.scanDate();
 
-        Movie.ContentRating contentRating = null;
+        ContentRating contentRating = null;
         do {
             System.out.println("\nSelect movie content rating:\n"
                     + "1. G\n"
@@ -90,24 +92,24 @@ public class MovieListingCUR {
             n = InputHandler.scanInt();
             switch (n) {
                 case 1:
-                    contentRating = Movie.ContentRating.G;
+                    contentRating = ContentRating.G;
                     break;
                 case 2:
-                    contentRating = Movie.ContentRating.PG;
+                    contentRating = ContentRating.PG;
                     break;
                 case 3:
-                    contentRating = Movie.ContentRating.PG13;
+                    contentRating = ContentRating.PG13;
                     break;
                 case 4:
-                    contentRating = Movie.ContentRating.R;
+                    contentRating = ContentRating.R;
                     break;
                 case 5:
-                    contentRating = Movie.ContentRating.NC17;
+                    contentRating = ContentRating.NC17;
                     break;
             }
         } while (n < 1 || n > 5);
 
-        Movie.MovieType movieType = null;
+        MovieType movieType = null;
         do {
             System.out.println("\nSelect movie type:\n"
                     + "1. Regular 2D\n"
@@ -118,16 +120,16 @@ public class MovieListingCUR {
             n = InputHandler.scanInt();
             switch (n) {
                 case 1:
-                    movieType = Movie.MovieType.REGULAR_TWO_D;
+                    movieType = MovieType.REGULAR_TWO_D;
                     break;
                 case 2:
-                    movieType = Movie.MovieType.REGULAR_THREE_D;
+                    movieType = MovieType.REGULAR_THREE_D;
                     break;
                 case 3:
-                    movieType = Movie.MovieType.BLOCKBUSTER_TWO_D;
+                    movieType = MovieType.BLOCKBUSTER_TWO_D;
                     break;
                 case 4:
-                    movieType = Movie.MovieType.BLOCKBUSTER_THREE_D;
+                    movieType = MovieType.BLOCKBUSTER_THREE_D;
                     break;
             }
         } while (n < 1 || n > 4);

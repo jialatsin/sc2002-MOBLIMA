@@ -2,10 +2,9 @@ package entity;
 
 import java.io.Serializable;
 
+import entity.Constants.SeatStatus;
+
 public class Seat implements Serializable {
-    public enum SeatStatus {
-        UNOCCUPIED, OCCUPIED, NOTEXIST
-    };
 
     private int row;
     private int column;
