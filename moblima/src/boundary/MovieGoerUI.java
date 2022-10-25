@@ -39,6 +39,7 @@ public class MovieGoerUI {
                     viewDetails(movieObject);
                     break;
                 case 3:
+                    bookTicket();
                     break;
                 case 4:
                     break;
@@ -65,12 +66,13 @@ public class MovieGoerUI {
         } while (true);
     }
 
-    public static void searchMovie() {
+    public static void searchMovie() { // another UI that is pretty unnecessary but we'll keep it to prevent nested
+                                       // switchcases
         do {
-            System.out.println("===== SEARCH/LIST MOVIE =====");
-            System.out.println("1. Search By Title");
-            System.out.println("2. List All Movies");
-            System.out.println("0. Return");
+            System.out.println("===== SEARCH/LIST MOVIE =====\n"
+                    + "1. Search By Title\n"
+                    + "2. List All Movies\n"
+                    + "0. Return\n");
             int choice = InputHandler.scanInt();
             switch (choice) {
                 case 1:
@@ -92,7 +94,7 @@ public class MovieGoerUI {
         } while (true);
     }
 
-    public static Movie searchMovieObject(String movieTitle) {
+    public static Movie searchMovieObject(String movieTitle) { // searches and returns requested movie object
         ArrayList<Movie> MovieList = movieController.readFromDatabase();
         for (Movie i : MovieList) {
             if ((movieTitle.toLowerCase()).compareTo(i.getTitle().toLowerCase()) == 0) {
@@ -104,7 +106,8 @@ public class MovieGoerUI {
 
     }
 
-    public static boolean updateMovieObject(Movie updatedMovie) {
+    public static boolean updateMovieObject(Movie updatedMovie) { // method that overwrites database everytime a movie
+                                                                  // has an update
         ArrayList<Movie> MovieList = movieController.readFromDatabase();
         for (int i = 0; i < MovieList.size(); i++) {
             if ((updatedMovie.getTitle().toLowerCase()).compareTo(MovieList.get(i).getTitle().toLowerCase()) == 0) {
@@ -117,53 +120,54 @@ public class MovieGoerUI {
     }
 
     public static void searchTitle(Movie movie) { // Method from SeachMovie() to find movie based on title
-        System.out.println("\n=================================================");
-        System.out.println("Movie: " + movie.getTitle());
-        System.out.println("Release Date: " + movie.getReleaseDate());
-        System.out.printf("Genres: ");
-        for (String k : movie.getGenres())
+        System.out.printf("\n================================================="
+                + "\nMovie: " + movie.getTitle()
+                + "\nRelease Date: " + movie.getReleaseDate()
+                + "\nGenres: ");
+        for (String k : movie.getGenres()) {
             System.out.printf(k + ", ");
-        System.out.printf("\n");
-        System.out.println("Showing Status: " + movie.getShowingStatus());
-        System.out.println("=================================================\n");
+        }
+        System.out.printf("\n"
+                + "Showing Status: " + movie.getShowingStatus()
+                + "\n=================================================\n");
     }
 
     public static void listAll() { // Method from SeachMovie() to list all movies in db
         ArrayList<Movie> MovieList = movieController.readFromDatabase();
         System.out.println();
         for (Movie movie : MovieList) {
-            System.out.println("=================================================");
-            System.out.println("Movie: " + movie.getTitle());
-            System.out.println("Release Date: " + movie.getReleaseDate());
-            System.out.printf("Genres: ");
+            System.out.printf("\n================================================="
+                    + "\nMovie: " + movie.getTitle()
+                    + "\nRelease Date: " + movie.getReleaseDate()
+                    + "\nGenres: ");
             for (String k : movie.getGenres())
                 System.out.printf(k + ", ");
-            System.out.printf("\n");
-            System.out.println("Showing Status: " + movie.getShowingStatus());
+            System.out.printf("\n"
+                    + "Showing Status: " + movie.getShowingStatus());
         }
-        System.out.println("=================================================\n");
+        System.out.println("\n=================================================\n");
     }
 
-    public static void viewDetails(Movie movie) {
-        System.out.println("\n=================================================");
-        System.out.println("Movie: " + movie.getTitle());
-        System.out.println("id: " + movie.getId());
-        System.out.println("Synopsis: " + movie.getSynopsis());
-        System.out.println("Director: " + movie.getDirector());
-        System.out.printf("Cast: ");
+    public static void viewDetails(Movie movie) { // prints all details of a movie
+        System.out.println("\n================================================="
+                + "\nMovie: " + movie.getTitle()
+                + "\nid: " + movie.getId()
+                + "\nSynopsis: " + movie.getSynopsis()
+                + "\nDirector: " + movie.getDirector()
+                + "\nCast: ");
         for (String j : movie.getCast())
             System.out.printf(j + ", ");
-        System.out.printf("\n");
-        System.out.printf("Genres: ");
+        System.out.printf("\n"
+                + "\nGenres: ");
         for (String genre : movie.getGenres())
             System.out.printf(genre + ", ");
-        System.out.printf("\n");
-        System.out.println("Release Date: " + movie.getReleaseDate());
-        System.out.println("Content Rating: " + movie.getContentRating());
-        System.out.println("Movie Type: " + movie.getMovieType());
-        System.out.println("Showing Status: " + movie.getShowingStatus());
-        System.out.println();
-        System.out.println("Average Review Rating: " + movie.getAverageReviewRating() + "*");
+        System.out.printf("\n"
+                + "\nRelease Date: " + movie.getReleaseDate()
+                + "\nContent Rating: " + movie.getContentRating()
+                + "\nMovie Type: " + movie.getMovieType()
+                + "\nShowing Status: " + movie.getShowingStatus()
+                + "\n"
+                + "\nAverage Review Rating: " + movie.getAverageReviewRating() + "*");
         // print reviews
         int numReviews = movie.getReviews().size(), reviewNum = 1;
         if (numReviews > 0)
@@ -177,12 +181,18 @@ public class MovieGoerUI {
         System.out.println("=================================================\n");
     }
 
+    public static void bookTicket() {
+        System.out.printf("Input movie to book tickets: ");
+        String movie = InputHandler.scanString();
+    }
+
     public static Movie addReview(Movie movie) {
         System.out.printf("Rate " + movie.getTitle() + " from 1-5: ");
         int rating = InputHandler.scanInt();
         System.out.println("Input your reviews for " + movie.getTitle() + ": ");
         String userReview = InputHandler.scanString();
         Review newReview = new Review(rating, userReview); // create new review
+
         ArrayList<Review> reviewList = movie.getReviews(); // retrieve exisiting reviewList
         reviewList.add(newReview);
         movie.setReviews(reviewList); // update reviewList
