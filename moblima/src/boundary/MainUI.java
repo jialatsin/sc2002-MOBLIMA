@@ -8,10 +8,10 @@ public class MainUI {
 
         int selection;
         do {
-            System.out.println("===== MAIN MENU =====");
-            System.out.println("1. Movie Goer");
-            System.out.println("2. Admin");
-            System.out.println("3. Exit");
+            System.out.println("\n===== MAIN MENU =====\n"
+                    + "1. Movie Goer\n"
+                    + "2. Admin\n"
+                    + "3. Exit\n");
 
             selection = InputHandler.scanInt();
             switch (selection) {

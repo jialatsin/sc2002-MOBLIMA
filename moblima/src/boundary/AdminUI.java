@@ -11,15 +11,16 @@ public class AdminUI {
 
         int selection;
         do {
-            System.out.println("===== ADMIN =====");
-            System.out.println("1. Create/Update/Remove Movie Listing");
-            System.out.println("2. Create/Update/Remove Movie Showings");
-            System.out.println("3. Configure System Settings");
-            System.out.println("4. Return to Main Menu");
+            System.out.println("\n===== ADMIN =====\n"
+                    + "1. Create/Update/Remove Movie Listing\n"
+                    + "2. Create/Update/Remove Movie Showings\n"
+                    + "3. Configure System Settings\n"
+                    + "4. Logout to Main Menu\n");
 
             selection = InputHandler.scanInt();
             switch (selection) {
                 case 1:
+                    MovieListingCUR.main();
                     break;
                 case 2:
                     break;
