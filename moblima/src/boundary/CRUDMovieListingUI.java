@@ -8,7 +8,7 @@ import entity.Movie;
 import entity.Constants.ContentRating;
 import entity.Constants.MovieType;
 
-public class MovieListingCUR {
+public class CRUDMovieListingUI {
     private static MovieController movieController = new MovieController();
 
     public static void main() {

@@ -9,7 +9,7 @@ public class AdminUI {
     private static AdminController adminController = new AdminController();
 
     public static void main() {
-        login();
+        // login();
 
         int selection;
         do {
@@ -22,7 +22,7 @@ public class AdminUI {
             selection = InputHandler.scanInt();
             switch (selection) {
                 case 1:
-                    MovieListingCUR.main();
+                    CRUDMovieListingUI.main();
                     break;
                 case 2:
                     break;

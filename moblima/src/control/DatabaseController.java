@@ -15,17 +15,12 @@ public class DatabaseController<DataType> {
         this.filePath = filePath;
     }
 
-    public boolean addToDatabase(DataType data) {
+    public void addToDatabase(DataType data) {
         try {
             ArrayList<DataType> dataList = new ArrayList<DataType>();
             // Append new dataList entry to existing database file
             if (new File(filePath).exists()) {
                 dataList = readFromDatabase();
-            }
-
-            if (dataList.contains(data)) {
-                System.out.println("Already exists in database!");
-                return false;
             }
 
             dataList.add(data);
@@ -37,7 +32,6 @@ public class DatabaseController<DataType> {
             oos.close();
         } catch (IOException e) {
         }
-        return true;
     }
 
     public ArrayList<DataType> readFromDatabase() {
