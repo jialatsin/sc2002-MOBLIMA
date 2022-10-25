@@ -23,10 +23,9 @@ public class Review implements Serializable {
     public String toString() {
             StringBuffer stars = new StringBuffer();
             int solidStars = rating;
-            for (int s=0; s<5; s++) {
-                if (solidStars-->0) stars.insert(s, "★");
-                else stars.insert(s, "☆");
+            for (int i=0; i<solidStars; i++) {
+                stars.insert(i, "*");
             }
-        return " [rating=" + stars.toString() + ", reviewText=" + reviewText + "]";
+        return " [rating = " + stars.toString() + ", reviewText = \"" + reviewText + "\"]";
     }
 }

@@ -2,6 +2,7 @@ package boundary;
 
 import control.MovieController;
 import java.util.*;
+
 import entity.Movie;
 import entity.Review;
 
@@ -12,6 +13,7 @@ public class MovieGoerUI {
         int selection;
         String movieTitle;
         Movie mov;
+        boolean updated;
         do {
             System.out.println("\n===== MOVIE GOER =====\n"
                     + "1. Search/List Movies\n"
@@ -50,7 +52,11 @@ public class MovieGoerUI {
                     mov = SearchMovieObject(movieTitle);
                     if (mov == null)
                         break;
-                    AddReview(mov);
+                    Movie newMovie = AddReview(mov);
+                    updated = UpdateMovieObject(newMovie);
+                    if (updated == true) {
+                        System.out.println("Review added");
+                    } else System.out.println("False");
                     break;
                 case 0:
                     return;
@@ -97,83 +103,96 @@ public class MovieGoerUI {
 
     }
 
-    public static void SearchTitle(Movie i) { // Method from SeachMovie() to find movie based on title
+    public static boolean UpdateMovieObject(Movie updatedMovie) {
+        ArrayList<Movie> MovieList = movieController.readFromDatabase();
+        for (int i=0; i<MovieList.size(); i++) {
+            if ((updatedMovie.getTitle().toLowerCase()).compareTo(MovieList.get(i).getTitle().toLowerCase()) == 0) {
+                MovieList.set(i, updatedMovie);
+                movieController.overwriteDatabase(MovieList);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void SearchTitle(Movie movie) { // Method from SeachMovie() to find movie based on title
         System.out.println("\n=================================================");
-        System.out.println("Movie: " + i.getTitle());
-        System.out.println("Release Date: " + i.getReleaseDate());
+        System.out.println("Movie: " + movie.getTitle());
+        System.out.println("Release Date: " + movie.getReleaseDate());
         System.out.printf("Genres: ");
-        for (String k : i.getGenres())
+        for (String k : movie.getGenres())
             System.out.printf(k + ", ");
         System.out.printf("\n");
-        System.out.println("Showing Status: " + i.getShowingStatus());
+        System.out.println("Showing Status: " + movie.getShowingStatus());
         System.out.println("=================================================\n");
     }
 
     public static void ListAll() { // Method from SeachMovie() to list all movies in db
         ArrayList<Movie> MovieList = movieController.readFromDatabase();
         System.out.println();
-        for (Movie i : MovieList) {
+        for (Movie movie : MovieList) {
             System.out.println("=================================================");
-            System.out.println("Movie: " + i.getTitle());
-            System.out.println("Release Date: " + i.getReleaseDate());
+            System.out.println("Movie: " + movie.getTitle());
+            System.out.println("Release Date: " + movie.getReleaseDate());
             System.out.printf("Genres: ");
-            for (String k : i.getGenres())
+            for (String k : movie.getGenres())
                 System.out.printf(k + ", ");
             System.out.printf("\n");
-            System.out.println("Showing Status: " + i.getShowingStatus());
+            System.out.println("Showing Status: " + movie.getShowingStatus());
         }
         System.out.println("=================================================\n");
     }
 
-    public static void ViewDetails(Movie i) {
+    public static void ViewDetails(Movie movie) {
         System.out.println("\n=================================================");
-        System.out.println("Movie: " + i.getTitle());
-        System.out.println("id: " + i.getId());
-        System.out.println("Synopsis: " + i.getSynopsis());
-        System.out.println("Director: " + i.getDirector());
+        System.out.println("Movie: " + movie.getTitle());
+        System.out.println("id: " + movie.getId());
+        System.out.println("Synopsis: " + movie.getSynopsis());
+        System.out.println("Director: " + movie.getDirector());
         System.out.printf("Cast: ");
-        for (String j : i.getCast())
+        for (String j : movie.getCast())
             System.out.printf(j + ", ");
         System.out.printf("\n");
         System.out.printf("Genres: ");
-        for (String k : i.getGenres())
-            System.out.printf(k + ", ");
+        for (String genre : movie.getGenres())
+            System.out.printf(genre + ", ");
         System.out.printf("\n");
-        System.out.println("Release Date: " + i.getReleaseDate());
-        System.out.println("Content Rating: " + i.getContentRating());
-        System.out.println("Movie Type: " + i.getMovieType());
-        System.out.println("Showing Status: " + i.getShowingStatus());
+        System.out.println("Release Date: " + movie.getReleaseDate());
+        System.out.println("Content Rating: " + movie.getContentRating());
+        System.out.println("Movie Type: " + movie.getMovieType());
+        System.out.println("Showing Status: " + movie.getShowingStatus());
         System.out.println();
-        System.out.println("Average Review Rating: " + i.getAverageReviewRating() + "★");
+        System.out.println("Average Review Rating: " + movie.getAverageReviewRating() + "*");
         //print reviews
-        int numReviews = i.getReviews().size(), j = 1;
+        int numReviews = movie.getReviews().size(), reviewNum = 1;
         if (numReviews > 0)
             System.out.println("Reviews: ");
-        ArrayList<Review> reviewList = i.getReviews();
-        for (Review R : reviewList) {
-            System.out.println("Review " + j + R);
-            j++;
+        ArrayList<Review> reviewList = movie.getReviews();
+        for (Review review : reviewList) {
+            System.out.println(reviewNum + ": " + review);
+            reviewNum++;
         }
 
         System.out.println("=================================================\n");
     }
 
-    public static void AddReview(Movie i) {
-        System.out.printf("Rate " + i.getTitle() + " from 1-5: ");
+    public static Movie AddReview(Movie movie) {
+        System.out.printf("Rate " + movie.getTitle() + " from 1-5: ");
         int rating = InputHandler.scanInt();
-        System.out.println("Input your reviews for " + i.getTitle() + ": ");
-        String review = InputHandler.scanString();
-        Review newReview = new Review(rating, review); // create new review
-        ArrayList<Review> reviewList = i.getReviews(); // retrieve exisiting reviewList
+        System.out.println("Input your reviews for " + movie.getTitle() + ": ");
+        String userReview = InputHandler.scanString();
+        Review newReview = new Review(rating, userReview); // create new review
+        ArrayList<Review> reviewList = movie.getReviews(); // retrieve exisiting reviewList
         reviewList.add(newReview);
-        i.setReviews(reviewList); // update reviewList
+        movie.setReviews(reviewList); // update reviewList
 
         // update averageReviewRating
         float totalReviewRating = 0;
         int numReviews = reviewList.size();
-        for (Review j : reviewList) {
-            totalReviewRating += j.getRating();
+        for (Review review : reviewList) {
+            totalReviewRating += review.getRating();
         }
-        i.setAverageReviewRating(totalReviewRating / numReviews);
+        movie.setAverageReviewRating(totalReviewRating / numReviews);
+        return movie;
     }
 }
