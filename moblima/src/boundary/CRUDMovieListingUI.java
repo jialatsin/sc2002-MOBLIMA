@@ -8,7 +8,9 @@ import entity.Movie;
 import entity.Constants.ContentRating;
 import entity.Constants.MovieType;
 
-public class MovieListingCUR {
+public class CRUDMovieListingUI {
+    private static MovieController movieController = new MovieController();
+
     public static void main() {
         int selection;
         do {
@@ -17,7 +19,7 @@ public class MovieListingCUR {
                     + "2. Update Movie Listing\n"
                     + "3. Remove Movie Listing\n"
                     + "4. Search/List Movies\n"
-                    + "5. Return to Admin Menu\n");
+                    + "0. Return to Admin Menu\n");
 
             selection = InputHandler.scanInt();
             switch (selection) {
@@ -31,11 +33,11 @@ public class MovieListingCUR {
                 case 4:
                     // TODO: Replace with Search/List Movies method
                     // from MovieGoerUI. Currently just lists all movies
-                    ArrayList<Movie> movies = MovieController.readFromDatabase();
+                    ArrayList<Movie> movies = movieController.readFromDatabase();
                     for (Movie movie : movies) {
                         System.out.println(movie);
                     }
-                case 5:
+                case 0:
                     return;
             }
         } while (true);
@@ -77,7 +79,7 @@ public class MovieListingCUR {
             genres.add(genre);
         }
 
-        System.out.println("\nEnter release date (dd/MM/yyyy):");
+        System.out.println("\nEnter release date:");
         LocalDate releaseDate = InputHandler.scanDate();
 
         ContentRating contentRating = null;
@@ -134,7 +136,9 @@ public class MovieListingCUR {
             }
         } while (n < 1 || n > 4);
 
-        MovieController.addToDatabase(
+        movieController.addToDatabase(
                 new Movie(id, title, synopsis, director, cast, genres, releaseDate, contentRating, movieType));
+
+        System.out.println(title + " (id: " + id + ") added to Movie database!");
     }
 }

@@ -18,4 +18,9 @@ public class Holiday implements Serializable {
         this.date = date;
     }
 
+    @Override
+    public String toString() {
+        return "Holiday [date=" + date + "]";
+    }
+
 }

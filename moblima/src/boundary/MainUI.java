@@ -11,7 +11,7 @@ public class MainUI {
             System.out.println("\n===== MAIN MENU =====\n"
                     + "1. Movie Goer\n"
                     + "2. Admin\n"
-                    + "3. Exit\n");
+                    + "0. Exit\n");
 
             selection = InputHandler.scanInt();
             switch (selection) {
@@ -21,7 +21,7 @@ public class MainUI {
                 case 2:
                     AdminUI.main();
                     break;
-                case 3:
+                case 0:
                     return;
             }
         } while (true);
