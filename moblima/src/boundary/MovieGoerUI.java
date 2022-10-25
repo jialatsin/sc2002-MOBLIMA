@@ -6,6 +6,8 @@ import entity.Movie;
 import entity.Review;
 
 public class MovieGoerUI {
+    private static MovieController movieController = new MovieController();
+
     public static void main() {
         int selection;
         String movieTitle;
@@ -19,7 +21,7 @@ public class MovieGoerUI {
                     + "5. View Booking History\n"
                     + "6. List Top 5 Ranking Movies\n"
                     + "7. Add Review\n"
-                    + "8. Return to Main Menu\n");
+                    + "0. Return to Main Menu\n");
 
             selection = InputHandler.scanInt();
             switch (selection) {
@@ -50,7 +52,7 @@ public class MovieGoerUI {
                         break;
                     AddReview(mov);
                     break;
-                case 8:
+                case 0:
                     return;
             }
         } while (true);
@@ -61,7 +63,7 @@ public class MovieGoerUI {
             System.out.println("===== SEARCH/LIST MOVIE =====");
             System.out.println("1. Search By Title");
             System.out.println("2. List All Movies");
-            System.out.println("3. Return");
+            System.out.println("0. Return");
             int choice = InputHandler.scanInt();
             switch (choice) {
                 case 1:
@@ -75,7 +77,7 @@ public class MovieGoerUI {
                 case 2:
                     ListAll();
                     break;
-                case 3:
+                case 0:
                     return;
                 default:
                     System.out.println("Wrong input");
@@ -84,7 +86,7 @@ public class MovieGoerUI {
     }
 
     public static Movie SearchMovieObject(String movieTitle) {
-        ArrayList<Movie> MovieList = MovieController.readFromDatabase();
+        ArrayList<Movie> MovieList = movieController.readFromDatabase();
         for (Movie i : MovieList) {
             if ((movieTitle.toLowerCase()).compareTo(i.getTitle().toLowerCase()) == 0) {
                 return i;
@@ -108,7 +110,7 @@ public class MovieGoerUI {
     }
 
     public static void ListAll() { // Method from SeachMovie() to list all movies in db
-        ArrayList<Movie> MovieList = MovieController.readFromDatabase();
+        ArrayList<Movie> MovieList = movieController.readFromDatabase();
         System.out.println();
         for (Movie i : MovieList) {
             System.out.println("=================================================");
