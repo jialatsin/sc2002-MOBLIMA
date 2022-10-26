@@ -2,7 +2,6 @@ package boundary;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.concurrent.DelayQueue;
 
 import control.MovieController;
 import entity.Movie;
@@ -34,7 +33,8 @@ public class CRUDMovieListingUI {
                     deleteMovieListing();
                     break;
                 case 4:
-                    MovieGoerUI.searchMovie();;
+                    MovieGoerUI.searchMovie();
+                    ;
                 case 0:
                     return;
             }

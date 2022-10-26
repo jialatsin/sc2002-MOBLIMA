@@ -14,4 +14,10 @@ public class Cinema implements Serializable {
         this.seatingLayout = seatingLayout;
         this.cinemaClass = cinemaClass;
     }
+
+    @Override
+    public String toString() {
+        return "Cinema [code=" + code + ", cinemaClass=" + cinemaClass + "]";
+    }
+
 }

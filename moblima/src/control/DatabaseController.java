@@ -34,6 +34,7 @@ public class DatabaseController<DataType> {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public ArrayList<DataType> readFromDatabase() {
         try {
             FileInputStream fis = new FileInputStream(filePath);
