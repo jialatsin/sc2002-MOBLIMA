@@ -23,7 +23,7 @@ public class Movie implements Serializable {
 
     private ShowingStatus showingStatus = ShowingStatus.COMING_SOON;
     private ArrayList<Review> reviews = new ArrayList<Review>();
-    private double averageReviewRating = 0;
+    private double averageReviewRating = -1;
     private int ticketSales = 0;
 
     public Movie(int id, String title, String synopsis, String director, ArrayList<String> cast,
@@ -115,8 +115,20 @@ public class Movie implements Serializable {
         return averageReviewRating;
     }
 
-    public void setAverageReviewRating(double reviewRating) {
-        this.averageReviewRating = reviewRating;
+    // Calculates average review rating and updates reviewRating
+    // TODO: Overall reviewer rating will only be displayed if there are more than
+    // ONE individual rating, else “NA” is displayed
+    public void setAverageReviewRating() {
+        int reviewCount = reviews.size();
+        if (reviewCount == 0) {
+            this.averageReviewRating = -1;
+            return;
+        }
+        double reviewRating = 0;
+        for (Review review : reviews) {
+            reviewRating += review.getRating();
+        }
+        this.averageReviewRating = reviewRating / reviewCount;
     }
 
     public int getTicketSales() {

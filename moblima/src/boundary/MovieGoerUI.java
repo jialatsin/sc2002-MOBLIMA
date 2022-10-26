@@ -27,10 +27,10 @@ public class MovieGoerUI {
 
             selection = InputHandler.scanInt();
             switch (selection) {
-                case 1: //Search/List Movies
+                case 1: // Search/List Movies
                     searchMovie();
                     break;
-                case 2: //View Movie Details
+                case 2: // View Movie Details
                     System.out.printf("Input movie title: ");
                     movieTitle = InputHandler.scanString();
                     movieObject = searchMovieObject(movieTitle);
@@ -38,21 +38,21 @@ public class MovieGoerUI {
                         break;
                     viewDetails(movieObject);
                     break;
-                case 3: //Check Seat Availabilty
+                case 3: // Check Seat Availabilty
                     break;
-                case 4: //Book Ticket
+                case 4: // Book Ticket
                     System.out.printf("Input movie title: ");
                     String title = InputHandler.scanString();
                     movieObject = searchMovieObject(title);
-                    if (movieObject == null) //checks if movie exists
+                    if (movieObject == null) // checks if movie exists
                         break;
-                    bookTicket(movieObject);  //TODO
+                    bookTicket(movieObject); // TODO
                     break;
-                case 5: //View Booking History
+                case 5: // View Booking History
                     break;
-                case 6: //List Top 5
+                case 6: // List Top 5
                     break;
-                case 7: //Add Review
+                case 7: // Add Review
                     System.out.printf("Input movie title: ");
                     movieTitle = InputHandler.scanString();
                     movieObject = searchMovieObject(movieTitle);
@@ -161,12 +161,12 @@ public class MovieGoerUI {
                 + "\nDirector: " + movie.getDirector()
                 + "\nCast: ");
         for (String j : movie.getCast())
-            System.out.printf(j + ", ");
-        System.out.printf("\n"
+            System.out.print(j + ", ");
+        System.out.print("\n"
                 + "\nGenres: ");
         for (String genre : movie.getGenres())
-            System.out.printf(genre + ", ");
-        System.out.printf("\n"
+            System.out.print(genre + ", ");
+        System.out.println("\n"
                 + "\nRelease Date: " + movie.getReleaseDate()
                 + "\nContent Rating: " + movie.getContentRating()
                 + "\nMovie Type: " + movie.getMovieType()
@@ -187,7 +187,7 @@ public class MovieGoerUI {
     }
 
     public static void bookTicket(Movie movie) {
-        //TODO: generate showings
+        // TODO: generate showings
     }
 
     public static Movie addReview(Movie movie) {
@@ -200,14 +200,7 @@ public class MovieGoerUI {
         ArrayList<Review> reviewList = movie.getReviews(); // retrieve exisiting reviewList
         reviewList.add(newReview);
         movie.setReviews(reviewList); // update reviewList
-
-        // update averageReviewRating
-        float totalReviewRating = 0;
-        int numReviews = reviewList.size();
-        for (Review review : reviewList) {
-            totalReviewRating += review.getRating();
-        }
-        movie.setAverageReviewRating(totalReviewRating / numReviews);
+        movie.setAverageReviewRating();
         return movie;
     }
 }
