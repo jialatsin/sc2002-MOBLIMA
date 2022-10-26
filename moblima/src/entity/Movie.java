@@ -10,6 +10,7 @@ import entity.Constants.ShowingStatus;
 
 public class Movie implements Serializable {
 
+    // unique ID that identifies the Movie
     private int id;
     private String title;
     private String synopsis;
@@ -45,6 +46,27 @@ public class Movie implements Serializable {
                 + cast + ", genres=" + genres + ", releaseDate=" + releaseDate + ", contentRating=" + contentRating
                 + ", movieType=" + movieType + ", showingStatus=" + showingStatus + ", reviews=" + reviews
                 + ", reviewRating=" + averageReviewRating + ", ticketSales=" + ticketSales + "]";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Movie) {
+            Movie other = (Movie) obj;
+            return this.id == other.getId()
+                    && this.title.equals(other.getTitle())
+                    && this.synopsis.equals(other.getSynopsis())
+                    && this.director.equals(other.getDirector())
+                    && this.cast.equals(other.getCast())
+                    && this.genres.equals(other.getGenres())
+                    && this.releaseDate.equals(other.getReleaseDate())
+                    && this.contentRating.equals(other.getContentRating())
+                    && this.movieType.equals(other.getMovieType())
+                    && this.showingStatus.equals(other.getShowingStatus())
+                    && this.reviews.equals(other.getReviews())
+                    && this.averageReviewRating == other.getAverageReviewRating()
+                    && this.ticketSales == other.getTicketSales();
+        }
+        return false;
     }
 
     public int getId() {

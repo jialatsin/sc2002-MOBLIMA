@@ -111,6 +111,8 @@ public class MovieGoerUI {
 
     }
 
+    // TODO: Use ID instead for handling data. There may be more than 1 movie with
+    // the same name!
     public static boolean updateMovieObject(Movie updatedMovie) { // method that overwrites database everytime a movie
                                                                   // has an update
         ArrayList<Movie> MovieList = movieController.readFromDatabase();

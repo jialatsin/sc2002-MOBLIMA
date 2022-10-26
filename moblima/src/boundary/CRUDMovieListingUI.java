@@ -42,21 +42,131 @@ public class CRUDMovieListingUI {
     }
 
     private static void createMovieListing() {
-        int selection;
         System.out.println("\nCREATING A MOVIE LISTING...");
 
-        System.out.println("Enter movie ID:");
+        int id = getIdFromUser();
+        String title = getTitleFromUser();
+        String synopsis = getSynopsisFromUser();
+        String director = getDirectorFromUser();
+        ArrayList<String> cast = getCastFromUser();
+        ArrayList<String> genres = getGenresFromUser();
+        LocalDate releaseDate = getReleaseDateFromUser();
+        ContentRating contentRating = getContentRatingFromUser();
+        MovieType movieType = getMovieTypeFromUser();
+
+        movieController.addToDatabase(
+                new Movie(id, title, synopsis, director, cast, genres, releaseDate, contentRating, movieType));
+
+        System.out.println(title + " (id: " + id + ") added to Movie database!");
+    }
+
+    // TODO
+    private static void updateMovieListing() {
+        System.out.println("\nUPDATING A MOVIE LISTING...");
+
+        int id = getIdFromUser();
+        Movie movie = movieController.getMovieById(id);
+        if (movie == null) {
+            System.out.println("Movie of ID " + id + " does not exist in Movie database!");
+            return;
+        }
+
+        System.out.println(movie);
+
+        int selection;
+        do {
+            System.out.println("\nSelect attribute to update for movie\n"
+                    + "1. ID\n"
+                    + "2. Title\n"
+                    + "3. Synopsis\n"
+                    + "4. Director\n"
+                    + "5. Cast\n"
+                    + "6. Genres\n"
+                    + "7. Release Date\n"
+                    + "8. Content Rating\n"
+                    + "9. Movie Type\n");
+            selection = InputHandler.scanInt();
+        } while (selection < 1 || selection > 9);
+
+        switch (selection) {
+            case 1:
+                int newId = getIdFromUser();
+                movieController.updateMovieAttribute(movie, selection, newId);
+                break;
+            case 2:
+                String title = getTitleFromUser();
+                movieController.updateMovieAttribute(movie, selection, title);
+                break;
+            case 3:
+                String synopsis = getSynopsisFromUser();
+                movieController.updateMovieAttribute(movie, selection, synopsis);
+                break;
+            case 4:
+                String director = getDirectorFromUser();
+                movieController.updateMovieAttribute(movie, selection, director);
+                break;
+            case 5:
+                ArrayList<String> cast = getCastFromUser();
+                movieController.updateMovieAttribute(movie, selection, cast);
+                break;
+            case 6:
+                ArrayList<String> genres = getGenresFromUser();
+                movieController.updateMovieAttribute(movie, selection, genres);
+                break;
+            case 7:
+                LocalDate date = getReleaseDateFromUser();
+                movieController.updateMovieAttribute(movie, selection, date);
+                break;
+            case 8:
+                ContentRating contentRating = getContentRatingFromUser();
+                movieController.updateMovieAttribute(movie, selection, contentRating);
+                break;
+            case 9:
+                MovieType movieType = getMovieTypeFromUser();
+                movieController.updateMovieAttribute(movie, selection, movieType);
+                break;
+        }
+
+        System.out.println("\nUpdated movie details!");
+    }
+
+    private static void deleteMovieListing() {
+        System.out.println("\nDELETING A MOVIE LISTING...");
+
+        int id = getIdFromUser();
+        if (movieController.deleteMovieById(id)) {
+            System.out.println("Deleted movie with ID " + id + "!");
+        } else {
+            System.out.println("Unable to delete movie with ID " + id + "!");
+        }
+    }
+
+    private static int getIdFromUser() {
+        System.out.println("Enter ID:");
         int id = InputHandler.scanInt();
+        return id;
+    }
 
-        System.out.println("\nEnter movie title:");
+    private static String getTitleFromUser() {
+        System.out.println("Enter title:");
         String title = InputHandler.scanString();
+        return title;
+    }
 
-        System.out.println("\nEnter movie synopsis:");
+    private static String getSynopsisFromUser() {
+        System.out.println("Enter synopsis:");
         String synopsis = InputHandler.scanString();
+        return synopsis;
+    }
 
-        System.out.println("\nEnter movie director name:");
+    private static String getDirectorFromUser() {
+        System.out.println("Enter director:");
         String director = InputHandler.scanString();
+        return director;
+    }
 
+    private static ArrayList<String> getCastFromUser() {
+        int selection;
         do {
             System.out.println("\nEnter number of cast members (at least 2):");
             selection = InputHandler.scanInt();
@@ -67,7 +177,11 @@ public class CRUDMovieListingUI {
             String castMember = InputHandler.scanString();
             cast.add(castMember);
         }
+        return cast;
+    }
 
+    private static ArrayList<String> getGenresFromUser() {
+        int selection;
         System.out.println("\nEnter number of genres:");
         selection = InputHandler.scanInt();
         ArrayList<String> genres = new ArrayList<String>();
@@ -76,10 +190,17 @@ public class CRUDMovieListingUI {
             String genre = InputHandler.scanString();
             genres.add(genre);
         }
+        return genres;
+    }
 
-        System.out.println("\nEnter release date:");
-        LocalDate releaseDate = InputHandler.scanDate();
+    private static LocalDate getReleaseDateFromUser() {
+        System.out.println("Enter release date:");
+        LocalDate date = InputHandler.scanDate();
+        return date;
+    }
 
+    private static ContentRating getContentRatingFromUser() {
+        int selection;
         ContentRating contentRating = null;
         do {
             System.out.println("\nSelect movie content rating:\n"
@@ -108,7 +229,11 @@ public class CRUDMovieListingUI {
                     break;
             }
         } while (selection < 1 || selection > 5);
+        return contentRating;
+    }
 
+    private static MovieType getMovieTypeFromUser() {
+        int selection;
         MovieType movieType = null;
         do {
             System.out.println("\nSelect movie type:\n"
@@ -133,46 +258,7 @@ public class CRUDMovieListingUI {
                     break;
             }
         } while (selection < 1 || selection > 4);
-
-        movieController.addToDatabase(
-                new Movie(id, title, synopsis, director, cast, genres, releaseDate, contentRating, movieType));
-
-        System.out.println(title + " (id: " + id + ") added to Movie database!");
-    }
-
-    // TODO
-    private static void updateMovieListing() {
-        System.out.println("\nUPDATING A MOVIE LISTING...");
-
-        System.out.println("Enter ID of movie to update:");
-        int id = InputHandler.scanInt();
-        if (movieController.getMovieById(id) == null) {
-            System.out.println("Movie of ID " + id + " does not exist in Movie database!");
-            return;
-        }
-
-        System.out.println("\nSelect attribute to update for movie"
-                + "1. ID\n"
-                + "2. Title\n"
-                + "3. Synopsis\n"
-                + "4. Director\n"
-                + "5. Cast\n"
-                + "6. Genres\n"
-                + "7. Release Date\n"
-                + "8. Content Rating\n"
-                + "9. Movie Type\n");
-    }
-
-    private static void deleteMovieListing() {
-        System.out.println("\nDELETING A MOVIE LISTING...");
-
-        System.out.println("Enter ID of movie to delete:");
-        int id = InputHandler.scanInt();
-        if (movieController.deleteMovieById(id)) {
-            System.out.println("Deleted movie with ID " + id + "!");
-        } else {
-            System.out.println("Unable to delete movie with ID " + id + "!");
-        }
+        return movieType;
     }
 
 }
