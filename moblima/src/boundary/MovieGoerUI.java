@@ -27,10 +27,10 @@ public class MovieGoerUI {
 
             selection = InputHandler.scanInt();
             switch (selection) {
-                case 1:
+                case 1: //Search/List Movies
                     searchMovie();
                     break;
-                case 2:
+                case 2: //View Movie Details
                     System.out.printf("Input movie title: ");
                     movieTitle = InputHandler.scanString();
                     movieObject = searchMovieObject(movieTitle);
@@ -38,16 +38,21 @@ public class MovieGoerUI {
                         break;
                     viewDetails(movieObject);
                     break;
-                case 3:
-                    bookTicket();
+                case 3: //Check Seat Availabilty
                     break;
-                case 4:
+                case 4: //Book Ticket
+                    System.out.printf("Input movie title: ");
+                    String title = InputHandler.scanString();
+                    movieObject = searchMovieObject(title);
+                    if (movieObject == null) //checks if movie exists
+                        break;
+                    bookTicket(movieObject);  //TODO
                     break;
-                case 5:
+                case 5: //View Booking History
                     break;
-                case 6:
+                case 6: //List Top 5
                     break;
-                case 7:
+                case 7: //Add Review
                     System.out.printf("Input movie title: ");
                     movieTitle = InputHandler.scanString();
                     movieObject = searchMovieObject(movieTitle);
@@ -181,9 +186,8 @@ public class MovieGoerUI {
         System.out.println("=================================================\n");
     }
 
-    public static void bookTicket() {
-        System.out.printf("Input movie to book tickets: ");
-        String movie = InputHandler.scanString();
+    public static void bookTicket(Movie movie) {
+        //TODO: generate showings
     }
 
     public static Movie addReview(Movie movie) {

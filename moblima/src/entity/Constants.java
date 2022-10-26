@@ -4,7 +4,8 @@ public class Constants {
 
     public enum CinemaClass {
         PLATINUM("Platinum Class"),
-        GOLD("Gold Class");
+        GOLD("Gold Class"),
+        STANDARD("Standard");
 
         private String cinemaClass;
 
