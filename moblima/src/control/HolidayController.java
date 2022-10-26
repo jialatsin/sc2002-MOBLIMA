@@ -10,19 +10,18 @@ public class HolidayController extends DatabaseController<Holiday> {
         super(MainController.FILEPATH_HOLIDAY);
     }
 
-    // Check if a holiday exists on the input date
-    public boolean holidayExists(LocalDate date) {
+    public Holiday getHolidayByDate(LocalDate date) {
         ArrayList<Holiday> holidays = readFromDatabase();
         for (Holiday holiday : holidays) {
             if (holiday.getDate().equals(date)) {
-                return true;
+                return holiday;
             }
         }
-        return false;
+        return null;
     }
 
     // Returns true on successful deletion
-    public boolean deleteHoliday(LocalDate date) {
+    public boolean deleteHolidayByDate(LocalDate date) {
         ArrayList<Holiday> holidays = readFromDatabase();
         for (Holiday holiday : holidays) {
             if (holiday.getDate().equals(date)) {

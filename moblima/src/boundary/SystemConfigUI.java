@@ -52,7 +52,7 @@ public class SystemConfigUI {
                     System.out.println("\nADDING A HOLIDAY...");
                     System.out.println("Enter date of holiday:");
                     date = InputHandler.scanDate();
-                    if (!holidayController.holidayExists(date)) {
+                    if (holidayController.getHolidayByDate(date) != null) {
                         System.out.println("Holiday on " + date + " added to Holiday database!");
                         holidayController.addToDatabase(new Holiday(date));
                         break;
@@ -63,7 +63,7 @@ public class SystemConfigUI {
                     System.out.println("\nDELETING A HOLIDAY...");
                     System.out.println("Enter date of holiday to delete:");
                     date = InputHandler.scanDate();
-                    if (holidayController.deleteHoliday(date)) {
+                    if (holidayController.deleteHolidayByDate(date)) {
                         System.out.println("Deleted holiday on " + date + "!");
                         break;
                     }

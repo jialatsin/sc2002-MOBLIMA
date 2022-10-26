@@ -2,6 +2,7 @@ package boundary;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.concurrent.DelayQueue;
 
 import control.MovieController;
 import entity.Movie;
@@ -17,7 +18,7 @@ public class CRUDMovieListingUI {
             System.out.println("\n===== MOVIE LISTINGS =====\n"
                     + "1. Create Movie Listing\n"
                     + "2. Update Movie Listing\n"
-                    + "3. Remove Movie Listing\n"
+                    + "3. Delete Movie Listing\n"
                     + "4. Search/List Movies\n"
                     + "0. Return to Admin Menu\n");
 
@@ -27,8 +28,10 @@ public class CRUDMovieListingUI {
                     createMovieListing();
                     break;
                 case 2:
+                    updateMovieListing();
                     break;
                 case 3:
+                    deleteMovieListing();
                     break;
                 case 4:
                     // TODO: Replace with Search/List Movies method
@@ -44,7 +47,7 @@ public class CRUDMovieListingUI {
     }
 
     private static void createMovieListing() {
-        int n; // Temporary counter
+        int selection;
         System.out.println("\nCREATING A MOVIE LISTING...");
 
         System.out.println("Enter movie ID:");
@@ -61,19 +64,19 @@ public class CRUDMovieListingUI {
 
         do {
             System.out.println("\nEnter number of cast members (at least 2):");
-            n = InputHandler.scanInt();
-        } while (n < 2);
+            selection = InputHandler.scanInt();
+        } while (selection < 2);
         ArrayList<String> cast = new ArrayList<String>();
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < selection; i++) {
             System.out.println("Enter name of cast member " + (i + 1) + ":");
             String castMember = InputHandler.scanString();
             cast.add(castMember);
         }
 
         System.out.println("\nEnter number of genres:");
-        n = InputHandler.scanInt();
+        selection = InputHandler.scanInt();
         ArrayList<String> genres = new ArrayList<String>();
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < selection; i++) {
             System.out.println("Enter genre " + (i + 1) + ":");
             String genre = InputHandler.scanString();
             genres.add(genre);
@@ -91,8 +94,8 @@ public class CRUDMovieListingUI {
                     + "4. R\n"
                     + "5. NC17");
 
-            n = InputHandler.scanInt();
-            switch (n) {
+            selection = InputHandler.scanInt();
+            switch (selection) {
                 case 1:
                     contentRating = ContentRating.G;
                     break;
@@ -109,7 +112,7 @@ public class CRUDMovieListingUI {
                     contentRating = ContentRating.NC17;
                     break;
             }
-        } while (n < 1 || n > 5);
+        } while (selection < 1 || selection > 5);
 
         MovieType movieType = null;
         do {
@@ -119,8 +122,8 @@ public class CRUDMovieListingUI {
                     + "3. Blockbuster 2D\n"
                     + "4. Blockbuster 3D");
 
-            n = InputHandler.scanInt();
-            switch (n) {
+            selection = InputHandler.scanInt();
+            switch (selection) {
                 case 1:
                     movieType = MovieType.REGULAR_TWO_D;
                     break;
@@ -134,11 +137,47 @@ public class CRUDMovieListingUI {
                     movieType = MovieType.BLOCKBUSTER_THREE_D;
                     break;
             }
-        } while (n < 1 || n > 4);
+        } while (selection < 1 || selection > 4);
 
         movieController.addToDatabase(
                 new Movie(id, title, synopsis, director, cast, genres, releaseDate, contentRating, movieType));
 
         System.out.println(title + " (id: " + id + ") added to Movie database!");
     }
+
+    // TODO
+    private static void updateMovieListing() {
+        System.out.println("\nUPDATING A MOVIE LISTING...");
+
+        System.out.println("Enter ID of movie to update:");
+        int id = InputHandler.scanInt();
+        if (movieController.getMovieById(id) == null) {
+            System.out.println("Movie of ID " + id + " does not exist in Movie database!");
+            return;
+        }
+
+        System.out.println("\nSelect attribute to update for movie"
+                + "1. ID\n"
+                + "2. Title\n"
+                + "3. Synopsis\n"
+                + "4. Director\n"
+                + "5. Cast\n"
+                + "6. Genres\n"
+                + "7. Release Date\n"
+                + "8. Content Rating\n"
+                + "9. Movie Type\n");
+    }
+
+    private static void deleteMovieListing() {
+        System.out.println("\nDELETING A MOVIE LISTING...");
+
+        System.out.println("Enter ID of movie to delete:");
+        int id = InputHandler.scanInt();
+        if (movieController.deleteMovieById(id)) {
+            System.out.println("Deleted movie with ID " + id + "!");
+        } else {
+            System.out.println("Unable to delete movie with ID " + id + "!");
+        }
+    }
+
 }
