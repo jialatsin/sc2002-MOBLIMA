@@ -9,7 +9,7 @@ public class SeatingLayout implements Serializable {
     int rows;
     int columns;
 
-    public SeatingLayout(Seat[][] seats, int rows, int columns) {
+    public SeatingLayout(int rows, int columns) {
         this.rows = rows;
         this.columns = columns;
         this.seats = new Seat[rows][columns];

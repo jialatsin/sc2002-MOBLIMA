@@ -31,12 +31,7 @@ public class CRUDMovieListingUI {
                 case 3:
                     break;
                 case 4:
-                    // TODO: Replace with Search/List Movies method
-                    // from MovieGoerUI. Currently just lists all movies
-                    ArrayList<Movie> movies = movieController.readFromDatabase();
-                    for (Movie movie : movies) {
-                        System.out.println(movie);
-                    }
+                    MovieGoerUI.searchMovie();;
                 case 0:
                     return;
             }

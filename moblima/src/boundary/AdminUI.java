@@ -25,6 +25,7 @@ public class AdminUI {
                     CRUDMovieListingUI.main();
                     break;
                 case 2:
+                    CRUDMovieShowingUI.main();
                     break;
                 case 3:
                     SystemConfigUI.main();
