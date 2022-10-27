@@ -36,9 +36,7 @@ public class MovieGoerUI {
                     ArrayList<Movie> requestedMovieList = new ArrayList<Movie>();
                     movieTitle = InputHandler.scanString();
                     Movie movieObject = searchMovieObject(movieTitle); // returns all movies with same title in them
-                    if (requestedMovieList == null)
-                        break;
-
+                    break;
                 case 3: // Check Seat Availabilty
                     SeatsUI.main();
                     break;
