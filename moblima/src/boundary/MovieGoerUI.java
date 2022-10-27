@@ -5,6 +5,7 @@ import java.util.*;
 
 import entity.Movie;
 import entity.Review;
+import boundary.SeatsUI;
 
 public class MovieGoerUI {
     private static MovieController movieController = new MovieController();
@@ -39,6 +40,7 @@ public class MovieGoerUI {
                         break;
 
                 case 3: // Check Seat Availabilty
+                    SeatsUI.main();
                     break;
                 case 4: // Book Ticket
                     // System.out.printf("Input movie title: ");
@@ -51,6 +53,7 @@ public class MovieGoerUI {
                 case 5: // View Booking History
                     break;
                 case 6: // List Top 5
+                    //Require Read from Database
                     break;
                 case 7: // Add Review
                     System.out.printf("Input movie title: ");
