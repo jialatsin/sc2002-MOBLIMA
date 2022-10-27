@@ -10,10 +10,10 @@ public class MovieGoerUI {
     private static MovieController movieController = new MovieController();
 
     public static void main() {
-        int selection;
+        int selection, movieID;
         String movieTitle;
-        Movie movieObject;
         boolean updated;
+
         do {
             System.out.println("\n===== MOVIE GOER =====\n"
                     + "1. Search/List Movies\n"
@@ -31,23 +31,23 @@ public class MovieGoerUI {
                     searchMovie();
                     break;
                 case 2: // View Movie Details
-                    System.out.printf("Input movie title: ");
+                    System.out.print("Input movie title: ");
+                    ArrayList<Movie> requestedMovieList = new ArrayList<Movie>();
                     movieTitle = InputHandler.scanString();
-                    movieObject = searchMovieObject(movieTitle);
-                    if (movieObject == null)
+                    Movie movieObject = searchMovieObject(movieTitle); // returns all movies with same title in them
+                    if (requestedMovieList == null)
                         break;
-                    viewDetails(movieObject);
-                    break;
+
                 case 3: // Check Seat Availabilty
                     break;
                 case 4: // Book Ticket
-                    System.out.printf("Input movie title: ");
-                    String title = InputHandler.scanString();
-                    movieObject = searchMovieObject(title);
-                    if (movieObject == null) // checks if movie exists
-                        break;
-                    bookTicket(movieObject); // TODO
-                    break;
+                    // System.out.printf("Input movie title: ");
+                    // String title = InputHandler.scanString();
+                    // movieObject = searchMovieObjects(title);
+                    // if (movieObject == null) // checks if movie exists
+                    // break;
+                    // bookTicket(movieObject); // TODO
+                    // break;
                 case 5: // View Booking History
                     break;
                 case 6: // List Top 5
@@ -58,7 +58,7 @@ public class MovieGoerUI {
                     movieObject = searchMovieObject(movieTitle);
                     if (movieObject == null)
                         break;
-                    Movie newMovie = addReview(movieObject);
+                    Movie newMovie = addReview(movieObject);  //creates new movie block to update reviews
                     updated = updateMovieObject(newMovie);
                     if (updated == true) {
                         System.out.println("Review added");
@@ -83,10 +83,10 @@ public class MovieGoerUI {
                 case 1:
                     System.out.printf("Input movie title: ");
                     String title = InputHandler.scanString();
-                    Movie mov = searchMovieObject(title);
-                    if (mov == null)
+                    Movie movieObject = searchMovieObject(title);
+                    if (movieObject == null)
                         break;
-                    searchTitle(mov);
+                    printMovieObject(movieObject);
                     break;
                 case 2:
                     listAll();
@@ -99,25 +99,72 @@ public class MovieGoerUI {
         } while (true);
     }
 
-    public static Movie searchMovieObject(String movieTitle) { // searches and returns requested movie object
-        ArrayList<Movie> MovieList = movieController.readFromDatabase();
-        for (Movie i : MovieList) {
-            if ((movieTitle.toLowerCase()).compareTo(i.getTitle().toLowerCase()) == 0) {
-                return i;
+    public static Movie searchMovieObject(String movieTitle) {
+        ArrayList<Movie> movieList = movieController.readFromDatabase();
+        ArrayList<Movie> requestedMovieList = new ArrayList<Movie>();
+        int movieFound = 0;
+        for (Movie i : movieList) {
+            if ((movieTitle.toLowerCase()).compareTo(i.getTitle().toLowerCase()) == 0) { // Searches for all movies with
+                                                                                         // same name
+                requestedMovieList.add(i);
+                movieFound = 1;
             }
         }
-        System.out.println("Movie not found");
-        return null;
+        if (movieFound == 0) {
+            System.out.println("Movie not found"); // Returns if no movie is found with given title
+            return null;
+        }
 
+        else { // Prints all movie IDs for users to select from
+            printMovieObject(requestedMovieList);
+
+            System.out.print("Input movie ID from results above: ");
+            int movieID = InputHandler.scanInt();
+            for (Movie movieObject : requestedMovieList) {
+                if (movieObject.getId() == movieID) { // search for movie using ID
+                    viewDetails(movieObject);
+                    return movieObject;
+                }
+            }
+            System.out.println("Wrong ID inputted");
+            return null;
+        }
     }
 
-    // TODO: Use ID instead for handling data. There may be more than 1 movie with
-    // the same name!
+    public static void printMovieObject(ArrayList<Movie> requestedMovieList) {  //Print all movies given movieList
+        for (Movie movie : requestedMovieList) {
+            System.out.printf("\n================================================="
+                    + "\nMovie: " + movie.getTitle()
+                    + "\nMovie ID: " + movie.getId()
+                    + "\nRelease Date: " + movie.getReleaseDate()
+                    + "\nGenres: ");
+            for (String k : movie.getGenres()) {
+                System.out.printf(k + ", ");
+            }
+            System.out.print("\nShowing Status: " + movie.getShowingStatus());
+        }
+        System.out.println("\n=================================================\n");
+        }
+
+    public static void printMovieObject(Movie movie) { //Overloaded method to print out one given movie
+        System.out.printf("\n================================================="
+                    + "\nMovie: " + movie.getTitle()
+                    + "\nMovie ID: " + movie.getId()
+                    + "\nRelease Date: " + movie.getReleaseDate()
+                    + "\nGenres: ");
+            for (String k : movie.getGenres()) {
+                System.out.printf(k + ", ");
+            }
+            System.out.println("\n"
+                    + "Showing Status: " + movie.getShowingStatus()
+                    + "\n=================================================");
+    }
+
     public static boolean updateMovieObject(Movie updatedMovie) { // method that overwrites database everytime a movie
                                                                   // has an update
         ArrayList<Movie> MovieList = movieController.readFromDatabase();
         for (int i = 0; i < MovieList.size(); i++) {
-            if ((updatedMovie.getTitle().toLowerCase()).compareTo(MovieList.get(i).getTitle().toLowerCase()) == 0) {
+            if (updatedMovie.getId() == MovieList.get(i).getId()) {
                 MovieList.set(i, updatedMovie);
                 movieController.overwriteDatabase(MovieList);
                 return true;
@@ -126,33 +173,10 @@ public class MovieGoerUI {
         return false;
     }
 
-    public static void searchTitle(Movie movie) { // Method from SeachMovie() to find movie based on title
-        System.out.printf("\n================================================="
-                + "\nMovie: " + movie.getTitle()
-                + "\nRelease Date: " + movie.getReleaseDate()
-                + "\nGenres: ");
-        for (String k : movie.getGenres()) {
-            System.out.printf(k + ", ");
-        }
-        System.out.printf("\n"
-                + "Showing Status: " + movie.getShowingStatus()
-                + "\n=================================================\n");
-    }
-
     public static void listAll() { // Method from SeachMovie() to list all movies in db
         ArrayList<Movie> MovieList = movieController.readFromDatabase();
         System.out.println();
-        for (Movie movie : MovieList) {
-            System.out.printf("\n================================================="
-                    + "\nMovie: " + movie.getTitle()
-                    + "\nRelease Date: " + movie.getReleaseDate()
-                    + "\nGenres: ");
-            for (String k : movie.getGenres())
-                System.out.printf(k + ", ");
-            System.out.printf("\n"
-                    + "Showing Status: " + movie.getShowingStatus());
-        }
-        System.out.println("\n=================================================\n");
+        printMovieObject(MovieList);
     }
 
     public static void viewDetails(Movie movie) { // prints all details of a movie
@@ -173,8 +197,12 @@ public class MovieGoerUI {
                 + "\nContent Rating: " + movie.getContentRating()
                 + "\nMovie Type: " + movie.getMovieType()
                 + "\nShowing Status: " + movie.getShowingStatus()
-                + "\n"
-                + "\nAverage Review Rating: " + movie.getAverageReviewRating() + "*");
+                + "\n");
+        double averageReviewRating = movie.getAverageReviewRating();
+        if (averageReviewRating < 0) {
+            System.out.println("\nAverage Review Rating: NaN");
+        } else
+        System.out.println("\nAverage Review Rating: " + movie.getAverageReviewRating() + "*");
         // print reviews
         int numReviews = movie.getReviews().size(), reviewNum = 1;
         if (numReviews > 0)
