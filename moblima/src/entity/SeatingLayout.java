@@ -19,4 +19,39 @@ public class SeatingLayout implements Serializable {
             }
         }
     }
+
+    public Seat[][] getSeats() {
+        return seats;
+    }
+
+    public void setSeats(Seat[][] seats) {
+        this.seats = seats;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public void setRows(int rows) {
+        this.rows = rows;
+    }
+
+    public int getColumns() {
+        return columns;
+    }
+
+    public void setColumns(int columns) {
+        this.columns = columns;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof SeatingLayout) {
+            SeatingLayout other = (SeatingLayout) obj;
+            return this.seats.equals(other.getSeats()) 
+                    && this.rows == other.getRows()
+                    && this.columns == other.getColumns();
+        }
+        return false;
+    }
 }

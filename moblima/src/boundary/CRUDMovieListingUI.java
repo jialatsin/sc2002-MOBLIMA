@@ -34,7 +34,7 @@ public class CRUDMovieListingUI {
                     break;
                 case 4:
                     MovieGoerUI.searchMovie();
-                    ;
+                    break;
                 case 0:
                     return;
             }

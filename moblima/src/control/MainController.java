@@ -13,6 +13,8 @@ public class MainController {
     public static final String FILEPATH_MOVIE = "moblima/db/movie.txt";
     public static final String FILEPATH_HOLIDAY = "moblima/db/holiday.txt";
     public static final String FILEPATH_CINEPLEX = "moblima/db/cineplex.txt";
+    public static final String FILEPATH_CINEMA = "moblima/db/cinema.txt";
+    public static final String FILEPATH_SHOWING = "moblima/db/showing.txt";
 
     private static CineplexController cineplexController = new CineplexController();
 

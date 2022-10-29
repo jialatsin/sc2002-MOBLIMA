@@ -42,4 +42,15 @@ public class Seat implements Serializable {
             return "   ";
         }
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Seat) {
+            Seat other = (Seat) obj;
+            return this.row == other.getRow()
+                    && this.column == other.getColumn()
+                    && this.status == other.getStatus();
+        }
+        return false;
+    }
 }

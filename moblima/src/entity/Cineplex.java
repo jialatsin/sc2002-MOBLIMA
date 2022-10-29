@@ -19,4 +19,38 @@ public class Cineplex implements Serializable {
         return "Cineplex [name=" + name + ", location=" + location + ", cinemas=" + cinemas + "]";
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public ArrayList<Cinema> getCinemas() {
+        return cinemas;
+    }
+
+    public void setCinemas(ArrayList<Cinema> cinemas) {
+        this.cinemas = cinemas;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Cineplex) {
+            Cineplex other = (Cineplex) obj;
+            return this.name.equals(other.getName())
+                    && this.location.equals(other.getLocation())
+                    && this.cinemas.equals(other.getCinemas());
+        }
+        return false;
+    }
 }

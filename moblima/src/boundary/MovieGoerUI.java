@@ -33,9 +33,11 @@ public class MovieGoerUI {
                     break;
                 case 2: // View Movie Details
                     System.out.print("Input movie title: ");
-                    ArrayList<Movie> requestedMovieList = new ArrayList<Movie>();
                     movieTitle = InputHandler.scanString();
-                    Movie movieObject = searchMovieObject(movieTitle); // returns all movies with same title in them
+                    Movie movieObject = searchMovieObject(movieTitle);
+                    if (movieObject == null)
+                        break;
+                    viewDetails(movieObject); // returns all movies with same title in them
                     break;
                 case 3: // Check Seat Availabilty
                     SeatsUI.main();
@@ -123,7 +125,6 @@ public class MovieGoerUI {
             int movieID = InputHandler.scanInt();
             for (Movie movieObject : requestedMovieList) {
                 if (movieObject.getId() == movieID) { // search for movie using ID
-                    viewDetails(movieObject);
                     return movieObject;
                 }
             }
@@ -162,24 +163,22 @@ public class MovieGoerUI {
     }
 
     public static void viewDetails(Movie movie) { // prints all details of a movie
-        System.out.println("\n================================================="
-                + "\nMovie: " + movie.getTitle()
+        System.out.println("\n=================================================");
+        System.out.println(
+                "\nMovie: " + movie.getTitle()
                 + "\nid: " + movie.getId()
                 + "\nSynopsis: " + movie.getSynopsis()
                 + "\nDirector: " + movie.getDirector()
                 + "\nCast: ");
         for (String j : movie.getCast())
             System.out.print(j + ", ");
-        System.out.print("\n"
-                + "\nGenres: ");
+        System.out.print("\nGenres: ");
         for (String genre : movie.getGenres())
             System.out.print(genre + ", ");
-        System.out.println("\n"
-                + "\nRelease Date: " + movie.getReleaseDate()
+        System.out.println("\nRelease Date: " + movie.getReleaseDate()
                 + "\nContent Rating: " + movie.getContentRating()
                 + "\nMovie Type: " + movie.getMovieType()
-                + "\nShowing Status: " + movie.getShowingStatus()
-                + "\n");
+                + "\nShowing Status: " + movie.getShowingStatus());
         double averageReviewRating = movie.getAverageReviewRating();
         if (averageReviewRating < 0) {
             System.out.println("\nAverage Review Rating: NaN");
@@ -195,7 +194,7 @@ public class MovieGoerUI {
             reviewNum++;
         }
 
-        System.out.println("=================================================\n");
+        System.out.println("=================================================");
     }
 
     public static void bookTicket(Movie movie) {
