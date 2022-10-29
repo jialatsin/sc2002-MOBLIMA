@@ -10,13 +10,32 @@ public class SeatingLayout implements Serializable {
     int rows;
     int columns;
 
-    public SeatingLayout(int rows, int columns) {
+    public SeatingLayout(int Selection) {
+        int rows, columns;
+        if(Selection == 1){
+            rows = 6;
+            columns = 8;
+        }else if(Selection == 2){
+            rows = 10;
+            columns = 14;
+        }else if(Selection == 3){
+            rows = 10;
+            columns =  14;
+        }else{
+            rows = 0;
+            columns = 0;
+        }
+
         this.rows = rows;
         this.columns = columns;
         this.seats = new Seat[rows][columns];
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < columns; c++) {
-                seats[r][c] = new Seat(r, c, SeatStatus.UNOCCUPIED);
+                if(c == columns/3 || c == columns/3 + columns/3 + 1){
+                    seats[r][c] = new Seat(r, c, SeatStatus.NOTEXIST);
+                }else{
+                    seats[r][c] = new Seat(r, c, SeatStatus.UNOCCUPIED);
+                }
             }
         }
     }
