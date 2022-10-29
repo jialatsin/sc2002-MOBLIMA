@@ -3,6 +3,7 @@ package control;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import boundary.MovieGoerUI;
 import entity.*;
 import entity.Constants.ContentRating;
 import entity.Constants.MovieType;
@@ -78,5 +79,24 @@ public class MovieController extends DatabaseController<Movie> {
         }
         movies.set(movieIndexInDatabase, movie);
         overwriteDatabase(movies);
+    }
+
+    public static void listAll() { // Method from SeachMovie() to list all movies in db
+        ArrayList<Movie> MovieList = MovieGoerUI.movieController.readFromDatabase();
+        System.out.println();
+        MovieGoerUI.printMovieObject(MovieList);
+    }
+
+    public static boolean updateMovieObject(Movie updatedMovie) { // method that overwrites database everytime a movie
+                                                                  // has an update
+        ArrayList<Movie> MovieList = MovieGoerUI.movieController.readFromDatabase();
+        for (int i = 0; i < MovieList.size(); i++) {
+            if (updatedMovie.getId() == MovieList.get(i).getId()) {
+                MovieList.set(i, updatedMovie);
+                MovieGoerUI.movieController.overwriteDatabase(MovieList);
+                return true;
+            }
+        }
+        return false;
     }
 }

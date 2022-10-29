@@ -8,7 +8,7 @@ import entity.Review;
 import boundary.SeatsUI;
 
 public class MovieGoerUI {
-    private static MovieController movieController = new MovieController();
+    public static MovieController movieController = new MovieController();
 
     public static void main() {
         int selection, movieID;
@@ -60,7 +60,7 @@ public class MovieGoerUI {
                     if (movieObject == null)
                         break;
                     Movie newMovie = addReview(movieObject);  //creates new movie block to update reviews
-                    updated = updateMovieObject(newMovie);
+                    updated = MovieController.updateMovieObject(newMovie);
                     if (updated == true) {
                         System.out.println("Review added");
                     } else
@@ -90,7 +90,7 @@ public class MovieGoerUI {
                     printMovieObject(movieObject);
                     break;
                 case 2:
-                    listAll();
+                    MovieController.listAll();
                     break;
                 case 0:
                     return;
@@ -159,25 +159,6 @@ public class MovieGoerUI {
             System.out.println("\n"
                     + "Showing Status: " + movie.getShowingStatus()
                     + "\n=================================================");
-    }
-
-    public static boolean updateMovieObject(Movie updatedMovie) { // method that overwrites database everytime a movie
-                                                                  // has an update
-        ArrayList<Movie> MovieList = movieController.readFromDatabase();
-        for (int i = 0; i < MovieList.size(); i++) {
-            if (updatedMovie.getId() == MovieList.get(i).getId()) {
-                MovieList.set(i, updatedMovie);
-                movieController.overwriteDatabase(MovieList);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static void listAll() { // Method from SeachMovie() to list all movies in db
-        ArrayList<Movie> MovieList = movieController.readFromDatabase();
-        System.out.println();
-        printMovieObject(MovieList);
     }
 
     public static void viewDetails(Movie movie) { // prints all details of a movie
