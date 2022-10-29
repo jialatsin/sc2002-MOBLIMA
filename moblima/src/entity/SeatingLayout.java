@@ -1,6 +1,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.*;
 
 import entity.Constants.SeatStatus;
 
@@ -48,7 +49,7 @@ public class SeatingLayout implements Serializable {
     public boolean equals(Object obj) {
         if (obj instanceof SeatingLayout) {
             SeatingLayout other = (SeatingLayout) obj;
-            return this.seats.equals(other.getSeats()) 
+            return Arrays.deepEquals(this.seats, other.getSeats()) 
                     && this.rows == other.getRows()
                     && this.columns == other.getColumns();
         }
