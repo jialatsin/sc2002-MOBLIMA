@@ -21,11 +21,21 @@ public class Review implements Serializable {
 
     @Override
     public String toString() {
-            StringBuffer stars = new StringBuffer();
-            int solidStars = rating;
-            for (int i=0; i<solidStars; i++) {
-                stars.insert(i, "*");
-            }
+        StringBuffer stars = new StringBuffer();
+        int solidStars = rating;
+        for (int i = 0; i < solidStars; i++) {
+            stars.insert(i, "*");
+        }
         return " [rating = " + stars.toString() + ", reviewText = \"" + reviewText + "\"]";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Review) {
+            Review other = (Review) obj;
+            return this.rating == other.getRating()
+                    && this.reviewText.equals(other.getReviewText());
+        }
+        return false;
     }
 }
