@@ -46,15 +46,15 @@ public class CRUDMovieShowingUI {
         System.out.println("\nCREATING A MOVIE SHOWING...");
 
         int id = getIdFromUser();
-        SeatingLayout seatingAvailability = getSeatingAvailabilityFromUser(); // TO BE CHANGED WHEN SEATING LAYOUT IS UPDATED
         Movie movie = getMovieFromUser();
         LocalDateTime showTime = getShowTimeFromUser();
         Cineplex cineplex = getCineplexFromUser();
         Cinema cinema = getCinemaFromUser(cineplex);
+        SeatingLayout seatingAvailability = getSeatingAvailabilityFromUser();
 
         showingController.addToDatabase(new Showing(id, seatingAvailability, movie, showTime, cinema, cineplex));
 
-        System.out.println(movie.getTitle() + "at showtime ID: " + id + " added to Showtime database!");
+        System.out.println(movie.getTitle() + " at showtime ID: " + id + " added to Showtime database!");
     }
 
     private static void updateMovieShowing() {

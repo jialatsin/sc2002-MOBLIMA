@@ -74,4 +74,10 @@ public class SeatingLayout implements Serializable {
         }
         return false;
     }
+
+    @Override
+    public String toString() {
+        return "seats=" + Arrays.toString(seats) + "\nrows=" + rows + "\ncolumns=" + columns;
+    }
+
 }

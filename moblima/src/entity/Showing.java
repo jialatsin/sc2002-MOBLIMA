@@ -22,8 +22,8 @@ public class Showing implements Serializable {
     }
 
     public String toString() {
-        return "Showing [id=" + id + ", movie=" + movie + ", showTime=" + showTime + ", cinema=" + cinema
-                + ", cineplex=" + cineplex + "]";
+        return "\nshowingId=" + id + "\nmovieTitle=" + movie.getTitle() + "\nmovieID=" + movie.getId() + "\nshowTime=" + showTime + "\ncinema=" + cinema
+                + "\ncineplex=" + "\nseatingAvailability=" + seatingAvailablity;
     }
 
     @Override

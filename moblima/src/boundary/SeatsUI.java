@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class SeatsUI {
 
     public static void main() {
-        // login();
 
         int selection;
         do {
