@@ -123,7 +123,7 @@ public class CRUDMovieShowingUI {
         }
     }
 
-    private static void searchMovieShowings() {
+    public static void searchMovieShowings() {
         do {
             System.out.println("===== SEARCH/LIST SHOWING =====\n"
                     + "1. Search By Showing code\n"
@@ -181,6 +181,28 @@ public class CRUDMovieShowingUI {
         }
     }
 
+    public static void listAll(Cineplex cineplex, Movie movie) { // Overloaded listAll function to find all showings
+                                                                 // with specific cineplex and movie. Method called in
+                                                                 // MovieGoerUI.checkSeatAvailability
+        ArrayList<Showing> showingList = showingController.readFromDatabase();
+        int showingFound = 0;
+        System.out.println("\n=================================================");
+        for (Showing showing : showingList) {
+            if ((showing.getCineplex().equals(cineplex)) && (showing.getMovie().equals(movie))) {
+                showingFound = 1;
+                System.out.println("Showing id=" + showing.getId() + "\nmovieTitle=" + showing.getMovie().getTitle()
+                        + ", movieID=" + showing.getMovie().getId()
+                        + "\nshowTime=" + showing.getShowTime() + "\ncineplex=" + showing.getCineplex().getName()
+                        + ", cinema="
+                        + showing.getCinema());
+                System.out.println("=================================================");
+            }
+        }
+        if (showingFound == 0) {
+            System.out.println("No showing of " + movie.getTitle() + " is found at " + cineplex.getName());
+        }
+    }
+
     private static int getIdFromUser() {
         System.out.println("\nEnter showing ID:");
         int id = InputHandler.scanInt();
@@ -194,7 +216,8 @@ public class CRUDMovieShowingUI {
             System.out.println(i++ + ". " + E);
         }
         int Selection = InputHandler.scanInt();
-        SeatingLayout seatingAvailability = new SeatingLayout(Selection); // TO BE CHANGED WHEN SEATING LAYOUT IS UPDATED
+        SeatingLayout seatingAvailability = new SeatingLayout(Selection); // TO BE CHANGED WHEN SEATING LAYOUT IS
+                                                                          // UPDATED
         return seatingAvailability;
     }
 
@@ -231,7 +254,7 @@ public class CRUDMovieShowingUI {
         return cinema;
     }
 
-    private static Cineplex getCineplexFromUser() {
+    public static Cineplex getCineplexFromUser() {
         int n, i;
         ArrayList<Cineplex> cineplexes = cineplexController.readFromDatabase();
         System.out.println("\nSelect cineplex:");

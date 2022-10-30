@@ -3,8 +3,7 @@ package boundary;
 import control.MovieController;
 import java.util.*;
 
-import entity.Movie;
-import entity.Review;
+import entity.*;
 import boundary.SeatsUI;
 
 public class MovieGoerUI {
@@ -40,7 +39,8 @@ public class MovieGoerUI {
                     viewDetails(movieObject); // returns all movies with same title in them
                     break;
                 case 3: // Check Seat Availabilty
-                    SeatsUI.main();
+                    checkSeatAvailability();
+                    // SeatsUI.main();
                     break;
                 case 4: // Book Ticket
                     // System.out.printf("Input movie title: ");
@@ -53,7 +53,7 @@ public class MovieGoerUI {
                 case 5: // View Booking History
                     break;
                 case 6: // List Top 5
-                    //Require Read from Database
+                    // Require Read from Database
                     break;
                 case 7: // Add Review
                     System.out.printf("Input movie title: ");
@@ -61,7 +61,7 @@ public class MovieGoerUI {
                     movieObject = searchMovieObject(movieTitle);
                     if (movieObject == null)
                         break;
-                    Movie newMovie = addReview(movieObject);  //creates new movie block to update reviews
+                    Movie newMovie = addReview(movieObject); // creates new movie block to update reviews
                     updated = MovieController.updateMovieObject(newMovie);
                     if (updated == true) {
                         System.out.println("Review added");
@@ -133,7 +133,7 @@ public class MovieGoerUI {
         }
     }
 
-    public static void printMovieObject(ArrayList<Movie> requestedMovieList) {  //Print all movies given movieList
+    public static void printMovieObject(ArrayList<Movie> requestedMovieList) { // Print all movies given movieList
         for (Movie movie : requestedMovieList) {
             System.out.printf("\n================================================="
                     + "\nMovie: " + movie.getTitle()
@@ -146,30 +146,30 @@ public class MovieGoerUI {
             System.out.print("\nShowing Status: " + movie.getShowingStatus());
         }
         System.out.println("\n=================================================\n");
-        }
+    }
 
-    public static void printMovieObject(Movie movie) { //Overloaded method to print out one given movie
+    public static void printMovieObject(Movie movie) { // Overloaded method to print out one given movie
         System.out.printf("\n================================================="
-                    + "\nMovie: " + movie.getTitle()
-                    + "\nMovie ID: " + movie.getId()
-                    + "\nRelease Date: " + movie.getReleaseDate()
-                    + "\nGenres: ");
-            for (String k : movie.getGenres()) {
-                System.out.printf(k + ", ");
-            }
-            System.out.println("\n"
-                    + "Showing Status: " + movie.getShowingStatus()
-                    + "\n=================================================");
+                + "\nMovie: " + movie.getTitle()
+                + "\nMovie ID: " + movie.getId()
+                + "\nRelease Date: " + movie.getReleaseDate()
+                + "\nGenres: ");
+        for (String k : movie.getGenres()) {
+            System.out.printf(k + ", ");
+        }
+        System.out.println("\n"
+                + "Showing Status: " + movie.getShowingStatus()
+                + "\n=================================================");
     }
 
     public static void viewDetails(Movie movie) { // prints all details of a movie
         System.out.println("\n=================================================");
         System.out.println(
                 "\nMovie: " + movie.getTitle()
-                + "\nid: " + movie.getId()
-                + "\nSynopsis: " + movie.getSynopsis()
-                + "\nDirector: " + movie.getDirector()
-                + "\nCast: ");
+                        + "\nid: " + movie.getId()
+                        + "\nSynopsis: " + movie.getSynopsis()
+                        + "\nDirector: " + movie.getDirector()
+                        + "\nCast: ");
         for (String j : movie.getCast())
             System.out.print(j + ", ");
         System.out.print("\nGenres: ");
@@ -183,7 +183,7 @@ public class MovieGoerUI {
         if (averageReviewRating < 0) {
             System.out.println("\nAverage Review Rating: NaN");
         } else
-        System.out.println("\nAverage Review Rating: " + movie.getAverageReviewRating() + "*");
+            System.out.println("\nAverage Review Rating: " + movie.getAverageReviewRating() + "*");
         // print reviews
         int numReviews = movie.getReviews().size(), reviewNum = 1;
         if (numReviews > 0)
@@ -197,8 +197,22 @@ public class MovieGoerUI {
         System.out.println("=================================================");
     }
 
+    public static void checkSeatAvailability() {
+        Cineplex cineplex = CRUDMovieShowingUI.getCineplexFromUser();
+        System.out.printf("Input movie title: ");
+        String title = InputHandler.scanString();
+        Movie movieObject = searchMovieObject(title);
+        if (movieObject == null)
+            return;
+        CRUDMovieShowingUI.listAll(cineplex, movieObject); //List all showings for user to pick one
+
+        System.out.println("Input movie showing id:");
+        int showingID = InputHandler.scanInt();
+        // TODO: Implement seachShowings from CRUD using showingID, and display available seats
+    }
+
     public static void bookTicket(Movie movie) {
-        // TODO: generate showings
+        // TODO
     }
 
     public static Movie addReview(Movie movie) {
