@@ -4,7 +4,6 @@ import control.MovieController;
 import java.util.*;
 
 import entity.*;
-import boundary.SeatsUI;
 
 public class MovieGoerUI {
     public static MovieController movieController = new MovieController();
@@ -199,7 +198,7 @@ public class MovieGoerUI {
     }
 
     public static void checkSeatAvailability() {
-        Cineplex cineplex = CRUDMovieShowingUI.getCineplexFromUser();
+        Cineplex cineplex = UserHandler.getCineplexFromUser();
         System.out.printf("Input movie title: ");
         String title = InputHandler.scanString();
         Movie movieObject = searchMovieObject(title);

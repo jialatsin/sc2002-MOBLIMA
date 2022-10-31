@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+// Handle user input of various low-level datatypes
 public class InputHandler {
     // Scanner must only be initialized once
     private static Scanner sc = new Scanner(System.in);
@@ -112,5 +113,4 @@ public class InputHandler {
     public static DateTimeFormatter getDateFormat() {
         return dateFormat;
     }
-
 }

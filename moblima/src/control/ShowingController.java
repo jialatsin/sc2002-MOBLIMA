@@ -5,12 +5,11 @@ import java.util.ArrayList;
 
 import entity.*;
 
-
-public class ShowingController extends DatabaseController<Showing>{
+public class ShowingController extends DatabaseController<Showing> {
     public ShowingController() {
         super(MainController.FILEPATH_SHOWING);
     }
-    
+
     public Showing getShowingById(int id) {
         ArrayList<Showing> showings = readFromDatabase();
         for (Showing showing : showings) {

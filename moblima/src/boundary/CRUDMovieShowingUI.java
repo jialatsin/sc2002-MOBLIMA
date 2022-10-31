@@ -1,16 +1,13 @@
 package boundary;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import control.*;
 import entity.*;
-import entity.Constants.CinemaClass;
 import entity.Cineplex;
 
 public class CRUDMovieShowingUI {
     private static ShowingController showingController = new ShowingController();
-    private static CineplexController cineplexController = new CineplexController();
 
     public static void main() {
         int selection;
@@ -45,12 +42,12 @@ public class CRUDMovieShowingUI {
     private static void createMovieShowing() {
         System.out.println("\nCREATING A MOVIE SHOWING...");
 
-        int id = getIdFromUser();
-        Movie movie = getMovieFromUser();
-        LocalDateTime showTime = getShowTimeFromUser();
-        Cineplex cineplex = getCineplexFromUser();
-        Cinema cinema = getCinemaFromUser(cineplex);
-        SeatingLayout seatingAvailability = getSeatingAvailabilityFromUser();
+        int id = UserHandler.getIdFromUser();
+        Movie movie = UserHandler.getMovieFromUser();
+        LocalDateTime showTime = UserHandler.getShowTimeFromUser();
+        Cineplex cineplex = UserHandler.getCineplexFromUser();
+        Cinema cinema = UserHandler.getCinemaFromUser(cineplex);
+        SeatingLayout seatingAvailability = cinema.getSeatingLayout();
 
         showingController.addToDatabase(new Showing(id, seatingAvailability, movie, showTime, cinema, cineplex));
 
@@ -60,7 +57,7 @@ public class CRUDMovieShowingUI {
     private static void updateMovieShowing() {
         System.out.println("\nUPDATING A MOVIE SHOWING...");
 
-        int id = getIdFromUser();
+        int id = UserHandler.getIdFromUser();
         Showing showing = showingController.getShowingById(id);
         if (showing == null) {
             System.out.println("Showing of ID " + id + " does not exist in Showing database!");
@@ -76,36 +73,38 @@ public class CRUDMovieShowingUI {
                     + "2. seatingAvailability\n"
                     + "3. Movie\n"
                     + "4. ShowTime\n"
-                    + "5. Cinema\n"
-                    + "6. Cineplex\n");
+                    + "5. Cinema\n");
             selection = InputHandler.scanInt();
-        } while (selection < 1 || selection > 6);
+        } while (selection < 1 || selection > 5);
 
         switch (selection) {
             case 1:
-                int newId = getIdFromUser();
+                int newId = UserHandler.getIdFromUser();
                 showingController.updateShowingAttribute(showing, selection, newId);
                 break;
             case 2:
-                SeatingLayout seatingAvailability = getSeatingAvailabilityFromUser();
-                showingController.updateShowingAttribute(showing, selection, seatingAvailability);
+                // TODO: Menu to change available seats
                 break;
             case 3:
-                Movie movie = getMovieFromUser();
+                Movie movie = UserHandler.getMovieFromUser();
+                if (movie == null) {
+                    System.out.println("Error updating Movie attribute!");
+                    break;
+                }
                 showingController.updateShowingAttribute(showing, selection, movie);
                 break;
             case 4:
-                LocalDateTime showTime = getShowTimeFromUser();
+                LocalDateTime showTime = UserHandler.getShowTimeFromUser();
                 showingController.updateShowingAttribute(showing, selection, showTime);
                 break;
             case 5:
-                Cineplex cineplex = getCineplexFromUser();
-                Cinema cinema = getCinemaFromUser(cineplex);
+                Cineplex cineplex = UserHandler.getCineplexFromUser();
+                Cinema cinema = UserHandler.getCinemaFromUser(cineplex);
+                if (cinema == null) {
+                    System.out.println("Error updating Cinema attribute!");
+                    break;
+                }
                 showingController.updateShowingAttribute(showing, selection, cinema);
-                break;
-            case 6:
-                cineplex = getCineplexFromUser();
-                showingController.updateShowingAttribute(showing, selection, cineplex);
                 break;
         }
 
@@ -115,7 +114,7 @@ public class CRUDMovieShowingUI {
     private static void deleteMovieShowing() {
         System.out.println("\nDELETING A MOVIE SHOWING...");
 
-        int id = getIdFromUser();
+        int id = UserHandler.getIdFromUser();
         if (showingController.deleteShowingById(id)) {
             System.out.println("Deleted showing with ID " + id + "!");
         } else {
@@ -201,75 +200,5 @@ public class CRUDMovieShowingUI {
         if (showingFound == 0) {
             System.out.println("No showing of " + movie.getTitle() + " is found at " + cineplex.getName());
         }
-    }
-
-    private static int getIdFromUser() {
-        System.out.println("\nEnter showing ID:");
-        int id = InputHandler.scanInt();
-        return id;
-    }
-
-    // TODO
-    private static SeatingLayout getSeatingAvailabilityFromUser() {
-        System.out.println("\nEnter seating layout:");
-        int i = 1;
-        for (CinemaClass E : java.util.Arrays.asList(CinemaClass.values())) {
-            System.out.println(i++ + ". " + E);
-        }
-        int Selection = InputHandler.scanInt();
-        // SeatingLayout seatingAvailability = new SeatingLayout(Selection); // TO BE
-        // CHANGED WHEN SEATING LAYOUT IS
-        // UPDATED
-        return null;
-    }
-
-    private static Movie getMovieFromUser() {
-        System.out.println("\nEnter movie title:");
-        String movieTitle = InputHandler.scanString();
-        Movie movie = MovieGoerUI.searchMovieObject(movieTitle);
-        if (movie == null) {
-            System.out.println("Movie not found.");
-            return null;
-        }
-        return movie;
-    }
-
-    private static LocalDateTime getShowTimeFromUser() {
-        System.out.println("\nEnter show timing 'dd/MM/yyyy HH:mm':");
-        LocalDateTime showTime = InputHandler.scanDateTime();
-        return showTime;
-    }
-
-    private static Cinema getCinemaFromUser(Cineplex cineplex) {
-        int n, i;
-        System.out.println("\nEnter cinema name:");
-        i = 1;
-        for (Cinema cinema : cineplex.getCinemas()) {
-            System.out.println(i++ + ". " + cinema.getCode());
-        }
-        n = InputHandler.scanInt();
-        Cinema cinema = null;
-        while (n < i && n > 0) {
-            cinema = cineplex.getCinemas().get(n - 1);
-            break;
-        }
-        return cinema;
-    }
-
-    public static Cineplex getCineplexFromUser() {
-        int n, i;
-        ArrayList<Cineplex> cineplexes = cineplexController.readFromDatabase();
-        System.out.println("\nSelect cineplex:");
-        i = 1;
-        for (Cineplex cineplex : cineplexes) {
-            System.out.println(i++ + ". " + cineplex.getName());
-        }
-        n = InputHandler.scanInt();
-        Cineplex cineplex = null;
-        while (n < i && n > 0) {
-            cineplex = cineplexes.get(n - 1);
-            break;
-        }
-        return cineplex;
     }
 }
