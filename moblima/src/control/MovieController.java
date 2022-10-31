@@ -81,19 +81,19 @@ public class MovieController extends DatabaseController<Movie> {
         overwriteDatabase(movies);
     }
 
-    public static void listAll() { // Method from SeachMovie() to list all movies in db
-        ArrayList<Movie> MovieList = MovieGoerUI.movieController.readFromDatabase();
+    public void listAll() { // Method from SeachMovie() to list all movies in db
+        ArrayList<Movie> MovieList = readFromDatabase();
         System.out.println();
         MovieGoerUI.printMovieObject(MovieList);
     }
 
-    public static boolean updateMovieObject(Movie updatedMovie) { // method that overwrites database everytime a movie
-                                                                  // has an update
-        ArrayList<Movie> MovieList = MovieGoerUI.movieController.readFromDatabase();
+    public boolean updateMovieObject(Movie updatedMovie) { // method that overwrites database everytime a movie
+                                                           // has an update
+        ArrayList<Movie> MovieList = readFromDatabase();
         for (int i = 0; i < MovieList.size(); i++) {
             if (updatedMovie.getId() == MovieList.get(i).getId()) {
                 MovieList.set(i, updatedMovie);
-                MovieGoerUI.movieController.overwriteDatabase(MovieList);
+                overwriteDatabase(MovieList);
                 return true;
             }
         }

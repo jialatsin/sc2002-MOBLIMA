@@ -133,17 +133,10 @@ public class CRUDMovieShowingUI {
                 case 1:
                     System.out.printf("Input showing code: ");
                     int id = InputHandler.scanInt();
-                    Showing showObject = searchShowingObject(id);
-                    if (showObject == null)
+                    Showing showing = searchShowingObject(id);
+                    if (showing == null)
                         break;
-                    System.out.println("\n=================================================");
-                    System.out.println(
-                            "Showing id=" + showObject.getId() + "\nmovieTitle=" + showObject.getMovie().getTitle()
-                                    + ", movieID=" + showObject.getMovie().getId()
-                                    + "\nshowTime=" + showObject.getShowTime() + "\ncineplex="
-                                    + showObject.getCineplex().getName() + ", cinema="
-                                    + showObject.getCinema());
-                    System.out.println("=================================================");
+                    System.out.println(showing);
                     break;
                 case 2:
                     listAll();
@@ -167,37 +160,30 @@ public class CRUDMovieShowingUI {
         return null;
     }
 
+    // TODO: refactor
     public static void listAll() {
-        ArrayList<Showing> showingList = showingController.readFromDatabase();
-        System.out.println("\n=================================================");
-        for (Showing showing : showingList) {
-            System.out.println("Showing id=" + showing.getId() + "\nmovieTitle=" + showing.getMovie().getTitle()
-                    + ", movieID=" + showing.getMovie().getId()
-                    + "\nshowTime=" + showing.getShowTime() + "\ncineplex=" + showing.getCineplex().getName()
-                    + ", cinema="
-                    + showing.getCinema());
-            System.out.println("=================================================");
+        ArrayList<Showing> showings = showingController.readFromDatabase();
+        if (showings == null) {
+            System.out.println("No showings exist in Showing database!");
+        }
+        for (Showing showing : showings) {
+            System.out.println(showing);
         }
     }
 
+    // TODO: refactor
     public static void listAll(Cineplex cineplex, Movie movie) { // Overloaded listAll function to find all showings
                                                                  // with specific cineplex and movie. Method called in
                                                                  // MovieGoerUI.checkSeatAvailability
         ArrayList<Showing> showingList = showingController.readFromDatabase();
-        int showingFound = 0;
-        System.out.println("\n=================================================");
+        boolean showingFound = false;
         for (Showing showing : showingList) {
             if ((showing.getCineplex().equals(cineplex)) && (showing.getMovie().equals(movie))) {
-                showingFound = 1;
-                System.out.println("Showing id=" + showing.getId() + "\nmovieTitle=" + showing.getMovie().getTitle()
-                        + ", movieID=" + showing.getMovie().getId()
-                        + "\nshowTime=" + showing.getShowTime() + "\ncineplex=" + showing.getCineplex().getName()
-                        + ", cinema="
-                        + showing.getCinema());
-                System.out.println("=================================================");
+                showingFound = true;
+                System.out.println(showing);
             }
         }
-        if (showingFound == 0) {
+        if (!showingFound) {
             System.out.println("No showing of " + movie.getTitle() + " is found at " + cineplex.getName());
         }
     }

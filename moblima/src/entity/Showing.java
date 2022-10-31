@@ -22,8 +22,12 @@ public class Showing implements Serializable {
     }
 
     public String toString() {
-        return "\nshowingId=" + id + "\nmovieTitle=" + movie.getTitle() + "\nmovieID=" + movie.getId() + "\nshowTime=" + showTime + "\ncinema=" + cinema
-                + "\ncineplex=" + "\nseatingAvailability=" + seatingAvailablity;
+        return "\nShowing ID:" + id
+                + "\nMovie Title:" + movie.getTitle() + " (ID: " + movie.getId() + ")"
+                + "\nShowtime:" + showTime
+                + "\nCineplex:" + cineplex.getName() + "(Cinema: " + cinema + ")"
+                + "\nAvailable Seats=" + seatingAvailablity.getAvailableSeatsCount()
+                + "\n=================================================\n";
     }
 
     @Override

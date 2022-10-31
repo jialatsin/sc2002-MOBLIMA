@@ -1,12 +1,15 @@
 package boundary;
 
 import control.MovieController;
+import control.ShowingController;
+
 import java.util.*;
 
 import entity.*;
 
 public class MovieGoerUI {
-    public static MovieController movieController = new MovieController();
+    private static MovieController movieController = new MovieController();
+    private static ShowingController showingController = new ShowingController();
 
     public static void main() {
         int selection, movieID;
@@ -37,9 +40,7 @@ public class MovieGoerUI {
                         break;
                     viewDetails(movieObject); // returns all movies with same title in them
                     break;
-                case 3: // Check Seat Availabilty
-                    checkSeatAvailability();
-                    // SeatsUI.main();
+                case 3: // TODO: Search showings instead of check seat availability?
                     break;
                 case 4: // Book Ticket
                     // System.out.printf("Input movie title: ");
@@ -61,7 +62,7 @@ public class MovieGoerUI {
                     if (movieObject == null)
                         break;
                     Movie newMovie = addReview(movieObject); // creates new movie block to update reviews
-                    updated = MovieController.updateMovieObject(newMovie);
+                    updated = movieController.updateMovieObject(newMovie);
                     if (updated == true) {
                         System.out.println("Review added");
                     } else
@@ -92,7 +93,7 @@ public class MovieGoerUI {
                     printMovieObject(movieObject);
                     break;
                 case 2:
-                    MovieController.listAll();
+                    movieController.listAll();
                     break;
                 case 0:
                     return;
@@ -197,19 +198,30 @@ public class MovieGoerUI {
         System.out.println("=================================================");
     }
 
-    public static void checkSeatAvailability() {
+    public static void searchShowing() {
         Cineplex cineplex = UserHandler.getCineplexFromUser();
         System.out.printf("Input movie title: ");
         String title = InputHandler.scanString();
-        Movie movieObject = searchMovieObject(title);
-        if (movieObject == null)
+        Movie movie = searchMovieObject(title);
+        if (movie == null) {
+            System.out.println("Movie does not exist in Movie database!");
             return;
-        CRUDMovieShowingUI.listAll(cineplex, movieObject); // List all showings for user to pick one
+        }
+        // TODO:
+        CRUDMovieShowingUI.listAll(cineplex, movie); // List all showings for user to pick one
 
         System.out.println("Input movie showing id:");
-        int showingID = InputHandler.scanInt();
-        // TODO: Implement seachShowings from CRUD using showingID, and display
-        // available seats
+        int showingId = InputHandler.scanInt();
+        Showing showing = showingController.getShowingById(showingId);
+    }
+
+    public static void checkSeatAvailability(Showing showing) {
+        if (showing == null) {
+            System.out.println("Movie showing does not exist in Showing database!");
+            return;
+        }
+        SeatingLayout seatingAvailability = showing.getSeatingAvailablity();
+        System.out.println(seatingAvailability);
     }
 
     public static void bookTicket(Movie movie) {

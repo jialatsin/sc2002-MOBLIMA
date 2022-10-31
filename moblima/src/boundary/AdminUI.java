@@ -38,6 +38,7 @@ public class AdminUI {
 
     private static void login() {
         // TODO: Better login validation?
+        // TODO: Refactor login logic to controller
         ArrayList<Admin> adminData = adminController.readFromDatabase();
         boolean isLoggedIn = false;
 
