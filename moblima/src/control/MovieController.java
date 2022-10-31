@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import boundary.MovieGoerUI;
+import boundary.SearchMovieUI;
 import entity.*;
 import entity.Constants.ContentRating;
 import entity.Constants.MovieType;
@@ -84,7 +85,7 @@ public class MovieController extends DatabaseController<Movie> {
     public void listAll() { // Method from SeachMovie() to list all movies in db
         ArrayList<Movie> MovieList = readFromDatabase();
         System.out.println();
-        MovieGoerUI.printMovieObject(MovieList);
+        SearchMovieUI.printMovieObject(MovieList);
     }
 
     public boolean updateMovieObject(Movie updatedMovie) { // method that overwrites database everytime a movie
