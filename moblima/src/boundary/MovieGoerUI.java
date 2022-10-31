@@ -74,6 +74,7 @@ public class MovieGoerUI {
         } while (true);
     }
 
+    // TODO: print no movies found!
     public static void searchMovie() { // another UI that is pretty unnecessary but we'll keep it to prevent nested
                                        // switchcases
         do {
@@ -204,11 +205,12 @@ public class MovieGoerUI {
         Movie movieObject = searchMovieObject(title);
         if (movieObject == null)
             return;
-        CRUDMovieShowingUI.listAll(cineplex, movieObject); //List all showings for user to pick one
+        CRUDMovieShowingUI.listAll(cineplex, movieObject); // List all showings for user to pick one
 
         System.out.println("Input movie showing id:");
         int showingID = InputHandler.scanInt();
-        // TODO: Implement seachShowings from CRUD using showingID, and display available seats
+        // TODO: Implement seachShowings from CRUD using showingID, and display
+        // available seats
     }
 
     public static void bookTicket(Movie movie) {

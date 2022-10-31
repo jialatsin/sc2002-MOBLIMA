@@ -28,15 +28,15 @@ public class MainController {
             // TODO: Admin menu to manage Cineplexes, Cinemas and SeatLayouts??
             // Currently hard-coded data
             ArrayList<Cinema> cinemasA = new ArrayList<Cinema>();
-            cinemasA.add(new Cinema("APL", new SeatingLayout(1), CinemaClass.PLATINUM));
-            cinemasA.add(new Cinema("AGO", new SeatingLayout(2), CinemaClass.GOLD));
-            cinemasA.add(new Cinema("AST", new SeatingLayout(3), CinemaClass.STANDARD));
+            cinemasA.add(new Cinema("APL", new SeatingLayout(5, 5), CinemaClass.PLATINUM));
+            cinemasA.add(new Cinema("AGO", new SeatingLayout(15, 10), CinemaClass.GOLD));
+            cinemasA.add(new Cinema("AST", new SeatingLayout(15, 25), CinemaClass.STANDARD));
             cineplexes.add(new Cineplex("GV Jurong Point", "Jurong", cinemasA));
 
             ArrayList<Cinema> cinemasB = new ArrayList<Cinema>();
-            cinemasB.add(new Cinema("APL", new SeatingLayout(1), CinemaClass.PLATINUM));
-            cinemasB.add(new Cinema("AGO", new SeatingLayout(2), CinemaClass.GOLD));
-            cinemasB.add(new Cinema("AST", new SeatingLayout(3), CinemaClass.STANDARD));
+            cinemasB.add(new Cinema("APL", new SeatingLayout(6, 6), CinemaClass.PLATINUM));
+            cinemasB.add(new Cinema("AGO", new SeatingLayout(10, 15), CinemaClass.GOLD));
+            cinemasB.add(new Cinema("AST", new SeatingLayout(20, 20), CinemaClass.STANDARD));
             cineplexes.add(new Cineplex("Cathay Cineplex Cineleisure", "Cineleisure Orchard", cinemasB));
 
             cineplexController.overwriteDatabase(cineplexes);

@@ -209,6 +209,7 @@ public class CRUDMovieShowingUI {
         return id;
     }
 
+    // TODO
     private static SeatingLayout getSeatingAvailabilityFromUser() {
         System.out.println("\nEnter seating layout:");
         int i = 1;
@@ -216,9 +217,10 @@ public class CRUDMovieShowingUI {
             System.out.println(i++ + ". " + E);
         }
         int Selection = InputHandler.scanInt();
-        SeatingLayout seatingAvailability = new SeatingLayout(Selection); // TO BE CHANGED WHEN SEATING LAYOUT IS
-                                                                          // UPDATED
-        return seatingAvailability;
+        // SeatingLayout seatingAvailability = new SeatingLayout(Selection); // TO BE
+        // CHANGED WHEN SEATING LAYOUT IS
+        // UPDATED
+        return null;
     }
 
     private static Movie getMovieFromUser() {

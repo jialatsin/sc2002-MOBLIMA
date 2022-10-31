@@ -33,6 +33,7 @@ public class CRUDMovieListingUI {
                     deleteMovieListing();
                     break;
                 case 4:
+                    // TODO: Refactor out search movies
                     MovieGoerUI.searchMovie();
                     break;
                 case 0:

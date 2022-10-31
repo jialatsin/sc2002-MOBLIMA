@@ -1,7 +1,9 @@
 package boundary;
 
-
 import java.util.ArrayList;
+
+import entity.Seat;
+import entity.Constants.SeatStatus;
 
 //import control.seatController;
 //import entity.Admin;
@@ -39,140 +41,141 @@ public class SeatsUI {
         int rows = 6;
         int columns = 8;
         int[][] matrix = new int[rows][columns];
-        //Need get seat number from Database and populate matrix first!
+        // Need get seat number from Database and populate matrix first!
         System.out.println("\n===== Platinum Suites Seats =====\n");
         for (int r = 0; r < rows; r++) {
-            if(r == rows - 1){
+            if (r == rows - 1) {
                 System.out.print("  ");
                 for (int c = 0; c < columns - 2; c++) {
-                    if(c == columns/3 || c == columns/3 + columns/3){
-                        System.out.print("  " + (char)('A' + c) + " ");
-                    }else{
-                        System.out.print((char)('A' + c) + " ");
+                    if (c == columns / 3 || c == columns / 3 + columns / 3) {
+                        System.out.print("  " + (char) ('A' + c) + " ");
+                    } else {
+                        System.out.print((char) ('A' + c) + " ");
                     }
-                        
+
                 }
-            }else{
+            } else {
                 System.out.print(r + 1 + " ");
                 for (int c = 0; c < columns; c++) {
-                    if(c == columns/3 || c == columns/3 + columns/3 + 1){
+                    if (c == columns / 3 || c == columns / 3 + columns / 3 + 1) {
                         System.out.print("  ");
-                    }else{
-                        if(r == rows - 1){
-                            System.out.print((char)('A' + c) + " ");
-                        }else if(matrix[r][c] != 0){
+                    } else {
+                        if (r == rows - 1) {
+                            System.out.print((char) ('A' + c) + " ");
+                        } else if (matrix[r][c] != 0) {
                             System.out.print(c + " ");
-                        }else{
+                        } else {
                             System.out.print("X ");
                         }
                     }
-                    
-                    
+
                 }
             }
-			
+
             System.out.println("");
-		}
+        }
     }
 
     public static void goldSuites() {
         int rows = 10;
         int columns = 14;
         int[][] matrix = new int[rows][columns];
-        //Need get seat number from Database and populate matrix first!
+        // Need get seat number from Database and populate matrix first!
         System.out.println("\n===== Gold Suites Seats =====\n");
         for (int r = 0; r < rows; r++) {
-            if(r == rows - 1){
+            if (r == rows - 1) {
                 System.out.print("  ");
                 for (int c = 0; c < columns - 2; c++) {
-                    if(c == columns/3 || c == columns/3 + columns/3){
-                        System.out.print("  " + (char)('A' + c) + " ");
-                    }else{
-                        System.out.print((char)('A' + c) + " ");
+                    if (c == columns / 3 || c == columns / 3 + columns / 3) {
+                        System.out.print("  " + (char) ('A' + c) + " ");
+                    } else {
+                        System.out.print((char) ('A' + c) + " ");
                     }
-                        
+
                 }
-            }else if(r > rows - 5){
+            } else if (r > rows - 5) {
                 System.out.print(r + 1 + " ");
                 for (int c = 0; c < columns; c++) {
-                    if(c == columns/3 || c == columns/3 + columns/3 + 1){
+                    if (c == columns / 3 || c == columns / 3 + columns / 3 + 1) {
                         System.out.print("  ");
-                    }else{
-                        if(matrix[r][c] != 0){
+                    } else {
+                        if (matrix[r][c] != 0) {
                             System.out.print(c + " ");
-                        }else{
-                            if(c > 4 && c < 9){
-                                if((c+1)%2 == 0){
-                                    System.out.print((char)('[') + " ");
-                                }else{
-                                    System.out.print((char)(']') + " ");
+                        } else {
+                            if (c > 4 && c < 9) {
+                                if ((c + 1) % 2 == 0) {
+                                    System.out.print((char) ('[') + " ");
+                                } else {
+                                    System.out.print((char) (']') + " ");
                                 }
-                            }else{
-                                if(c%2 == 0){
-                                    System.out.print((char)('[') + " ");
-                                }else{
-                                    System.out.print((char)(']') + " ");
+                            } else {
+                                if (c % 2 == 0) {
+                                    System.out.print((char) ('[') + " ");
+                                } else {
+                                    System.out.print((char) (']') + " ");
                                 }
                             }
-                            
-                            
+
                         }
                     }
                 }
-            }else{
+            } else {
                 System.out.print(r + 1 + " ");
                 for (int c = 0; c < columns; c++) {
-                    if(c == columns/3 || c == columns/3 + columns/3 + 1){
+                    if (c == columns / 3 || c == columns / 3 + columns / 3 + 1) {
                         System.out.print("  ");
-                    }else{
-                        if(matrix[r][c] != 0){
+                    } else {
+                        if (matrix[r][c] != 0) {
                             System.out.print(c + " ");
-                        }else{
+                        } else {
                             System.out.print("X ");
                         }
                     }
                 }
             }
-			
+
             System.out.println("");
-		}
+        }
     }
 
     public static void standardSuites() {
-        int rows = 10;
-        int columns = 14;
+        int rows = 20;
+        int columns = 20;
         int[][] matrix = new int[rows][columns];
-        //Need get seat number from Database and populate matrix first!
+        // Need get seat number from Database and populate matrix first!
         System.out.println("\n===== Standard Suites Seats =====\n");
         for (int r = 0; r < rows; r++) {
-            if(r == rows - 1){
-                System.out.print("  ");
-                for (char c = 'A'; c < (char)(columns + 'A' - 2); c++) {
-                    if(c == (char)(columns/3 + 'A' ) || c == (char)(columns/3 + columns/3 + 'A')){
-                        System.out.print("  " + c + " ");
-                    }else{
-                        System.out.print(c + " "); 
+            // last row
+            if (r == rows - 1) {
+                System.out.printf(" "); // left padding for letters
+                for (char c = 'A'; c < (char) (columns + 'A' - 2); c++) {
+                    if (c == (char) (columns / 3 + 'A') || c == (char) (columns / 3 + columns / 3
+                            + 'A')) {
+                        System.out.print(" " + c + " ");
+                    } else {
+                        System.out.print(c + " ");
                     }
-                        
+
                 }
-            }else{
+            } else {
+                // row number
                 System.out.print(r + 1 + " ");
                 for (int c = 0; c < columns; c++) {
-                    if(c == columns/3 || c == columns/3 + columns/3 + 1){
-                        System.out.print("  ");
-                    }else{
-                        if(matrix[r][c] != 0){
+                    // aisle
+                    if ((c + 1) % 4 == 0) {
+                        System.out.print(" ");
+                    } else {
+                        if (matrix[r][c] != 0) {
                             System.out.print(c + " ");
-                        }else{
+                        } else {
                             System.out.print("X ");
                         }
                     }
-                    
-                    
+
                 }
             }
-			
+
             System.out.println("");
-		}
+        }
     }
 }

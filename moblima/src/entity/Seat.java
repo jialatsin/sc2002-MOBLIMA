@@ -36,10 +36,8 @@ public class Seat implements Serializable {
     public String toString() {
         if (status == SeatStatus.UNOCCUPIED) {
             return "[ ]";
-        } else if (status == SeatStatus.OCCUPIED) {
-            return "[X]";
         } else {
-            return "   ";
+            return "[X]";
         }
     }
 
