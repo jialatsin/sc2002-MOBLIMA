@@ -70,6 +70,7 @@ public class MovieGoerUI {
         for (String genre : movie.getGenres())
             System.out.print(genre + ", ");
         System.out.println("\nRelease Date: " + movie.getReleaseDate()
+                + "\nEnd Date: " + movie.getEndDate()
                 + "\nContent Rating: " + movie.getContentRating()
                 + "\nMovie Type: " + movie.getMovieType()
                 + "\nShowing Status: " + movie.getShowingStatus());
