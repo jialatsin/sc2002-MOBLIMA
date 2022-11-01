@@ -12,8 +12,9 @@ public class SearchShowingUI {
 
     public static void main() {
         do {
+            // TODO: Search by Cineplex / Search by movie?
             System.out.println("===== SEARCH/LIST SHOWING =====\n"
-                    + "1. Search By Showing code\n"
+                    + "1. Search By Showing ID\n"
                     + "2. List All Showings\n"
                     + "0. Return\n");
             int choice = InputHandler.scanInt();
@@ -35,21 +36,13 @@ public class SearchShowingUI {
     public static void searchShowingById() {
         System.out.printf("Input showing id: ");
         int id = InputHandler.scanInt();
-        Showing showing = searchShowingObject(id);
-        if (showing == null)
+        Showing showing = showingController.findShowing(id);
+        if (showing == null) {
             return;
-        System.out.println(showing);
-    }
-
-    public static Showing searchShowingObject(int id) {
-        ArrayList<Showing> showingList = showingController.readFromDatabase();
-        for (Showing i : showingList) {
-            if (id == i.getId()) { // Searches for all movies with
-                return i;
-            }
         }
-        System.out.println("Movie not found"); // Returns if no showing is found with given id
-        return null;
+        System.out.println("=================================================");
+        System.out.println(showing);
+        System.out.println();
     }
 
     // Print all showings in database
@@ -59,9 +52,11 @@ public class SearchShowingUI {
             System.out.println("No showings exist in Showing database!");
             return;
         }
+        System.out.println("=================================================");
         for (Showing showing : showings) {
-            System.out.println(showing);
+            System.out.print(showing);
         }
+        System.out.println();
     }
 
     // Overloaded listAllShowings function to print all showings in database with

@@ -46,6 +46,11 @@ public class CRUDMovieListingUI {
         System.out.println("\nCREATING A MOVIE LISTING...");
 
         int id = UserHandler.getIdFromUser();
+        if (movieController.findMovie(id) != null) {
+            System.out.println("Movie of ID " + id + " already exists in Movie database!");
+            return;
+        }
+
         String title = UserHandler.getTitleFromUser();
         String synopsis = UserHandler.getSynopsisFromUser();
         String director = UserHandler.getDirectorFromUser();

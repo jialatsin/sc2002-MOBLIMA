@@ -3,6 +3,8 @@ package entity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import boundary.InputHandler;
+
 public class Showing implements Serializable {
     private int id;
     private SeatingLayout seatingAvailablity;
@@ -22,11 +24,12 @@ public class Showing implements Serializable {
     }
 
     public String toString() {
-        return "\nShowing ID:" + id
-                + "\nMovie Title:" + movie.getTitle() + " (ID: " + movie.getId() + ")"
-                + "\nShowtime:" + showTime
-                + "\nCineplex:" + cineplex.getName() + "(Cinema: " + cinema + ")"
-                + "\nAvailable Seats=" + seatingAvailablity.getAvailableSeatsCount()
+        return "\nShowing ID: " + id
+                + "\nMovie Title: " + movie.getTitle() + " (ID: " + movie.getId() + ")"
+                + "\nShowtime: " + showTime.format(InputHandler.getDateTimeFormat())
+                + "\nCineplex: " + cineplex.getName()
+                + " (Cinema: " + cinema.getCode() + ", " + cinema.getCinemaClass() + ")"
+                + "\nAvailable Seats: " + seatingAvailablity.getAvailableSeatsCount()
                 + "\n=================================================";
     }
 

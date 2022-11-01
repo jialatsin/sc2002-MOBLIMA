@@ -22,6 +22,18 @@ public class ShowingController extends DatabaseController<Showing> {
         return null;
     }
 
+    // Search for a showing by its cinema and showtime in the Showing database
+    // Returns the matching showing, returns null if showing not found
+    public Showing findShowing(Cinema cinema, LocalDateTime showTime) {
+        ArrayList<Showing> showings = readFromDatabase();
+        for (Showing showing : showings) {
+            if (showing.getCinema() == cinema && showing.getShowTime() == showTime) {
+                return showing;
+            }
+        }
+        return null;
+    }
+
     // Search for showings with specified movie and cineplex in the Showing database
     // Returns an ArrayList with matching showings, returns null if no showing found
     public ArrayList<Showing> findShowings(Cineplex cineplex, Movie movie) {

@@ -42,10 +42,20 @@ public class CRUDMovieShowingUI {
         System.out.println("\nCREATING A MOVIE SHOWING...");
 
         int id = UserHandler.getIdFromUser();
+        if (showingController.findShowing(id) != null) {
+            System.out.println("Showing of ID " + id + " already exists in Showing database!");
+            return;
+        }
+
         Movie movie = UserHandler.getMovieFromUser();
         LocalDateTime showTime = UserHandler.getShowTimeFromUser();
         Cineplex cineplex = UserHandler.getCineplexFromUser();
         Cinema cinema = UserHandler.getCinemaFromUser(cineplex);
+        if (showingController.findShowing(cinema, showTime) != null) {
+            System.out.println("There already exists a showing in cinema " + cinema.getCode()
+                    + "at " + showTime.format(InputHandler.getDateTimeFormat()) + "! ");
+        }
+
         SeatingLayout seatingAvailability = cinema.getSeatingLayout();
 
         if (cineplex == null || cinema == null) {
