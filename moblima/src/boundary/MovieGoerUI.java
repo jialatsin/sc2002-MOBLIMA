@@ -37,6 +37,7 @@ public class MovieGoerUI {
                     SearchShowingUI.main();
                     break;
                 case 4: // Book Ticket
+                    BookingUI.main();
                     break;
                 case 5: // View Booking History
                     break;
@@ -93,20 +94,6 @@ public class MovieGoerUI {
             }
         }
         System.out.println("=================================================");
-    }
-
-    // Prints current seating layout for the given showing
-    public static void checkSeatAvailability(Showing showing) {
-        if (showing == null) {
-            System.out.println("Movie showing does not exist in Showing database!");
-            return;
-        }
-        SeatingLayout seatingAvailability = showing.getSeatingAvailablity();
-        System.out.println(seatingAvailability);
-    }
-
-    public static void bookTicket(Movie movie) {
-        // TODO
     }
 
     public static void addReview() {
