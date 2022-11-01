@@ -43,7 +43,6 @@ public class ShowingController extends DatabaseController<Showing> {
         ID, SEATINGAVAILABILITY, MOVIE, SHOWTIME, CINEMA, CINEPLEX
     }
 
-    @SuppressWarnings("unchecked")
     public void updateShowingAttribute(Showing showing, int attribute, Object newAttributeValue) {
         ArrayList<Showing> showings = readFromDatabase();
         int showingIndexInDatabase = showings.indexOf(showing);

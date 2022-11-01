@@ -39,25 +39,19 @@ public class AdminUI {
     private static void login() {
         // TODO: Better login validation?
         // TODO: Refactor login logic to controller
-        ArrayList<Admin> adminData = adminController.readFromDatabase();
-        boolean isLoggedIn = false;
 
+        boolean isLoggedIn = false;
         System.out.println("===== ADMIN LOGIN =====");
         do {
             System.out.println("Enter username:");
             String usernameInput = InputHandler.scanString();
             System.out.println("Enter password:");
             String passwordInput = InputHandler.scanString();
-            // Search for input username and password in Admin database
-            for (Admin admin : adminData) {
-                if (usernameInput.equals(admin.getUsername()) &&
-                        passwordInput.equals(admin.getPassword())) {
-                    isLoggedIn = true;
-                    System.out.println("Login successful!");
-                    break;
-                }
-            }
-            if (!isLoggedIn) {
+
+            isLoggedIn = adminController.loginValidation(usernameInput, passwordInput);
+            if (isLoggedIn) {
+                System.out.println("Login successful!");
+            } else {
                 System.out.println("Login failed!");
             }
         } while (!isLoggedIn);

@@ -30,7 +30,7 @@ public class MovieController extends DatabaseController<Movie> {
         ArrayList<Movie> movies = readFromDatabase();
         ArrayList<Movie> moviesResult = new ArrayList<Movie>();
         for (Movie movie : movies) {
-            if (movie.getTitle().equals(title.toLowerCase())) {
+            if (movie.getTitle().toLowerCase().equals(title.toLowerCase())) {
                 moviesResult.add(movie);
             }
         }

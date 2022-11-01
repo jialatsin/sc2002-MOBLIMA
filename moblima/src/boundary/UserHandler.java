@@ -207,8 +207,20 @@ public class UserHandler {
     // title, then prompts user to choose movie ID
     // Returns selected movie
     public static Movie getMovieByTitleFromUser() {
-        SearchMovieUI.searchByTitle();
+        // Prompts user for movie title
+        String title = UserHandler.getTitleFromUser();
+        ArrayList<Movie> movies = movieController.findMovies(title);
 
+        // Prints all movies with matching movie
+        if (movies == null) {
+            System.out.println("Movie not found in Movie database!");
+            return null;
+        }
+        for (Movie m : movies) {
+            System.out.println(m);
+        }
+
+        // Prompts user to choose movie ID
         System.out.print("Input movie ID from above results: ");
         int movieId = InputHandler.scanInt();
         Movie movie = movieController.findMovie(movieId);
