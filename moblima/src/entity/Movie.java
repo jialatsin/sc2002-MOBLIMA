@@ -42,10 +42,15 @@ public class Movie implements Serializable {
 
     @Override
     public String toString() {
-        return "Movie [id=" + id + ", title=" + title + ", synopsis=" + synopsis + ", director=" + director + ", cast="
-                + cast + ", genres=" + genres + ", releaseDate=" + releaseDate + ", contentRating=" + contentRating
-                + ", movieType=" + movieType + ", showingStatus=" + showingStatus + ", reviews=" + reviews
-                + ", reviewRating=" + averageReviewRating + ", ticketSales=" + ticketSales + "]";
+        String movieString = "";
+
+        movieString += "\nMovie: " + title
+                + "\nMovie ID: " + id
+                + "\nRelease Date: " + releaseDate
+                + "\nShowing Status: " + showingStatus;
+        movieString += "\n=================================================";
+
+        return movieString;
     }
 
     @Override

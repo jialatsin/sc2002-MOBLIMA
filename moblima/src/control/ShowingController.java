@@ -10,7 +10,9 @@ public class ShowingController extends DatabaseController<Showing> {
         super(MainController.FILEPATH_SHOWING);
     }
 
-    public Showing getShowingById(int id) {
+    // Search for a showing by its showing id in the Showing database
+    // Returns the matching showing, returns null if showing not found
+    public Showing findShowing(int id) {
         ArrayList<Showing> showings = readFromDatabase();
         for (Showing showing : showings) {
             if (showing.getId() == id) {
@@ -18,6 +20,23 @@ public class ShowingController extends DatabaseController<Showing> {
             }
         }
         return null;
+    }
+
+    // Search for showings with specified movie and cineplex in the Showing database
+    // Returns an ArrayList with matching showings, returns null if no showing found
+    public ArrayList<Showing> findShowings(Cineplex cineplex, Movie movie) {
+        ArrayList<Showing> showings = readFromDatabase();
+        ArrayList<Showing> showingsResult = new ArrayList<Showing>();
+        for (Showing showing : showings) {
+            if (showing.getCineplex().equals(cineplex) && showing.getMovie().equals(movie)) {
+                showingsResult.add(showing);
+            }
+        }
+
+        if (showingsResult.isEmpty()) {
+            return null;
+        }
+        return showingsResult;
     }
 
     private enum Attributes {

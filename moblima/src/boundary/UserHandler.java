@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import control.CineplexController;
 import control.MovieController;
+import control.ShowingController;
 import entity.Cinema;
 import entity.Cineplex;
 import entity.Movie;
+import entity.Showing;
 import entity.Constants.ContentRating;
 import entity.Constants.MovieType;
 import java.time.LocalDate;
@@ -16,6 +18,7 @@ import java.time.LocalDateTime;
 public class UserHandler {
     private static MovieController movieController = new MovieController();
     private static CineplexController cineplexController = new CineplexController();
+    private static ShowingController showingController = new ShowingController();
 
     public static int getIdFromUser() {
         System.out.println("Enter ID:");
@@ -143,10 +146,12 @@ public class UserHandler {
         return movieType;
     }
 
+    // Prompts a movie for a movie ID
+    // Returns selected movie
     public static Movie getMovieFromUser() {
         System.out.println("\nEnter movie ID:");
         int id = InputHandler.scanInt();
-        Movie movie = movieController.getMovieById(id);
+        Movie movie = movieController.findMovie(id);
         if (movie == null) {
             System.out.println("Movie of ID " + id + " does not exist in Movie database!");
             return null;
@@ -155,6 +160,7 @@ public class UserHandler {
     }
 
     // Prompts user to select from a list of available cineplexes
+    // Returns selected cineplex
     public static Cineplex getCineplexFromUser() {
         ArrayList<Cineplex> cineplexes = cineplexController.readFromDatabase();
         if (cineplexes.isEmpty()) {
@@ -176,6 +182,7 @@ public class UserHandler {
     }
 
     // Prompts user to select from a list of available cinemas for a known cineplex
+    // Returns selected cinema
     public static Cinema getCinemaFromUser(Cineplex cineplex) {
         ArrayList<Cinema> cinemas = cineplex.getCinemas();
         if (cinemas.isEmpty()) {
@@ -194,5 +201,44 @@ public class UserHandler {
 
         Cinema cinema = cinemas.get(selection - 1);
         return cinema;
+    }
+
+    // Prompts user for movie title and prints all movies with matching movie
+    // title, then prompts user to choose movie ID
+    // Returns selected movie
+    public static Movie getMovieByTitleFromUser() {
+        SearchMovieUI.searchByTitle();
+
+        System.out.print("Input movie ID from above results: ");
+        int movieId = InputHandler.scanInt();
+        Movie movie = movieController.findMovie(movieId);
+        if (movie == null) {
+            System.out.println("Movie of ID " + movieId + " does not exist in Movie database!");
+            return null;
+        }
+        return movie;
+    }
+
+    // Prompts user for cineplex and movie, prints all showings for given cineplex
+    // and movie, then prompts user to choose showing ID
+    // Returns selected showing
+    public static Showing getShowingFromUser() {
+        Cineplex cineplex = getCineplexFromUser();
+        Movie movie = getMovieByTitleFromUser();
+        if (cineplex == null || movie == null) {
+            return null;
+        }
+
+        // List all showings for user to pick one
+        SearchShowingUI.listAllShowings(cineplex, movie);
+        System.out.println("Input movie showing ID:");
+        int showingId = InputHandler.scanInt();
+
+        Showing showing = showingController.findShowing(showingId);
+        if (showing == null) {
+            System.out.println("Showing of ID " + showingId + "not found in Showing database!");
+            return null;
+        }
+        return showing;
     }
 }

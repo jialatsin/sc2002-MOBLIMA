@@ -18,7 +18,7 @@ public class MovieGoerUI {
             System.out.println("\n===== MOVIE GOER =====\n"
                     + "1. Search/List Movies\n"
                     + "2. View Movie Details\n"
-                    + "3. Check Seat Availabilty\n"
+                    + "3. Search/List Showings\n"
                     + "4. Book and Purchase Ticket\n"
                     + "5. View Booking History\n"
                     + "6. List Top 5 Ranking Movies\n"
@@ -31,9 +31,10 @@ public class MovieGoerUI {
                     SearchMovieUI.main();
                     break;
                 case 2: // View Movie Details
-                    viewDetails(); // returns all movies with same title in them
+                    viewMovieDetails(); // returns all movies with same title in them
                     break;
-                case 3: // TODO: Search showings instead of check seat availability?
+                case 3: // Search/List Showings
+                    SearchShowingUI.main();
                     break;
                 case 4: // Book Ticket
                     break;
@@ -51,22 +52,21 @@ public class MovieGoerUI {
         } while (true);
     }
 
-    public static void viewDetails() { // prints all details of a movie
-        System.out.print("Input movie title: ");
-        String movieTitle = InputHandler.scanString();
-        Movie movie = SearchMovieUI.searchMovieObject(movieTitle);
+    // Prints full movie details of a movie
+    public static void viewMovieDetails() {
+        Movie movie = UserHandler.getMovieByTitleFromUser();
         if (movie == null)
             return;
 
         System.out.println("\n=================================================");
         System.out.println(
                 "\nMovie: " + movie.getTitle()
-                        + "\nid: " + movie.getId()
+                        + "\nID: " + movie.getId()
                         + "\nSynopsis: " + movie.getSynopsis()
                         + "\nDirector: " + movie.getDirector()
                         + "\nCast: ");
-        for (String j : movie.getCast())
-            System.out.print(j + ", ");
+        for (String castMember : movie.getCast())
+            System.out.print(castMember + ", ");
         System.out.print("\nGenres: ");
         for (String genre : movie.getGenres())
             System.out.print(genre + ", ");
@@ -74,41 +74,28 @@ public class MovieGoerUI {
                 + "\nContent Rating: " + movie.getContentRating()
                 + "\nMovie Type: " + movie.getMovieType()
                 + "\nShowing Status: " + movie.getShowingStatus());
+
         double averageReviewRating = movie.getAverageReviewRating();
         if (averageReviewRating < 0) {
-            System.out.println("\nAverage Review Rating: NaN");
+            System.out.println("\nAverage Review Rating: NaN"); // No reviews available
         } else
             System.out.println("\nAverage Review Rating: " + movie.getAverageReviewRating() + "*");
-        // print reviews
-        int numReviews = movie.getReviews().size(), reviewNum = 1;
-        if (numReviews > 0)
-            System.out.println("Reviews: ");
-        ArrayList<Review> reviewList = movie.getReviews();
-        for (Review review : reviewList) {
-            System.out.println(reviewNum + ": " + review);
-            reviewNum++;
-        }
 
+        // Print reviews
+        ArrayList<Review> reviews = movie.getReviews();
+        System.out.println("Reviews: ");
+        if (reviews.isEmpty()) {
+            System.out.println("No reviews found!");
+        } else {
+            int i = 1;
+            for (Review review : reviews) {
+                System.out.println(i++ + ": " + review);
+            }
+        }
         System.out.println("=================================================");
     }
 
-    public static void searchShowing() {
-        Cineplex cineplex = UserHandler.getCineplexFromUser();
-        System.out.printf("Input movie title: ");
-        String title = InputHandler.scanString();
-        Movie movie = SearchMovieUI.searchMovieObject(title);
-        if (movie == null) {
-            System.out.println("Movie does not exist in Movie database!");
-            return;
-        }
-        // TODO:
-        SearchShowingUI.listAll(cineplex, movie); // List all showings for user to pick one
-
-        System.out.println("Input movie showing id:");
-        int showingId = InputHandler.scanInt();
-        Showing showing = showingController.getShowingById(showingId);
-    }
-
+    // Prints current seating layout for the given showing
     public static void checkSeatAvailability(Showing showing) {
         if (showing == null) {
             System.out.println("Movie showing does not exist in Showing database!");
@@ -122,29 +109,19 @@ public class MovieGoerUI {
         // TODO
     }
 
-    // TODO: Refactor into movie controller
     public static void addReview() {
-        System.out.printf("Input movie title: ");
-        String movieTitle = InputHandler.scanString();
-        Movie movie = SearchMovieUI.searchMovieObject(movieTitle);
+        Movie movie = UserHandler.getMovieByTitleFromUser();
         if (movie == null)
             return;
 
+        // Prompt user to review movie
         System.out.printf("Rate " + movie.getTitle() + " from 1-5: ");
         int rating = InputHandler.scanInt();
         System.out.println("Input your reviews for " + movie.getTitle() + ": ");
-        String userReview = InputHandler.scanString();
-        Review newReview = new Review(rating, userReview); // create new review
+        String reviewText = InputHandler.scanString();
 
-        ArrayList<Review> reviewList = movie.getReviews(); // retrieve exisiting reviewList
-        reviewList.add(newReview);
-        movie.setReviews(reviewList); // update reviewList
-        movie.setAverageReviewRating();
-
-        boolean updated = movieController.updateMovieObject(movie);
-        if (updated == true) {
-            System.out.println("Review added");
-        } else
-            System.out.println("False");
+        Review newReview = new Review(rating, reviewText);
+        movieController.addReviewToMovie(movie, newReview);
+        System.out.println("Added review to " + movie.getTitle() + "!");
     }
 }

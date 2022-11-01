@@ -27,7 +27,7 @@ public class Showing implements Serializable {
                 + "\nShowtime:" + showTime
                 + "\nCineplex:" + cineplex.getName() + "(Cinema: " + cinema + ")"
                 + "\nAvailable Seats=" + seatingAvailablity.getAvailableSeatsCount()
-                + "\n=================================================\n";
+                + "\n=================================================";
     }
 
     @Override

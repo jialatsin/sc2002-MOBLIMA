@@ -1,7 +1,6 @@
 package boundary;
 
 import java.time.LocalDateTime;
-import java.util.*;
 import control.*;
 import entity.*;
 import entity.Cineplex;
@@ -49,8 +48,12 @@ public class CRUDMovieShowingUI {
         Cinema cinema = UserHandler.getCinemaFromUser(cineplex);
         SeatingLayout seatingAvailability = cinema.getSeatingLayout();
 
-        showingController.addToDatabase(new Showing(id, seatingAvailability, movie, showTime, cinema, cineplex));
+        if (cineplex == null || cinema == null) {
+            System.out.println("Unable to create showing!");
+            return;
+        }
 
+        showingController.addToDatabase(new Showing(id, seatingAvailability, movie, showTime, cinema, cineplex));
         System.out.println(movie.getTitle() + " at showtime ID: " + id + " added to Showtime database!");
     }
 
@@ -58,7 +61,7 @@ public class CRUDMovieShowingUI {
         System.out.println("\nUPDATING A MOVIE SHOWING...");
 
         int id = UserHandler.getIdFromUser();
-        Showing showing = showingController.getShowingById(id);
+        Showing showing = showingController.findShowing(id);
         if (showing == null) {
             System.out.println("Showing of ID " + id + " does not exist in Showing database!");
             return;

@@ -34,6 +34,7 @@ public class DatabaseController<DataType> {
         }
     }
 
+    // TODO: return null instead of empty arraylist?
     @SuppressWarnings("unchecked")
     public ArrayList<DataType> readFromDatabase() {
         try {

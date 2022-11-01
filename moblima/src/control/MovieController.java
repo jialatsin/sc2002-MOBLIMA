@@ -3,8 +3,6 @@ package control;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import boundary.MovieGoerUI;
-import boundary.SearchMovieUI;
 import entity.*;
 import entity.Constants.ContentRating;
 import entity.Constants.MovieType;
@@ -14,7 +12,9 @@ public class MovieController extends DatabaseController<Movie> {
         super(MainController.FILEPATH_MOVIE);
     }
 
-    public Movie getMovieById(int id) {
+    // Search for a movie by its movie id in the Movie database
+    // Returns the matching movie, returns null if movie not found
+    public Movie findMovie(int id) {
         ArrayList<Movie> movies = readFromDatabase();
         for (Movie movie : movies) {
             if (movie.getId() == id) {
@@ -24,8 +24,26 @@ public class MovieController extends DatabaseController<Movie> {
         return null;
     }
 
+    // Search for movies with matching title in the Movie database
+    // Returns an ArrayList of matching movies, returns null if no movie found
+    public ArrayList<Movie> findMovies(String title) {
+        ArrayList<Movie> movies = readFromDatabase();
+        ArrayList<Movie> moviesResult = new ArrayList<Movie>();
+        for (Movie movie : movies) {
+            if (movie.getTitle().equals(title.toLowerCase())) {
+                moviesResult.add(movie);
+            }
+        }
+
+        if (moviesResult.isEmpty()) {
+            return null;
+        }
+        return moviesResult;
+    }
+
+    // Search for and deletes movie with movie id in the Movie database
     // Returns true on successful deletion
-    public boolean deleteMovieById(int id) {
+    public boolean deleteMovie(int id) {
         ArrayList<Movie> movies = readFromDatabase();
         for (Movie movie : movies) {
             if (movie.getId() == id) {
@@ -43,6 +61,7 @@ public class MovieController extends DatabaseController<Movie> {
         ID, TITLE, SYNOPSIS, DIRECTOR, CAST, GENRES, RELEASE_DATE, CONTENT_RATING, MOVIE_TYPE
     }
 
+    // Updates the selected movie's entry in Movie database with the new attribute
     @SuppressWarnings("unchecked")
     public void updateMovieAttribute(Movie movie, int attribute, Object newAttributeValue) {
         ArrayList<Movie> movies = readFromDatabase();
@@ -82,10 +101,22 @@ public class MovieController extends DatabaseController<Movie> {
         overwriteDatabase(movies);
     }
 
-    public void listAll() { // Method from SeachMovie() to list all movies in db
-        ArrayList<Movie> MovieList = readFromDatabase();
-        System.out.println();
-        SearchMovieUI.printMovieObject(MovieList);
+    // Adds the given review to selected movie's entry in Movie database
+    public void addReviewToMovie(Movie movie, Review review) {
+        ArrayList<Movie> movies = readFromDatabase();
+        int movieIndexInDatabase = movies.indexOf(movie);
+
+        // Append new review to existing list of reviews
+        ArrayList<Review> reviews = movie.getReviews();
+        reviews.add(review);
+
+        // Update movie average rating and reviews
+        movie.setReviews(reviews);
+        movie.setAverageReviewRating();
+
+        // Updates the selected movie's entry in Movie database with new list of reviews
+        movies.set(movieIndexInDatabase, movie);
+        overwriteDatabase(movies);
     }
 
     public boolean updateMovieObject(Movie updatedMovie) { // method that overwrites database everytime a movie

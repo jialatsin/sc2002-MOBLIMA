@@ -66,7 +66,7 @@ public class CRUDMovieListingUI {
         System.out.println("\nUPDATING A MOVIE LISTING...");
 
         int id = UserHandler.getIdFromUser();
-        Movie movie = movieController.getMovieById(id);
+        Movie movie = movieController.findMovie(id);
         if (movie == null) {
             System.out.println("Movie of ID " + id + " does not exist in Movie database!");
             return;
@@ -135,7 +135,7 @@ public class CRUDMovieListingUI {
         System.out.println("\nDELETING A MOVIE LISTING...");
 
         int id = UserHandler.getIdFromUser();
-        if (movieController.deleteMovieById(id)) {
+        if (movieController.deleteMovie(id)) {
             System.out.println("Deleted movie with ID " + id + "!");
         } else {
             System.out.println("Unable to delete movie with ID " + id + "!");

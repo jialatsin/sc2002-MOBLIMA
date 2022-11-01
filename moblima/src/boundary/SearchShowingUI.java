@@ -22,7 +22,7 @@ public class SearchShowingUI {
                     searchShowingById();
                     break;
                 case 2:
-                    listAll();
+                    listAllShowings();
                     break;
                 case 0:
                     return;
@@ -52,31 +52,28 @@ public class SearchShowingUI {
         return null;
     }
 
-    // TODO: refactor
-    public static void listAll() {
+    // Print all showings in database
+    public static void listAllShowings() {
         ArrayList<Showing> showings = showingController.readFromDatabase();
-        if (showings == null) {
+        if (showings.isEmpty()) {
             System.out.println("No showings exist in Showing database!");
+            return;
         }
         for (Showing showing : showings) {
             System.out.println(showing);
         }
     }
 
-    // TODO: refactor
-    public static void listAll(Cineplex cineplex, Movie movie) { // Overloaded listAll function to find all showings
-                                                                 // with specific cineplex and movie. Method called in
-                                                                 // MovieGoerUI.checkSeatAvailability
-        ArrayList<Showing> showingList = showingController.readFromDatabase();
-        boolean showingFound = false;
-        for (Showing showing : showingList) {
-            if ((showing.getCineplex().equals(cineplex)) && (showing.getMovie().equals(movie))) {
-                showingFound = true;
-                System.out.println(showing);
-            }
+    // Overloaded listAllShowings function to print all showings in database with
+    // matching cineplex and movie
+    public static void listAllShowings(Cineplex cineplex, Movie movie) {
+        ArrayList<Showing> showings = showingController.findShowings(cineplex, movie);
+        if (showings == null) {
+            System.out.println("No showings of " + movie.getTitle() + " is found at " + cineplex.getName() + "!");
+            return;
         }
-        if (!showingFound) {
-            System.out.println("No showing of " + movie.getTitle() + " is found at " + cineplex.getName());
+        for (Showing showing : showings) {
+            System.out.println(showing);
         }
     }
 }
