@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import entity.Constants.ContentRating;
@@ -18,17 +19,19 @@ public class Movie implements Serializable {
     private ArrayList<String> cast;
     private ArrayList<String> genres;
     private LocalDate releaseDate;
+    private LocalDate endDate;
 
     private ContentRating contentRating;
     private MovieType movieType;
 
-    private ShowingStatus showingStatus = ShowingStatus.COMING_SOON;
+    private ShowingStatus showingStatus;
     private ArrayList<Review> reviews = new ArrayList<Review>();
     private double averageReviewRating = -1;
     private int ticketSales = 0;
 
     public Movie(int id, String title, String synopsis, String director, ArrayList<String> cast,
-            ArrayList<String> genres, LocalDate releaseDate, ContentRating contentRating, MovieType movieType) {
+            ArrayList<String> genres, LocalDate releaseDate, LocalDate endDate, ContentRating contentRating,
+            MovieType movieType) {
         this.id = id;
         this.title = title;
         this.synopsis = synopsis;
@@ -36,6 +39,7 @@ public class Movie implements Serializable {
         this.cast = cast;
         this.genres = genres;
         this.releaseDate = releaseDate;
+        this.endDate = endDate;
         this.contentRating = contentRating;
         this.movieType = movieType;
     }
@@ -47,7 +51,8 @@ public class Movie implements Serializable {
         movieString += "\nMovie: " + title
                 + "\nMovie ID: " + id
                 + "\nRelease Date: " + releaseDate
-                + "\nShowing Status: " + showingStatus;
+                + "\nEnd Date: " + endDate
+                + "\nShowing Status: " + getShowingStatus();
         movieString += "\n=================================================";
 
         return movieString;
@@ -64,9 +69,10 @@ public class Movie implements Serializable {
                     && this.cast.equals(other.getCast())
                     && this.genres.equals(other.getGenres())
                     && this.releaseDate.equals(other.getReleaseDate())
+                    && this.endDate.equals(other.getEndDate())
                     && this.contentRating.equals(other.getContentRating())
                     && this.movieType.equals(other.getMovieType())
-                    && this.showingStatus.equals(other.getShowingStatus())
+                    && this.getShowingStatus().equals(other.getShowingStatus())
                     && this.reviews.equals(other.getReviews())
                     && this.averageReviewRating == other.getAverageReviewRating()
                     && this.ticketSales == other.getTicketSales();
@@ -130,6 +136,14 @@ public class Movie implements Serializable {
         this.releaseDate = releaseDate;
     }
 
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
+
     public ArrayList<Review> getReviews() {
         return reviews;
     }
@@ -142,9 +156,8 @@ public class Movie implements Serializable {
         return averageReviewRating;
     }
 
-    // Calculates average review rating and updates reviewRating
-    // TODO: Overall reviewer rating will only be displayed if there are more than
-    // ONE individual rating, else “NA” is displayed
+    // Average review rating is set to -1 if there are no reviews currently
+    // available
     public void setAverageReviewRating() {
         int reviewCount = reviews.size();
         if (reviewCount == 0) {
@@ -182,11 +195,29 @@ public class Movie implements Serializable {
         this.movieType = movieType;
     }
 
+    // Query the showing status of the movie
+    // Showing status is automatically derived from movie's releaseDate, endDate
+    // and the current LocalDate from the system clock
+    // Returns "END OF SHOWING" if current date is after movie end date
+    // Returns "NOW SHOWING" if current date is after release date and before end
+    // date
+    // Returns "PREVIEW" if current date is within 7 days before release date
+    // Returns "COMING SOON" if current date is more than 7 days before release date
     public ShowingStatus getShowingStatus() {
-        return showingStatus;
-    }
+        LocalDate current = LocalDate.now();
 
-    public void setShowingStatus(ShowingStatus showingStatus) {
-        this.showingStatus = showingStatus;
+        if (current.isAfter(endDate)) {
+            return ShowingStatus.END_OF_SHOWING;
+        } else if (current.isAfter(releaseDate) && current.isBefore(endDate)) {
+            return ShowingStatus.NOW_SHOWING;
+        } else {
+            // Difference in days from release date to current date (releaseDate - current)
+            long daysBetween = ChronoUnit.DAYS.between(current, releaseDate);
+            if (daysBetween <= 7) {
+                return ShowingStatus.PREVIEW;
+            } else {
+                return ShowingStatus.COMING_SOON;
+            }
+        }
     }
 }

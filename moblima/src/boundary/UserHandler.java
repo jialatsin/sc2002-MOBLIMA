@@ -14,6 +14,8 @@ import entity.Constants.CinemaClass;
 import entity.Constants.ContentRating;
 import entity.Constants.Day;
 import entity.Constants.MovieType;
+import entity.Constants.ShowingStatus;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -77,6 +79,12 @@ public class UserHandler {
 
     public static LocalDate getReleaseDateFromUser() {
         System.out.println("Enter release date 'dd/MM/yyyy':");
+        LocalDate date = InputHandler.scanDate();
+        return date;
+    }
+
+    public static LocalDate getEndDateFromUser() {
+        System.out.println("Enter end date 'dd/MM/yyyy':");
         LocalDate date = InputHandler.scanDate();
         return date;
     }
@@ -246,6 +254,11 @@ public class UserHandler {
             return null;
         }
 
+        if (movie.getShowingStatus() != ShowingStatus.NOW_SHOWING
+                || movie.getShowingStatus() != ShowingStatus.PREVIEW) {
+            System.out.println("Movie is currently not showing!");
+        }
+
         // List all showings for user to pick one
         SearchShowingUI.listAllShowings(cineplex, movie);
         System.out.println("Input movie showing ID:");
@@ -299,7 +312,7 @@ public class UserHandler {
                     age = Age.ADULT;
                     break;
                 case 2:
-                    age = Age.SENIOR;   
+                    age = Age.SENIOR;
                     break;
                 case 3:
                     age = Age.CHILD;
@@ -324,7 +337,7 @@ public class UserHandler {
                     day = Day.HOLIDAY;
                     break;
                 case 2:
-                    day = Day.WEEKDAY;   
+                    day = Day.WEEKDAY;
                     break;
                 case 3:
                     day = Day.WEEKEND;

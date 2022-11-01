@@ -1,7 +1,6 @@
 package boundary;
 
 import control.MovieController;
-import control.ShowingController;
 
 import java.util.*;
 
@@ -9,7 +8,6 @@ import entity.*;
 
 public class MovieGoerUI {
     private static MovieController movieController = new MovieController();
-    private static ShowingController showingController = new ShowingController();
 
     public static void main() {
         int selection;

@@ -1,5 +1,6 @@
 package control;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -51,8 +52,42 @@ public class ShowingController extends DatabaseController<Showing> {
         return showingsResult;
     }
 
+    // Search for showings with specified movie in the Showing database
+    // Returns an ArrayList with matching showings, returns null if no showing found
+    public ArrayList<Showing> findShowings(Movie movie) {
+        ArrayList<Showing> showings = readFromDatabase();
+        ArrayList<Showing> showingsResult = new ArrayList<Showing>();
+        for (Showing showing : showings) {
+            if (showing.getMovie().equals(movie)) {
+                showingsResult.add(showing);
+            }
+        }
+
+        if (showingsResult.isEmpty()) {
+            return null;
+        }
+        return showingsResult;
+    }
+
+    // Called from CRUDMovieListingUI when releaseDate or endDate is updated
+    // Deletes all showings with showtimes that no longer fall within the "PREIVEW"
+    // or "NOW SHOWING" period
+    public void deleteInvalidShowings(Movie movie, LocalDate releaseDate, LocalDate endDate) {
+        ArrayList<Showing> showings = findShowings(movie);
+        ArrayList<Showing> validShowings = new ArrayList<Showing>();
+        for (Showing showing : showings) {
+            // Valid showtime is before end date
+            // and after 7 days before release date
+            if (showing.getShowTime().toLocalDate().isBefore(endDate)
+                    && showing.getShowTime().toLocalDate().isAfter(releaseDate.minusDays(7))) {
+                validShowings.add(showing);
+            }
+        }
+        overwriteDatabase(validShowings);
+    }
+
     private enum Attributes {
-        ID, SEATINGAVAILABILITY, MOVIE, SHOWTIME, CINEMA, CINEPLEX
+        ID, SEATING_AVAILABILITY, MOVIE, SHOWTIME, CINEMA, CINEPLEX
     }
 
     public void updateShowingAttribute(Showing showing, int attribute, Object newAttributeValue) {
@@ -64,7 +99,7 @@ public class ShowingController extends DatabaseController<Showing> {
             case ID:
                 showing.setId((int) newAttributeValue);
                 break;
-            case SEATINGAVAILABILITY:
+            case SEATING_AVAILABILITY:
                 showing.setSeatingAvailablity((SeatingLayout) newAttributeValue);
                 break;
             case MOVIE:

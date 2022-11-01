@@ -58,7 +58,7 @@ public class MovieController extends DatabaseController<Movie> {
     // In the order of selection options provided to user when updating movie
     // attributes
     private enum Attributes {
-        ID, TITLE, SYNOPSIS, DIRECTOR, CAST, GENRES, RELEASE_DATE, CONTENT_RATING, MOVIE_TYPE
+        ID, TITLE, SYNOPSIS, DIRECTOR, CAST, GENRES, RELEASE_DATE, END_DATE, CONTENT_RATING, MOVIE_TYPE
     }
 
     // Updates the selected movie's entry in Movie database with the new attribute
@@ -89,6 +89,9 @@ public class MovieController extends DatabaseController<Movie> {
                 break;
             case RELEASE_DATE:
                 movie.setReleaseDate((LocalDate) newAttributeValue);
+                break;
+            case END_DATE:
+                movie.setEndDate((LocalDate) newAttributeValue);
                 break;
             case CONTENT_RATING:
                 movie.setContentRating((ContentRating) newAttributeValue);

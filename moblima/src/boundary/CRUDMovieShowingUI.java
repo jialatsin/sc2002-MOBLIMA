@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import control.*;
 import entity.*;
 import entity.Cineplex;
+import entity.Constants.ShowingStatus;
 
 public class CRUDMovieShowingUI {
     private static ShowingController showingController = new ShowingController();
@@ -49,6 +50,12 @@ public class CRUDMovieShowingUI {
         Movie movie = UserHandler.getMovieFromUser();
         if (movie == null) {
             System.out.println("Movie of ID " + id + " does not exist in Movie database!");
+            return;
+        }
+
+        if (movie.getShowingStatus() != ShowingStatus.PREVIEW
+                && movie.getShowingStatus() != ShowingStatus.NOW_SHOWING) {
+            System.out.println("Cannot create showing when movie showing status is not 'Preview' or 'Now Showing'!");
             return;
         }
         LocalDateTime showTime = UserHandler.getShowTimeFromUser();
@@ -105,7 +112,7 @@ public class CRUDMovieShowingUI {
                 Movie movie = UserHandler.getMovieFromUser();
                 if (movie == null) {
                     System.out.println("Error updating Movie attribute!");
-                    break;
+                    return;
                 }
                 showingController.updateShowingAttribute(showing, selection, movie);
                 break;
@@ -118,7 +125,7 @@ public class CRUDMovieShowingUI {
                 Cinema cinema = UserHandler.getCinemaFromUser(cineplex);
                 if (cinema == null) {
                     System.out.println("Error updating Cinema attribute!");
-                    break;
+                    return;
                 }
                 showingController.updateShowingAttribute(showing, selection, cinema);
                 break;

@@ -13,6 +13,7 @@ public class SearchShowingUI {
     public static void main() {
         do {
             // TODO: Search by Cineplex / Search by movie?
+            // Displays showings regardless of showing status
             System.out.println("===== SEARCH/LIST SHOWING =====\n"
                     + "1. Search By Showing ID\n"
                     + "2. List All Showings\n"
@@ -43,7 +44,7 @@ public class SearchShowingUI {
         }
         System.out.println("=================================================");
         System.out.println(showing);
-        System.out.println("\n");
+        System.out.println();
     }
 
     // Print all showings in database
@@ -55,9 +56,9 @@ public class SearchShowingUI {
         }
         System.out.println("=================================================");
         for (Showing showing : showings) {
-            System.out.print(showing);
+            System.out.println(showing);
         }
-        System.out.println("\n");
+        System.out.println();
     }
 
     // Overloaded listAllShowings function to print all showings in database with
@@ -71,5 +72,6 @@ public class SearchShowingUI {
         for (Showing showing : showings) {
             System.out.println(showing);
         }
+        System.out.println();
     }
 }

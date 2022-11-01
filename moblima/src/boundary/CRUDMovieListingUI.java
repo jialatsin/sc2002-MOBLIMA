@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import control.MovieController;
 import control.ShowingController;
 import entity.Movie;
+import entity.Showing;
 import entity.Constants.ContentRating;
 import entity.Constants.MovieType;
 
@@ -59,11 +60,16 @@ public class CRUDMovieListingUI {
         ArrayList<String> cast = UserHandler.getCastFromUser();
         ArrayList<String> genres = UserHandler.getGenresFromUser();
         LocalDate releaseDate = UserHandler.getReleaseDateFromUser();
+        LocalDate endDate = UserHandler.getEndDateFromUser();
+        if (releaseDate.isAfter(endDate)) {
+            System.out.println("Release date cannot be after end date!");
+            return;
+        }
         ContentRating contentRating = UserHandler.getContentRatingFromUser();
         MovieType movieType = UserHandler.getMovieTypeFromUser();
 
         movieController.addToDatabase(
-                new Movie(id, title, synopsis, director, cast, genres, releaseDate, contentRating, movieType));
+                new Movie(id, title, synopsis, director, cast, genres, releaseDate, endDate, contentRating, movieType));
 
         System.out.println(title + " (id: " + id + ") added to Movie database!");
     }
@@ -81,6 +87,9 @@ public class CRUDMovieListingUI {
 
         System.out.println(movie);
 
+        // Get all showings to be updated
+        ArrayList<Showing> showings = showingController.findShowings(movie);
+
         int selection;
         do {
             System.out.println("\nSelect attribute to update for movie\n"
@@ -91,10 +100,11 @@ public class CRUDMovieListingUI {
                     + "5. Cast\n"
                     + "6. Genres\n"
                     + "7. Release Date\n"
-                    + "8. Content Rating\n"
-                    + "9. Movie Type\n");
+                    + "8. End Date\n"
+                    + "9. Content Rating\n"
+                    + "10. Movie Type\n");
             selection = InputHandler.scanInt();
-        } while (selection < 1 || selection > 9);
+        } while (selection < 1 || selection > 10);
 
         switch (selection) {
             case 1:
@@ -122,17 +132,44 @@ public class CRUDMovieListingUI {
                 movieController.updateMovieAttribute(movie, selection, genres);
                 break;
             case 7:
-                LocalDate date = UserHandler.getReleaseDateFromUser();
-                movieController.updateMovieAttribute(movie, selection, date);
+                LocalDate releaseDate = UserHandler.getReleaseDateFromUser();
+                if (releaseDate.isAfter(movie.getEndDate())) {
+                    System.out.println("Release date cannot be after end date!");
+                    return;
+                }
+                showingController.deleteInvalidShowings(movie, releaseDate, movie.getEndDate());
+                System.out.println("Deleted all showings with invalid showtimes!");
+                // Get all remaining showings to be updated
+                showings = showingController.findShowings(movie);
+                movieController.updateMovieAttribute(movie, selection, releaseDate);
                 break;
             case 8:
+                LocalDate endDate = UserHandler.getEndDateFromUser();
+                if (endDate.isBefore(movie.getReleaseDate())) {
+                    System.out.println("End date cannot be before release date!");
+                    return;
+                }
+                showingController.deleteInvalidShowings(movie, movie.getReleaseDate(), endDate);
+                System.out.println("Deleted all showings with invalid showtimes!");
+                // Get all remaining showings to be updated
+                showings = showingController.findShowings(movie);
+                movieController.updateMovieAttribute(movie, selection, endDate);
+                break;
+            case 9:
                 ContentRating contentRating = UserHandler.getContentRatingFromUser();
                 movieController.updateMovieAttribute(movie, selection, contentRating);
                 break;
-            case 9:
+            case 10:
                 MovieType movieType = UserHandler.getMovieTypeFromUser();
                 movieController.updateMovieAttribute(movie, selection, movieType);
                 break;
+        }
+
+        // Update movie attribute of all showings with the given updated movie
+        if (showings != null) {
+            for (Showing showing : showings) {
+                showingController.updateShowingAttribute(showing, 3, movie);
+            }
         }
 
         System.out.println("\nUpdated movie details!");
