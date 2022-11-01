@@ -216,9 +216,11 @@ public class UserHandler {
             System.out.println("Movie not found in Movie database!");
             return null;
         }
+        System.out.print("\n=================================================");
         for (Movie m : movies) {
-            System.out.println(m);
+            System.out.print(m);
         }
+        System.out.println("\n");
 
         // Prompts user to choose movie ID
         System.out.print("Input movie ID from above results: ");

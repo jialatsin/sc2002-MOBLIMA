@@ -38,9 +38,11 @@ public class SearchMovieUI {
             System.out.println("Movie not found in Movie database!");
             return;
         }
+        System.out.print("\n=================================================");
         for (Movie m : movies) {
-            System.out.println(m);
+            System.out.print(m);
         }
+        System.out.println("\n");
     }
 
     // Prints all movies in database
@@ -50,8 +52,10 @@ public class SearchMovieUI {
             System.out.println("No movies exist in Movie database!");
             return;
         }
+        System.out.print("\n=================================================");
         for (Movie movie : movies) {
-            System.out.println(movie);
+            System.out.print(movie);
         }
+        System.out.println("\n");
     }
 }

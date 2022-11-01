@@ -59,7 +59,7 @@ public class MovieGoerUI {
         if (movie == null)
             return;
 
-        System.out.println("\n=================================================");
+        System.out.print("\n=================================================");
         System.out.println(
                 "\nMovie: " + movie.getTitle()
                         + "\nID: " + movie.getId()
