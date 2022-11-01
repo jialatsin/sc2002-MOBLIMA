@@ -46,8 +46,11 @@ public class CRUDMovieShowingUI {
             System.out.println("Showing of ID " + id + " already exists in Showing database!");
             return;
         }
-
         Movie movie = UserHandler.getMovieFromUser();
+        if (movie == null) {
+            System.out.println("Movie of ID " + id + " does not exist in Movie database!");
+            return;
+        }
         LocalDateTime showTime = UserHandler.getShowTimeFromUser();
         Cineplex cineplex = UserHandler.getCineplexFromUser();
         Cinema cinema = UserHandler.getCinemaFromUser(cineplex);
@@ -128,7 +131,7 @@ public class CRUDMovieShowingUI {
         System.out.println("\nDELETING A MOVIE SHOWING...");
 
         int id = UserHandler.getIdFromUser();
-        if (showingController.deleteShowingById(id)) {
+        if (showingController.deleteShowing(id)) {
             System.out.println("Deleted showing with ID " + id + "!");
         } else {
             System.out.println("Unable to delete showing with ID " + id + "!");

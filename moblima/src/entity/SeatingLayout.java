@@ -61,7 +61,8 @@ public class SeatingLayout implements Serializable {
             SeatingLayout other = (SeatingLayout) obj;
             return Arrays.deepEquals(this.seats, other.getSeats())
                     && this.rows == other.getRows()
-                    && this.columns == other.getColumns();
+                    && this.columns == other.getColumns()
+                    && this.availableSeatsCount == other.getAvailableSeatsCount();
         }
         return false;
     }

@@ -34,15 +34,16 @@ public class SearchShowingUI {
     }
 
     public static void searchShowingById() {
-        System.out.printf("Input showing id: ");
+        System.out.println("Input showing id: ");
         int id = InputHandler.scanInt();
         Showing showing = showingController.findShowing(id);
         if (showing == null) {
+            System.out.println("No showing with ID " + id + " found!");
             return;
         }
         System.out.println("=================================================");
         System.out.println(showing);
-        System.out.println();
+        System.out.println("\n");
     }
 
     // Print all showings in database
@@ -56,7 +57,7 @@ public class SearchShowingUI {
         for (Showing showing : showings) {
             System.out.print(showing);
         }
-        System.out.println();
+        System.out.println("\n");
     }
 
     // Overloaded listAllShowings function to print all showings in database with

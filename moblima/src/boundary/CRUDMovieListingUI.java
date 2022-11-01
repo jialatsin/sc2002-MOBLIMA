@@ -4,12 +4,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import control.MovieController;
+import control.ShowingController;
 import entity.Movie;
 import entity.Constants.ContentRating;
 import entity.Constants.MovieType;
 
 public class CRUDMovieListingUI {
     private static MovieController movieController = new MovieController();
+    private static ShowingController showingController = new ShowingController();
 
     public static void main() {
         int selection;
@@ -140,8 +142,10 @@ public class CRUDMovieListingUI {
         System.out.println("\nDELETING A MOVIE LISTING...");
 
         int id = UserHandler.getIdFromUser();
+        Movie movie = movieController.findMovie(id);
         if (movieController.deleteMovie(id)) {
             System.out.println("Deleted movie with ID " + id + "!");
+            showingController.deleteShowing(movie); // Deletes all showings for the movie
         } else {
             System.out.println("Unable to delete movie with ID " + id + "!");
         }

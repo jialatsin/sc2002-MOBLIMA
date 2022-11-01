@@ -24,7 +24,7 @@ public class Showing implements Serializable {
     }
 
     public String toString() {
-        return "\nShowing ID: " + id
+        return "Showing ID: " + id
                 + "\nMovie Title: " + movie.getTitle() + " (ID: " + movie.getId() + ")"
                 + "\nShowtime: " + showTime.format(InputHandler.getDateTimeFormat())
                 + "\nCineplex: " + cineplex.getName()

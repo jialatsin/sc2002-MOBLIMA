@@ -84,7 +84,9 @@ public class ShowingController extends DatabaseController<Showing> {
         overwriteDatabase(showings);
     }
 
-    public boolean deleteShowingById(int id) {
+    // Search for and deletes showing with showing id in the Showing database
+    // Returns true on successful deletion
+    public boolean deleteShowing(int id) {
         ArrayList<Showing> showings = readFromDatabase();
         for (Showing showing : showings) {
             if (showing.getId() == id) {
@@ -94,5 +96,16 @@ public class ShowingController extends DatabaseController<Showing> {
             }
         }
         return false;
+    }
+
+    // Search for and deletes all showings with given movie in Showing database
+    public void deleteShowing(Movie movie) {
+        ArrayList<Showing> showings = readFromDatabase();
+        for (Showing showing : showings) {
+            if (showing.getMovie().equals(movie)) {
+                showings.remove(showing);
+            }
+        }
+        overwriteDatabase(showings);
     }
 }
