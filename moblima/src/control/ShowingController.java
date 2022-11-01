@@ -28,7 +28,7 @@ public class ShowingController extends DatabaseController<Showing> {
     public Showing findShowing(Cinema cinema, LocalDateTime showTime) {
         ArrayList<Showing> showings = readFromDatabase();
         for (Showing showing : showings) {
-            if (showing.getCinema() == cinema && showing.getShowTime() == showTime) {
+            if (showing.getCinema().equals(cinema) && showing.getShowTime().equals(showTime)) {
                 return showing;
             }
         }

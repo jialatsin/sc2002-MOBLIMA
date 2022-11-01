@@ -64,6 +64,7 @@ public class CRUDMovieShowingUI {
         if (showingController.findShowing(cinema, showTime) != null) {
             System.out.println("There already exists a showing in cinema " + cinema.getCode()
                     + "at " + showTime.format(InputHandler.getDateTimeFormat()) + "! ");
+            return;
         }
 
         SeatingLayout seatingAvailability = cinema.getSeatingLayout();
@@ -112,6 +113,11 @@ public class CRUDMovieShowingUI {
                 Movie movie = UserHandler.getMovieFromUser();
                 if (movie == null) {
                     System.out.println("Error updating Movie attribute!");
+                    return;
+                }
+                if (movie.getShowingStatus() != ShowingStatus.PREVIEW
+                        && movie.getShowingStatus() != ShowingStatus.NOW_SHOWING) {
+                    System.out.println("Can not update to a movie that is not in 'Preview' or 'Now Showing'!");
                     return;
                 }
                 showingController.updateShowingAttribute(showing, selection, movie);

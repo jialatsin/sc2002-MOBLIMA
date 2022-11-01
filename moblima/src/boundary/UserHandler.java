@@ -255,7 +255,7 @@ public class UserHandler {
         }
 
         if (movie.getShowingStatus() != ShowingStatus.NOW_SHOWING
-                || movie.getShowingStatus() != ShowingStatus.PREVIEW) {
+                && movie.getShowingStatus() != ShowingStatus.PREVIEW) {
             System.out.println("Movie is currently not showing!");
         }
 

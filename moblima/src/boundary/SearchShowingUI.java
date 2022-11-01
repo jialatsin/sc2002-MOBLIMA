@@ -12,11 +12,12 @@ public class SearchShowingUI {
 
     public static void main() {
         do {
-            // TODO: Search by Cineplex / Search by movie?
             // Displays showings regardless of showing status
             System.out.println("===== SEARCH/LIST SHOWING =====\n"
                     + "1. Search By Showing ID\n"
-                    + "2. List All Showings\n"
+                    + "2. Search By Cineplex\n"
+                    + "3. Search By Movie Title\n"
+                    + "4. List All Showings\n"
                     + "0. Return\n");
             int choice = InputHandler.scanInt();
             switch (choice) {
@@ -24,6 +25,12 @@ public class SearchShowingUI {
                     searchShowingById();
                     break;
                 case 2:
+                    // TODO: searchShowingByCineplex();
+                    break;
+                case 3:
+                    // TODO: searchShowingByMovie();
+                    break;
+                case 4:
                     listAllShowings();
                     break;
                 case 0:
