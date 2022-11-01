@@ -35,8 +35,7 @@ public class SearchShowingUI {
     }
 
     public static void searchShowingById() {
-        System.out.println("Input showing id: ");
-        int id = InputHandler.scanInt();
+        int id = UserHandler.getIdFromUser();
         Showing showing = showingController.findShowing(id);
         if (showing == null) {
             System.out.println("No showing with ID " + id + " found!");

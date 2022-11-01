@@ -75,6 +75,11 @@ public class ShowingController extends DatabaseController<Showing> {
     public void deleteInvalidShowings(Movie movie, LocalDate releaseDate, LocalDate endDate) {
         ArrayList<Showing> showings = findShowings(movie);
         ArrayList<Showing> validShowings = new ArrayList<Showing>();
+
+        if (showings == null) {
+            return;
+        }
+
         for (Showing showing : showings) {
             // Valid showtime is before end date
             // and after 7 days before release date
