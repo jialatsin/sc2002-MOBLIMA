@@ -1,9 +1,6 @@
 package boundary;
 
-import java.util.ArrayList;
-
 import control.AdminController;
-import entity.Admin;
 
 public class AdminUI {
     private static AdminController adminController = new AdminController();

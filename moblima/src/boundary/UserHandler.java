@@ -9,7 +9,10 @@ import entity.Cinema;
 import entity.Cineplex;
 import entity.Movie;
 import entity.Showing;
+import entity.Constants.Age;
+import entity.Constants.CinemaClass;
 import entity.Constants.ContentRating;
+import entity.Constants.Day;
 import entity.Constants.MovieType;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -254,5 +257,80 @@ public class UserHandler {
             return null;
         }
         return showing;
+    }
+
+    public static CinemaClass getCinemaClassFromUser() {
+        int selection;
+        CinemaClass cinemaClass = null;
+        do {
+            System.out.println("\nSelect Cinema Class:\n"
+                    + "1. Platinum\n"
+                    + "2. Gold\n"
+                    + "3. Standard\n");
+
+            selection = InputHandler.scanInt();
+            switch (selection) {
+                case 1:
+                    cinemaClass = CinemaClass.PLATINUM;
+                    break;
+                case 2:
+                    cinemaClass = CinemaClass.GOLD;
+                    break;
+                case 3:
+                    cinemaClass = CinemaClass.STANDARD;
+                    break;
+            }
+        } while (selection < 1 || selection > 3);
+        return cinemaClass;
+    }
+
+    public static Age getAgeFromUser() {
+        int selection;
+        Age age = null;
+        do {
+            System.out.println("\nSelect Age:\n"
+                    + "1. Adult\n"
+                    + "2. Senior\n"
+                    + "3. Child\n");
+
+            selection = InputHandler.scanInt();
+            switch (selection) {
+                case 1:
+                    age = Age.ADULT;
+                    break;
+                case 2:
+                    age = Age.SENIOR;   
+                    break;
+                case 3:
+                    age = Age.CHILD;
+                    break;
+            }
+        } while (selection < 1 || selection > 3);
+        return age;
+    }
+
+    public static Day getDayFromUser() {
+        int selection;
+        Day day = null;
+        do {
+            System.out.println("\nSelect Day:\n"
+                    + "1. Holiday\n"
+                    + "2. Weekday\n"
+                    + "3. Weekend\n");
+
+            selection = InputHandler.scanInt();
+            switch (selection) {
+                case 1:
+                    day = Day.HOLIDAY;
+                    break;
+                case 2:
+                    day = Day.WEEKDAY;   
+                    break;
+                case 3:
+                    day = Day.WEEKEND;
+                    break;
+            }
+        } while (selection < 1 || selection > 3);
+        return day;
     }
 }

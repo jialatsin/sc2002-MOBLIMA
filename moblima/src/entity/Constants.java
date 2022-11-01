@@ -2,7 +2,7 @@ package entity;
 
 public class Constants {
 
-    public enum CinemaClass {
+    public enum CinemaClass implements PriceType {
         PLATINUM("Platinum Class"),
         GOLD("Gold Class"),
         STANDARD("Standard");
@@ -27,7 +27,7 @@ public class Constants {
         G, PG, PG13, R, NC17
     };
 
-    public enum MovieType {
+    public enum MovieType implements PriceType {
         REGULAR_TWO_D("Regular 2D"),
         REGULAR_THREE_D("Regular 3D"),
         BLOCKBUSTER_TWO_D("Blockbuster 2D"),
@@ -63,7 +63,7 @@ public class Constants {
         }
     };
 
-    public enum Age {
+    public enum Age implements PriceType  {
         ADULT("Adult"),
         SENIOR("Senior"),
         CHILD("Child");
@@ -77,6 +77,23 @@ public class Constants {
         @Override
         public String toString() {
             return age;
+        }
+    };
+
+    public enum Day implements PriceType  {
+        HOLIDAY("Holiday"),
+        WEEKDAY("Weekday"),
+        WEEKEND("Weekend");
+
+        private String day;
+
+        Day(String day) {
+            this.day = day;
+        }
+
+        @Override
+        public String toString() {
+            return day;
         }
     };
 
