@@ -49,10 +49,18 @@ public class Movie implements Serializable {
     public String toString() {
         String movieString = "";
 
-        movieString += "\nMovie: " + title + " (ID: " + id + ")" + " (" + movieType + ")"
+        movieString += "Movie: " + title + " (ID: " + id + ")" + " (" + movieType + ")"
                 + "\nRelease Date: " + releaseDate.format(InputHandler.getDateFormat()) + ", "
                 + "End Date: " + endDate.format((InputHandler.getDateFormat()))
-                + "\nShowing Status: " + getShowingStatus();
+                + "\nShowing Status: " + getShowingStatus()
+                + "\nTicket Sales: " + getTicketSales() + ", "
+                + "Overall Rating: ";
+
+        if (averageReviewRating < 0) {
+            movieString += "NaN"; // No reviews available
+        } else
+            movieString += String.format("%.2f *", averageReviewRating);
+
         movieString += "\n=================================================";
 
         return movieString;

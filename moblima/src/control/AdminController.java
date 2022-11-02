@@ -22,4 +22,27 @@ public class AdminController extends DatabaseController<Admin> {
         }
         return false;
     }
+
+    public Admin getAdminByUsername(String username) {
+        ArrayList<Admin> admins = readFromDatabase();
+        for (Admin admin : admins) {
+            if (admin.getUsername().equals(username)) {
+                return admin;
+            }
+        }
+        return null;
+    }
+
+    // Returns true on successful deletion
+    public boolean deleteAdminByUsername(String username) {
+        ArrayList<Admin> admins = readFromDatabase();
+        for (Admin admin : admins) {
+            if (admin.getUsername().equals(username)) {
+                admins.remove(admin);
+                overwriteDatabase(admins);
+                return true;
+            }
+        }
+        return false;
+    }
 }

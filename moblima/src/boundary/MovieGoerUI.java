@@ -44,7 +44,7 @@ public class MovieGoerUI {
                     viewBookingHistory();
                     break;
                 case 6: // List Top 5
-                    // Require Read from Database
+                    ListTopMovies.main();
                     break;
                 case 7: // Add Review
                     addReview();
@@ -130,4 +130,5 @@ public class MovieGoerUI {
         }
         System.out.println();
     }
+
 }

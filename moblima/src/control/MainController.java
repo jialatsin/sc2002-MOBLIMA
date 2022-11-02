@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 
+import entity.Admin;
 import entity.Cinema;
 import entity.Cineplex;
 import entity.SeatingLayout;
@@ -26,16 +27,23 @@ public class MainController {
 
     private static CineplexController cineplexController = new CineplexController();
     private static PriceController priceController = new PriceController();
+    private static AdminController adminController = new AdminController();
 
-    // Creates starting data for cineplexes and pricing if not already available in
-    // database
+    // Creates starting data for admins, cineplexes and pricing if not already
+    // available in database
     public static void initializeDatabase() {
+        // Initialize admin database
+        ArrayList<Admin> admins = new ArrayList<Admin>();
+        admins = adminController.readFromDatabase();
+        if (admins.size() == 0) {
+            Admin admin = new Admin("admin", "pw123");
+            admins.add(admin);
+        }
+
         // Intiialize cineplex database
         ArrayList<Cineplex> cineplexes = new ArrayList<Cineplex>();
         cineplexes = cineplexController.readFromDatabase();
         if (cineplexes.size() == 0) {
-            // TODO: Create seating layouts with aisles, stairs
-            // TODO: Admin menu to manage Cineplexes, Cinemas and SeatLayouts??
             // Currently hard-coded data
             ArrayList<Cinema> cinemasA = new ArrayList<Cinema>();
             cinemasA.add(new Cinema("APA", new SeatingLayout(4, 5), CinemaClass.PLATINUM));

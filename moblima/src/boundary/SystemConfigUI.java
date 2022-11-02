@@ -4,8 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Map;
 
+import control.AdminController;
 import control.HolidayController;
 import control.PriceController;
+import entity.Admin;
 import entity.Holiday;
 import entity.PriceType;
 import entity.Constants.Age;
@@ -16,11 +18,11 @@ import entity.Constants.MovieType;
 public class SystemConfigUI {
     private static HolidayController holidayController = new HolidayController();
     private static PriceController priceController = new PriceController();
+    private static AdminController adminController = new AdminController();
 
     public static void main() {
         int selection;
         do {
-            // TODO: Manage Seating Layouts? Manage Cineplexes?
             System.out.println("\n===== CONFIGURE SYSTEM SETTINGS =====\n"
                     + "1. Manage Holidays\n"
                     + "2. Manage Ticket Prices\n"
@@ -33,9 +35,10 @@ public class SystemConfigUI {
                     manageHolidays();
                     break;
                 case 2:
-                    managePrice();
+                    managePrices();
                     break;
                 case 3:
+                    manageAdmin();
                     break;
                 case 0:
                     return;
@@ -60,11 +63,12 @@ public class SystemConfigUI {
                     System.out.println("Enter date of holiday:");
                     date = InputHandler.scanDate();
                     if (holidayController.getHolidayByDate(date) != null) {
-                        System.out.println("Holiday on " + date + " added to Holiday database!");
-                        holidayController.addToDatabase(new Holiday(date));
+                        System.out.println("Holiday on " + date + " already exists in Holiday database!");
                         break;
+
                     }
-                    System.out.println("Holiday on " + date + " already exists in Holiday database!");
+                    System.out.println("Holiday on " + date + " added to Holiday database!");
+                    holidayController.addToDatabase(new Holiday(date));
                     break;
                 case 2:
                     System.out.println("\nDELETING A HOLIDAY...");
@@ -78,6 +82,11 @@ public class SystemConfigUI {
                     break;
                 case 3:
                     ArrayList<Holiday> holidays = holidayController.readFromDatabase();
+                    if (holidays.isEmpty()) {
+                        System.out.println("No holidays exist in Holiday database!");
+                        break;
+                    }
+
                     for (Holiday holiday : holidays) {
                         System.out.println(holiday);
                     }
@@ -88,7 +97,7 @@ public class SystemConfigUI {
         } while (true);
     }
 
-    private static void managePrice() {
+    private static void managePrices() {
         int selection;
         do {
             System.out.println("\n===== TICKET PRICING MANAGER =====\n"
@@ -160,5 +169,59 @@ public class SystemConfigUI {
         priceList.entrySet().forEach(entry -> {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         });
+    }
+
+    private static void manageAdmin() {
+        int selection;
+        do {
+            System.out.println("\n===== ADMIN ACCOUNT MANAGER =====\n"
+                    + "1. Create an Admin\n"
+                    + "2. Delete an Admin\n"
+                    + "3. View All Admins\n"
+                    + "0. Return to System Configuration Menu\n");
+
+            selection = InputHandler.scanInt();
+
+            String username = null;
+            switch (selection) {
+                case 1:
+                    System.out.println("\nADDING AN ADMIN...");
+                    System.out.println("Enter username of admin:");
+                    username = InputHandler.scanString();
+                    if (adminController.getAdminByUsername(username) != null) {
+                        System.out.println("Username already exists on Admin database!");
+                        return;
+                    }
+                    System.out.println("Enter password of admin:");
+                    String password = InputHandler.scanString();
+
+                    Admin admin = new Admin(username, password);
+                    adminController.addToDatabase(admin);
+                    break;
+                case 2:
+                    System.out.println("\nDELETING AN ADMIN...");
+                    System.out.println("Enter username of admin to delete:");
+                    username = InputHandler.scanString();
+                    if (adminController.deleteAdminByUsername(username)) {
+                        System.out.println("Deleted admin " + username + "!");
+                        break;
+                    }
+                    System.out.println("Unable to delete admin " + username + "!");
+                    break;
+                case 3:
+                    ArrayList<Admin> admins = adminController.readFromDatabase();
+                    if (admins.isEmpty()) {
+                        System.out.println("No admins exist in Admin database!");
+                        break;
+                    }
+
+                    for (Admin a : admins) {
+                        System.out.println(a);
+                    }
+                    break;
+                case 0:
+                    return;
+            }
+        } while (true);
     }
 }

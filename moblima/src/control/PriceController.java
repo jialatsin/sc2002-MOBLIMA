@@ -33,7 +33,7 @@ public class PriceController extends DatabaseController<Map<PriceType, Double>> 
     public void updatePriceType(PriceType priceType, double price) {
         ArrayList<Map<PriceType, Double>> priceMaps = readFromDatabase();
         Map<PriceType, Double> priceMap = priceMaps.get(0);
-        priceMap.put(priceType, price); // update here
+        priceMap.put(priceType, price);
         priceMaps.set(0, priceMap);
         overwriteDatabase(priceMaps);
     }

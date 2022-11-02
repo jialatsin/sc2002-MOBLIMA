@@ -6,7 +6,7 @@ public class AdminUI {
     private static AdminController adminController = new AdminController();
 
     public static void main() {
-        // login();
+        login();
 
         int selection;
         do {
@@ -14,6 +14,7 @@ public class AdminUI {
                     + "1. Create/Update/Remove Movie Listing\n"
                     + "2. Create/Update/Remove Movie Showings\n"
                     + "3. Configure System Settings\n"
+                    + "4. List Top 5 Ranking Movies\n"
                     + "0. Logout to Main Menu\n");
 
             selection = InputHandler.scanInt();
@@ -27,6 +28,9 @@ public class AdminUI {
                 case 3:
                     SystemConfigUI.main();
                     break;
+                case 4:
+                    ListTopMovies.main();
+                    break;
                 case 0:
                     return;
             }
@@ -34,9 +38,6 @@ public class AdminUI {
     }
 
     private static void login() {
-        // TODO: Better login validation?
-        // TODO: Refactor login logic to controller
-
         boolean isLoggedIn = false;
         System.out.println("===== ADMIN LOGIN =====");
         do {

@@ -130,9 +130,10 @@ public class MovieController extends DatabaseController<Movie> {
         overwriteDatabase(movies);
     }
 
-    // Sorts given ArrayList of movies based on its averageReviewRating attribute
+    // Sorts given ArrayList of movies in descending order based on its
+    // averageReviewRating attribute
     public ArrayList<Movie> sortByRating(ArrayList<Movie> movies) {
-        Collections.sort(movies, new Comparator<Movie>() {
+        Collections.sort(movies, Collections.reverseOrder(new Comparator<Movie>() {
             public int compare(Movie a, Movie b) {
                 double aRating = a.getAverageReviewRating();
                 double bRating = b.getAverageReviewRating();
@@ -144,13 +145,14 @@ public class MovieController extends DatabaseController<Movie> {
                     return 0;
                 }
             }
-        });
+        }));
         return movies;
     }
 
-    // Sorts given ArrayList of movies based on its ticketSales attribute
+    // Sorts given ArrayList of movies in descending order based on its ticketSales
+    // attribute
     public ArrayList<Movie> sortByTicketSales(ArrayList<Movie> movies) {
-        Collections.sort(movies, new Comparator<Movie>() {
+        Collections.sort(movies, Collections.reverseOrder(new Comparator<Movie>() {
             public int compare(Movie a, Movie b) {
                 int aTicketSales = a.getTicketSales();
                 int bTicketSales = b.getTicketSales();
@@ -162,7 +164,7 @@ public class MovieController extends DatabaseController<Movie> {
                     return 0;
                 }
             }
-        });
+        }));
         return movies;
     }
 }

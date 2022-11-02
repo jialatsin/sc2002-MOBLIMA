@@ -228,9 +228,9 @@ public class UserHandler {
             System.out.println("Movie not found in Movie database!");
             return null;
         }
-        System.out.print("\n=================================================");
+        System.out.println("\n=================================================");
         for (Movie m : movies) {
-            System.out.print(m);
+            System.out.println(m);
         }
         System.out.println("\n");
 
