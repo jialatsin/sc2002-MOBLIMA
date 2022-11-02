@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import entity.*;
-import entity.Constants.SeatStatus;
 
 public class ShowingController extends DatabaseController<Showing> {
     public ShowingController() {
@@ -109,21 +108,21 @@ public class ShowingController extends DatabaseController<Showing> {
         overwriteDatabase(validShowings);
     }
 
-    private enum Attributes {
-        ID, SEATING_AVAILABILITY, MOVIE, SHOWTIME, CINEMA, CINEPLEX
+    public enum ShowingAttribute {
+        ID, MOVIE, SHOWTIME, CINEMA;
+
+        public static ShowingAttribute get(int i) {
+            return values()[i - 1]; // User selection starts from 1, but enum counting starts from 0
+        }
     }
 
-    public void updateShowingAttribute(Showing showing, int attribute, Object newAttributeValue) {
+    public void updateShowingAttribute(Showing showing, ShowingAttribute attribute, Object newAttributeValue) {
         ArrayList<Showing> showings = readFromDatabase();
         int showingIndexInDatabase = showings.indexOf(showing);
 
-        Attributes[] attributes = Attributes.values();
-        switch (attributes[attribute - 1]) {
+        switch (attribute) {
             case ID:
                 showing.setId((int) newAttributeValue);
-                break;
-            case SEATING_AVAILABILITY:
-                showing.setSeatingAvailability((SeatingLayout) newAttributeValue);
                 break;
             case MOVIE:
                 showing.setMovie((Movie) newAttributeValue);
@@ -133,9 +132,6 @@ public class ShowingController extends DatabaseController<Showing> {
                 break;
             case CINEMA:
                 showing.setCinema((Cinema) newAttributeValue);
-                break;
-            case CINEPLEX:
-                showing.setCineplex((Cineplex) newAttributeValue);
                 break;
         }
         showings.set(showingIndexInDatabase, showing);

@@ -2,8 +2,8 @@ package boundary;
 
 import java.time.LocalDateTime;
 import control.*;
+import control.ShowingController.ShowingAttribute;
 import entity.*;
-import entity.Cineplex;
 import entity.Constants.ShowingStatus;
 import entity.Constants.User;
 
@@ -54,15 +54,16 @@ public class CRUDMovieShowingUI {
             return;
         }
 
-        if (!movie.getShowingStatus().equals(ShowingStatus.PREVIEW) 
+        if (!movie.getShowingStatus().equals(ShowingStatus.PREVIEW)
                 && !movie.getShowingStatus().equals(ShowingStatus.NOW_SHOWING)) {
             System.out.println("Cannot create showing when movie showing status is not 'Preview' or 'Now Showing'!");
             return;
         }
 
         LocalDateTime showTime = UserHandler.getShowTimeFromUser();
-    
-        if (showTime.isAfter(movie.getEndDate().atStartOfDay()) || showTime.isBefore(movie.getReleaseDate().atStartOfDay())) {
+
+        if (showTime.isAfter(movie.getEndDate().atStartOfDay())
+                || showTime.isBefore(movie.getReleaseDate().atStartOfDay())) {
             System.out.println("Cannot create showing when movie is not within releaseDate and endDates!");
             return;
         }
@@ -102,22 +103,19 @@ public class CRUDMovieShowingUI {
         do {
             System.out.println("\nSelect attribute to update for showing\n"
                     + "1. ID\n"
-                    + "2. seatingAvailability\n"
-                    + "3. Movie\n"
-                    + "4. ShowTime\n"
-                    + "5. Cinema\n");
+                    + "2. Movie\n"
+                    + "3. ShowTime\n"
+                    + "4. Cinema\n");
             selection = InputHandler.scanInt();
-        } while (selection < 1 || selection > 5);
+        } while (selection < 1 || selection > 4);
 
-        switch (selection) {
-            case 1:
+        ShowingAttribute attribute = ShowingAttribute.get(selection);
+        switch (attribute) {
+            case ID:
                 int newId = UserHandler.getIdFromUser();
-                showingController.updateShowingAttribute(showing, selection, newId);
+                showingController.updateShowingAttribute(showing, attribute, newId);
                 break;
-            case 2:
-                // TODO: Menu to change available seats
-                break;
-            case 3:
+            case MOVIE:
                 Movie movie = UserHandler.getMovieFromUser();
                 if (movie == null) {
                     System.out.println("Error updating Movie attribute!");
@@ -128,25 +126,26 @@ public class CRUDMovieShowingUI {
                     System.out.println("Can not update to a movie that is not in 'Preview' or 'Now Showing'!");
                     return;
                 }
-                showingController.updateShowingAttribute(showing, selection, movie);
+                showingController.updateShowingAttribute(showing, attribute, movie);
                 break;
-            case 4:
+            case SHOWTIME:
                 LocalDateTime showTime = UserHandler.getShowTimeFromUser();
                 movie = showing.getMovie();
-                if (showTime.isAfter(movie.getEndDate().atStartOfDay()) || showTime.isBefore(movie.getReleaseDate().atStartOfDay())) {
+                if (showTime.isAfter(movie.getEndDate().atStartOfDay())
+                        || showTime.isBefore(movie.getReleaseDate().atStartOfDay())) {
                     System.out.println("Cannot update showing when movie is not within releaseDate and endDates!");
                     return;
                 }
-                showingController.updateShowingAttribute(showing, selection, showTime);
+                showingController.updateShowingAttribute(showing, attribute, showTime);
                 break;
-            case 5:
+            case CINEMA:
                 Cineplex cineplex = UserHandler.getCineplexFromUser();
                 Cinema cinema = UserHandler.getCinemaFromUser(cineplex);
                 if (cinema == null) {
                     System.out.println("Error updating Cinema attribute!");
                     return;
                 }
-                showingController.updateShowingAttribute(showing, selection, cinema);
+                showingController.updateShowingAttribute(showing, attribute, cinema);
                 break;
         }
 

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import control.MovieController;
 import control.ShowingController;
+import control.MovieController.MovieAttribute;
+import control.ShowingController.ShowingAttribute;
 import entity.Movie;
 import entity.Showing;
 import entity.Constants.ContentRating;
@@ -74,7 +76,6 @@ public class CRUDMovieListingUI {
         System.out.println(title + " (id: " + id + ") added to Movie database!");
     }
 
-    // TODO
     private static void updateMovieListing() {
         System.out.println("\nUPDATING A MOVIE LISTING...");
 
@@ -102,36 +103,38 @@ public class CRUDMovieListingUI {
                     + "7. Release Date\n"
                     + "8. End Date\n"
                     + "9. Content Rating\n"
-                    + "10. Movie Type\n");
+                    + "10. Movie Type\n"
+                    + "11. Ticket Sales");
             selection = InputHandler.scanInt();
-        } while (selection < 1 || selection > 10);
+        } while (selection < 1 || selection > 11);
 
-        switch (selection) {
-            case 1:
+        MovieAttribute attribute = MovieAttribute.get(selection);
+        switch (attribute) {
+            case ID:
                 int newId = UserHandler.getIdFromUser();
-                movieController.updateMovieAttribute(movie, selection, newId);
+                movieController.updateMovieAttribute(movie, attribute, newId);
                 break;
-            case 2:
+            case TITLE:
                 String title = UserHandler.getTitleFromUser();
-                movieController.updateMovieAttribute(movie, selection, title);
+                movieController.updateMovieAttribute(movie, attribute, title);
                 break;
-            case 3:
+            case SYNOPSIS:
                 String synopsis = UserHandler.getSynopsisFromUser();
-                movieController.updateMovieAttribute(movie, selection, synopsis);
+                movieController.updateMovieAttribute(movie, attribute, synopsis);
                 break;
-            case 4:
+            case DIRECTOR:
                 String director = UserHandler.getDirectorFromUser();
-                movieController.updateMovieAttribute(movie, selection, director);
+                movieController.updateMovieAttribute(movie, attribute, director);
                 break;
-            case 5:
+            case CAST:
                 ArrayList<String> cast = UserHandler.getCastFromUser();
-                movieController.updateMovieAttribute(movie, selection, cast);
+                movieController.updateMovieAttribute(movie, attribute, cast);
                 break;
-            case 6:
+            case GENRES:
                 ArrayList<String> genres = UserHandler.getGenresFromUser();
-                movieController.updateMovieAttribute(movie, selection, genres);
+                movieController.updateMovieAttribute(movie, attribute, genres);
                 break;
-            case 7:
+            case RELEASE_DATE:
                 LocalDate releaseDate = UserHandler.getReleaseDateFromUser();
                 if (releaseDate.isAfter(movie.getEndDate())) {
                     System.out.println("Release date cannot be after end date!");
@@ -141,9 +144,9 @@ public class CRUDMovieListingUI {
                 System.out.println("Deleted all showings with invalid showtimes!");
                 // Get all remaining showings to be updated
                 showings = showingController.findShowings(movie);
-                movieController.updateMovieAttribute(movie, selection, releaseDate);
+                movieController.updateMovieAttribute(movie, attribute, releaseDate);
                 break;
-            case 8:
+            case END_DATE:
                 LocalDate endDate = UserHandler.getEndDateFromUser();
                 if (endDate.isBefore(movie.getReleaseDate())) {
                     System.out.println("End date cannot be before release date!");
@@ -153,22 +156,26 @@ public class CRUDMovieListingUI {
                 System.out.println("Deleted all showings with invalid showtimes!");
                 // Get all remaining showings to be updated
                 showings = showingController.findShowings(movie);
-                movieController.updateMovieAttribute(movie, selection, endDate);
+                movieController.updateMovieAttribute(movie, attribute, endDate);
                 break;
-            case 9:
+            case CONTENT_RATING:
                 ContentRating contentRating = UserHandler.getContentRatingFromUser();
-                movieController.updateMovieAttribute(movie, selection, contentRating);
+                movieController.updateMovieAttribute(movie, attribute, contentRating);
                 break;
-            case 10:
+            case MOVIE_TYPE:
                 MovieType movieType = UserHandler.getMovieTypeFromUser();
-                movieController.updateMovieAttribute(movie, selection, movieType);
+                movieController.updateMovieAttribute(movie, attribute, movieType);
+                break;
+            case TICKET_SALES:
+                int ticketSales = InputHandler.scanInt();
+                movieController.updateMovieAttribute(movie, attribute, ticketSales);
                 break;
         }
 
         // Update movie attribute of all showings with the given updated movie
         if (showings != null) {
             for (Showing showing : showings) {
-                showingController.updateShowingAttribute(showing, 3, movie);
+                showingController.updateShowingAttribute(showing, ShowingAttribute.MOVIE, movie);
             }
         }
 

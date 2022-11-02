@@ -2,6 +2,8 @@ package control;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import entity.*;
 import entity.Constants.ContentRating;
@@ -57,18 +59,21 @@ public class MovieController extends DatabaseController<Movie> {
 
     // In the order of selection options provided to user when updating movie
     // attributes
-    private enum Attributes {
-        ID, TITLE, SYNOPSIS, DIRECTOR, CAST, GENRES, RELEASE_DATE, END_DATE, CONTENT_RATING, MOVIE_TYPE
+    public enum MovieAttribute {
+        ID, TITLE, SYNOPSIS, DIRECTOR, CAST, GENRES, RELEASE_DATE, END_DATE, CONTENT_RATING, MOVIE_TYPE, TICKET_SALES;
+
+        public static MovieAttribute get(int i) {
+            return values()[i - 1]; // User selection starts from 1, but enum counting starts from 0
+        }
     }
 
     // Updates the selected movie's entry in Movie database with the new attribute
     @SuppressWarnings("unchecked")
-    public void updateMovieAttribute(Movie movie, int attribute, Object newAttributeValue) {
+    public void updateMovieAttribute(Movie movie, MovieAttribute attribute, Object newAttributeValue) {
         ArrayList<Movie> movies = readFromDatabase();
         int movieIndexInDatabase = movies.indexOf(movie);
 
-        Attributes[] attributes = Attributes.values();
-        switch (attributes[attribute - 1]) {
+        switch (attribute) {
             case ID:
                 movie.setId((int) newAttributeValue);
                 break;
@@ -99,6 +104,9 @@ public class MovieController extends DatabaseController<Movie> {
             case MOVIE_TYPE:
                 movie.setMovieType((MovieType) newAttributeValue);
                 break;
+            case TICKET_SALES:
+                movie.setTicketSales((int) newAttributeValue);
+                break;
         }
         movies.set(movieIndexInDatabase, movie);
         overwriteDatabase(movies);
@@ -122,16 +130,39 @@ public class MovieController extends DatabaseController<Movie> {
         overwriteDatabase(movies);
     }
 
-    public boolean updateMovieObject(Movie updatedMovie) { // method that overwrites database everytime a movie
-                                                           // has an update
-        ArrayList<Movie> MovieList = readFromDatabase();
-        for (int i = 0; i < MovieList.size(); i++) {
-            if (updatedMovie.getId() == MovieList.get(i).getId()) {
-                MovieList.set(i, updatedMovie);
-                overwriteDatabase(MovieList);
-                return true;
+    // Sorts given ArrayList of movies based on its averageReviewRating attribute
+    public ArrayList<Movie> sortByRating(ArrayList<Movie> movies) {
+        Collections.sort(movies, new Comparator<Movie>() {
+            public int compare(Movie a, Movie b) {
+                double aRating = a.getAverageReviewRating();
+                double bRating = b.getAverageReviewRating();
+                if (aRating < bRating) {
+                    return -1;
+                } else if (aRating > bRating) {
+                    return 1;
+                } else {
+                    return 0;
+                }
             }
-        }
-        return false;
+        });
+        return movies;
+    }
+
+    // Sorts given ArrayList of movies based on its ticketSales attribute
+    public ArrayList<Movie> sortByTicketSales(ArrayList<Movie> movies) {
+        Collections.sort(movies, new Comparator<Movie>() {
+            public int compare(Movie a, Movie b) {
+                int aTicketSales = a.getTicketSales();
+                int bTicketSales = b.getTicketSales();
+                if (aTicketSales < bTicketSales) {
+                    return -1;
+                } else if (aTicketSales > bTicketSales) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+        return movies;
     }
 }

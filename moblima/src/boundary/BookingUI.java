@@ -6,8 +6,11 @@ import java.util.ArrayList;
 
 import control.BookingController;
 import control.HolidayController;
+import control.MovieController;
 import control.PriceController;
+import control.MovieController.MovieAttribute;
 import entity.Booking;
+import entity.Movie;
 import entity.MovieGoer;
 import entity.Seat;
 import entity.SeatingLayout;
@@ -22,6 +25,7 @@ public class BookingUI {
     private static PriceController priceController = new PriceController();
     private static HolidayController holidayController = new HolidayController();
     private static BookingController bookingController = new BookingController();
+    private static MovieController movieController = new MovieController();
 
     public static void main() {
         Showing showing = null;
@@ -82,6 +86,11 @@ public class BookingUI {
         Booking booking = new Booking(transactionID, movieGoer, tickets, transactionTime, showing, price);
         bookingController.addToDatabase(booking);
         System.out.println("\nBooking created!");
+
+        // Update the ticket sales for the movie
+        Movie movie = showing.getMovie();
+        int newTicketSales = movie.getTicketSales() + ticketCount;
+        movieController.updateMovieAttribute(movie, MovieAttribute.TICKET_SALES, newTicketSales);
     }
 
     private static double displayTotalPrice(ArrayList<Ticket> tickets) {

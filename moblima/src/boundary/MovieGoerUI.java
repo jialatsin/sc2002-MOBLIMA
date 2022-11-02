@@ -83,7 +83,7 @@ public class MovieGoerUI {
         if (averageReviewRating < 0) {
             System.out.println("\nAverage Review Rating: NaN"); // No reviews available
         } else
-            System.out.println("\nAverage Review Rating: " + movie.getAverageReviewRating() + "*");
+            System.out.printf("\nAverage Review Rating: %.2f *", movie.getAverageReviewRating());
 
         // Print reviews
         ArrayList<Review> reviews = movie.getReviews();
