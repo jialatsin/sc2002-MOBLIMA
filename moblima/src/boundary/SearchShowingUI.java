@@ -6,11 +6,13 @@ import control.ShowingController;
 import entity.Cineplex;
 import entity.Movie;
 import entity.Showing;
+import entity.Constants.ShowingStatus;
+import entity.Constants.User;
 
 public class SearchShowingUI {
     private static ShowingController showingController = new ShowingController();
 
-    public static void main() {
+    public static void main(User user) {
         do {
             // Displays showings regardless of showing status
             System.out.println("===== SEARCH/LIST SHOWING =====\n"
@@ -22,16 +24,16 @@ public class SearchShowingUI {
             int choice = InputHandler.scanInt();
             switch (choice) {
                 case 1:
-                    searchShowingById();
+                    searchShowingById(user);
                     break;
                 case 2:
-                    // TODO: searchShowingByCineplex();
+                    searchShowingByCineplex(user);
                     break;
                 case 3:
-                    // TODO: searchShowingByMovie();
+                    searchShowingByMovie(user);
                     break;
                 case 4:
-                    listAllShowings();
+                    listAllShowings(user);
                     break;
                 case 0:
                     return;
@@ -41,12 +43,17 @@ public class SearchShowingUI {
         } while (true);
     }
 
-    public static void searchShowingById() {
+    public static void searchShowingById(User user) {
         int id = UserHandler.getIdFromUser();
         Showing showing = showingController.findShowing(id);
         if (showing == null) {
             System.out.println("No showing with ID " + id + " found!");
             return;
+        }
+        if (user.equals(User.MOVIEGOER) && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING) 
+                && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)) {
+                    System.out.println("Movie showing is not available for viewing");
+                    return;
         }
         System.out.println("=================================================");
         System.out.println(showing);
@@ -54,10 +61,29 @@ public class SearchShowingUI {
     }
 
     // Print all showings in database
-    public static void listAllShowings() {
+    public static void listAllShowings(User user) {
         ArrayList<Showing> showings = showingController.readFromDatabase();
         if (showings.isEmpty()) {
             System.out.println("No showings exist in Showing database!");
+            return;
+        }
+        System.out.println("=================================================");
+        for (Showing showing : showings) {
+            if (user.equals(User.MOVIEGOER) && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING) 
+                && showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)) {
+                    continue;
+            }
+            System.out.println(showing);
+        }
+        System.out.println();
+    }
+
+    // Overloaded listAllShowings function to print all showings in database with
+    // matching cineplex and movie (Used by MOVIERGOER, not admin)
+    public static void listAllShowings(Cineplex cineplex, Movie movie) {
+        ArrayList<Showing> showings = showingController.findShowings(cineplex, movie);
+        if (showings == null) {
+            System.out.println("No showings of " + movie.getTitle() + " is found at " + cineplex.getName() + "!");
             return;
         }
         System.out.println("=================================================");
@@ -67,15 +93,37 @@ public class SearchShowingUI {
         System.out.println();
     }
 
-    // Overloaded listAllShowings function to print all showings in database with
-    // matching cineplex and movie
-    public static void listAllShowings(Cineplex cineplex, Movie movie) {
-        ArrayList<Showing> showings = showingController.findShowings(cineplex, movie);
+    public static void searchShowingByCineplex(User user) {
+        Cineplex cineplex = UserHandler.getCineplexFromUser();
+        ArrayList<Showing> showings = showingController.findShowings(cineplex);
         if (showings == null) {
-            System.out.println("No showings of " + movie.getTitle() + " is found at " + cineplex.getName() + "!");
+            System.out.println("No showings are found at " + cineplex.getName() + "!");
             return;
         }
         for (Showing showing : showings) {
+            if (user.equals(User.MOVIEGOER) && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING) 
+                && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)) {
+                    System.out.println("Movie showing is not available for viewing");
+                    return;
+            }
+            System.out.println(showing);
+        }
+        System.out.println();
+    }
+
+    public static void searchShowingByMovie(User user) {
+        Movie movie = UserHandler.getMovieFromUser();
+        ArrayList<Showing> showings = showingController.findShowings(movie);
+        if (showings == null) {
+            System.out.println("No showings of " + movie.getTitle() + " is found!");
+            return;
+        }
+        for (Showing showing : showings) {
+            if (user.equals(User.MOVIEGOER) && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING) 
+                && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)) {
+                    System.out.println("Movie showing is not available for viewing");
+                    return;
+            }
             System.out.println(showing);
         }
         System.out.println();

@@ -5,6 +5,7 @@ import control.*;
 import entity.*;
 import entity.Cineplex;
 import entity.Constants.ShowingStatus;
+import entity.Constants.User;
 
 public class CRUDMovieShowingUI {
     private static ShowingController showingController = new ShowingController();
@@ -31,7 +32,7 @@ public class CRUDMovieShowingUI {
                     deleteMovieShowing();
                     break;
                 case 4:
-                    SearchShowingUI.main();
+                    SearchShowingUI.main(User.ADMIN);
                     break;
                 case 0:
                     return;
@@ -53,12 +54,19 @@ public class CRUDMovieShowingUI {
             return;
         }
 
-        if (movie.getShowingStatus() != ShowingStatus.PREVIEW
-                && movie.getShowingStatus() != ShowingStatus.NOW_SHOWING) {
+        if (!movie.getShowingStatus().equals(ShowingStatus.PREVIEW) 
+                && !movie.getShowingStatus().equals(ShowingStatus.NOW_SHOWING)) {
             System.out.println("Cannot create showing when movie showing status is not 'Preview' or 'Now Showing'!");
             return;
         }
+
         LocalDateTime showTime = UserHandler.getShowTimeFromUser();
+    
+        if (showTime.isAfter(movie.getEndDate().atStartOfDay()) || showTime.isBefore(movie.getReleaseDate().atStartOfDay())) {
+            System.out.println("Cannot create showing when movie is not within releaseDate and endDates!");
+            return;
+        }
+
         Cineplex cineplex = UserHandler.getCineplexFromUser();
         Cinema cinema = UserHandler.getCinemaFromUser(cineplex);
         if (showingController.findShowing(cinema, showTime) != null) {
@@ -115,8 +123,8 @@ public class CRUDMovieShowingUI {
                     System.out.println("Error updating Movie attribute!");
                     return;
                 }
-                if (movie.getShowingStatus() != ShowingStatus.PREVIEW
-                        && movie.getShowingStatus() != ShowingStatus.NOW_SHOWING) {
+                if (!movie.getShowingStatus().equals(ShowingStatus.PREVIEW)
+                        && !movie.getShowingStatus().equals(ShowingStatus.NOW_SHOWING)) {
                     System.out.println("Can not update to a movie that is not in 'Preview' or 'Now Showing'!");
                     return;
                 }
@@ -124,6 +132,11 @@ public class CRUDMovieShowingUI {
                 break;
             case 4:
                 LocalDateTime showTime = UserHandler.getShowTimeFromUser();
+                movie = showing.getMovie();
+                if (showTime.isAfter(movie.getEndDate().atStartOfDay()) || showTime.isBefore(movie.getReleaseDate().atStartOfDay())) {
+                    System.out.println("Cannot update showing when movie is not within releaseDate and endDates!");
+                    return;
+                }
                 showingController.updateShowingAttribute(showing, selection, showTime);
                 break;
             case 5:

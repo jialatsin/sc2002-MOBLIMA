@@ -97,4 +97,7 @@ public class Constants {
         }
     };
 
+    public enum User {
+        MOVIEGOER, ADMIN;
+    }
 }

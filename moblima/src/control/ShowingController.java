@@ -69,6 +69,23 @@ public class ShowingController extends DatabaseController<Showing> {
         return showingsResult;
     }
 
+    // Search for showings with specified cineplex in the Showing database
+    // Returns an ArrayList with matching showings, returns null if no showing found
+    public ArrayList<Showing> findShowings(Cineplex cineplex) {
+        ArrayList<Showing> showings = readFromDatabase();
+        ArrayList<Showing> showingsResult = new ArrayList<Showing>();
+        for (Showing showing : showings) {
+            if (showing.getCineplex().equals(cineplex)) {
+                showingsResult.add(showing);
+            }
+        }
+
+        if (showingsResult.isEmpty()) {
+            return null;
+        }
+        return showingsResult;
+    }
+
     // Called from CRUDMovieListingUI when releaseDate or endDate is updated
     // Deletes all showings with showtimes that no longer fall within the "PREIVEW"
     // or "NOW SHOWING" period

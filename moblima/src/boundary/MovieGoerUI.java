@@ -5,6 +5,7 @@ import control.MovieController;
 import java.util.*;
 
 import entity.*;
+import entity.Constants.User;
 
 public class MovieGoerUI {
     private static MovieController movieController = new MovieController();
@@ -32,7 +33,7 @@ public class MovieGoerUI {
                     viewMovieDetails(); // returns all movies with same title in them
                     break;
                 case 3: // Search/List Showings
-                    SearchShowingUI.main();
+                    SearchShowingUI.main(User.MOVIEGOER);
                     break;
                 case 4: // Book Ticket
                     BookingUI.main();
