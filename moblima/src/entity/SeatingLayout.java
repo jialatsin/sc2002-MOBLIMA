@@ -77,7 +77,7 @@ public class SeatingLayout implements Serializable {
             for (int c = 0; c < columns; c++) {
                 seatsString += seats[r][c];
                 // print aisle
-                if ((c + 1) % 3 == 0) {
+                if (c + 1 == columns / 2) {
                     seatsString += "  ";
                 }
             }
@@ -89,12 +89,41 @@ public class SeatingLayout implements Serializable {
         for (int c = 0; c < columns; c++) {
             seatsString += String.format(" %s ", (char) (c + 'A'));
             // print aisle
-            if ((c + 1) % 3 == 0) {
+            if (c + 1 == columns / 2) {
                 seatsString += "  ";
             }
         }
         seatsString += "\n";
 
         return seatsString + "\nNumber of Available Seats: " + availableSeatsCount + "\n";
+    }
+
+    // Sets a seat in given row and column to be OCCUPIED for the given showing
+    // Returns assigned seat if UNOCCUPIED seat is successfully set to OCCUPIED
+    // Returns null if seat is already OCCUPIED
+    public Seat assignSeat(int row, int column) {
+        if (seats[row][column].getStatus() == SeatStatus.OCCUPIED) {
+            return null;
+        }
+        seats[row][column].setStatus(SeatStatus.OCCUPIED);
+        availableSeatsCount--;
+        return seats[row][column];
+    }
+
+    // Sets a seat in given row and column to be UNOCCUPIED for the given showing
+    // Returns unassigned seat if OCCUPIED seat is successfully set to UNOCCUPIED
+    // Returns null if seat is already UNOCCUPIED
+    public Seat unassignSeat(int row, int column) {
+        if (seats[row][column].getStatus() == SeatStatus.UNOCCUPIED) {
+            return null;
+        }
+        seats[row][column].setStatus(SeatStatus.UNOCCUPIED);
+        availableSeatsCount++;
+        return seats[row][column];
+    }
+
+    // Returns seat in given row and column
+    public Seat getSeat(int row, int column) {
+        return seats[row][column];
     }
 }

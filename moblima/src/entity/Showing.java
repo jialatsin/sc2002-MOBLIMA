@@ -7,16 +7,16 @@ import boundary.InputHandler;
 
 public class Showing implements Serializable {
     private int id;
-    private SeatingLayout seatingAvailablity;
+    private SeatingLayout seatingAvailability;
     private Movie movie;
     private LocalDateTime showTime;
     private Cinema cinema;
     private Cineplex cineplex;
 
-    public Showing(int id, SeatingLayout seatingAvailablity, Movie movie, LocalDateTime showtime, Cinema cinema,
+    public Showing(int id, SeatingLayout seatingAvailability, Movie movie, LocalDateTime showtime, Cinema cinema,
             Cineplex cineplex) {
         this.id = id;
-        this.seatingAvailablity = seatingAvailablity;
+        this.seatingAvailability = seatingAvailability;
         this.movie = movie;
         this.showTime = showtime;
         this.cinema = cinema;
@@ -29,7 +29,6 @@ public class Showing implements Serializable {
                 + "\nShowtime: " + showTime.format(InputHandler.getDateTimeFormat())
                 + "\nCineplex: " + cineplex.getName()
                 + " (Cinema: " + cinema.getCode() + ", " + cinema.getCinemaClass() + ")"
-                + "\nAvailable Seats: " + seatingAvailablity.getAvailableSeatsCount()
                 + "\n=================================================";
     }
 
@@ -38,7 +37,7 @@ public class Showing implements Serializable {
         if (obj instanceof Showing) {
             Showing other = (Showing) obj;
             return this.id == other.getId()
-                    && this.seatingAvailablity.equals(other.getSeatingAvailablity())
+                    && this.seatingAvailability.equals(other.getSeatingAvailability())
                     && this.movie.equals(other.getMovie())
                     && this.showTime.equals(other.getShowTime())
                     && this.cinema.equals(other.getCinema())
@@ -55,12 +54,12 @@ public class Showing implements Serializable {
         this.id = id;
     }
 
-    public SeatingLayout getSeatingAvailablity() {
-        return seatingAvailablity;
+    public SeatingLayout getSeatingAvailability() {
+        return seatingAvailability;
     }
 
-    public void setSeatingAvailablity(SeatingLayout seatingAvailablity) {
-        this.seatingAvailablity = seatingAvailablity;
+    public void setSeatingAvailability(SeatingLayout seatingAvailability) {
+        this.seatingAvailability = seatingAvailability;
     }
 
     public Movie getMovie() {

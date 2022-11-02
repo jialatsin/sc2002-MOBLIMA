@@ -4,7 +4,7 @@ import control.MainController;
 
 public class MainUI {
     public static void main() {
-        MainController.start();
+        MainController.initializeDatabase();
 
         int selection;
         do {

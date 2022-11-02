@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import boundary.InputHandler;
+
 public class Booking implements Serializable {
     private String transactionID;
     private MovieGoer movieGoer;
@@ -21,4 +23,67 @@ public class Booking implements Serializable {
         this.showing = showing;
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "Transaction ID: " + transactionID
+                + "\nEmail: " + movieGoer.getEmail()
+                + "\nMovie Title: " + showing.getMovie().getTitle()
+                + " (ID: " + showing.getMovie().getId() + ")"
+                + " (" + showing.getMovie().getMovieType() + ")"
+                + "\nShowtime: " + showing.getShowTime().format(InputHandler.getDateTimeFormat())
+                + "\nCineplex: " + showing.getCineplex().getName()
+                + " (Cinema: " + showing.getCinema().getCode() + ", " + showing.getCinema().getCinemaClass() + ")"
+                + "\nPrice: " + price
+                + "\n=================================================";
+    }
+
+    public String getTransactionID() {
+        return transactionID;
+    }
+
+    public void setTransactionID(String transactionID) {
+        this.transactionID = transactionID;
+    }
+
+    public MovieGoer getMovieGoer() {
+        return movieGoer;
+    }
+
+    public void setMovieGoer(MovieGoer movieGoer) {
+        this.movieGoer = movieGoer;
+    }
+
+    public ArrayList<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(ArrayList<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+
+    public LocalDateTime getTransactionTime() {
+        return transactionTime;
+    }
+
+    public void setTransactionTime(LocalDateTime transactionTime) {
+        this.transactionTime = transactionTime;
+    }
+
+    public Showing getShowing() {
+        return showing;
+    }
+
+    public void setShowing(Showing showing) {
+        this.showing = showing;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
 }

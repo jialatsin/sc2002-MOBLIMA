@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import entity.*;
+import entity.Constants.SeatStatus;
 
 public class ShowingController extends DatabaseController<Showing> {
     public ShowingController() {
@@ -122,7 +123,7 @@ public class ShowingController extends DatabaseController<Showing> {
                 showing.setId((int) newAttributeValue);
                 break;
             case SEATING_AVAILABILITY:
-                showing.setSeatingAvailablity((SeatingLayout) newAttributeValue);
+                showing.setSeatingAvailability((SeatingLayout) newAttributeValue);
                 break;
             case MOVIE:
                 showing.setMovie((Movie) newAttributeValue);
@@ -165,4 +166,5 @@ public class ShowingController extends DatabaseController<Showing> {
         }
         overwriteDatabase(showings);
     }
+
 }

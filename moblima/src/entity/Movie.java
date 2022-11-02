@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
+import boundary.InputHandler;
 import entity.Constants.ContentRating;
 import entity.Constants.MovieType;
 import entity.Constants.ShowingStatus;
@@ -48,10 +49,9 @@ public class Movie implements Serializable {
     public String toString() {
         String movieString = "";
 
-        movieString += "\nMovie: " + title
-                + "\nMovie ID: " + id
-                + "\nRelease Date: " + releaseDate
-                + "\nEnd Date: " + endDate
+        movieString += "\nMovie: " + title + " (ID: " + id + ")" + " (" + movieType + ")"
+                + "\nRelease Date: " + releaseDate.format(InputHandler.getDateFormat()) + ", "
+                + "End Date: " + endDate.format((InputHandler.getDateFormat()))
                 + "\nShowing Status: " + getShowingStatus();
         movieString += "\n=================================================";
 
@@ -72,7 +72,7 @@ public class Movie implements Serializable {
                     && this.endDate.equals(other.getEndDate())
                     && this.contentRating.equals(other.getContentRating())
                     && this.movieType.equals(other.getMovieType())
-                    && this.getShowingStatus().equals(other.getShowingStatus())
+                    && this.getShowingStatus() == other.getShowingStatus()
                     && this.reviews.equals(other.getReviews())
                     && this.averageReviewRating == other.getAverageReviewRating()
                     && this.ticketSales == other.getTicketSales();

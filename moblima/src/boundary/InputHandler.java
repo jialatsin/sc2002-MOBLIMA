@@ -63,6 +63,19 @@ public class InputHandler {
         return input;
     }
 
+    public static char scanChar() {
+        String input = "";
+        while (true) {
+            input = sc.nextLine();
+            if (input.length() == 1) {
+                break;
+            } else {
+                System.out.println("Input must be 1 character long!");
+            }
+        }
+        return input.charAt(0);
+    }
+
     public static String scanString() {
         String input = "";
         while (true) {
@@ -71,6 +84,34 @@ public class InputHandler {
                 break;
             } else {
                 System.out.println("Input must not be empty string!");
+            }
+        }
+        return input;
+    }
+
+    public static String scanMobileNumber() {
+        String pattern = "\\d{8}";
+        String input = "";
+        while (true) {
+            input = sc.nextLine();
+            if (input.matches(pattern)) {
+                break;
+            } else {
+                System.out.println("Input must be a mobile number with 8 digits!");
+            }
+        }
+        return input;
+    }
+
+    public static String scanEmail() {
+        String pattern = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        String input = "";
+        while (true) {
+            input = sc.nextLine();
+            if (input.matches(pattern)) {
+                break;
+            } else {
+                System.out.println("Input must be of email format!");
             }
         }
         return input;

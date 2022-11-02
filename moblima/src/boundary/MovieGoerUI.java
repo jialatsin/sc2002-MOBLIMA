@@ -1,5 +1,6 @@
 package boundary;
 
+import control.BookingController;
 import control.MovieController;
 
 import java.util.*;
@@ -9,6 +10,7 @@ import entity.Constants.User;
 
 public class MovieGoerUI {
     private static MovieController movieController = new MovieController();
+    private static BookingController bookingController = new BookingController();
 
     public static void main() {
         int selection;
@@ -39,6 +41,7 @@ public class MovieGoerUI {
                     BookingUI.main();
                     break;
                 case 5: // View Booking History
+                    viewBookingHistory();
                     break;
                 case 6: // List Top 5
                     // Require Read from Database
@@ -110,5 +113,21 @@ public class MovieGoerUI {
         Review newReview = new Review(rating, reviewText);
         movieController.addReviewToMovie(movie, newReview);
         System.out.println("Added review to " + movie.getTitle() + "!");
+    }
+
+    public static void viewBookingHistory() {
+        System.out.println("\nEnter email to view booking history for:");
+        String email = InputHandler.scanEmail();
+
+        ArrayList<Booking> bookings = bookingController.findBookings(email);
+        if (bookings == null) {
+            System.out.println("No bookings exist in Booking database!");
+            return;
+        }
+        System.out.println("=================================================");
+        for (Booking booking : bookings) {
+            System.out.println(booking);
+        }
+        System.out.println();
     }
 }

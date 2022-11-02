@@ -24,13 +24,13 @@ public class MovieController extends DatabaseController<Movie> {
         return null;
     }
 
-    // Search for movies with matching title in the Movie database
+    // Search for movies with titles with matching keywords in the Movie database
     // Returns an ArrayList of matching movies, returns null if no movie found
     public ArrayList<Movie> findMovies(String title) {
         ArrayList<Movie> movies = readFromDatabase();
         ArrayList<Movie> moviesResult = new ArrayList<Movie>();
         for (Movie movie : movies) {
-            if (movie.getTitle().toLowerCase().equals(title.toLowerCase())) {
+            if (movie.getTitle().toLowerCase().contains(title.toLowerCase())) {
                 moviesResult.add(movie);
             }
         }

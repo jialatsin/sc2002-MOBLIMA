@@ -98,13 +98,13 @@ public class SystemConfigUI {
 
             selection = InputHandler.scanInt();
             switch (selection) {
-                case 1: 
+                case 1:
                     updatePrice();
                     break;
                 case 2:
                     viewPriceList();
                     break;
-                case 0: 
+                case 0:
                     return;
             }
         } while (true);
@@ -112,7 +112,6 @@ public class SystemConfigUI {
 
     private static void updatePrice() {
         int selection;
-        PriceType priceType;
         double value;
         do {
             System.out.println("\nUPDATING A PRICE...\n"
@@ -129,37 +128,37 @@ public class SystemConfigUI {
                     value = InputHandler.scanDouble();
                     priceController.updatePriceType(movieType, value);
                     break;
-                case 2: 
+                case 2:
                     CinemaClass cinemaClass = UserHandler.getCinemaClassFromUser();
                     System.out.printf("Enter new price: ");
                     value = InputHandler.scanDouble();
                     priceController.updatePriceType(cinemaClass, value);
                     break;
-                case 3: 
+                case 3:
                     Age age = UserHandler.getAgeFromUser();
                     System.out.printf("Enter new price: ");
                     value = InputHandler.scanDouble();
                     priceController.updatePriceType(age, value);
-                        break;
-                case 4: 
+                    break;
+                case 4:
                     Day day = UserHandler.getDayFromUser();
                     System.out.printf("Enter new price: ");
                     value = InputHandler.scanDouble();
                     priceController.updatePriceType(day, value);
-                        break;
-                case 5: 
+                    break;
+                case 5:
                     System.out.printf("Enter new base price: ");
                     value = InputHandler.scanDouble();
                     priceController.updatePriceType(MovieType.REGULAR_TWO_D, value);
-                        break;
+                    break;
             }
-        } while (selection<1 || selection>5);
+        } while (selection < 1 || selection > 5);
     }
 
     private static void viewPriceList() {
-        Map<PriceType,Double> priceList = priceController.getPriceList();
-        priceList.entrySet().forEach(entry->{
-            System.out.println(entry.getKey() + ": " + entry.getValue() );
+        Map<PriceType, Double> priceList = priceController.getPriceList();
+        priceList.entrySet().forEach(entry -> {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
         });
     }
 }

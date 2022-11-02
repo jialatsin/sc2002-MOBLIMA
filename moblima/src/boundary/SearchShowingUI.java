@@ -14,7 +14,6 @@ public class SearchShowingUI {
 
     public static void main(User user) {
         do {
-            // Displays showings regardless of showing status
             System.out.println("===== SEARCH/LIST SHOWING =====\n"
                     + "1. Search By Showing ID\n"
                     + "2. Search By Cineplex\n"
@@ -50,10 +49,11 @@ public class SearchShowingUI {
             System.out.println("No showing with ID " + id + " found!");
             return;
         }
-        if (user.equals(User.MOVIEGOER) && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING) 
+        // Moviegoer only can view showings with "Preview" or "Now Showing" status
+        if (user.equals(User.MOVIEGOER) && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
                 && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)) {
-                    System.out.println("Movie showing is not available for viewing");
-                    return;
+            System.out.println("Movie showing is not available for viewing");
+            return;
         }
         System.out.println("=================================================");
         System.out.println(showing);
@@ -69,25 +69,11 @@ public class SearchShowingUI {
         }
         System.out.println("=================================================");
         for (Showing showing : showings) {
-            if (user.equals(User.MOVIEGOER) && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING) 
-                && showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)) {
-                    continue;
+            // Moviegoer only can view showings with "Preview" or "Now Showing" status
+            if (user.equals(User.MOVIEGOER) && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
+                    && showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)) {
+                continue;
             }
-            System.out.println(showing);
-        }
-        System.out.println();
-    }
-
-    // Overloaded listAllShowings function to print all showings in database with
-    // matching cineplex and movie (Used by MOVIERGOER, not admin)
-    public static void listAllShowings(Cineplex cineplex, Movie movie) {
-        ArrayList<Showing> showings = showingController.findShowings(cineplex, movie);
-        if (showings == null) {
-            System.out.println("No showings of " + movie.getTitle() + " is found at " + cineplex.getName() + "!");
-            return;
-        }
-        System.out.println("=================================================");
-        for (Showing showing : showings) {
             System.out.println(showing);
         }
         System.out.println();
@@ -101,10 +87,10 @@ public class SearchShowingUI {
             return;
         }
         for (Showing showing : showings) {
-            if (user.equals(User.MOVIEGOER) && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING) 
-                && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)) {
-                    System.out.println("Movie showing is not available for viewing");
-                    return;
+            if (user.equals(User.MOVIEGOER) && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
+                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)) {
+                System.out.println("Movie showing is not available for viewing");
+                return;
             }
             System.out.println(showing);
         }
@@ -112,17 +98,20 @@ public class SearchShowingUI {
     }
 
     public static void searchShowingByMovie(User user) {
-        Movie movie = UserHandler.getMovieFromUser();
+        Movie movie = UserHandler.getMovieByTitleFromUser();
+        if (movie == null) {
+            return;
+        }
         ArrayList<Showing> showings = showingController.findShowings(movie);
         if (showings == null) {
             System.out.println("No showings of " + movie.getTitle() + " is found!");
             return;
         }
         for (Showing showing : showings) {
-            if (user.equals(User.MOVIEGOER) && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING) 
-                && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)) {
-                    System.out.println("Movie showing is not available for viewing");
-                    return;
+            if (user.equals(User.MOVIEGOER) && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
+                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)) {
+                System.out.println("Movie showing is not available for viewing");
+                return;
             }
             System.out.println(showing);
         }

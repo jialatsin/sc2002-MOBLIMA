@@ -219,7 +219,8 @@ public class UserHandler {
     // Returns selected movie
     public static Movie getMovieByTitleFromUser() {
         // Prompts user for movie title
-        String title = UserHandler.getTitleFromUser();
+        System.out.println("Enter movie title: ");
+        String title = InputHandler.scanString();
         ArrayList<Movie> movies = movieController.findMovies(title);
 
         // Prints all movies with matching movie
@@ -248,25 +249,45 @@ public class UserHandler {
     // and movie, then prompts user to choose showing ID
     // Returns selected showing
     public static Showing getShowingFromUser() {
-        Cineplex cineplex = getCineplexFromUser();
         Movie movie = getMovieByTitleFromUser();
+        if (movie == null) {
+            return null;
+        }
+
+        if (movie.getShowingStatus() != (ShowingStatus.NOW_SHOWING)
+                && movie.getShowingStatus() != (ShowingStatus.PREVIEW)) {
+            System.out.println("Movie is currently not showing!");
+            return null;
+        }
+        Cineplex cineplex = getCineplexFromUser();
         if (cineplex == null || movie == null) {
             return null;
         }
 
-        if (movie.getShowingStatus() != ShowingStatus.NOW_SHOWING
-                && movie.getShowingStatus() != ShowingStatus.PREVIEW) {
-            System.out.println("Movie is currently not showing!");
-        }
-
         // List all showings for user to pick one
-        SearchShowingUI.listAllShowings(cineplex, movie);
+        ArrayList<Showing> showings = showingController.findShowings(cineplex, movie);
+        if (showings == null) {
+            System.out.println("\nNo showings of " + movie.getTitle() + " are found at " + cineplex.getName() + "!");
+            return null;
+        }
+        System.out.println("\nShowings of " + movie.getTitle() + " at " + cineplex.getName());
+        System.out.println("=================================================");
+        for (Showing showing : showings) {
+            // Moviegoer only can view showings with "Preview" or "Now Showing" status
+            if (!showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
+                    && showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)) {
+                continue;
+            }
+            System.out.println(showing);
+        }
+        System.out.println();
+
         System.out.println("Input movie showing ID:");
         int showingId = InputHandler.scanInt();
 
         Showing showing = showingController.findShowing(showingId);
         if (showing == null) {
-            System.out.println("Showing of ID " + showingId + "not found in Showing database!");
+            System.out.println("Showing of ID " + showingId + " not found in Showing database!");
             return null;
         }
         return showing;
@@ -301,7 +322,7 @@ public class UserHandler {
         int selection;
         Age age = null;
         do {
-            System.out.println("\nSelect Age:\n"
+            System.out.println("Select Age:\n"
                     + "1. Adult\n"
                     + "2. Senior\n"
                     + "3. Child\n");

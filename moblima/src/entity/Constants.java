@@ -20,7 +20,7 @@ public class Constants {
     };
 
     public enum SeatStatus {
-        UNOCCUPIED, OCCUPIED, NOTEXIST
+        UNOCCUPIED, OCCUPIED
     };
 
     public enum ContentRating {
@@ -63,7 +63,7 @@ public class Constants {
         }
     };
 
-    public enum Age implements PriceType  {
+    public enum Age implements PriceType {
         ADULT("Adult"),
         SENIOR("Senior"),
         CHILD("Child");
@@ -80,7 +80,7 @@ public class Constants {
         }
     };
 
-    public enum Day implements PriceType  {
+    public enum Day implements PriceType {
         HOLIDAY("Holiday"),
         WEEKDAY("Weekday"),
         WEEKEND("Weekend");
