@@ -90,21 +90,21 @@ public class ShowingController extends DatabaseController<Showing> {
     // Deletes all showings with showtimes that no longer fall within the "PREIVEW"
     // or "NOW SHOWING" period
     public void deleteInvalidShowings(Movie movie, LocalDate releaseDate, LocalDate endDate) {
-        ArrayList<Showing> showings = findShowings(movie);
+        ArrayList<Showing> allShowings = readFromDatabase();
         ArrayList<Showing> validShowings = new ArrayList<Showing>();
 
-        if (showings == null) {
-            return;
-        }
-
-        for (Showing showing : showings) {
+        for (Showing showing : allShowings) {
+            if (!showing.getMovie().equals(movie)) {
+                validShowings.add(showing);
+            }             
             // Valid showtime is before end date
             // and after 7 days before release date
-            if (showing.getShowTime().toLocalDate().isBefore(endDate)
-                    && showing.getShowTime().toLocalDate().isAfter(releaseDate.minusDays(7))) {
+            else if (showing.getShowTime().toLocalDate().isBefore(endDate)
+            && showing.getShowTime().toLocalDate().isAfter(releaseDate.minusDays(7))) {
                 validShowings.add(showing);
             }
         }
+        //TODO
         overwriteDatabase(validShowings);
     }
 

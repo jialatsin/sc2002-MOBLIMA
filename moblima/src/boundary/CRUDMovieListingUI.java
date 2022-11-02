@@ -167,6 +167,7 @@ public class CRUDMovieListingUI {
                 movieController.updateMovieAttribute(movie, attribute, movieType);
                 break;
             case TICKET_SALES:
+                System.out.println("Enter number of ticket sales: ");
                 int ticketSales = InputHandler.scanInt();
                 movieController.updateMovieAttribute(movie, attribute, ticketSales);
                 break;

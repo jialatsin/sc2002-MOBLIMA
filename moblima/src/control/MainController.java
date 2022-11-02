@@ -38,6 +38,7 @@ public class MainController {
         if (admins.size() == 0) {
             Admin admin = new Admin("admin", "pw123");
             admins.add(admin);
+            adminController.overwriteDatabase(admins);
         }
 
         // Intiialize cineplex database

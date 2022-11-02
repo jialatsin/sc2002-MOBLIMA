@@ -54,16 +54,10 @@ public class CRUDMovieShowingUI {
             return;
         }
 
-        if (!movie.getShowingStatus().equals(ShowingStatus.PREVIEW)
-                && !movie.getShowingStatus().equals(ShowingStatus.NOW_SHOWING)) {
-            System.out.println("Cannot create showing when movie showing status is not 'Preview' or 'Now Showing'!");
-            return;
-        }
-
         LocalDateTime showTime = UserHandler.getShowTimeFromUser();
 
-        if (showTime.isAfter(movie.getEndDate().atStartOfDay())
-                || showTime.isBefore(movie.getReleaseDate().atStartOfDay())) {
+        if (showTime.toLocalDate().isAfter(movie.getEndDate())
+                || showTime.toLocalDate().isBefore(movie.getReleaseDate().minusDays(7))) {
             System.out.println("Cannot create showing when movie is not within releaseDate and endDates!");
             return;
         }
@@ -131,8 +125,8 @@ public class CRUDMovieShowingUI {
             case SHOWTIME:
                 LocalDateTime showTime = UserHandler.getShowTimeFromUser();
                 movie = showing.getMovie();
-                if (showTime.isAfter(movie.getEndDate().atStartOfDay())
-                        || showTime.isBefore(movie.getReleaseDate().atStartOfDay())) {
+                if (showTime.toLocalDate().isAfter(movie.getEndDate())
+                        || showTime.toLocalDate().isBefore(movie.getReleaseDate())) {
                     System.out.println("Cannot update showing when movie is not within releaseDate and endDates!");
                     return;
                 }
