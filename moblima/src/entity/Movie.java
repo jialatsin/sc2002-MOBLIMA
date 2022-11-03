@@ -80,7 +80,7 @@ public class Movie implements Serializable {
                     && this.endDate.equals(other.getEndDate())
                     && this.contentRating.equals(other.getContentRating())
                     && this.movieType.equals(other.getMovieType())
-                    && this.getShowingStatus() == other.getShowingStatus()
+                    && this.getShowingStatus().equals(other.getShowingStatus()) 
                     && this.reviews.equals(other.getReviews())
                     && this.averageReviewRating == other.getAverageReviewRating()
                     && this.ticketSales == other.getTicketSales();

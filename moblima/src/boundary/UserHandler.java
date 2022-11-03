@@ -254,8 +254,8 @@ public class UserHandler {
             return null;
         }
 
-        if (movie.getShowingStatus() != (ShowingStatus.NOW_SHOWING)
-                && movie.getShowingStatus() != (ShowingStatus.PREVIEW)) {
+        if (!movie.getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
+                && !movie.getShowingStatus().equals(ShowingStatus.PREVIEW)) {
             System.out.println("Movie is currently not showing!");
             return null;
         }
@@ -273,9 +273,11 @@ public class UserHandler {
         System.out.println("\nShowings of " + movie.getTitle() + " at " + cineplex.getName());
         System.out.println("=================================================");
         for (Showing showing : showings) {
-            // Moviegoer only can view showings with "Preview" or "Now Showing" status
+            // Moviegoer only can view showings with "Preview" or "Now Showing" status and showtime have not already passed current time
             if (!showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
-                    && showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)) {
+                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)) {
+
+                        //TODO: MAKE SHOWTIMES THAT HAVE PASSED NOT VISIBLE
                 continue;
             }
             System.out.println(showing);

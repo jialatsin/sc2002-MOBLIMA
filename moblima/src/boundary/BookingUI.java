@@ -8,7 +8,9 @@ import control.BookingController;
 import control.HolidayController;
 import control.MovieController;
 import control.PriceController;
+import control.ShowingController;
 import control.MovieController.MovieAttribute;
+import control.ShowingController.ShowingAttribute;
 import entity.Booking;
 import entity.Movie;
 import entity.MovieGoer;
@@ -26,6 +28,7 @@ public class BookingUI {
     private static HolidayController holidayController = new HolidayController();
     private static BookingController bookingController = new BookingController();
     private static MovieController movieController = new MovieController();
+    private static ShowingController showingController = new ShowingController();
 
     public static void main() {
         Showing showing = null;
@@ -51,7 +54,7 @@ public class BookingUI {
 
         ArrayList<Ticket> tickets = new ArrayList<Ticket>();
         for (int i = 0; i < ticketCount; i++) {
-            System.out.printf("----- TICKET %d -----\n", i + 1);
+            System.out.printf("\n----- TICKET %d -----\n", i + 1);
             Ticket ticket = bookTicket(showing);
             tickets.add(ticket);
         }
@@ -69,7 +72,7 @@ public class BookingUI {
             return;
         }
 
-        System.out.println("Enter your name number:");
+        System.out.println("Enter your name:");
         String name = InputHandler.scanString();
         System.out.println("Enter your mobile number:");
         String mobileNumber = InputHandler.scanMobileNumber();
@@ -90,12 +93,21 @@ public class BookingUI {
         // Update the ticket sales for the movie
         Movie movie = showing.getMovie();
         int newTicketSales = movie.getTicketSales() + ticketCount;
+        // Get all showings to be updated
+        ArrayList<Showing> showings = showingController.findShowings(movie);
         movieController.updateMovieAttribute(movie, MovieAttribute.TICKET_SALES, newTicketSales);
+        // Update movie attribute of all showings with the given updated movie
+        if (showings != null) {
+            for (Showing i : showings) {
+                showingController.updateShowingAttribute(i, ShowingAttribute.MOVIE, movie);
+            }
+        }
     }
 
     private static double displayTotalPrice(ArrayList<Ticket> tickets) {
         double totalPrice = 0;
         int i = 1;
+        System.out.println();
         for (Ticket ticket : tickets) {
             Showing showing = ticket.getShowing();
             MovieType movieType = showing.getMovie().getMovieType();

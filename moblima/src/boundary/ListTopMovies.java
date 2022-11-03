@@ -40,8 +40,16 @@ public class ListTopMovies {
         movies = movieController.sortByRating(movies);
 
         System.out.println("=================================================");
-        for (int i = 0; i < movieCount; i++) {
-            System.out.println(movies.get(i));
+        // Print all movies in database if there are less movies than the ranking cutoff
+        if (movies.size() < movieCount) {
+            for (Movie movie : movies)
+            System.out.println(movie);
+        }
+        // Print top movies from the ranking cutoff
+        else {
+            for (int i = 0; i < movieCount; i++) {
+                System.out.println(movies.get(i));
+            }
         }
         System.out.println();
     }
@@ -56,8 +64,16 @@ public class ListTopMovies {
         movies = movieController.sortByTicketSales(movies);
 
         System.out.println("=================================================");
-        for (int i = 0; i < movieCount; i++) {
-            System.out.println(movies.get(i));
+        // Print all movies in database if there are less movies than the ranking cutoff
+        if (movies.size() < movieCount) {
+            for (Movie movie : movies)
+            System.out.println(movie);
+        }
+        // Print top movies from the ranking cutoff
+        else {
+            for (int i = 0; i < movieCount; i++) {
+                System.out.println(movies.get(i));
+            }
         }
         System.out.println();
     }
