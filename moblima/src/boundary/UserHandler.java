@@ -275,7 +275,8 @@ public class UserHandler {
         for (Showing showing : showings) {
             // Moviegoer only can view showings with "Preview" or "Now Showing" status and showtime have not already passed current time
             if (!showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
-                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)) {
+                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)
+                    || showing.getShowTime().isBefore(LocalDateTime.now())) {
 
                         //TODO: MAKE SHOWTIMES THAT HAVE PASSED NOT VISIBLE
                 continue;
