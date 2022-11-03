@@ -57,7 +57,7 @@ public class MainController {
             cinemasB.add(new Cinema("BPA", new SeatingLayout(6, 6), CinemaClass.PLATINUM));
             cinemasB.add(new Cinema("BGA", new SeatingLayout(8, 7), CinemaClass.GOLD));
             cinemasB.add(new Cinema("BSA", new SeatingLayout(9, 9), CinemaClass.STANDARD));
-            cineplexes.add(new Cineplex("Cathay Cineplex Cineleisure", "C   ineleisure Orchard", cinemasB));
+            cineplexes.add(new Cineplex("Cathay Cineplex Cineleisure", "Cineleisure Orchard", cinemasB));
 
             ArrayList<Cinema> cinemasC = new ArrayList<Cinema>();
             cinemasC.add(new Cinema("CPA", new SeatingLayout(4, 4), CinemaClass.PLATINUM));

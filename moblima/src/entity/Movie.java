@@ -25,7 +25,6 @@ public class Movie implements Serializable {
     private ContentRating contentRating;
     private MovieType movieType;
 
-    private ShowingStatus showingStatus;
     private ArrayList<Review> reviews = new ArrayList<Review>();
     private double averageReviewRating = -1;
     private int ticketSales = 0;
@@ -80,7 +79,7 @@ public class Movie implements Serializable {
                     && this.endDate.equals(other.getEndDate())
                     && this.contentRating.equals(other.getContentRating())
                     && this.movieType.equals(other.getMovieType())
-                    && this.getShowingStatus().equals(other.getShowingStatus()) 
+                    && this.getShowingStatus().equals(other.getShowingStatus())
                     && this.reviews.equals(other.getReviews())
                     && this.averageReviewRating == other.getAverageReviewRating()
                     && this.ticketSales == other.getTicketSales();

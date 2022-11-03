@@ -29,7 +29,7 @@ public class Cinema implements Serializable {
     }
 
     public SeatingLayout getSeatingLayout() {
-        return seatingLayout;
+        return (SeatingLayout) seatingLayout.clone();
     }
 
     public void setSeatingLayout(SeatingLayout seatingLayout) {
@@ -49,7 +49,7 @@ public class Cinema implements Serializable {
         if (obj instanceof Cinema) {
             Cinema other = (Cinema) obj;
             return this.code.equals(other.getCode())
-                    && this.seatingLayout.equals(other.getSeatingLayout()) 
+                    && this.seatingLayout.equals(other.getSeatingLayout())
                     && this.cinemaClass.equals(other.getCinemaClass());
         }
         return false;

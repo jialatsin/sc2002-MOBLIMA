@@ -126,4 +126,13 @@ public class SeatingLayout implements Serializable {
     public Seat getSeat(int row, int column) {
         return seats[row][column];
     }
+
+    @Override
+    public Object clone() {
+        try {
+            return (SeatingLayout) super.clone();
+        } catch (CloneNotSupportedException e) {
+            return new SeatingLayout(rows, columns);
+        }
+    }
 }

@@ -51,4 +51,13 @@ public class Seat implements Serializable {
         }
         return false;
     }
+
+    @Override
+    public Object clone() {
+        try {
+            return (Seat) super.clone();
+        } catch (CloneNotSupportedException e) {
+            return new Seat(this.row, this.column, this.status);
+        }
+    }
 }
