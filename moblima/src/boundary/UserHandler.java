@@ -267,20 +267,31 @@ public class UserHandler {
         // List all showings for user to pick one
         ArrayList<Showing> showings = showingController.findShowings(cineplex, movie);
         if (showings == null) {
-            System.out.println("\nNo showings of " + movie.getTitle() + " are found at " + cineplex.getName() + "!");
+            System.out.println(
+                    "\nNo showings of " + movie.getTitle() + " are currently available at " + cineplex.getName() + "!");
+            return null;
+        }
+
+        ArrayList<Showing> showingsResult = new ArrayList<Showing>();
+        for (Showing showing : showings) {
+            // Moviegoer only can view showings with "Preview" or "Now Showing" status and
+            // showtime have not already passed current time
+            if (!showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
+                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)
+                    || showing.getShowTime().isBefore(LocalDateTime.now())) {
+                continue;
+            }
+            showingsResult.add(showing);
+        }
+
+        if (showingsResult.isEmpty()) {
+            System.out.println(
+                    "\nNo showings of " + movie.getTitle() + " are currently available at " + cineplex.getName() + "!");
             return null;
         }
         System.out.println("\nShowings of " + movie.getTitle() + " at " + cineplex.getName());
         System.out.println("=================================================");
-        for (Showing showing : showings) {
-            // Moviegoer only can view showings with "Preview" or "Now Showing" status and showtime have not already passed current time
-            if (!showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
-                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)
-                    || showing.getShowTime().isBefore(LocalDateTime.now())) {
-
-                        //TODO: MAKE SHOWTIMES THAT HAVE PASSED NOT VISIBLE
-                continue;
-            }
+        for (Showing showing : showingsResult) {
             System.out.println(showing);
         }
         System.out.println();

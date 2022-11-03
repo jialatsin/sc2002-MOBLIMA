@@ -1,5 +1,6 @@
 package boundary;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import control.ShowingController;
@@ -49,10 +50,12 @@ public class SearchShowingUI {
             System.out.println("No showing with ID " + id + " found!");
             return;
         }
-        // Moviegoer only can view showings with "Preview" or "Now Showing" status
+        // Moviegoer only can view showings with "Preview" or "Now Showing" status and
+        // showtime have not already passed current time
         if (user.equals(User.MOVIEGOER) && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
-                && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)) {
-            System.out.println("Movie showing is not available for viewing");
+                && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)
+                || showing.getShowTime().isBefore(LocalDateTime.now())) {
+            System.out.println("Movie showing is currently not available for viewing!");
             return;
         }
         System.out.println("=================================================");
@@ -67,13 +70,27 @@ public class SearchShowingUI {
             System.out.println("No showings exist in Showing database!");
             return;
         }
-        System.out.println("=================================================");
+
+        ArrayList<Showing> showingsResult = new ArrayList<Showing>();
         for (Showing showing : showings) {
-            // Moviegoer only can view showings with "Preview" or "Now Showing" status
-            if (user.equals(User.MOVIEGOER) && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
-                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)) {
+            // Moviegoer only can view showings with "Preview" or "Now Showing" status and
+            // showtime have not already passed current time
+            if (user.equals(User.MOVIEGOER)
+                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
+                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)
+                    || showing.getShowTime().isBefore(LocalDateTime.now())) {
                 continue;
             }
+            showingsResult.add(showing);
+        }
+
+        if (showingsResult.isEmpty()) {
+            System.out.println("\nNo showings are currently available!");
+            return;
+        }
+
+        System.out.println("=================================================");
+        for (Showing showing : showingsResult) {
             System.out.println(showing);
         }
         System.out.println();
@@ -83,16 +100,30 @@ public class SearchShowingUI {
         Cineplex cineplex = UserHandler.getCineplexFromUser();
         ArrayList<Showing> showings = showingController.findShowings(cineplex);
         if (showings == null) {
-            System.out.println("No showings are found at " + cineplex.getName() + "!");
+            System.out.println("No showings are currently available at " + cineplex.getName() + "!");
             return;
         }
-        System.out.println("\n=================================================");
+
+        ArrayList<Showing> showingsResult = new ArrayList<Showing>();
         for (Showing showing : showings) {
-            if (user.equals(User.MOVIEGOER) && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
-                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)) {
-                System.out.println("Movie showing is not available for viewing");
-                return;
+            // Moviegoer only can view showings with "Preview" or "Now Showing" status and
+            // showtime have not already passed current time
+            if (user.equals(User.MOVIEGOER)
+                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
+                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)
+                    || showing.getShowTime().isBefore(LocalDateTime.now())) {
+                continue;
             }
+            showingsResult.add(showing);
+        }
+
+        if (showingsResult.isEmpty()) {
+            System.out.println("No showings are currently available at " + cineplex.getName() + "!");
+            return;
+        }
+
+        System.out.println("=================================================");
+        for (Showing showing : showingsResult) {
             System.out.println(showing);
         }
         System.out.println();
@@ -101,21 +132,35 @@ public class SearchShowingUI {
     public static void searchShowingByMovie(User user) {
         Movie movie = UserHandler.getMovieByTitleFromUser();
         if (movie == null) {
-            System.out.println("No showings found!");
             return;
         }
+
         ArrayList<Showing> showings = showingController.findShowings(movie);
         if (showings == null) {
-            System.out.println("No showings of " + movie.getTitle() + " is found!");
+            System.out.println("No showings of " + movie.getTitle() + " are currently available!");
             return;
         }
-        System.out.println("\n=================================================");
+
+        ArrayList<Showing> showingsResult = new ArrayList<Showing>();
         for (Showing showing : showings) {
-            if (user.equals(User.MOVIEGOER) && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
-                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)) {
-                System.out.println("Movie showing is not available for viewing");
-                return;
+            // Moviegoer only can view showings with "Preview" or "Now Showing" status and
+            // showtime have not already passed current time
+            if (user.equals(User.MOVIEGOER)
+                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
+                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)
+                    || showing.getShowTime().isBefore(LocalDateTime.now())) {
+                continue;
             }
+            showingsResult.add(showing);
+        }
+
+        if (showingsResult.isEmpty()) {
+            System.out.println("No showings of " + movie.getTitle() + " are currently available!");
+            return;
+        }
+
+        System.out.println("=================================================");
+        for (Showing showing : showingsResult) {
             System.out.println(showing);
         }
         System.out.println();
