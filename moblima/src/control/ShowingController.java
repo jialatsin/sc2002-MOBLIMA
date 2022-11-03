@@ -96,15 +96,15 @@ public class ShowingController extends DatabaseController<Showing> {
         for (Showing showing : allShowings) {
             if (!showing.getMovie().equals(movie)) {
                 validShowings.add(showing);
-            }             
+            }
             // Valid showtime is before end date
             // and after 7 days before release date
             else if (showing.getShowTime().toLocalDate().isBefore(endDate)
-            && showing.getShowTime().toLocalDate().isAfter(releaseDate.minusDays(7))) {
+                    && showing.getShowTime().toLocalDate().isAfter(releaseDate.minusDays(7))) {
                 validShowings.add(showing);
             }
         }
-        //TODO
+        // TODO
         overwriteDatabase(validShowings);
     }
 

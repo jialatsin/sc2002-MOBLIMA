@@ -52,12 +52,23 @@ public class BookingUI {
             return;
         }
 
+        // Get showing to be updated in Showing database
+        ArrayList<Showing> showings = showingController.readFromDatabase();
+        int showingIndexInDatabase = showings.indexOf(showing);
+
         ArrayList<Ticket> tickets = new ArrayList<Ticket>();
         for (int i = 0; i < ticketCount; i++) {
             System.out.printf("\n----- TICKET %d -----\n", i + 1);
-            Ticket ticket = bookTicket(showing);
+
+            Seat assignedSeat = chooseSeat(seatingAvailability);
+
+            Age age = UserHandler.getAgeFromUser();
+            Ticket ticket = new Ticket(showing, assignedSeat, age);
             tickets.add(ticket);
         }
+
+        // Final seat assignment
+        System.out.println(showing.getSeatingAvailability());
 
         double price = displayTotalPrice(tickets);
 
@@ -86,6 +97,10 @@ public class BookingUI {
         // Transaction ID format: XXXYYYYMMDDhhmm
         String transactionID = showing.getCinema().getCode() + transactionTime.format(transactionTimeFormat);
 
+        // Update showing with new seat layout in Showing database
+        showings.set(showingIndexInDatabase, showing);
+        showingController.overwriteDatabase(showings);
+
         Booking booking = new Booking(transactionID, movieGoer, tickets, transactionTime, showing, price);
         bookingController.addToDatabase(booking);
         System.out.println("\nBooking created!");
@@ -93,12 +108,13 @@ public class BookingUI {
         // Update the ticket sales for the movie
         Movie movie = showing.getMovie();
         int newTicketSales = movie.getTicketSales() + ticketCount;
-        // Get all showings to be updated
-        ArrayList<Showing> showings = showingController.findShowings(movie);
+
+        // Get all showings to be updated with updated movie
+        ArrayList<Showing> showingsWithMovie = showingController.findShowings(movie);
         movieController.updateMovieAttribute(movie, MovieAttribute.TICKET_SALES, newTicketSales);
         // Update movie attribute of all showings with the given updated movie
-        if (showings != null) {
-            for (Showing i : showings) {
+        if (showingsWithMovie != null) {
+            for (Showing i : showingsWithMovie) {
                 showingController.updateShowingAttribute(i, ShowingAttribute.MOVIE, movie);
             }
         }
@@ -123,9 +139,8 @@ public class BookingUI {
         return totalPrice;
     }
 
-    private static Ticket bookTicket(Showing showing) {
-        // Choose seat for current ticket
-        SeatingLayout seatingAvailability = showing.getSeatingAvailability();
+    // Choose seat for current ticket
+    private static Seat chooseSeat(SeatingLayout seatingAvailability) {
         Seat assignedSeat = null;
         // Prompts user until a valid seat is selected
         do {
@@ -156,10 +171,7 @@ public class BookingUI {
             }
         } while (true);
 
-        Age age = UserHandler.getAgeFromUser();
-
-        Ticket ticket = new Ticket(showing, assignedSeat, age);
-        return ticket;
+        return assignedSeat;
     }
 
 }
