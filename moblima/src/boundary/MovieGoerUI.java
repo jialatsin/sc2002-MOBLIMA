@@ -2,6 +2,8 @@ package boundary;
 
 import control.BookingController;
 import control.MovieController;
+import control.ShowingController;
+import control.ShowingController.ShowingAttribute;
 
 import java.util.*;
 
@@ -11,6 +13,7 @@ import entity.Constants.User;
 public class MovieGoerUI {
     private static MovieController movieController = new MovieController();
     private static BookingController bookingController = new BookingController();
+    private static ShowingController showingController = new ShowingController();
 
     public static void main() {
         int selection;
@@ -104,6 +107,9 @@ public class MovieGoerUI {
         if (movie == null)
             return;
 
+        // Get all showings to be updated
+        ArrayList<Showing> showings = showingController.findShowings(movie);
+
         // Prompt user to review movie
         System.out.printf("Rate " + movie.getTitle() + " from 1-5: ");
         int rating = InputHandler.scanInt();
@@ -113,6 +119,13 @@ public class MovieGoerUI {
         Review newReview = new Review(rating, reviewText);
         movieController.addReviewToMovie(movie, newReview);
         System.out.println("Added review to " + movie.getTitle() + "!");
+
+        // Update movie attribute of all showings with the given updated movie
+        if (showings != null) {
+            for (Showing showing : showings) {
+                showingController.updateShowingAttribute(showing, ShowingAttribute.MOVIE, movie);
+            }
+        }
     }
 
     public static void viewBookingHistory() {
