@@ -52,9 +52,10 @@ public class SearchShowingUI {
         }
         // Moviegoer only can view showings with "Preview" or "Now Showing" status and
         // showtime have not already passed current time
-        if (user.equals(User.MOVIEGOER) && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
-                && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)
-                || showing.getShowTime().isBefore(LocalDateTime.now())) {
+        if (user.equals(User.MOVIEGOER)
+                && (!showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
+                        && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)
+                        || showing.getShowTime().isBefore(LocalDateTime.now()))) {
             System.out.println("Movie showing is currently not available for viewing!");
             return;
         }
@@ -76,9 +77,9 @@ public class SearchShowingUI {
             // Moviegoer only can view showings with "Preview" or "Now Showing" status and
             // showtime have not already passed current time
             if (user.equals(User.MOVIEGOER)
-                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
-                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)
-                    || showing.getShowTime().isBefore(LocalDateTime.now())) {
+                    && (!showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
+                            && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)
+                            || showing.getShowTime().isBefore(LocalDateTime.now()))) {
                 continue;
             }
             showingsResult.add(showing);
@@ -109,9 +110,9 @@ public class SearchShowingUI {
             // Moviegoer only can view showings with "Preview" or "Now Showing" status and
             // showtime have not already passed current time
             if (user.equals(User.MOVIEGOER)
-                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
-                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)
-                    || showing.getShowTime().isBefore(LocalDateTime.now())) {
+                    && (!showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
+                            && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)
+                            || showing.getShowTime().isBefore(LocalDateTime.now()))) {
                 continue;
             }
             showingsResult.add(showing);
@@ -146,9 +147,9 @@ public class SearchShowingUI {
             // Moviegoer only can view showings with "Preview" or "Now Showing" status and
             // showtime have not already passed current time
             if (user.equals(User.MOVIEGOER)
-                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
-                    && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)
-                    || showing.getShowTime().isBefore(LocalDateTime.now())) {
+                    && (!showing.getMovie().getShowingStatus().equals(ShowingStatus.NOW_SHOWING)
+                            && !showing.getMovie().getShowingStatus().equals(ShowingStatus.PREVIEW)
+                            || showing.getShowTime().isBefore(LocalDateTime.now()))) {
                 continue;
             }
             showingsResult.add(showing);

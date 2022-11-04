@@ -107,12 +107,21 @@ public class CRUDMovieShowingUI {
         switch (attribute) {
             case ID:
                 int newId = UserHandler.getIdFromUser();
+                if (showingController.findShowing(newId) != null) {
+                    System.out.println("Showing of ID " + id + " already exists in Showing database!");
+                    return;
+                }
                 showingController.updateShowingAttribute(showing, attribute, newId);
                 break;
             case MOVIE:
                 Movie movie = UserHandler.getMovieFromUser();
                 if (movie == null) {
                     System.out.println("Error updating Movie attribute!");
+                    return;
+                }
+                if (showing.getShowTime().toLocalDate().isAfter(movie.getEndDate())
+                        || showing.getShowTime().toLocalDate().isBefore(movie.getReleaseDate().minusDays(7))) {
+                    System.out.println("Cannot create showing when movie is not within releaseDate and endDates!");
                     return;
                 }
                 if (!movie.getShowingStatus().equals(ShowingStatus.PREVIEW)
@@ -135,8 +144,14 @@ public class CRUDMovieShowingUI {
             case CINEMA:
                 Cineplex cineplex = UserHandler.getCineplexFromUser();
                 Cinema cinema = UserHandler.getCinemaFromUser(cineplex);
+
                 if (cinema == null) {
                     System.out.println("Error updating Cinema attribute!");
+                    return;
+                }
+                if (showingController.findShowing(cinema, showing.getShowTime()) != null) {
+                    System.out.println("There already exists a showing in cinema " + cinema.getCode()
+                            + "at " + showing.getShowTime().format(InputHandler.getDateTimeFormat()) + "! ");
                     return;
                 }
                 showingController.updateShowingAttribute(showing, attribute, cinema);
