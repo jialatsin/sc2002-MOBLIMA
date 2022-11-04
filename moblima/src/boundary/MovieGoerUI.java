@@ -10,6 +10,7 @@ import java.util.*;
 import entity.*;
 import entity.Enumerators.User;
 
+/* Main menu user interface for Movie Goer */
 public class MovieGoerUI {
     private static MovieController movieController = new MovieController();
     private static BookingController bookingController = new BookingController();
@@ -40,25 +41,25 @@ public class MovieGoerUI {
                 case 3: // Search/List Showings
                     SearchShowingUI.main(User.MOVIEGOER);
                     break;
-                case 4: // Book Ticket
+                case 4: // Book and Purchase Ticket
                     BookingUI.main();
                     break;
                 case 5: // View Booking History
                     viewBookingHistory();
                     break;
-                case 6: // List Top 5
+                case 6: // List Top 5 Ranking Movies
                     ListTopMovies.main();
                     break;
                 case 7: // Add Review
                     addReview();
                     break;
-                case 0:
+                case 0: // Return to Main Menu
                     return;
             }
         } while (true);
     }
 
-    // Prints full movie details of a movie
+    /* Prints full movie details of a movie */
     public static void viewMovieDetails() {
         Movie movie = UserHandler.getMovieByTitleFromUser();
         if (movie == null)
@@ -86,7 +87,7 @@ public class MovieGoerUI {
         if (averageReviewRating < 0) {
             System.out.println("\nAverage Review Rating: NaN"); // No reviews available
         } else
-            System.out.printf("\nAverage Review Rating: %.2f *", movie.getAverageReviewRating());
+            System.out.printf("\nAverage Review Rating: %.2f*\n", movie.getAverageReviewRating());
 
         // Print reviews
         ArrayList<Review> reviews = movie.getReviews();
@@ -102,6 +103,7 @@ public class MovieGoerUI {
         System.out.println("=================================================");
     }
 
+    /* Add a review to a movie */
     public static void addReview() {
         Movie movie = UserHandler.getMovieByTitleFromUser();
         if (movie == null)

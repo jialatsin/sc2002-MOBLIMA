@@ -2,6 +2,7 @@ package boundary;
 
 import control.MainController;
 
+/* Main menu user interface for user to select if they are a MovieGoer or Admin */
 public class MainUI {
     public static void main() {
         MainController.initializeDatabase();
@@ -15,13 +16,13 @@ public class MainUI {
 
             selection = InputHandler.scanInt();
             switch (selection) {
-                case 1:
+                case 1: // Movie Goer
                     MovieGoerUI.main();
                     break;
-                case 2:
+                case 2: // Admin
                     AdminUI.main();
                     break;
-                case 0:
+                case 0: // Exit
                     return;
             }
         } while (true);
