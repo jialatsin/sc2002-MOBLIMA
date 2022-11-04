@@ -9,8 +9,12 @@ public class BookingController extends DatabaseController<Booking> {
         super(MainController.FILEPATH_BOOKING);
     }
 
-    // Search for bookings by given email in the Booking database
-    // Returns an ArrayList of matching bookings, returns null if no booking found
+    /**
+     * Search for bookings by given email in the Booking database.
+     * 
+     * @param email Email of the MovieGoer
+     * @return ArrayList of matching Bookings if found, else null
+     */
     public ArrayList<Booking> findBookings(String email) {
         ArrayList<Booking> bookings = readFromDatabase();
         ArrayList<Booking> bookingsResult = new ArrayList<Booking>();

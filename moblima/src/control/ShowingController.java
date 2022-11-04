@@ -11,8 +11,13 @@ public class ShowingController extends DatabaseController<Showing> {
         super(MainController.FILEPATH_SHOWING);
     }
 
-    // Search for a showing by its showing id in the Showing database
-    // Returns the matching showing, returns null if showing not found
+    /**
+     * Search for a Showing by its showing id in the Showing database.
+     * Overloaded method.
+     * 
+     * @param id Showing id
+     * @return Matching Showing if found, else null
+     */
     public Showing findShowing(int id) {
         ArrayList<Showing> showings = readFromDatabase();
         for (Showing showing : showings) {
@@ -23,8 +28,14 @@ public class ShowingController extends DatabaseController<Showing> {
         return null;
     }
 
-    // Search for a showing by its cinema and showtime in the Showing database
-    // Returns the matching showing, returns null if showing not found
+    /**
+     * Search for a Showing by its Cinema and showTime in the Showing database.
+     * Overloaded method.
+     * 
+     * @param cinema   Selected Cinema
+     * @param showTime Selected showTime
+     * @return Matching Showing if found, else null
+     */
     public Showing findShowing(Cinema cinema, LocalDateTime showTime) {
         ArrayList<Showing> showings = readFromDatabase();
         for (Showing showing : showings) {
@@ -35,8 +46,15 @@ public class ShowingController extends DatabaseController<Showing> {
         return null;
     }
 
-    // Search for showings with specified movie and cineplex in the Showing database
-    // Returns an ArrayList with matching showings, returns null if no showing found
+    /**
+     * Search for Showings with specified Movie and Cineplex in the Showing
+     * database.
+     * Overloaded method.
+     * 
+     * @param cineplex Selected Cineplex
+     * @param movie    Selected Movie
+     * @return ArrayList of matching showings if found, else null
+     */
     public ArrayList<Showing> findShowings(Cineplex cineplex, Movie movie) {
         ArrayList<Showing> showings = readFromDatabase();
         ArrayList<Showing> showingsResult = new ArrayList<Showing>();
@@ -52,8 +70,13 @@ public class ShowingController extends DatabaseController<Showing> {
         return showingsResult;
     }
 
-    // Search for showings with specified movie in the Showing database
-    // Returns an ArrayList with matching showings, returns null if no showing found
+    /**
+     * Search for Showings with specified Movie in the Showing database.
+     * Overloaded method.
+     * 
+     * @param movie Selected Movie
+     * @return ArrayList of matching showings if found, else null
+     */
     public ArrayList<Showing> findShowings(Movie movie) {
         ArrayList<Showing> showings = readFromDatabase();
         ArrayList<Showing> showingsResult = new ArrayList<Showing>();
@@ -69,8 +92,13 @@ public class ShowingController extends DatabaseController<Showing> {
         return showingsResult;
     }
 
-    // Search for showings with specified cineplex in the Showing database
-    // Returns an ArrayList with matching showings, returns null if no showing found
+    /**
+     * Search for Showings with specified Cineplex in the Showing database.
+     * Overloaded method.
+     * 
+     * @param movie Selected Cineplex
+     * @return ArrayList of matching showings if found, else null
+     */
     public ArrayList<Showing> findShowings(Cineplex cineplex) {
         ArrayList<Showing> showings = readFromDatabase();
         ArrayList<Showing> showingsResult = new ArrayList<Showing>();
@@ -86,9 +114,15 @@ public class ShowingController extends DatabaseController<Showing> {
         return showingsResult;
     }
 
-    // Called from CRUDMovieListingUI when releaseDate or endDate is updated
-    // Deletes all showings with showtimes that no longer fall within the "PREIVEW"
-    // or "NOW SHOWING" period
+    /**
+     * Deletes all showings with showTimes that no longer fall within the valid
+     * showing period from the Showing database.
+     * Called from CRUDMovieListingUI when releaseDate or endDate is updated.
+     * 
+     * @param movie       Selected Showing
+     * @param releaseDate Release date of Showing
+     * @param endDate     End date of Showing
+     */
     public void deleteInvalidShowings(Movie movie, LocalDate releaseDate, LocalDate endDate) {
         ArrayList<Showing> allShowings = readFromDatabase();
         ArrayList<Showing> validShowings = new ArrayList<Showing>();
@@ -107,6 +141,11 @@ public class ShowingController extends DatabaseController<Showing> {
         overwriteDatabase(validShowings);
     }
 
+    /**
+     * Defined for readability and easier referencing of Showing attributes.
+     * In the order of selection options provided to user when updating showing
+     * attributes.
+     */
     public enum ShowingAttribute {
         ID, MOVIE, SHOWTIME, CINEMA;
 
@@ -115,6 +154,14 @@ public class ShowingController extends DatabaseController<Showing> {
         }
     }
 
+    /**
+     * Updates the selected showing's entry in Showing database with the new
+     * attribute.
+     * 
+     * @param movie             Selected showing
+     * @param attribute         Showing attribute to be updated
+     * @param newAttributeValue New attribute value
+     */
     public void updateShowingAttribute(Showing showing, ShowingAttribute attribute, Object newAttributeValue) {
         ArrayList<Showing> showings = readFromDatabase();
         int showingIndexInDatabase = showings.indexOf(showing);
@@ -137,8 +184,13 @@ public class ShowingController extends DatabaseController<Showing> {
         overwriteDatabase(showings);
     }
 
-    // Search for and deletes showing with showing id in the Showing database
-    // Returns true on successful deletion
+    /**
+     * Search for and deletes Showing with showing id in the Showing database.
+     * Overloaded function.
+     * 
+     * @param id Showing id
+     * @return true if successfully deleted, else false
+     */
     public boolean deleteShowing(int id) {
         ArrayList<Showing> showings = readFromDatabase();
         for (Showing showing : showings) {
@@ -151,7 +203,12 @@ public class ShowingController extends DatabaseController<Showing> {
         return false;
     }
 
-    // Search for and deletes all showings with given movie in Showing database
+    /**
+     * Search for and deletes Showing with given Movie in the Showing database.
+     * Overloaded function.
+     * 
+     * @param movie Movie of the Showing
+     */
     public void deleteShowing(Movie movie) {
         ArrayList<Showing> showings = readFromDatabase();
         for (Showing showing : showings) {

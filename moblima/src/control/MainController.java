@@ -14,8 +14,11 @@ import entity.Enumerators.Day;
 import entity.Enumerators.MovieType;
 import entity.PriceType;
 
+/**
+ * Contains path names of Database files to access, and initializes starting
+ * data for some database files
+ */
 public class MainController {
-
     public static final String FILEPATH_ADMIN = "moblima/db/admin.txt";
     public static final String FILEPATH_MOVIE = "moblima/db/movie.txt";
     public static final String FILEPATH_HOLIDAY = "moblima/db/holiday.txt";
@@ -29,8 +32,10 @@ public class MainController {
     private static PriceController priceController = new PriceController();
     private static AdminController adminController = new AdminController();
 
-    // Creates starting data for admins, cineplexes and pricing if not already
-    // available in database
+    /*
+     * Creates starting data for admins, cineplexes and pricing if not already
+     * available in database
+     */
     public static void initializeDatabase() {
         // Initialize admin database
         ArrayList<Admin> admins = new ArrayList<Admin>();

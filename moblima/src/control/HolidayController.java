@@ -36,9 +36,13 @@ public class HolidayController extends DatabaseController<Holiday> {
         return false;
     }
 
-    // Returns enum 'HOLIDAY' if date is on a holiday
-    // Returns enum 'WEEKDAY' if date is on a regular weekday
-    // Returns enum 'WEEKEND' if date is on a regular weekend
+    /**
+     * Get the corresponding Day enumeration for the given date.
+     * 
+     * @param date Date
+     * @return Enum 'HOLIDAY' if date is on a holiday, enum 'WEEKDAY' if date is on
+     *         a regular weekday, enum 'WEEKEND' if date is on a regular weekend
+     */
     public Day getDayType(LocalDateTime date) {
         // Showtime is on a holiday
         if (getHolidayByDate(date.toLocalDate()) != null) {
