@@ -112,7 +112,10 @@ public class MovieController extends DatabaseController<Movie> {
         overwriteDatabase(movies);
     }
 
-    // Adds the given review to selected movie's entry in Movie database
+    /*
+     * Adds the given Review to the given Movie's entry and updates the Movie's
+     * average rating in Movie database.
+     */
     public void addReviewToMovie(Movie movie, Review review) {
         ArrayList<Movie> movies = readFromDatabase();
         int movieIndexInDatabase = movies.indexOf(movie);

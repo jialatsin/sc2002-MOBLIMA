@@ -2,9 +2,16 @@ package boundary;
 
 import control.AdminController;
 
+/**
+ * Main menu user interface for an Admin, which can only be accessed by logging
+ * in with admin account.
+ * An Admin can create, update, delete movie listings and movie showings,
+ * configure system settings, list top 5 ranking movies.
+ */
 public class AdminUI {
     private static AdminController adminController = new AdminController();
 
+    /** Main Menu for Admin. */
     public static void main() {
         boolean isLoggedIn = login();
         if (!isLoggedIn) {
@@ -22,24 +29,25 @@ public class AdminUI {
 
             selection = InputHandler.scanInt();
             switch (selection) {
-                case 1:
+                case 1: // Create/Update/Remove Movie Listing
                     CRUDMovieListingUI.main();
                     break;
-                case 2:
+                case 2: // Create/Update/Remove Movie Showings
                     CRUDMovieShowingUI.main();
                     break;
-                case 3:
+                case 3: // Configure System Settings
                     SystemConfigUI.main();
                     break;
-                case 4:
+                case 4: // List Top 5 Ranking Movies
                     ListTopMovies.main();
                     break;
-                case 0:
+                case 0: // Logout to Main Menu
                     return;
             }
         } while (true);
     }
 
+    /** Prompts user to login as Admin with username and password. */
     private static boolean login() {
         boolean isLoggedIn = false;
         System.out.println("===== ADMIN LOGIN =====");

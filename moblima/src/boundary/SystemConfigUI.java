@@ -15,11 +15,16 @@ import entity.Enumerators.CinemaClass;
 import entity.Enumerators.Day;
 import entity.Enumerators.MovieType;
 
+/**
+ * Admin interface to configure system settings related to Holidays, ticket
+ * prices and Admin accounts.
+ */
 public class SystemConfigUI {
     private static HolidayController holidayController = new HolidayController();
     private static PriceController priceController = new PriceController();
     private static AdminController adminController = new AdminController();
 
+    /** Menu for Configure System Settings. */
     public static void main() {
         int selection;
         do {
@@ -31,21 +36,22 @@ public class SystemConfigUI {
 
             selection = InputHandler.scanInt();
             switch (selection) {
-                case 1:
+                case 1: // Manage Holidays
                     manageHolidays();
                     break;
-                case 2:
+                case 2: // Manage Ticket Prices
                     managePrices();
                     break;
-                case 3:
+                case 3: // Manage Admin Accounts
                     manageAdmin();
                     break;
-                case 0:
+                case 0: // Return to Admin Menu
                     return;
             }
         } while (true);
     }
 
+    /** Menu for adding, deleting, viewing Holidays in Holiday database. */
     private static void manageHolidays() {
         int selection;
         do {
@@ -97,6 +103,7 @@ public class SystemConfigUI {
         } while (true);
     }
 
+    /** Menu for updating, viewing Prices in Price database. */
     private static void managePrices() {
         int selection;
         do {
@@ -119,6 +126,7 @@ public class SystemConfigUI {
         } while (true);
     }
 
+    /** Menu for updating Prices in Price database. */
     private static void updatePrice() {
         int selection;
         double value;
@@ -164,6 +172,11 @@ public class SystemConfigUI {
         } while (selection < 1 || selection > 5);
     }
 
+    /**
+     * Menu for viewing all the current Prices in Price database.
+     * Regular 2D MovieType is taken as the base price, while all other prices are
+     * additional fees added onto the base price.
+     */
     private static void viewPriceList() {
         Map<PriceType, Double> priceList = priceController.getPriceList();
         priceList.entrySet().forEach(entry -> {
@@ -171,6 +184,7 @@ public class SystemConfigUI {
         });
     }
 
+    /** Menu for creating, deleting and viewing Admins in Admin database. */
     private static void manageAdmin() {
         int selection;
         do {

@@ -12,10 +12,12 @@ import entity.Showing;
 import entity.Enumerators.ContentRating;
 import entity.Enumerators.MovieType;
 
+/** Admin interface to create, update, delete, list Movies. */
 public class CRUDMovieListingUI {
     private static MovieController movieController = new MovieController();
     private static ShowingController showingController = new ShowingController();
 
+    /** Main Menu for CRUD Movie Listings. */
     public static void main() {
         int selection;
         do {
@@ -28,25 +30,28 @@ public class CRUDMovieListingUI {
 
             selection = InputHandler.scanInt();
             switch (selection) {
-                case 1:
+                case 1: // Create Movie Listing
                     createMovieListing();
                     break;
-                case 2:
+                case 2: // Update Movie Listing
                     updateMovieListing();
                     break;
-                case 3:
+                case 3: // Delete Movie Listing
                     deleteMovieListing();
                     break;
-                case 4:
-                    // TODO: Refactor out search movies
+                case 4: // Search/List Movies
                     SearchMovieUI.main();
                     break;
-                case 0:
+                case 0: // Return to Admin Menu
                     return;
             }
         } while (true);
     }
 
+    /**
+     * Creates a Movie with user inputted attributes and adds it to the Movie
+     * database.
+     */
     private static void createMovieListing() {
         System.out.println("\nCREATING A MOVIE LISTING...");
 
@@ -76,6 +81,10 @@ public class CRUDMovieListingUI {
         System.out.println(title + " (id: " + id + ") added to Movie database!");
     }
 
+    /**
+     * Updates a Movie with user inputted new attribute and updates the Movie's
+     * entry in the Movie database.
+     */
     private static void updateMovieListing() {
         System.out.println("\nUPDATING A MOVIE LISTING...");
 
@@ -183,6 +192,10 @@ public class CRUDMovieListingUI {
         System.out.println("\nUpdated movie details!");
     }
 
+    /**
+     * Deletes a Movie with selected movie id and deletes the Movie's entry in the
+     * Movie database.
+     */
     private static void deleteMovieListing() {
         System.out.println("\nDELETING A MOVIE LISTING...");
 

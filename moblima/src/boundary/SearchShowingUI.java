@@ -10,9 +10,17 @@ import entity.Showing;
 import entity.Enumerators.ShowingStatus;
 import entity.Enumerators.User;
 
+/**
+ * User interface to search for Showings, used by both Admin and MovieGoer.
+ * An Admin can see all the Showings available in the Showing database,
+ * but a MovieGoer can only see Showings of Movies that are currently in
+ * "Preview" or "Now Showing" and with showtimes that have not passed the
+ * current datetime.
+ */
 public class SearchShowingUI {
     private static ShowingController showingController = new ShowingController();
 
+    /** Menu for Search/List Showings. */
     public static void main(User user) {
         do {
             System.out.println("===== SEARCH/LIST SHOWING =====\n"
@@ -23,19 +31,19 @@ public class SearchShowingUI {
                     + "0. Return\n");
             int choice = InputHandler.scanInt();
             switch (choice) {
-                case 1:
+                case 1: // Search by Showing ID
                     searchShowingById(user);
                     break;
-                case 2:
+                case 2: // Search by Cineplex
                     searchShowingByCineplex(user);
                     break;
-                case 3:
+                case 3: // Search by Movie Title
                     searchShowingByMovie(user);
                     break;
-                case 4:
+                case 4: // List All Showings
                     listAllShowings(user);
                     break;
-                case 0:
+                case 0: // Return
                     return;
                 default:
                     System.out.println("Wrong input");
@@ -43,6 +51,16 @@ public class SearchShowingUI {
         } while (true);
     }
 
+    /**
+     * Prompts user for a Showing ID and prints the showing found in Showing
+     * database with matching ID.
+     * A MovieGoer can only see the Showing if it is "Preview" or "Now Showing" and
+     * with showtime that have not passed the current datetime,
+     * but an Admin can see the Showing irregardless of ShowingStatus and showTime
+     * if it exists in the database.
+     * 
+     * @param user User (Admin/MovieGoer) that calls this method
+     */
     public static void searchShowingById(User user) {
         int id = UserHandler.getIdFromUser();
         Showing showing = showingController.findShowing(id);
@@ -64,7 +82,15 @@ public class SearchShowingUI {
         System.out.println();
     }
 
-    // Print all showings in database
+    /**
+     * Prints a list of all the Showings in the Showing database.
+     * An Admin can see all the Showings available in the Showing database,
+     * but a MovieGoer can only see Showings of Movies that are currently in
+     * "Preview" or "Now Showing" and with showtimes that have not passed the
+     * current datetime.
+     * 
+     * @param user User (Admin/MovieGoer) that calls this method
+     */
     public static void listAllShowings(User user) {
         ArrayList<Showing> showings = showingController.readFromDatabase();
         if (showings.isEmpty()) {
@@ -97,6 +123,16 @@ public class SearchShowingUI {
         System.out.println();
     }
 
+    /**
+     * Prompts user for a Cineplex and prints a list of all showings found in
+     * Showing database with matching Cineplex.
+     * A MovieGoer can only see the Showing if it is "Preview" or "Now Showing" and
+     * with showtime that have not passed the current datetime,
+     * but an Admin can see the Showing irregardless of ShowingStatus and showTime
+     * if it exists in the database.
+     * 
+     * @param user User (Admin/MovieGoer) that calls this method
+     */
     public static void searchShowingByCineplex(User user) {
         Cineplex cineplex = UserHandler.getCineplexFromUser();
         ArrayList<Showing> showings = showingController.findShowings(cineplex);
@@ -130,6 +166,16 @@ public class SearchShowingUI {
         System.out.println();
     }
 
+    /**
+     * Prompts user for a Movie and prints a list of all showings found in
+     * Showing database with matching Movie.
+     * A MovieGoer can only see the Showing if it is "Preview" or "Now Showing" and
+     * with showtime that have not passed the current datetime,
+     * but an Admin can see the Showing irregardless of ShowingStatus and showTime
+     * if it exists in the database.
+     * 
+     * @param user User (Admin/MovieGoer) that calls this method
+     */
     public static void searchShowingByMovie(User user) {
         Movie movie = UserHandler.getMovieByTitleFromUser();
         if (movie == null) {

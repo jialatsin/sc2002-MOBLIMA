@@ -7,14 +7,24 @@ import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-// Handle user input of various low-level datatypes
+/**
+ * Used to take user input of various primitive or low-level datatypes.
+ * Implemented for static declaration of Scanner, to prevent multiple Scanners
+ * from being created.
+ */
 public class InputHandler {
-    // Scanner must only be initialized once
+    /* Scanner must only be initialized once. */
     private static Scanner sc = new Scanner(System.in);
 
     private static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
     private static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+    /**
+     * Prompts user for an integer input until correct input is given.
+     * 
+     * @return Valid int
+     */
     public static int scanInt() {
         int input;
         while (true) {
@@ -31,6 +41,11 @@ public class InputHandler {
         return input;
     }
 
+    /**
+     * Prompts user for an double input until correct input is given.
+     * 
+     * @return Valid double
+     */
     public static double scanDouble() {
         double input;
         while (true) {
@@ -47,6 +62,11 @@ public class InputHandler {
         return input;
     }
 
+    /**
+     * Prompts user for a boolean input until correct input is given.
+     * 
+     * @return Valid boolean
+     */
     public static boolean scanBoolean() {
         boolean input;
         while (true) {
@@ -63,6 +83,11 @@ public class InputHandler {
         return input;
     }
 
+    /**
+     * Prompts user for an character input until correct input is given.
+     * 
+     * @return Valid char
+     */
     public static char scanChar() {
         String input = "";
         while (true) {
@@ -76,6 +101,11 @@ public class InputHandler {
         return input.charAt(0);
     }
 
+    /**
+     * Prompts user for a string input until correct input is given.
+     * 
+     * @return Valid String
+     */
     public static String scanString() {
         String input = "";
         while (true) {
@@ -89,6 +119,11 @@ public class InputHandler {
         return input;
     }
 
+    /**
+     * Prompts user for a mobile number of 8 digits until correct input is given.
+     * 
+     * @return Valid String containing mobile number
+     */
     public static String scanMobileNumber() {
         String pattern = "\\d{8}";
         String input = "";
@@ -103,6 +138,11 @@ public class InputHandler {
         return input;
     }
 
+    /**
+     * Prompts user for an email address until correct input is given.
+     * 
+     * @return Valid String containing email address
+     */
     public static String scanEmail() {
         String pattern = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
         String input = "";
@@ -117,6 +157,12 @@ public class InputHandler {
         return input;
     }
 
+    /**
+     * Prompts user for a datetime of format dd/MM/yyyy HH:mm until correct input is
+     * given.
+     * 
+     * @return Valid LocalDateTime
+     */
     public static LocalDateTime scanDateTime() {
         String input = "";
         LocalDateTime dateTime;
@@ -132,6 +178,12 @@ public class InputHandler {
         return dateTime;
     }
 
+    /**
+     * Prompts user for a datetime of format dd/MM/yyyy until correct input is
+     * given.
+     * 
+     * @return Valid LocalDate
+     */
     public static LocalDate scanDate() {
         String input = "";
         LocalDate date;

@@ -10,12 +10,18 @@ import java.util.*;
 import entity.*;
 import entity.Enumerators.User;
 
-/* Main menu user interface for Movie Goer */
+/**
+ * Main menu user interface for a MovieGoer.
+ * A MovieGoer can search for movies, view movie details,
+ * search showings, book a ticket, view booking history,
+ * list top 5 ranking movies, add a review to a movie.
+ */
 public class MovieGoerUI {
     private static MovieController movieController = new MovieController();
     private static BookingController bookingController = new BookingController();
     private static ShowingController showingController = new ShowingController();
 
+    /** Main Menu for MovieGoer. */
     public static void main() {
         int selection;
 
@@ -59,7 +65,11 @@ public class MovieGoerUI {
         } while (true);
     }
 
-    /* Prints full movie details of a movie */
+    /**
+     * Prompts user for a movie and prints all attributes of the Movie.
+     * Overall reviewer rating will only be displayed if there are more than ONE
+     * individual rating, else “NaN” is displayed.
+     */
     public static void viewMovieDetails() {
         Movie movie = UserHandler.getMovieByTitleFromUser();
         if (movie == null)
@@ -103,7 +113,7 @@ public class MovieGoerUI {
         System.out.println("=================================================");
     }
 
-    /* Add a review to a movie */
+    /** User can input a Review to be added to a Movie. */
     public static void addReview() {
         Movie movie = UserHandler.getMovieByTitleFromUser();
         if (movie == null)
@@ -130,6 +140,7 @@ public class MovieGoerUI {
         }
     }
 
+    /** User can input their email to be view all their previous Bookings. */
     public static void viewBookingHistory() {
         System.out.println("\nEnter email to view booking history for:");
         String email = InputHandler.scanEmail();

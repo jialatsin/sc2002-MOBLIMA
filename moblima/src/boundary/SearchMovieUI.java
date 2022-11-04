@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import control.MovieController;
 import entity.Movie;
 
+/** User interface to search for Movies, used by both Admin and MovieGoer. */
 public class SearchMovieUI {
     private static MovieController movieController = new MovieController();
 
+    /** Menu for Search/List Movies. */
     public static void main() {
         do {
             System.out.println("===== SEARCH/LIST MOVIE =====\n"
@@ -30,7 +32,10 @@ public class SearchMovieUI {
         } while (true);
     }
 
-    // Prints all movies found in database with matching title
+    /**
+     * Prompts user for a movie title and prints a list of all movies found in Movie
+     * database with matching title.
+     */
     public static void searchByTitle() {
         String title = UserHandler.getTitleFromUser();
         ArrayList<Movie> movies = movieController.findMovies(title);
@@ -45,7 +50,7 @@ public class SearchMovieUI {
         System.out.println("\n");
     }
 
-    // Prints all movies in database
+    /** Prints a list of all the movies in the Movie database. */
     public static void listAllMovies() {
         ArrayList<Movie> movies = movieController.readFromDatabase();
         if (movies.isEmpty()) {

@@ -104,7 +104,6 @@ public class ShowingController extends DatabaseController<Showing> {
                 validShowings.add(showing);
             }
         }
-        // TODO
         overwriteDatabase(validShowings);
     }
 

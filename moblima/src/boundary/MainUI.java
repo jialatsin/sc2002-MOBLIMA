@@ -2,8 +2,11 @@ package boundary;
 
 import control.MainController;
 
-/* Main menu user interface for user to select if they are a MovieGoer or Admin */
+/**
+ * Main menu user interface for user to select if they are a MovieGoer or Admin.
+ */
 public class MainUI {
+    /** Main Menu of MOBLIMA. */
     public static void main() {
         MainController.initializeDatabase();
 

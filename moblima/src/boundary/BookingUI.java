@@ -23,6 +23,7 @@ import entity.Enumerators.CinemaClass;
 import entity.Enumerators.Day;
 import entity.Enumerators.MovieType;
 
+/** User interface for a MovieGoer to make a Booking for movie tickets. */
 public class BookingUI {
     private static PriceController priceController = new PriceController();
     private static HolidayController holidayController = new HolidayController();
@@ -30,22 +31,25 @@ public class BookingUI {
     private static MovieController movieController = new MovieController();
     private static ShowingController showingController = new ShowingController();
 
+    /** Menu for Ticket Booking. */
     public static void main() {
         Showing showing = null;
         System.out.println("\n===== TICKET BOOKING =====");
+        // Prompts user for a Showing
         showing = UserHandler.getShowingFromUser();
         if (showing == null) {
             return;
         }
 
+        // Displays number of seats available for this Showing
         SeatingLayout seatingAvailability = showing.getSeatingAvailability();
-
         System.out.printf("\n%d seats available for %s at %s (%s)\n",
                 seatingAvailability.getAvailableSeatsCount(),
                 showing.getMovie().getTitle(),
                 showing.getCineplex().getName(),
                 showing.getShowTime().format(InputHandler.getDateTimeFormat()));
 
+        // Prompts user for number of tickets they want to purchase
         System.out.println("Enter number of tickets to you would like to buy:");
         int ticketCount = InputHandler.scanInt();
         if (ticketCount < 1 || ticketCount > seatingAvailability.getAvailableSeatsCount()) {
@@ -57,6 +61,7 @@ public class BookingUI {
         ArrayList<Showing> showings = showingController.readFromDatabase();
         int showingIndexInDatabase = showings.indexOf(showing);
 
+        // Create tickets for the movie Showing
         ArrayList<Ticket> tickets = new ArrayList<Ticket>();
         for (int i = 0; i < ticketCount; i++) {
             System.out.printf("\n----- TICKET %d -----\n", i + 1);
@@ -68,22 +73,23 @@ public class BookingUI {
             tickets.add(ticket);
         }
 
-        // Final seat assignment
+        // Display final seat assignment
         System.out.println(showing.getSeatingAvailability());
 
         double price = displayTotalPrice(tickets);
 
+        // Prompt user for booking confirmation
         char selection;
         do {
             System.out.println("Confirm booking? (Y/N)");
             selection = Character.toUpperCase(InputHandler.scanChar());
         } while (selection != 'Y' && selection != 'N');
-
         if (selection == 'N') {
             System.out.println("Booking cancelled!\n");
             return;
         }
 
+        // Prompt user for MovieGoer details
         System.out.println("Enter your name:");
         String name = InputHandler.scanString();
         System.out.println("Enter your mobile number:");
@@ -102,9 +108,10 @@ public class BookingUI {
         showings.set(showingIndexInDatabase, showing);
         showingController.overwriteDatabase(showings);
 
+        // Add new Booking to Booking database
         Booking booking = new Booking(transactionID, movieGoer, tickets, transactionTime, showing, price);
         bookingController.addToDatabase(booking);
-        System.out.println("\nBooking created!");
+        System.out.println("\nBooking created! You will be able to view your booking history with your email.");
 
         // Update the ticket sales for the movie
         Movie movie = showing.getMovie();
@@ -121,11 +128,20 @@ public class BookingUI {
         }
     }
 
+    /**
+     * Calculates and prints the total price of all the tickets that the MovieGoer
+     * is trying to buy.
+     * 
+     * @param tickets ArrayList of Tickets that to be purchase
+     * 
+     * @return Total price of all the tickets
+     */
     private static double displayTotalPrice(ArrayList<Ticket> tickets) {
         double totalPrice = 0;
         int i = 1;
         System.out.println();
         for (Ticket ticket : tickets) {
+            // Get ticket details
             Showing showing = ticket.getShowing();
             MovieType movieType = showing.getMovie().getMovieType();
             CinemaClass cinemaClass = showing.getCinema().getCinemaClass();
@@ -140,7 +156,15 @@ public class BookingUI {
         return totalPrice;
     }
 
-    // Choose seat for current ticket
+    /**
+     * Prompts MovieGoer to choose a Seat for the current Ticket and assigns the
+     * Seat.
+     * 
+     * @param seatingAvailability The current seating availability in the cinema for
+     *                            the Showing
+     * 
+     * @return The assigned Seat
+     */
     private static Seat chooseSeat(SeatingLayout seatingAvailability) {
         Seat assignedSeat = null;
         // Prompts user until a valid seat is selected

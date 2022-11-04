@@ -19,36 +19,65 @@ import entity.Enumerators.ShowingStatus;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-// Handle user input of custom-defined datatypes
+/**
+ * Used to take user input of custom-defined datatypes.
+ * Implemented for reuse in multiple methods.
+ */
 public class UserHandler {
     private static MovieController movieController = new MovieController();
     private static CineplexController cineplexController = new CineplexController();
     private static ShowingController showingController = new ShowingController();
 
+    /**
+     * Prompts user for an id (integer) input until correct input is given.
+     * 
+     * @return Valid id
+     */
     public static int getIdFromUser() {
         System.out.println("Enter ID:");
         int id = InputHandler.scanInt();
         return id;
     }
 
+    /**
+     * Prompts user for a title (String) input until correct input is given.
+     * 
+     * @return Valid title
+     */
     public static String getTitleFromUser() {
         System.out.println("Enter title:");
         String title = InputHandler.scanString();
         return title;
     }
 
+    /**
+     * Prompts user for a synopsis (String) input until correct input is given.
+     * 
+     * @return Valid synopsis
+     */
     public static String getSynopsisFromUser() {
         System.out.println("Enter synopsis:");
         String synopsis = InputHandler.scanString();
         return synopsis;
     }
 
+    /**
+     * Prompts user for a director (String) input until correct input is given.
+     * 
+     * @return Valid director
+     */
     public static String getDirectorFromUser() {
         System.out.println("Enter director:");
         String director = InputHandler.scanString();
         return director;
     }
 
+    /**
+     * Prompts user to input a list of cast members (at least 2) until correct input
+     * is given.
+     * 
+     * @return Valid ArrayList<String> of cast members
+     */
     public static ArrayList<String> getCastFromUser() {
         int selection;
         do {
@@ -64,6 +93,12 @@ public class UserHandler {
         return cast;
     }
 
+    /**
+     * Prompts user to input a list of genres until correct input
+     * is given.
+     * 
+     * @return Valid ArrayList<String> of Genres
+     */
     public static ArrayList<String> getGenresFromUser() {
         int selection;
         System.out.println("\nEnter number of genres:");
@@ -77,24 +112,47 @@ public class UserHandler {
         return genres;
     }
 
+    /**
+     * Prompts user for a releaseDate (LocalDate) input of format dd/MM/yyyy until
+     * correct input is given.
+     * 
+     * @return Valid releaseDate
+     */
     public static LocalDate getReleaseDateFromUser() {
         System.out.println("Enter release date 'dd/MM/yyyy':");
         LocalDate date = InputHandler.scanDate();
         return date;
     }
 
+    /**
+     * Prompts user for a endDate (LocalDate) input of format dd/MM/yyyy until
+     * correct input is given.
+     * 
+     * @return Valid endDate
+     */
     public static LocalDate getEndDateFromUser() {
         System.out.println("Enter end date 'dd/MM/yyyy':");
         LocalDate date = InputHandler.scanDate();
         return date;
     }
 
+    /**
+     * Prompts user for a showTime (LocalDateTime) input of format dd/MM/yyyy HH:mm
+     * until correct input is given.
+     * 
+     * @return Valid showTime
+     */
     public static LocalDateTime getShowTimeFromUser() {
         System.out.println("\nEnter show timing 'dd/MM/yyyy HH:mm':");
         LocalDateTime showTime = InputHandler.scanDateTime();
         return showTime;
     }
 
+    /**
+     * Prompts user to choose a ContentRating until correct input is given.
+     * 
+     * @return Valid ContentRating
+     */
     public static ContentRating getContentRatingFromUser() {
         int selection;
         ContentRating contentRating = null;
@@ -128,6 +186,11 @@ public class UserHandler {
         return contentRating;
     }
 
+    /**
+     * Prompts user to choose a MovieType until correct input is given.
+     * 
+     * @return Valid MovieType
+     */
     public static MovieType getMovieTypeFromUser() {
         int selection;
         MovieType movieType = null;
@@ -157,8 +220,11 @@ public class UserHandler {
         return movieType;
     }
 
-    // Prompts a movie for a movie ID
-    // Returns selected movie
+    /**
+     * Get a Movie by prompting user to input its ID until correct input is given.
+     * 
+     * @return Movie with the selected ID
+     */
     public static Movie getMovieFromUser() {
         System.out.println("\nEnter movie ID:");
         int id = InputHandler.scanInt();
@@ -170,8 +236,12 @@ public class UserHandler {
         return movie;
     }
 
-    // Prompts user to select from a list of available cineplexes
-    // Returns selected cineplex
+    /**
+     * Get a Cineplex by prompting user to choose from a list of available
+     * Cineplexes.
+     * 
+     * @return Selected Cineplex
+     */
     public static Cineplex getCineplexFromUser() {
         ArrayList<Cineplex> cineplexes = cineplexController.readFromDatabase();
         if (cineplexes.isEmpty()) {
@@ -192,8 +262,13 @@ public class UserHandler {
         return cineplex;
     }
 
-    // Prompts user to select from a list of available cinemas for a known cineplex
-    // Returns selected cinema
+    /**
+     * Get a Cinema by prompting user to choose from a list of available
+     * Cinema from a given Cineplex.
+     * 
+     * @param cineplex Given Cineplex to select a Cinema from
+     * @return Selected Cinema
+     */
     public static Cinema getCinemaFromUser(Cineplex cineplex) {
         ArrayList<Cinema> cinemas = cineplex.getCinemas();
         if (cinemas.isEmpty()) {
@@ -214,9 +289,14 @@ public class UserHandler {
         return cinema;
     }
 
-    // Prompts user for movie title and prints all movies with matching movie
-    // title, then prompts user to choose movie ID
-    // Returns selected movie
+    /**
+     * Gets a Movie by prompting user for movie title, then prompts user to input
+     * movie ID from a list of movies with matching movie title.
+     * User needs to input movie ID because multiple movies may have the same title,
+     * but each movie will have its own unique ID.
+     * 
+     * @return Selected Movie
+     */
     public static Movie getMovieByTitleFromUser() {
         // Prompts user for movie title
         System.out.println("Enter movie title: ");
@@ -245,9 +325,14 @@ public class UserHandler {
         return movie;
     }
 
-    // Prompts user for cineplex and movie, prints all showings for given cineplex
-    // and movie, then prompts user to choose showing ID
-    // Returns selected showing
+    /**
+     * Gets a Showing by prompting user for Cineplex and Movie, then prompts user to
+     * input showing ID from a list of showings with matching cineplex and movie
+     * User needs to input showing ID because there may be multiple showings for the
+     * same movie at the same cineplex.
+     * 
+     * @return Selected Showing
+     */
     public static Showing getShowingFromUser() {
         Movie movie = getMovieByTitleFromUser();
         if (movie == null) {
@@ -307,6 +392,12 @@ public class UserHandler {
         return showing;
     }
 
+    /**
+     * Get a CinemaClass by prompting user to choose from a list of available
+     * cinema classes.
+     * 
+     * @return Selected CinemaClass
+     */
     public static CinemaClass getCinemaClassFromUser() {
         int selection;
         CinemaClass cinemaClass = null;
@@ -332,6 +423,12 @@ public class UserHandler {
         return cinemaClass;
     }
 
+    /**
+     * Get Age by prompting user to choose from a list of available age
+     * categories.
+     * 
+     * @return Selected Age category
+     */
     public static Age getAgeFromUser() {
         int selection;
         Age age = null;
@@ -357,6 +454,11 @@ public class UserHandler {
         return age;
     }
 
+    /**
+     * Get Day by prompting user to choose from a list of available day categories.
+     * 
+     * @return Selected Day category
+     */
     public static Day getDayFromUser() {
         int selection;
         Day day = null;

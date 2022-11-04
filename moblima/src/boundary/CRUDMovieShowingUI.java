@@ -7,9 +7,11 @@ import entity.*;
 import entity.Enumerators.ShowingStatus;
 import entity.Enumerators.User;
 
+/** Admin interface to create, update, delete, list Showings. */
 public class CRUDMovieShowingUI {
     private static ShowingController showingController = new ShowingController();
 
+    /** Main Menu for CRUD Movie Showings. */
     public static void main() {
         int selection;
         do {
@@ -40,6 +42,10 @@ public class CRUDMovieShowingUI {
         } while (true);
     }
 
+    /**
+     * Creates a Showing with user inputted attributes and adds it to the Showing
+     * database.
+     */
     private static void createMovieShowing() {
         System.out.println("\nCREATING A MOVIE SHOWING...");
 
@@ -81,6 +87,10 @@ public class CRUDMovieShowingUI {
         System.out.println(movie.getTitle() + " at showtime ID: " + id + " added to Showtime database!");
     }
 
+    /**
+     * Updates a Showing with user inputted new attribute and updates the Showing's
+     * entry in the Showing database.
+     */
     private static void updateMovieShowing() {
         System.out.println("\nUPDATING A MOVIE SHOWING...");
 
@@ -161,6 +171,10 @@ public class CRUDMovieShowingUI {
         System.out.println("\nUpdated showing details!");
     }
 
+    /**
+     * Deletes a Showing with selected showing id and deletes the Showing's entry in
+     * the Showing database.
+     */
     private static void deleteMovieShowing() {
         System.out.println("\nDELETING A MOVIE SHOWING...");
 
