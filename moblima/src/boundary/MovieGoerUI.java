@@ -8,7 +8,7 @@ import control.ShowingController.ShowingAttribute;
 import java.util.*;
 
 import entity.*;
-import entity.Constants.User;
+import entity.Enumerators.User;
 
 public class MovieGoerUI {
     private static MovieController movieController = new MovieController();

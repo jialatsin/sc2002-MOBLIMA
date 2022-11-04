@@ -3,6 +3,10 @@ package entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/* Represents a Cineplex 
+ * A Cineplex has a name identifier, a location and a list of cinemas that the cineplex contains. 
+ * A Cineplex has at least 3 Cinemas
+ */
 public class Cineplex implements Serializable {
     private String name;
     private String location;

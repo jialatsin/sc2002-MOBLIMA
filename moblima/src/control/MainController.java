@@ -8,10 +8,10 @@ import entity.Admin;
 import entity.Cinema;
 import entity.Cineplex;
 import entity.SeatingLayout;
-import entity.Constants.Age;
-import entity.Constants.CinemaClass;
-import entity.Constants.Day;
-import entity.Constants.MovieType;
+import entity.Enumerators.Age;
+import entity.Enumerators.CinemaClass;
+import entity.Enumerators.Day;
+import entity.Enumerators.MovieType;
 import entity.PriceType;
 
 public class MainController {

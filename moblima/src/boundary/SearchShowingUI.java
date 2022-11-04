@@ -7,8 +7,8 @@ import control.ShowingController;
 import entity.Cineplex;
 import entity.Movie;
 import entity.Showing;
-import entity.Constants.ShowingStatus;
-import entity.Constants.User;
+import entity.Enumerators.ShowingStatus;
+import entity.Enumerators.User;
 
 public class SearchShowingUI {
     private static ShowingController showingController = new ShowingController();

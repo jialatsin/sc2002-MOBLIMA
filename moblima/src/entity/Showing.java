@@ -5,8 +5,10 @@ import java.time.LocalDateTime;
 
 import boundary.InputHandler;
 
+/* Represents a Showing for a Movie */
 public class Showing implements Serializable {
     private int id;
+    /* The current available seating layout for this Showing */
     private SeatingLayout seatingAvailability;
     private Movie movie;
     private LocalDateTime showTime;

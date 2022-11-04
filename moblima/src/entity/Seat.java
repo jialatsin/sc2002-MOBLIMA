@@ -2,10 +2,12 @@ package entity;
 
 import java.io.Serializable;
 
-import entity.Constants.SeatStatus;
+import entity.Enumerators.SeatStatus;
 
+/* Represents a Seat in a SeatingLayout 
+ * Contain the Seat's position and occupancy status
+*/
 public class Seat implements Serializable {
-
     private int row;
     private int column;
     private SeatStatus status;

@@ -1,6 +1,7 @@
 package entity;
 
-public class Constants {
+/* Enumerators defined for readability and easier referencing */
+public class Enumerators {
 
     public enum CinemaClass implements PriceType {
         PLATINUM("Platinum Class"),

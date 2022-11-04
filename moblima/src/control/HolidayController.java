@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import entity.Holiday;
-import entity.Constants.Day;
+import entity.Enumerators.Day;
 
 public class HolidayController extends DatabaseController<Holiday> {
     public HolidayController() {

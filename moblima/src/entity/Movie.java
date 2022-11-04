@@ -6,10 +6,11 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 import boundary.InputHandler;
-import entity.Constants.ContentRating;
-import entity.Constants.MovieType;
-import entity.Constants.ShowingStatus;
+import entity.Enumerators.ContentRating;
+import entity.Enumerators.MovieType;
+import entity.Enumerators.ShowingStatus;
 
+/* Represents a Movie and its information */
 public class Movie implements Serializable {
 
     // unique ID that identifies the Movie
@@ -29,6 +30,10 @@ public class Movie implements Serializable {
     private double averageReviewRating = -1;
     private int ticketSales = 0;
 
+    /*
+     * Creates a movie with the given attributes
+     * By default, a movie will have no reviews and no ticketSales on creation
+     */
     public Movie(int id, String title, String synopsis, String director, ArrayList<String> cast,
             ArrayList<String> genres, LocalDate releaseDate, LocalDate endDate, ContentRating contentRating,
             MovieType movieType) {
@@ -44,6 +49,11 @@ public class Movie implements Serializable {
         this.movieType = movieType;
     }
 
+    /*
+     * String containing a short description about this Movie to return when called
+     * Contains movie title, ID, release and end date, showing status, ticket sales
+     * and overall review rating
+     */
     @Override
     public String toString() {
         String movieString = "";
@@ -58,7 +68,7 @@ public class Movie implements Serializable {
         if (averageReviewRating < 0) {
             movieString += "NaN"; // No reviews available
         } else
-            movieString += String.format("%.2f *", averageReviewRating);
+            movieString += String.format("%.2f*", averageReviewRating);
 
         movieString += "\n=================================================";
 

@@ -9,8 +9,8 @@ import control.MovieController.MovieAttribute;
 import control.ShowingController.ShowingAttribute;
 import entity.Movie;
 import entity.Showing;
-import entity.Constants.ContentRating;
-import entity.Constants.MovieType;
+import entity.Enumerators.ContentRating;
+import entity.Enumerators.MovieType;
 
 public class CRUDMovieListingUI {
     private static MovieController movieController = new MovieController();

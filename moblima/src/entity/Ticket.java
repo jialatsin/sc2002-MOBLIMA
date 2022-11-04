@@ -2,11 +2,15 @@ package entity;
 
 import java.io.Serializable;
 
-import entity.Constants.Age;
+import entity.Enumerators.Age;
 
+/* Represents a Ticket for a Showing */
+/* Created when making a booking */
 public class Ticket implements Serializable {
     private Showing showing = null;
+    /* Seat assigned to the moviegoer */
     private Seat seat;
+    /* Age of the moviegoer */
     private Age age;
 
     public Ticket(Showing showing, Seat seat, Age age) {

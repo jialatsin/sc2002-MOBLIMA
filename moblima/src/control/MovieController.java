@@ -6,8 +6,8 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import entity.*;
-import entity.Constants.ContentRating;
-import entity.Constants.MovieType;
+import entity.Enumerators.ContentRating;
+import entity.Enumerators.MovieType;
 
 public class MovieController extends DatabaseController<Movie> {
     public MovieController() {

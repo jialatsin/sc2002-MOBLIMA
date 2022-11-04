@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 
+/* Represents a Review added by MovieGoer to a Movie */
 public class Review implements Serializable {
     private int rating;
     private String reviewText;

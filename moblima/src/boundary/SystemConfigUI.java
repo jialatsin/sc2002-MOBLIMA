@@ -10,10 +10,10 @@ import control.PriceController;
 import entity.Admin;
 import entity.Holiday;
 import entity.PriceType;
-import entity.Constants.Age;
-import entity.Constants.CinemaClass;
-import entity.Constants.Day;
-import entity.Constants.MovieType;
+import entity.Enumerators.Age;
+import entity.Enumerators.CinemaClass;
+import entity.Enumerators.Day;
+import entity.Enumerators.MovieType;
 
 public class SystemConfigUI {
     private static HolidayController holidayController = new HolidayController();

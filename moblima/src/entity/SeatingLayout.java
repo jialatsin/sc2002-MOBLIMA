@@ -3,8 +3,9 @@ package entity;
 import java.io.Serializable;
 import java.util.*;
 
-import entity.Constants.SeatStatus;
+import entity.Enumerators.SeatStatus;
 
+/* Represents the SeatingLayout of a Cinema */
 public class SeatingLayout implements Serializable {
     Seat[][] seats;
     int rows;

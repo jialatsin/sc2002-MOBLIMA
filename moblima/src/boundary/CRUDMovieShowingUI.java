@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import control.*;
 import control.ShowingController.ShowingAttribute;
 import entity.*;
-import entity.Constants.ShowingStatus;
-import entity.Constants.User;
+import entity.Enumerators.ShowingStatus;
+import entity.Enumerators.User;
 
 public class CRUDMovieShowingUI {
     private static ShowingController showingController = new ShowingController();

@@ -9,12 +9,12 @@ import entity.Cinema;
 import entity.Cineplex;
 import entity.Movie;
 import entity.Showing;
-import entity.Constants.Age;
-import entity.Constants.CinemaClass;
-import entity.Constants.ContentRating;
-import entity.Constants.Day;
-import entity.Constants.MovieType;
-import entity.Constants.ShowingStatus;
+import entity.Enumerators.Age;
+import entity.Enumerators.CinemaClass;
+import entity.Enumerators.ContentRating;
+import entity.Enumerators.Day;
+import entity.Enumerators.MovieType;
+import entity.Enumerators.ShowingStatus;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

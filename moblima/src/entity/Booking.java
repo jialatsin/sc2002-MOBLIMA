@@ -6,7 +6,12 @@ import java.util.ArrayList;
 
 import boundary.InputHandler;
 
+/* Represents a Booking made by a movieGoer for a movie Showing */
 public class Booking implements Serializable {
+    /**
+     * Transaction ID in the format of XXXYYYYMMDDhhmm,
+     * where XXX is the cinema code, YYYYDDMMhhmm is the datetime
+     */
     private String transactionID;
     private MovieGoer movieGoer;
     private ArrayList<Ticket> tickets;

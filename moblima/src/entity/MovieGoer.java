@@ -2,6 +2,10 @@ package entity;
 
 import java.io.Serializable;
 
+/* Represents a MovieGoer
+ * Details of MovieGoer is captured by the application upon booking of tickets.
+ * A MovieGoer can only read database records and create certain records (eg. reviews)
+ */
 public class MovieGoer implements Serializable {
     private String name;
     private String mobile;

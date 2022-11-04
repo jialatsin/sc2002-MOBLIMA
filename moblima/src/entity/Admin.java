@@ -2,6 +2,10 @@ package entity;
 
 import java.io.Serializable;
 
+/*
+ * Represents an Admin with access to system settings
+ * Adminstrators have the ability create, update, delete database records
+ */
 public class Admin implements Serializable {
     private String username;
     private String password;

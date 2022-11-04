@@ -2,10 +2,15 @@ package entity;
 
 import java.io.Serializable;
 
-import entity.Constants.CinemaClass;
+import entity.Enumerators.CinemaClass;
 
+/*
+ * Represents a Cinema that belongs to a Cineplex
+ */
 public class Cinema implements Serializable {
+    /* Cinema code identifier */
     private String code;
+    /* Seating layout template */
     private SeatingLayout seatingLayout;
     private CinemaClass cinemaClass;
 
@@ -28,6 +33,7 @@ public class Cinema implements Serializable {
         this.code = code;
     }
 
+    /* Get the seating layout template for this Cinema */
     public SeatingLayout getSeatingLayout() {
         return (SeatingLayout) seatingLayout.clone();
     }

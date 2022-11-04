@@ -18,10 +18,10 @@ import entity.Seat;
 import entity.SeatingLayout;
 import entity.Showing;
 import entity.Ticket;
-import entity.Constants.Age;
-import entity.Constants.CinemaClass;
-import entity.Constants.Day;
-import entity.Constants.MovieType;
+import entity.Enumerators.Age;
+import entity.Enumerators.CinemaClass;
+import entity.Enumerators.Day;
+import entity.Enumerators.MovieType;
 
 public class BookingUI {
     private static PriceController priceController = new PriceController();
