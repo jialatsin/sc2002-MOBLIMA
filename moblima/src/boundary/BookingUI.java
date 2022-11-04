@@ -32,10 +32,11 @@ public class BookingUI {
 
     public static void main() {
         Showing showing = null;
-        do {
-            System.out.println("\n===== TICKET BOOKING =====");
-            showing = UserHandler.getShowingFromUser();
-        } while (showing == null);
+        System.out.println("\n===== TICKET BOOKING =====");
+        showing = UserHandler.getShowingFromUser();
+        if (showing == null) {
+            return;
+        }
 
         SeatingLayout seatingAvailability = showing.getSeatingAvailability();
 

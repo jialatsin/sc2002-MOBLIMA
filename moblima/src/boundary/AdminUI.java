@@ -6,7 +6,10 @@ public class AdminUI {
     private static AdminController adminController = new AdminController();
 
     public static void main() {
-        login();
+        boolean isLoggedIn = login();
+        if (!isLoggedIn) {
+            return;
+        }
 
         int selection;
         do {
@@ -37,21 +40,21 @@ public class AdminUI {
         } while (true);
     }
 
-    private static void login() {
+    private static boolean login() {
         boolean isLoggedIn = false;
         System.out.println("===== ADMIN LOGIN =====");
-        do {
-            System.out.println("Enter username:");
-            String usernameInput = InputHandler.scanString();
-            System.out.println("Enter password:");
-            String passwordInput = InputHandler.scanString();
+        System.out.println("Enter username:");
+        String usernameInput = InputHandler.scanString();
+        System.out.println("Enter password:");
+        String passwordInput = InputHandler.scanString();
 
-            isLoggedIn = adminController.loginValidation(usernameInput, passwordInput);
-            if (isLoggedIn) {
-                System.out.println("Login successful!");
-            } else {
-                System.out.println("Login failed!");
-            }
-        } while (!isLoggedIn);
+        isLoggedIn = adminController.loginValidation(usernameInput, passwordInput);
+        if (isLoggedIn) {
+            System.out.println("Login successful!");
+            return true;
+        } else {
+            System.out.println("Login failed!");
+            return false;
+        }
     }
 }
