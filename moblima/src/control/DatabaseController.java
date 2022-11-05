@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * database file.
  * Inherited by all Controller classes with database storage.
  */
-public class DatabaseController<DataType> {
+public abstract class DatabaseController<DataType> {
     /** File path name of database file to access. */
     private String filePath;
 
