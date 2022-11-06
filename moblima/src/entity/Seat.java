@@ -34,6 +34,14 @@ public class Seat implements Serializable {
         this.status = status;
     }
 
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
+    }
+
     @Override
     public String toString() {
         if (status == SeatStatus.UNOCCUPIED) {

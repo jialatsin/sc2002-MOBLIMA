@@ -20,6 +20,14 @@ public class Review implements Serializable {
         return reviewText;
     }
 
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public void setReviewText(String reviewText) {
+        this.reviewText = reviewText;
+    }
+
     @Override
     public String toString() {
         StringBuffer stars = new StringBuffer();
