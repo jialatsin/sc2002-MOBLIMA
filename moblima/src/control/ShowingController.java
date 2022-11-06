@@ -96,7 +96,7 @@ public class ShowingController extends DatabaseController<Showing> {
      * Search for Showings with specified Cineplex in the Showing database.
      * Overloaded method.
      * 
-     * @param movie Selected Cineplex
+     * @param cineplex Selected Cineplex
      * @return ArrayList of matching showings if found, else null
      */
     public ArrayList<Showing> findShowings(Cineplex cineplex) {
@@ -158,7 +158,7 @@ public class ShowingController extends DatabaseController<Showing> {
      * Updates the selected showing's entry in Showing database with the new
      * attribute.
      * 
-     * @param movie             Selected showing
+     * @param showing             Selected showing
      * @param attribute         Showing attribute to be updated
      * @param newAttributeValue New attribute value
      */

@@ -24,7 +24,7 @@ public class PriceController extends DatabaseController<Map<PriceType, Double>> 
      * @param day         Type of Day
      * @param movieType   Type of movie
      * @param cinemaClass Class of cinema
-     * @param Age         Age category of MovieGoer
+     * @param age         Age category of MovieGoer
      * @return Calculated price of ticket
      */
     public double calculatePriceType(Day day, MovieType movieType, CinemaClass cinemaClass, Age age) {

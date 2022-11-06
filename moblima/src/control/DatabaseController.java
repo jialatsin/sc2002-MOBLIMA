@@ -29,7 +29,6 @@ public abstract class DatabaseController<DataType> {
      * database file.
      * 
      * @param data Data object to be added into database
-     * @throws IOException
      */
     public void addToDatabase(DataType data) {
         try {
@@ -55,8 +54,6 @@ public abstract class DatabaseController<DataType> {
      * If database file is not found, returns an empty list.
      * 
      * @return ArrayList of data objects if found, else empty list
-     * @throws IOException
-     * @throws ClassNotFoundException
      */
     @SuppressWarnings("unchecked")
     public ArrayList<DataType> readFromDatabase() {
@@ -75,7 +72,6 @@ public abstract class DatabaseController<DataType> {
      * Overwrites the existing database file with given new list of data objects.
      * 
      * @param dataList List of data objects to overwrite database with
-     * @throws IOException
      */
     public void overwriteDatabase(ArrayList<DataType> dataList) {
         try {

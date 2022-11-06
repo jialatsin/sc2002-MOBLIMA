@@ -76,7 +76,7 @@ public class UserHandler {
      * Prompts user to input a list of cast members (at least 2) until correct input
      * is given.
      * 
-     * @return Valid ArrayList<String> of cast members
+     * @return Valid list of cast members
      */
     public static ArrayList<String> getCastFromUser() {
         int selection;
@@ -97,7 +97,7 @@ public class UserHandler {
      * Prompts user to input a list of genres until correct input
      * is given.
      * 
-     * @return Valid ArrayList<String> of Genres
+     * @return Valid list of genres
      */
     public static ArrayList<String> getGenresFromUser() {
         int selection;

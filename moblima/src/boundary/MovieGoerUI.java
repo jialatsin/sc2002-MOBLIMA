@@ -68,7 +68,7 @@ public class MovieGoerUI {
     /**
      * Prompts user for a movie and prints all attributes of the Movie.
      * Overall reviewer rating will only be displayed if there are more than ONE
-     * individual rating, else “NaN” is displayed.
+     * individual rating, else 'NaN' is displayed.
      */
     public static void viewMovieDetails() {
         Movie movie = UserHandler.getMovieByTitleFromUser();
