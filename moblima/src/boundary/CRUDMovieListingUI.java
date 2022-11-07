@@ -12,12 +12,24 @@ import entity.Showing;
 import entity.Enumerators.ContentRating;
 import entity.Enumerators.MovieType;
 
-/** Admin interface to create, update, delete, list Movies. */
+/**
+ * It is an Admin interface to create, update, delete, list Movies.
+ * @author OOP LAB Group 4
+ * @version 8/11/2022
+ */
 public class CRUDMovieListingUI {
+	/**
+	 * The movie controller
+	 */
     private static MovieController movieController = new MovieController();
+    /**
+	 * The showing controller
+	 */
     private static ShowingController showingController = new ShowingController();
 
-    /** Main Menu for CRUD Movie Listings. */
+    /** 
+     * The main Menu for CRUD Movie Listings, to create, update, delete, search movie listing and return to admin menu if desired.  
+     */
     public static void main() {
         int selection;
         do {
@@ -49,8 +61,7 @@ public class CRUDMovieListingUI {
     }
 
     /**
-     * Creates a Movie with user inputted attributes and adds it to the Movie
-     * database.
+     * Creates a Movie with user inputted attributes and adds it to the Movie database.
      */
     private static void createMovieListing() {
         System.out.println("\nCREATING A MOVIE LISTING...");
@@ -82,8 +93,7 @@ public class CRUDMovieListingUI {
     }
 
     /**
-     * Updates a Movie with user inputted new attribute and updates the Movie's
-     * entry in the Movie database.
+     * Updates a Movie with user inputted new attribute and updates the Movie's entry in the Movie database.
      */
     private static void updateMovieListing() {
         System.out.println("\nUPDATING A MOVIE LISTING...");
@@ -193,8 +203,7 @@ public class CRUDMovieListingUI {
     }
 
     /**
-     * Deletes a Movie with selected movie id and deletes the Movie's entry in the
-     * Movie database.
+     * Deletes a Movie with selected movie id and deletes the Movie's entry in the Movie database.
      */
     private static void deleteMovieListing() {
         System.out.println("\nDELETING A MOVIE LISTING...");
