@@ -1,19 +1,24 @@
 package control;
 
 import java.util.ArrayList;
-
 import entity.Booking;
-
+/**
+ * It Represents the Booking Controller 
+ * @author OOP SSP1 Lab Group 4
+ * @version 8/11/2022
+ */
 public class BookingController extends DatabaseController<Booking> {
-    public BookingController() {
+	/** 
+     * File path name of booking database file to access. 
+     */
+	public BookingController() {
         super(MainController.FILEPATH_BOOKING);
     }
 
     /**
      * Search for bookings by given email in the Booking database.
-     * 
-     * @param email Email of the MovieGoer
-     * @return ArrayList of matching Bookings if found, else null
+     * @param email         The email of the movieGoer
+     * @return ArrayList    The array list of matching Bookings if found, else null
      */
     public ArrayList<Booking> findBookings(String email) {
         ArrayList<Booking> bookings = readFromDatabase();
