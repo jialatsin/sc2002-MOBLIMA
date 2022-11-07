@@ -8,22 +8,27 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * Used to take user input of various primitive or low-level datatypes.
- * Implemented for static declaration of Scanner, to prevent multiple Scanners
- * from being created.
+ * It is used to take user input of various primitive or low-level datatypes, and it is implemented for static declaration of Scanner, to prevent multiple Scanners from being created.
+ * @author OOP LAB Group 4
+ * @version 8/11/2022
  */
 public class InputHandler {
-    /* Scanner must only be initialized once. */
+    /**
+     * Scanner must only be initialized once. 
+     */
     private static Scanner sc = new Scanner(System.in);
-
+    /**
+     * It is for the date time format
+     */
     private static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-
+    /**
+     * It is for the date format
+     */
     private static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     /**
-     * Prompts user for an integer input until correct input is given.
-     * 
-     * @return Valid int
+     * Prompts user for an integer input until correct input is given.     * 
+     * @return input It returns Valid int 
      */
     public static int scanInt() {
         int input;
@@ -42,9 +47,8 @@ public class InputHandler {
     }
 
     /**
-     * Prompts user for an double input until correct input is given.
-     * 
-     * @return Valid double
+     * Prompts user for an double input until correct input is given.     * 
+     * @return input It returns Valid double
      */
     public static double scanDouble() {
         double input;
@@ -64,8 +68,7 @@ public class InputHandler {
 
     /**
      * Prompts user for a boolean input until correct input is given.
-     * 
-     * @return Valid boolean
+     * @return input It returns Valid boolean
      */
     public static boolean scanBoolean() {
         boolean input;
@@ -85,8 +88,7 @@ public class InputHandler {
 
     /**
      * Prompts user for an character input until correct input is given.
-     * 
-     * @return Valid char
+     * @return input It returns Valid char
      */
     public static char scanChar() {
         String input = "";
@@ -103,8 +105,7 @@ public class InputHandler {
 
     /**
      * Prompts user for a string input until correct input is given.
-     * 
-     * @return Valid String
+     * @return input It returns Valid string
      */
     public static String scanString() {
         String input = "";
@@ -121,8 +122,7 @@ public class InputHandler {
 
     /**
      * Prompts user for a mobile number of 8 digits until correct input is given.
-     * 
-     * @return Valid String containing mobile number
+     * @return input It returns Valid string which contains a 8 digit mobile number
      */
     public static String scanMobileNumber() {
         String pattern = "\\d{8}";
@@ -140,8 +140,7 @@ public class InputHandler {
 
     /**
      * Prompts user for an email address until correct input is given.
-     * 
-     * @return Valid String containing email address
+     * @return input It returns Valid String containing email address
      */
     public static String scanEmail() {
         String pattern = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
@@ -158,10 +157,9 @@ public class InputHandler {
     }
 
     /**
-     * Prompts user for a datetime of format dd/MM/yyyy HH:mm until correct input is
-     * given.
+     * Prompts user for a datetime of format dd/MM/yyyy HH:mm until correct input is given.
      * 
-     * @return Valid LocalDateTime
+     * @return input It returns Valid LocalDateTime in the ' dd/MM/yyyy HH:mm ' format
      */
     public static LocalDateTime scanDateTime() {
         String input = "";
@@ -179,10 +177,8 @@ public class InputHandler {
     }
 
     /**
-     * Prompts user for a datetime of format dd/MM/yyyy until correct input is
-     * given.
-     * 
-     * @return Valid LocalDate
+     * Prompts user for a datetime of format dd/MM/yyyy until correct input is given.
+     * @return input It returns Valid LocalDateTime in the ' dd/MM/yyyy ' format
      */
     public static LocalDate scanDate() {
         String input = "";
@@ -198,11 +194,17 @@ public class InputHandler {
         }
         return date;
     }
-
+    /**
+     * Get the date and time in this format ' dd/MM/yyyy HH:mm '
+     * @return dateTimeFormat
+     */
     public static DateTimeFormatter getDateTimeFormat() {
         return dateTimeFormat;
     }
-
+    /**
+     * Get the date in this format ' dd/MM/yyyy '
+     * @return dateFormat 
+     */
     public static DateTimeFormatter getDateFormat() {
         return dateFormat;
     }
