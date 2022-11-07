@@ -1,0 +1,80 @@
+Hi this is SS7, Group 4 
+My group has me, Gerald, Yu Juan, Jian Le, and Tushar
+
+*Admin module*
+My name is Josh, I'm working for MOBLIMA and this is what i do in a day
+*Login*
+First, let me login to MOBLIMA with my admin account 
+
+*Creating movie listing*
+If there's a new movie that's coming out and we just got the details, I'll need to create a movie listing.
+This is how i'll go about creating a movie listing
+Each individual movie ID is unique so if i input a duplicated movie ID, an error will pop out and i won't be able to proceed
+Input duplicated ID
+I'll input the data given by my boss this time to create this new movie listing
+Entering Details**
+
+*Update movie listing*
+When a movie detail is first released to us, the data may not be complete, we will still create the movie listing and update the data later.
+When we received the updated data, this is how i'll update the movie listing
+Each individual movie ID is unique so if i input a duplicated movie ID, an error will pop out and i won't be able to proceed
+**Update casts and release date attributes
+
+*Remove movie listing*
+If a movie that is expected to be released but the production was stopped halfway, 
+we'll need to delete the movie listing from our system
+
+*Create movies showtimes*
+Every sunday, we have to create movie showtimes for the following week so that users will be able to book the tickets 
+from our platform. This is what we do to create individual movie showtimes for a specfic cinema 
+
+*Update movies showtimes*
+If there is an unexpected event or typo when inputting the data, we are able to update the movie showtimes to resolve the issue
+
+*Remove movies showtimes*
+If a movie is not doing well, and we would like to remove it so that we can fit in other movies, we can do so by first removing the movie showtimes before adding in the new movie showtime
+
+*Configure system settings*
+Adding holidays
+If the government declares a new holiday, we are required to add in the holiday dates only then 
+the tickets for the price will be charged accordingly
+
+*Removing holidays*
+If there was a mistake on the holiday dates and it will accidentally added, we are able to remove it using this function
+
+*Viewing holidays*
+I'm able to see all the holiday dates i have in my database when i press this
+
+*Manging Ticket prices*
+As MOBLIMA is a for profit organisation, due to increasing manpower costs and inflation.
+Sometimes we are tasked by our boss to increase the prices of the tickets
+
+Adding admin account
+If there's a new staff, we are required to create an admin account for him/her and this is how we will do it
+
+Deleting admin account
+If i were to leave the company today, the other staff would delete my account using this function so that i will no longer be able to access the system.
+
+And this is what i do in a day as a staff at MOBLIMA, hope to see you coming to watch movies with us!
+
+Movie-goer module
+Follow lucas on his journey as he uses MOBLIMA system to book tickets
+
+*Search/List movie*
+Searching for a movie on MOBLIMA has never been easier, with MOBLIMA you are able to list all the movies 
+that has been shown in MOBLIMA threatres or movies that are coming soon, or search for a specific movie that you are interested in
+
+*View movie details – including reviews and ratings*
+Lucas is able to decide whether to watch a movie or not by looking through each movie details, and see their review and ratings left by patrons that watched the movie previously
+
+*Check seat availability and selection of seat/s.
+If Lucas is interested in a movie, he is able to see the seat avaliablity and select the seats that he wants.
+
+*Book and purchase ticket
+After choosing the seats, Lucas will be able to proceed to book and purchase the tickets for the movie
+
+*View booking history
+Lucas can view his booking history by typing in the email he used when to book and purchase the tickets. His girlfriend would be able to see if there are any movies he watched without her with just his email
+
+*List the Top 5 ranking by ticket sales OR by overall reviewers’ ratings*
+MOBLIMA system allows lucas to check the top 5 movies by ticket sales or overall reviewer ratings
