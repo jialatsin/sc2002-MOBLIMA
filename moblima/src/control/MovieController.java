@@ -1,7 +1,6 @@
 package control;
 
 import java.time.LocalDate;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -9,23 +8,25 @@ import java.util.Comparator;
 import entity.*;
 import entity.Enumerators.ContentRating;
 import entity.Enumerators.MovieType;
+
 /**
- * It Represents the Movie Controller 
- * @author OOP SSP1 Lab Group 4
- * @version 8/11/2022
+ * Represents a MovieController which contains the logic for handling Movie
+ * data.
  */
 public class MovieController extends DatabaseController<Movie> {
-	/** 
-     * File path name of movie database file to access. 
+    /**
+     * Creates a MovieController with the file path of the movie database file
+     * to access.
      */
-	public MovieController() {
+    public MovieController() {
         super(MainController.FILEPATH_MOVIE);
     }
 
     /**
-     * Search for a movie by its movie id in the Movie database.
-     * @param id The Movie id 
-     * @return movie If successful, it returns the movie by matching its unique movieid with an id in the database, else null value is returned
+     * Returns a movie by searching with its movie id in the movie database.
+     * 
+     * @param id Id of movie to be searched.
+     * @return Returns movie with matching id if found in database, else null.
      */
     public Movie findMovie(int id) {
         ArrayList<Movie> movies = readFromDatabase();
@@ -38,9 +39,11 @@ public class MovieController extends DatabaseController<Movie> {
     }
 
     /**
-     * Search for movies with titles with matching keywords in the Movie database.
-     * @param title The movie title
-     * @return moviesResult  Return an array list of Movies if found, else null
+     * Returns a list of movies by searching with titles containing matching
+     * keywords in the movie database.
+     * 
+     * @param title Title of movie to be searched.
+     * @return Returns list of matching movies if found in database, else null.
      */
     public ArrayList<Movie> findMovies(String title) {
         ArrayList<Movie> movies = readFromDatabase();
@@ -58,9 +61,10 @@ public class MovieController extends DatabaseController<Movie> {
     }
 
     /**
-     * Delete the movie in the Database file, based on the movie id attribute passed
-     * @param id The movie id
-     * @return boolean It returns true on successful deletion of movie in the database file, based on the movie id attribute passed
+     * Deletes movie by searching with the given movie id in the movie database.
+     * 
+     * @param id Id of movie to be deleted.
+     * @return Returns true if movie is successfully deleted, else false.
      */
     public boolean deleteMovie(int id) {
         ArrayList<Movie> movies = readFromDatabase();
@@ -75,71 +79,54 @@ public class MovieController extends DatabaseController<Movie> {
     }
 
     /**
-     * It is defined for readability and easier referencing of Movie attributes in the order of selection options provided to user when updating movie.
+     * Defined for readability and easier referencing of Movie attributes.
+     * In the order of selection options provided to user when updating movie
      * attributes.
-     * @author OOP SSP1 Lab Group 4
-     * @version 8/11/2022
      */
     public enum MovieAttribute {
-    	/**
-    	 * The Movie ID 
-    	 */
+        /** Unique identifier for the movie. */
         ID,
-        /**
-    	 * The title of the movie
-    	 */
-        TITLE, 
-        /**
-    	 * A brief summary of the movie
-    	 */
+        /** Title of the movie. */
+        TITLE,
+        /** Synopsis of the movie. */
         SYNOPSIS,
-        /**
-    	 * The names of the directors of the movie
-    	 */
+        /** Director of the movie. */
         DIRECTOR,
-    	 /**
-     	 * The names of the cast members of the movie
-     	 */
+        /** List of cast members for the movie. */
         CAST,
-     	/**
-     	 * The genres of the movie
-     	 */
-     	 GENRES,
-     	 /**
-     	 * The release date of the movie
-     	 */
-     	 RELEASE_DATE,
-     	/**
-     	 * The end date of the movie, as in from when the movie will stop being shown in the cinema
-     	 */
-     	 END_DATE,
-     	/**
-     	 * The content rating of the movie as in whether it is PG, NC17 etc.
-     	 */
-     	 CONTENT_RATING,
-     	 /**
-     	 *  The type of movie as in whether it is Regular 2D, Blockbuster 3D etc.
-     	 */
-     	 MOVIE_TYPE,
-     	/**
-     	 * The ticket sales of the movie
-     	 */
-     	 TICKET_SALES;
-    	/**
-    	 * CHECK THIS AGAIN
-    	 * @param i To store the user selection 
-    	 * @return values The values generated according to the chosen i. 
-    	 */
+        /** List of genres for the movie. */
+        GENRES,
+        /** Release date of the movie. */
+        RELEASE_DATE,
+        /** Date when the movie stops showing. */
+        END_DATE,
+        /** Content rating of the movie (eg. PG, NC17). */
+        CONTENT_RATING,
+        /** Type of the movie (eg. Blockbuster 3D). */
+        MOVIE_TYPE,
+        /** Total tickets sold for the movie. */
+        TICKET_SALES;
+
+        /**
+         * Returns the mapping of the user input selection to the attribute enumerator.
+         * User selection starts from 1, but enumerator counting starts from 0.
+         * 
+         * @param i Input user selection.
+         * @return Returns the mapping of the user input selection to the attribute
+         *         enumerator.
+         */
         public static MovieAttribute get(int i) {
             return values()[i - 1]; // User selection starts from 1, but enum counting starts from 0
         }
     }
 
     /**
-     * It updates the selected movie's entry in Movie database with the new attribute.
-     * @param movie             The name of the selected movie
-     * @param attribute         The movie attribute to be updated
-     * @param newAttributeValue The new attribute value
+     * Updates the selected movie's entry in the movie database with the given new
+     * attribute.
+     * 
+     * @param movie             Movie to be updated.
+     * @param attribute         Movie attribute to be updated.
+     * @param newAttributeValue New attribute value.
      */
     @SuppressWarnings("unchecked")
     public void updateMovieAttribute(Movie movie, MovieAttribute attribute, Object newAttributeValue) {
@@ -186,9 +173,11 @@ public class MovieController extends DatabaseController<Movie> {
     }
 
     /**
-     * It adds the given Review to the given Movie's entry and updates the movie's average rating in Movie database.
-     * @param movie  The name of the selected movi
-     * @param review The New review to be added for the movie 
+     * Adds the given review to the given movie's entry and updates the movie's
+     * average rating in the movie database.
+     * 
+     * @param movie  Selected movie to be updated.
+     * @param review New review to be added for the movie.
      */
     public void addReviewToMovie(Movie movie, Review review) {
         ArrayList<Movie> movies = readFromDatabase();
@@ -208,9 +197,11 @@ public class MovieController extends DatabaseController<Movie> {
     }
 
     /**
-     * It sorts given list of movies in descending order based on its averageReviewRating attribute.
-     * @param movies The array list of movies
-     * @return movies it returns an sorted arraylist of movies 
+     * Sorts the given list of movies in descending order based on its
+     * averageReviewRating attribute.
+     * 
+     * @param movies List of movies to be sorted.
+     * @return Returns a list of movies sorted by rating.
      */
     public ArrayList<Movie> sortByRating(ArrayList<Movie> movies) {
         Collections.sort(movies, Collections.reverseOrder(new Comparator<Movie>() {
@@ -230,9 +221,11 @@ public class MovieController extends DatabaseController<Movie> {
     }
 
     /**
-     * It sorts given list of movies in descending order based on its ticketSales attribute.
-     * @param movies The array list of movies
-     * @return movies It returns an sorted arraylist of movies in descending order based on its ticketSales attribute.
+     * Sorts the given list of movies in descending order based on its
+     * ticketSales attribute.
+     * 
+     * @param movies List of movies to be sorted.
+     * @return Returns a list of movies sorted by ticket sales.
      */
     public ArrayList<Movie> sortByTicketSales(ArrayList<Movie> movies) {
         Collections.sort(movies, Collections.reverseOrder(new Comparator<Movie>() {

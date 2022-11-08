@@ -13,22 +13,22 @@ import entity.Enumerators.ContentRating;
 import entity.Enumerators.MovieType;
 
 /**
- * It is an Admin interface to create, update, delete, list Movies.
- * @author OOP LAB Group 4
- * @version 8/11/2022
+ * Represents the admin interface to create, update, delete, and list movies.
  */
 public class CRUDMovieListingUI {
-	/**
-	 * The movie controller
-	 */
+    /**
+     * The movie controller to be referenced.
+     */
     private static MovieController movieController = new MovieController();
     /**
-	 * The showing controller
-	 */
+     * The showing controller to be referenced.
+     */
     private static ShowingController showingController = new ShowingController();
 
-    /** 
-     * The main Menu for CRUD Movie Listings, to create, update, delete, search movie listing and return to admin menu if desired.  
+    /**
+     * Main menu for an admin for CRUD of movie listings. Displays 5 options: Create
+     * Movie Listing, Update Movie Listing, Delete Movie Listing, Search/List
+     * Movies, Return to Admin Menu.
      */
     public static void main() {
         int selection;
@@ -61,7 +61,7 @@ public class CRUDMovieListingUI {
     }
 
     /**
-     * Creates a Movie with user inputted attributes and adds it to the Movie database.
+     * Prompts user to create a new movie entry in the movie database.
      */
     private static void createMovieListing() {
         System.out.println("\nCREATING A MOVIE LISTING...");
@@ -93,7 +93,8 @@ public class CRUDMovieListingUI {
     }
 
     /**
-     * Updates a Movie with user inputted new attribute and updates the Movie's entry in the Movie database.
+     * Prompts user to select and update a movie entry with a new attribute value in
+     * the movie database.
      */
     private static void updateMovieListing() {
         System.out.println("\nUPDATING A MOVIE LISTING...");
@@ -203,7 +204,7 @@ public class CRUDMovieListingUI {
     }
 
     /**
-     * Deletes a Movie with selected movie id and deletes the Movie's entry in the Movie database.
+     * Prompts user to select and delete a movie entry in the movie database.
      */
     private static void deleteMovieListing() {
         System.out.println("\nDELETING A MOVIE LISTING...");

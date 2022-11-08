@@ -3,24 +3,28 @@ package control;
 import java.util.ArrayList;
 
 import entity.*;
+
 /**
- * It Represents the Admin Controller 
- * @author OOP SSP1 Lab Group 4
- * @version 8/11/2022
+ * Represents an AdminController which contains the logic for handling Admin
+ * data.
  */
 public class AdminController extends DatabaseController<Admin> {
-	/** 
-     * File path name of admin database file to access. 
+    /**
+     * Creates an AdminController with the file path of the admin database file to
+     * access.
      */
     public AdminController() {
         super(MainController.FILEPATH_ADMIN);
     }
 
     /**
-     * Verifying an user's logging in (admin/movie goer) by checking with the database
-     * @param usernameInput The username input by the admin
-     * @param passwordInput The password input by the admin
-     * @return boolean      return true if user has been verified based on the email and password entered
+     * Verifies whether an admin account exists in the admin database with the given
+     * username and password.
+     * 
+     * @param usernameInput Username of admin to be verified.
+     * @param passwordInput Password of admin to be verified.
+     * @return Returns true if an admin with the given username and password has
+     *         been successfully found in the database, else false.
      */
     public boolean loginValidation(String usernameInput, String passwordInput) {
         ArrayList<Admin> adminData = readFromDatabase();
@@ -33,10 +37,13 @@ public class AdminController extends DatabaseController<Admin> {
         }
         return false;
     }
+
     /**
-     * Extracting Information of the admin from the username input from the Database
-     * @param username Read admins username from Database
-     * @return admin   If successful, it extracts the information of the admin by matching it with a username in the database, else null value is returned. 
+     * Returns an admin by searching with the given username in the
+     * admin database.
+     * 
+     * @param username Username of admin to search for.
+     * @return Returns admin with matching username if found in database, else null.
      */
     public Admin getAdminByUsername(String username) {
         ArrayList<Admin> admins = readFromDatabase();
@@ -47,10 +54,12 @@ public class AdminController extends DatabaseController<Admin> {
         }
         return null;
     }
+
     /**
-     * Deletes the username of the admin from the database
-     * @param username   The username of the admin 
-     * @return boolean   It returns true on successful deletion of admin username
+     * Searches for and deletes admin with the given username in the admin database.
+     * 
+     * @param username Username of admin to be deleted.
+     * @return Returns true if admin is uccessfully deleted, else false.
      */
     public boolean deleteAdminByUsername(String username) {
         ArrayList<Admin> admins = readFromDatabase();

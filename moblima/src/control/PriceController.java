@@ -1,7 +1,6 @@
 package control;
 
 import java.util.ArrayList;
-
 import java.util.Map;
 
 import entity.PriceType;
@@ -9,27 +8,32 @@ import entity.Enumerators.Age;
 import entity.Enumerators.CinemaClass;
 import entity.Enumerators.Day;
 import entity.Enumerators.MovieType;
+
 /**
- * It Represents the Price Controller 
- * @author OOP SSP1 Lab Group 4
- * @version 8/11/2022
+ * Represents a PriceController which contains the logic for handling Price
+ * data.
  */
 public class PriceController extends DatabaseController<Map<PriceType, Double>> {
-	/** 
-     * File path name of price database file to access. 
+    /**
+     * Creates a PriceController with the file path of the price database file
+     * to access.
      */
-	public PriceController() {
+    public PriceController() {
         super(MainController.FILEPATH_PRICE);
     }
 
     /**
-     * It Calculates the price of a showing ticket according to the current type of Day, movieType, cinemaClass and Age category. Regular 2D MovieType is taken as the base price, while additional fees added onto the base price depending on the type of movie, class of cinema, age of
-     * movie-goer and day of the week/public holiday.
-     * @param day         The type of day as in, whether it is a Weekday, Weekend or a Holiday.
-     * @param movieType   The type of movie as in whether it is a Regular 2D, Blockbuster 3D etc. 
-     * @param cinemaClass The class of cinema as in whether it is a Platinum, Gold or Standard. 
-     * @param age         The Age category of the MovieGoer.
-     * @return price      The calculated price of the movie ticket.
+     * Calculates the price of a showing ticket according to the current
+     * type of day, movie type, cinema class and age category.
+     * Regular 2D movie type is taken as the base price, while additional fees added
+     * onto the base price depending on the type of movie, cinema class, age
+     * category of moviegoer and day of the week/public holiday.
+     * 
+     * @param day         Type of day the showing is held on.
+     * @param movieType   Type of the movie being shown.
+     * @param cinemaClass Class of the cinema where the showing is being held.
+     * @param age         Age category of moviegoer purchasing the ticket.
+     * @return Returns the calculated price of the movie ticket.
      */
     public double calculatePriceType(Day day, MovieType movieType, CinemaClass cinemaClass, Age age) {
         ArrayList<Map<PriceType, Double>> priceMaps = readFromDatabase();
@@ -48,9 +52,12 @@ public class PriceController extends DatabaseController<Map<PriceType, Double>> 
     }
 
     /**
-     * It updates the price in Price database of a given class that implements PriceType that determines the calculated price of a ticket.
-     * @param priceType It is selected class that implements PriceType
-     * @param price     The corresponding price of the ticket
+     * Updates the price in the price database of a given class (eg. Blockbuster 3D,
+     * Senior, Holiday) that implements PriceType, which determines the calculated
+     * price of a ticket.
+     * 
+     * @param priceType Selected class that implements PriceType.
+     * @param price     Price mapped to the class.
      */
     public void updatePriceType(PriceType priceType, double price) {
         ArrayList<Map<PriceType, Double>> priceMaps = readFromDatabase();
@@ -61,8 +68,12 @@ public class PriceController extends DatabaseController<Map<PriceType, Double>> 
     }
 
     /**
-     * Gets all the classes implementing PriceType and their corresponding prices that determine the calculated price of a ticket.
-     * @return priceMaps The total calculated price of the ticket
+     * Gets all the classes (eg. Blockbuster 3D, Senior, Holiday) implementing
+     * PriceType and their corresponding prices that determine the calculated price
+     * of a ticket.
+     * 
+     * @return Returns a price list with every class mapped to their corresponding
+     *         price.
      */
     public Map<PriceType, Double> getPriceList() {
         ArrayList<Map<PriceType, Double>> priceMaps = readFromDatabase();

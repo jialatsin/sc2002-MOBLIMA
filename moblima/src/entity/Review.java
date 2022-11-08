@@ -1,61 +1,65 @@
 package entity;
 
 import java.io.Serializable;
-/**
- * It Represents a Review added by MovieGoer to a Movie
- * @author OOP SSP1 Lab Group 4
- * @version 7/11/2022
- */
+
+/** Represents a Review added by a moviegoer to a movie. */
 public class Review implements Serializable {
-    /**
-     * The rating of the movie
-     */
-	private int rating;
-	/**
-	 * The review of the movie
-	 */
+    /** Rating given for this review. */
+    private int rating;
+    /** Comment given for this review. */
     private String reviewText;
+
     /**
-     * Creates a Review with these given attributes
-     * Review information consisting of a a rating and review text
-     * @param rating      The rating of the movie
-     * @param reviewText  The review of the movie
+     * Creates a Review with the given attributes.
+     * 
+     * @param rating     The rating for this review.
+     * @param reviewText The comment for this review.
      */
     public Review(int rating, String reviewText) {
         this.rating = rating;
         this.reviewText = reviewText;
     }
+
     /**
-     * Get the rating of the movie
-     * @return rating The rating of the movie
+     * Gets the rating for this review.
+     * 
+     * @return Rating for this review.
      */
     public int getRating() {
         return rating;
-    }	
+    }
+
     /**
-     * The review text of the movie
-     * @return review The review text of the movie
+     * Gets the comment for this review.
+     * 
+     * @return Comment for this review.
      */
     public String getReviewText() {
         return reviewText;
     }
+
     /**
-     * The rating of the movie
-     * @param rating The rating of the movie
+     * Changes the rating for this review.
+     * 
+     * @param rating The input rating.
      */
     public void setRating(int rating) {
         this.rating = rating;
     }
+
     /**
-     * The review text of the movie
-     * @param reviewText The review text of the movie
+     * Changes the comment for this review.
+     * 
+     * @param reviewText The input comment.
      */
     public void setReviewText(String reviewText) {
         this.reviewText = reviewText;
     }
+
     /**
-     * String displaying the rating and the review text of the movie.
-     * @return string displaying the rating and the review text of the movie.
+     * Returns a string containing this review's rating and comment.
+     * 
+     * @return String containing this review's rating and comment.
      */
     @Override
     public String toString() {
@@ -66,9 +70,12 @@ public class Review implements Serializable {
         }
         return " [rating = " + stars.toString() + ", reviewText = \"" + reviewText + "\"]";
     }
+
     /**
-     * Compare 2 Review Instances to check if they are identical
-     * @return boolean      Return true if both reviews are identical based on their rating and review text, else false
+     * Compares 2 Review instances to check if they are identical.
+     * 
+     * @return Returns true if all attributes of both reviews are equal, else
+     *         false.
      */
     @Override
     public boolean equals(Object obj) {
@@ -80,4 +87,3 @@ public class Review implements Serializable {
         return false;
     }
 }
-

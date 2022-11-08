@@ -3,40 +3,34 @@ package entity;
 import java.io.Serializable;
 
 import entity.Enumerators.Age;
-import boundary.InputHandler;
-/**
-* Represents a Ticket for a Showing
-* Created when making a booking 
-* @author OOP SSP1 Lab Group 4
-* @version 07/11/2022
-*/
+
+/** Represents a Ticket for a showing. Created when making a booking */
 public class Ticket implements Serializable {
-    /**
-     * showing is null 
-     */
-	private Showing showing = null;
-	/**
-	 * Seat assigned to the moviegoer
-	 */
+    /** Showing assigned to this ticket. */
+    private Showing showing = null;
+    /** Seat assigned to the owner of this ticket. */
     private Seat seat;
-    /**
-     * Age of the moviegoer
-     */
+    /** Age category of the owner of this ticket. */
     private Age age;
+
     /**
+     * Creates a Ticket with the given attributes.
      * 
-     * @param showing The showing is initialized to null
-     * @param seat    The seat assigned to the moviegoer
-     * @param age     The age of the moviegoer
+     * @param showing The showing assigned to the ticket.
+     * @param seat    The seat assigned to the owner of the ticket.
+     * @param age     The age category of the owner of the ticket.
      */
     public Ticket(Showing showing, Seat seat, Age age) {
         this.showing = showing;
         this.seat = seat;
         this.age = age;
     }
+
     /**
-     * String to display age, ticket and seat of the movie-goer
-     * @return string to display age, ticket and seat of the movie-goer
+     * Returns a string containing the age category, assigned seat and showing for
+     * this ticket.
+     * 
+     * @return String containing age, seat and showing for this ticket.
      */
     @Override
     public String toString() {
@@ -44,44 +38,56 @@ public class Ticket implements Serializable {
                 + "\nSeat: " + (char) (seat.getColumn() + 'A') + seat.getRow()
                 + "\n" + showing;
     }
+
     /**
-     * Get the show time of the movie
-     * @return showing The show time of the movie
+     * Gets the showing for this ticket.
+     * 
+     * @return Showing for this ticket.
      */
     public Showing getShowing() {
         return showing;
     }
+
     /**
-     * The show time of the movie
-     * @param showing The show time of the movie
+     * Changes the showing for this ticket.
+     * 
+     * @param showing The input showing.
      */
     public void setShowing(Showing showing) {
         this.showing = showing;
     }
+
     /**
-     * Get the age of the movie-goer
-     * @return age The age of the movie-goer
+     * Gets the age category of the owner of this ticket.
+     * 
+     * @return age category of the owner of this ticket.
      */
     public Age getAge() {
         return age;
     }
+
     /**
-     * The age of the movie-goer
-     * @param age of the movie-goer
+     * Changes the age category of the owner of this ticket.
+     * 
+     * @param age The input age category.
      */
     public void setAge(Age age) {
         this.age = age;
     }
+
     /**
-     * Get the seat of the movie-goer
-     * @return seat The seat of the movie-goer
+     * Gets the seat assigned to this ticket.
+     * 
+     * @return Seat assigned to this ticket.
      */
     public Seat getSeat() {
         return seat;
     }
+
     /**
-     * The seat of the movie-goer
-     * @param seat The seat of the movie-goer
+     * Changes the seat assigned to this ticket.
+     * 
+     * @param seat The input seat.
      */
     public void setSeat(Seat seat) {
         this.seat = seat;

@@ -1,63 +1,68 @@
 package entity;
 
 import java.io.Serializable;
+
 /**
- * It represents an Admin with access to system settings and the adminstrators have the ability create, update, delete database records.
- * @author  OOP SSP1 Lab Group 4
- * @version 7/11/2022
+ * Represents an Admin with access to system settings.
+ * Adminstrators have the ability to create, update, delete database records.
  */
 public class Admin implements Serializable {
-    // username and password are private Strings
-	/**
-	 * username is the unique username of the admin
-	 */
-	
-	private String username;
-	/**
-	 * password is the secure password entered by the admin
-	 */
+    /** Unique username of this admin. */
+    private String username;
+    /** Password needed to login to this admin account. */
     private String password;
+
     /**
-     * Creates a admin login page with these given attributes
-     * @param username The Admin's username 
-     * @param password The Admin's password (unencrypted)
+     * Creates an Admin with the given attributes.
+     * 
+     * @param username The admin's username.
+     * @param password The admin's password (unencrypted).
      */
     public Admin(String username, String password) {
-    	
         this.username = username;
         this.password = password;
     }
+
     /**
-     * Get the unique username of admin
-     * @return username The unique username of admin
+     * Gets the unique username of this admin.
+     * 
+     * @return String containing this admin's username.
      */
     public String getUsername() {
         return username;
     }
+
     /**
-     * String for username of admin
-     * @param username The username input by admin
+     * Changes the username of this admin.
+     * 
+     * @param username The input username.
      */
     public void setUsername(String username) {
         this.username = username;
     }
+
     /**
-     * Get the password of admin
-     * @return password The password of the admin
+     * Gets the password of this admin.
+     * 
+     * @return String containing this admin's username.
      */
     public String getPassword() {
         return password;
     }
+
     /**
-     * String for password of admin
-     * @param password The password of the admin
+     * Changes the password of this admin.
+     * 
+     * @param password The input password.
      */
     public void setPassword(String password) {
         this.password = password;
     }
+
     /**
-     * String for displaying the admin username and password
-     * @return string displaying admin username and password 
+     * Returns a string containing this admin's username and password.
+     * 
+     * @return String containing this admin's username and password.
      */
     @Override
     public String toString() {
@@ -65,4 +70,3 @@ public class Admin implements Serializable {
     }
 
 }
-

@@ -5,19 +5,17 @@ import java.util.ArrayList;
 import control.MovieController;
 import entity.Movie;
 
-/** 
- * It is user interface to search for Movies, used by both Admin and MovieGoer.
- * @author OOP LAB Group 4
- * @version 8/11/2022
+/**
+ * Represents the user interface to search for movies, used by both admin and
+ * moviegoer.
  */
 public class SearchMovieUI {
-	/**
-	 * The movie controller
-	 */
+    /** The movie controller to be referenced. */
     private static MovieController movieController = new MovieController();
 
-    /** 
-     * It is a Menu for Search/List Movies displaying 3 options such as to search movies by title, list all movies and return to main menu. 
+    /**
+     * Main menu for searching movies. Displays 3 options: Search
+     * By Title, List All Movies, Return.
      */
     public static void main() {
         do {
@@ -42,7 +40,8 @@ public class SearchMovieUI {
     }
 
     /**
-     * Prompts user for a movie title and prints a list of all movies found in Movie database with matching title.
+     * Prompts user for a movie title and prints a list of all movies found in the
+     * movie database with matching titles.
      */
     public static void searchByTitle() {
         String title = UserHandler.getTitleFromUser();
@@ -58,9 +57,7 @@ public class SearchMovieUI {
         System.out.println("\n");
     }
 
-    /** 
-     * It prints a list of all the movies in the Movie database. 
-     */
+    /** Prints a list of all the movies in the movie database. */
     public static void listAllMovies() {
         ArrayList<Movie> movies = movieController.readFromDatabase();
         if (movies.isEmpty()) {

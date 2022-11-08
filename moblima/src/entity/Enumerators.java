@@ -1,264 +1,230 @@
 package entity;
 
-/**
- * Enumerators defined for readability and easier referencing
- * @author SSP1 Lab Group 4
- * @version 08/11/2022
- */
+/** Enumerators defined for readability and easier referencing. */
 public class Enumerators {
-	/**
-	 * The price type depends on the cinema class chosen by the movie-goer for the show. 
-	 * @author OOP SSP1 Lab Group 4
-	 * @version 8/11/2022
-	 */
+
+    /**
+     * Enumerators to define the various cinema classes.
+     * Implements {@link PriceType} as it affects the price of a movie ticket.
+     */
     public enum CinemaClass implements PriceType {
-    	/**
-    	 * The Platinum cinema class 
-    	 */
-    	PLATINUM("Platinum Class"),
-    	/**
-    	 * The Gold cinema class   
-    	 */
+        /** Platinum cinema class. */
+        PLATINUM("Platinum Class"),
+        /** Gold cinema class. */
         GOLD("Gold Class"),
-        /**
-    	 * The Standard cinema class   
-    	 */
+        /** Standard cinema class. */
         STANDARD("Standard");
-    	/**
-    	 * The cinemaClass of the movie
-    	 */
+
+        /** String containing the cinema class. */
         private String cinemaClass;
+
         /**
-         * The cinema class of the movie
-         * @param cinemaClass The cinema class of the movie
+         * Creates a CinemaClass with the given attribute.
+         * 
+         * @param cinemaClass The input cinema class.
          */
         CinemaClass(String cinemaClass) {
             this.cinemaClass = cinemaClass;
         }
+
         /**
-         * The cinema class of the movie
-         * @return cinemaClass The cinema class of the movie
+         * Returns a string containing the cinema class.
+         * 
+         * @return String containing the cinema class.
          */
         @Override
         public String toString() {
             return cinemaClass;
         }
     };
+
     /**
-     * The status of the seat, whether it is unoccupied or occupied.
+     * Enumerators to define the various seat statuses.
      */
     public enum SeatStatus {
-    	/**
-    	 * It indicates the seat is unoccupied
-    	 */
-    	UNOCCUPIED,
-    	/**
-    	 * It indicates the seat is occupied
-    	 */
-    	 OCCUPIED
+        /** Indicates that the seat is currently unoccupied. */
+        UNOCCUPIED,
+        /** Indicates that the seat is currently occupied. */
+        OCCUPIED
     };
+
     /**
-     * The Content ratings are used to inform consumers, especially parents, of potentially objectionable content that is shown during the duration of the movie. 
-     * @author OOP SSP1 Lab Group 4
-     * @version 8/11/2022
+     * Enumerators to define the various movie content ratings.
+     * Content ratings are used to inform consumers of potentionally objectionable
+     * content that is shown during the duration of the movie.
      */
     public enum ContentRating {
-    	/**
-    	 * It indicates the movie is for General Audience.
-    	 */
-        G, 
+        /** Indicates that the movie is for general audiences. */
+        G,
+        /** Indicates that some parental guidance is suggested for the movie. */
+        PG,
         /**
-    	 * It indicates Parental Guidance suggested.
-    	 */
-        PG, 
+         * Indicates that some materials may be inappropriate for children under 13, and
+         * cautions parents strongly.
+         */
+        PG13,
         /**
-    	 * It cautions Parents strongly, since some material may be inappropiate for Children under the age of 13. 
-    	 */
-        PG13, 
-        /**
-    	 * It indicates that it is not suitable to be seen by children because of violence, offensive language, or sexual activity.
-    	 */
-        R, 
-        /**
-    	 * It indicates that no one aged 17 or under is allowed to see it in a movie theater. 
-    	 */
+         * Indicates that the movie is not suitable to be seen by children because of
+         * violence, offensive language, or sexual activity.
+         */
+        R,
+        /** Indicates that no one aged 17 or under is allowed to view the movie. */
         NC17
     };
+
     /**
-     * The price of the movie ticket depends on the type of the movie, whether it is Regular 2D, Regular 3, Blockbuster 2D,  Blockbuster 3D etc. 
-     * @author OOP SSP1 Lab Group 4
-     * @version 8/11/2022
-     *
+     * Enumerators to define the various movie types.
+     * Implements {@link PriceType} as it affects the price of a movie ticket.
      */
     public enum MovieType implements PriceType {
-    	/**
-    	 * It indicates that is a Regular 2D movie. 
-    	 */
-    	REGULAR_TWO_D("Regular 2D"),
-    	/**
-    	 * It indicates that is a Regular 3D movie.
-    	 */
+        /** Regular two-dimensional movie. */
+        REGULAR_TWO_D("Regular 2D"),
+        /** Regular three-dimensional movie. */
         REGULAR_THREE_D("Regular 3D"),
-        /**
-    	 * It indicates that is a Blockbuster 2D movie.
-    	 */
+        /** Blockbuster two-dimensional movie. */
         BLOCKBUSTER_TWO_D("Blockbuster 2D"),
-        /**
-    	 * It indicates that is a Blockbuster 3D movie.
-    	 */
+        /** Blockbuster three-dimensional movie. */
         BLOCKBUSTER_THREE_D("Blockbuster 3D");
-    	/**
-    	 * The type of movie, whether it is regular or blockbuster
-    	 */
+
+        /** String containing the movie type. */
         private String movieType;
+
         /**
-         * The type of movie, whether it is regular or blockbuster
-         * @param movieType The type of movie, whether it is regular or blockbuster
+         * Creates a MovieType with the given attribute.
+         * 
+         * @param movieType The input movie type.
          */
         MovieType(String movieType) {
             this.movieType = movieType;
         }
+
         /**
-         * String to display the type of movie, whether it is regular or blockbuster
-         * @return movieType The type of movie, whether it is regular or blockbuster
+         * Returns a string containing the movie type.
+         * 
+         * @return String containing the movie type.
          */
         @Override
         public String toString() {
             return movieType;
         }
     };
+
     /**
-     * It indicates the status of the movie, whether it is coming soon, preview, currently showing or end of showing. 
-     * @author OOP SSP1 Lab Group 4
-     * @version 8/11/2022
-     *
+     * Enumerators to define the various showing statuses.
      */
     public enum ShowingStatus {
-    	/**
-    	 * It indicates that the movie is coming soon. 
-    	 */
-    	COMING_SOON("Coming Soon"),
-    	/**
-    	 *It indicates the movie preview. 
-    	 */
+        /** Indicates that the movie is coming soon. */
+        COMING_SOON("Coming Soon"),
+        /** Indicates that the movie is previewing. */
         PREVIEW("Preview"),
-        /**
-    	 * It indicates that the movie is now showing.
-    	 */
+        /** Indicates that the movie is now showing. */
         NOW_SHOWING("Now Showing"),
-        /**
-    	 * It indicates the end of the movie show.  
-    	 */
+        /** Indicates that the movie is no longer showing. */
         END_OF_SHOWING("End Of Showing");
-    	/**
-    	 * The showing status of the movie
-    	 */
+
+        /** String containing the showing status. */
         private String showingStatus;
+
         /**
-         * The showing status of the movie
-         * @param showingStatus The showing status of the movie
+         * Creates a ShowingStatus with the given attribute.
+         * 
+         * @param showingStatus The input showing status.
          */
         ShowingStatus(String showingStatus) {
             this.showingStatus = showingStatus;
         }
+
         /**
-         * Get the showing status of the movie
-         * @return showingStatus The showing status of the movie
+         * Returns a string containing the showing status.
+         * 
+         * @return String containing the showing status.
          */
         @Override
         public String toString() {
             return showingStatus;
         }
     };
+
     /**
-     * The pricetype depends on the age category of the movie-goer
-     * @author OOP SSP1 Lab Group 4
-     * @version 8/11/2022
+     * Enumerators to define the age category of the moviegoer.
+     * Implements {@link PriceType} as it affects the price of a movie ticket.
      */
     public enum Age implements PriceType {
-    	/**
-    	 * The age category between 18 and 60 years  
-    	 */
+        /** Adult category for those aged between 18 and 60 years. */
         ADULT("Adult"),
-        /**
-         * The age category above 60 years
-         */
+        /** Senior category for those aged above 60 years. */
         SENIOR("Senior"),
-        /**
-         * The age category below 18 years
-         */
+        /** Child category for those aged below 18 years. */
         CHILD("Child");
-    	/**
-    	 * The age category of movie=goer
-    	 */
+
+        /** String containing the age category. */
         private String age;
+
         /**
-         * The age category of the movie-goer
-         * @param age The age category of the movie-goer
+         * Creates an Age category with the given attribute.
+         * 
+         * @param age The input age.
          */
         Age(String age) {
             this.age = age;
         }
+
         /**
-         * String to display the age 
-         * @return age The age category of the movie-goer
+         * Returns a string containing the age category.
+         * 
+         * @return String containing the age category.
          */
         @Override
         public String toString() {
             return age;
         }
     };
+
     /**
-     * The price type depends on which day of the week the movie show is taking place.  
-     * @author OOP SSP1 Lab Group 4
-     * @version 8/11/2022
+     * Enumerators to define the type of day a movie showing falls on.
+     * Implements {@link PriceType} as it affects the price of a movie ticket.
      */
     public enum Day implements PriceType {
-    	/**
-    	 * The holidays which occur in a year because of periods of celebration such as festivals, national days etc. 
-    	 */
+        /**
+         * Holidays which occur in a year because of periods of celebration such as
+         * festivals, national days, etc.
+         */
         HOLIDAY("Holiday"),
-        /**
-    	 * The weekdays are Monday, Tuesday, Wednesday, Thursday and Friday
-    	 */
+        /** Weekdays are Monday, Tuesday, Wednesday, Thursday and Friday. */
         WEEKDAY("Weekday"),
-        /**
-    	 * Saturday and Sunday 
-    	 */
+        /** Weekends are Saturday and Sunday. */
         WEEKEND("Weekend");
-    	/**
-    	 * day of the movie
-    	 */
+
+        /** String containing the type of day. */
         private String day;
+
         /**
-         * The pricetype depends on day of the movie show 
-         * @param day The day of the movie show
+         * Creates a Day category with the given attribute.
+         * 
+         * @param day The input day.
          */
         Day(String day) {
             this.day = day;
         }
+
         /**
-         * String to display the day of the movie show
-         * @return day The day of the movie show
+         * Returns a string containing the type of day.
+         * 
+         * @return String containing the type of day.
          */
         @Override
         public String toString() {
             return day;
         }
     };
+
     /**
-     * The type of user, whether it is admin or movie-goer
-     * @author OOP SSP1 Lab Group 4
-     * @version 8/11/2022
+     * Enumerators to define the various users.
      */
     public enum User {
-    	/**
-    	 * It indicates the user is a movie-goer
-    	 */
-    	MOVIEGOER,
-    	/**
-    	 * It indicates the user is the admin
-    	 */
-    	ADMIN;
+        /** Indicates the user is a moviegoer. */
+        MOVIEGOER,
+        /** Indicates the user is an admin with adminstrative powers. */
+        ADMIN;
     }
 }

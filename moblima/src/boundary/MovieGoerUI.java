@@ -11,26 +11,30 @@ import entity.*;
 import entity.Enumerators.User;
 
 /**
- * It is a user interface for a MovieGoer to search for movies, view movie details, search showings, book a ticket, view booking history,and list top 5 ranking movies, add a review to a movie.
- * @author OOP LAB Group 4
- * @version 8/11/2022
+ * Represents the main menu user interface for a moviegoer.
+ * A moviegoer can search for movies, view movie details,
+ * search showings, book a ticket, view booking history,
+ * list top 5 ranking movies, and add a review to a movie.
  */
 public class MovieGoerUI {
-	/**
-	 * The movie controller
-	 */
+    /**
+     * The movie controller to be referenced.
+     */
     private static MovieController movieController = new MovieController();
     /**
-	 * The booking controller
-	 */
+     * The booking controller to be referenced.
+     */
     private static BookingController bookingController = new BookingController();
     /**
-	 * The showing controller
-	 */
+     * The showing controller to be referenced.
+     */
     private static ShowingController showingController = new ShowingController();
 
-    /** 
-     * The Main Menu for MovieGoer displaying 8 options such as search movies, view movie details, search list showings, book and purchase tickets, list top 5 ranking movies, add review and return to main menu.  
+    /**
+     * Main menu for a moviegoer for all possible moviegoer actions.
+     * Displays 8 options: Search/List Movies, View Movie Details, Search/List
+     * Showings, Book and Purchase Ticket, View Booking History, List Top 5 Ranking
+     * Movies, Add Review, Return to Main Menu.
      */
     public static void main() {
         int selection;
@@ -76,7 +80,9 @@ public class MovieGoerUI {
     }
 
     /**
-     * Prompts user for a movie and prints all attributes of the Movie and overall reviewer rating will only be displayed if there are more than ONE individual rating, else 'NaN' is displayed.
+     * Prompts user for a movie and prints all attributes of the selected movie.
+     * Overall reviewer rating will only be displayed if there are more than ONE
+     * individual rating, else 'NaN' is displayed.
      */
     public static void viewMovieDetails() {
         Movie movie = UserHandler.getMovieByTitleFromUser();
@@ -121,10 +127,10 @@ public class MovieGoerUI {
         System.out.println("=================================================");
     }
 
-    /** 
-     * Prompts the user for a review to be added to a movie, and it also updates the movie attribute of all showings with the given updated movie. 
+    /**
+     * Prompts user for a review to be added to a movie, and updates relevant
+     * showings with the given updated movie.
      */
-    
     public static void addReview() {
         Movie movie = UserHandler.getMovieByTitleFromUser();
         if (movie == null)
@@ -151,8 +157,8 @@ public class MovieGoerUI {
         }
     }
 
-    /** 
-     * The User can input their email to be view all their previous Bookings. 
+    /**
+     * Prompts user for their email to view all of their previous bookings.
      */
     public static void viewBookingHistory() {
         System.out.println("\nEnter email to view booking history for:");

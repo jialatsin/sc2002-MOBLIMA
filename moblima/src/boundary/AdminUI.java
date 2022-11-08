@@ -3,17 +3,20 @@ package boundary;
 import control.AdminController;
 
 /**
- * The Admin UI contains the main menu user interface for an Admin, which can only be accessed by logging in with admin account, an Admin can create, update, delete movie listings and movie showings, configure system settings, list top 5 ranking movies.
- * @author OOP LAB Group 4
- * @version 8/11/2022
+ * Represents the main menu user interface for an Admin, which can only be
+ * accessed by logging in with an admin account.
+ * An Admin can create, update, delete movie listings and movie showings,
+ * configure system settings, and list top 5 ranking movies.
  */
 public class AdminUI {
-	/** 
-	 * The admin controller 
-	 */
+    /** The admin controller to be referenced. */
     private static AdminController adminController = new AdminController();
-    /** 
-     * The main Menu for Admin, it displays 5 options, some of them are creating/updating/removing movie listings and showings, configuring system settings.
+
+    /**
+     * Main menu for an admin for all possible admin actions.
+     * Displays 5 options: Create/Update/Remove Movie Listing,
+     * Create/Update/Remove Movie Showings, Configure System Settings, List Top 5
+     * Ranking Movies, Logout to Main Menu.
      */
     public static void main() {
         boolean isLoggedIn = login();
@@ -49,11 +52,12 @@ public class AdminUI {
             }
         } while (true);
     }
-    // Since this is private, its javadocs will be generated on choosing the Private option only. 
-    /** 
-     *
-     * It prompts user to login as Admin with username and password.
-     * @return boolean It returns true if user has been verified based on the username and password entered, else false.
+
+    /**
+     * Prompts user to login as admin with username and password.
+     * 
+     * @return Returns true if the user has been successfuly validated as an admin,
+     *         else false.
      */
     private static boolean login() {
         boolean isLoggedIn = false;

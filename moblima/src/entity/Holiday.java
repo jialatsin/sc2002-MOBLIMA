@@ -4,39 +4,44 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
-* It Represents a Holiday defined in the system settings which is used in determining ticket pricing
-* @author OOP SSP1 Lab Group 4 
-* @version 08/11/2022
-*/
+ * Represents a Holiday defined in the system settings.
+ * Used in determining ticket pricing.
+ */
 public class Holiday implements Serializable {
+    /** Date of this holiday. */
+    private LocalDate date;
+
     /**
-     * The holiday dates
+     * Creates a Holiday with the given attribute.
+     * 
+     * @param date The holiday's date.
      */
-	private LocalDate date;
-	/**
-	 * Creates Holiday with the given attribute
-	 * @param date The date of holidays
-	 */
     public Holiday(LocalDate date) {
         this.date = date;
     }
+
     /**
-     * Get the date of the holidays
-     * @return date The date of the holidays
+     * Gets the date of this holiday.
+     * 
+     * @return This holiday's date.
      */
     public LocalDate getDate() {
         return date;
     }
+
     /**
-     * The date of the holidays
-     * @param date The date of the holidays
+     * Changes the date of this holiday.
+     * 
+     * @param date The input date.
      */
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
     /**
-     * String displaying the holiday dates
-     * @return string displaying the holiday dates
+     * Returns a string containing this holiday's date.
+     * 
+     * @return String containing this holiday's date.
      */
     @Override
     public String toString() {
@@ -44,4 +49,3 @@ public class Holiday implements Serializable {
     }
 
 }
-

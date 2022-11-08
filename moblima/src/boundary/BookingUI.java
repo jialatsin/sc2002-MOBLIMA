@@ -24,34 +24,34 @@ import entity.Enumerators.Day;
 import entity.Enumerators.MovieType;
 
 /**
- * It is user interface for a MovieGoer to make a Booking for movie tickets.
- * @author OOP LAB Group 4
- * @version 8/11/2022
+ * Represents the user interface for a moviegoer to make a booking for movie
+ * tickets.
  */
 public class BookingUI {
-	/**
-	 * The price controller
-	 */
+    /**
+     * The price controller to be referenced.
+     */
     private static PriceController priceController = new PriceController();
     /**
-	 * The holiday controller
-	 */
+     * The holiday controller to be referenced.
+     */
     private static HolidayController holidayController = new HolidayController();
     /**
-	 * The booking controller
-	 */
+     * The booking controller to be referenced.
+     */
     private static BookingController bookingController = new BookingController();
     /**
-	 * The movie controller
-	 */
+     * The movie controller to be referenced.
+     */
     private static MovieController movieController = new MovieController();
     /**
-	 * The price controller
-	 */
+     * The showing controller to be referenced.
+     */
     private static ShowingController showingController = new ShowingController();
 
-    /** 
-     * The menu for Ticket Booking, which prompts user for a showing, displays seats available for that show, prompts user if they wish to purchase a ticket. 
+    /**
+     * Menu for Ticket Booking.
+     * Prompts user to choose a showing, choose seats then purchase tickets.
      */
     public static void main() {
         Showing showing = null;
@@ -150,9 +150,13 @@ public class BookingUI {
     }
 
     /**
-     * It calculates and prints the total price of all the tickets that the movie-goer is trying to buy.
-     * @param tickets     The array list of Tickets that is to be purchased
-     * @return totalPrice The total price of all the tickets of the movie shows chosen by the movie-goer
+     * Calculates and prints the total price of all the tickets that the moviegoer
+     * is trying to buy.
+     * 
+     * @param tickets List of tickets to be purchased.
+     * 
+     * @return Returns the total price of all the movie tickets chosen by the
+     *         moviegoer.
      */
     private static double displayTotalPrice(ArrayList<Ticket> tickets) {
         double totalPrice = 0;
@@ -175,9 +179,13 @@ public class BookingUI {
     }
 
     /**
-     * Prompts MovieGoer to choose a Seat for the current Ticket and assigns the seat.
-     * @param seatingAvailability The current seating availability in the cinema for the movie showing
-     * @return assignedSeat The seat assigned to the movie-goer for the show 
+     * Prompts moviegoer to choose a seat for the current ticket and assigns the
+     * seat.
+     * 
+     * @param seatingAvailability The current seating availability in the cinema for
+     *                            the showing.
+     * 
+     * @return Returns the assigned seat in the cinema for the showing.
      */
     private static Seat chooseSeat(SeatingLayout seatingAvailability) {
         Seat assignedSeat = null;

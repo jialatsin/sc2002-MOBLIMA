@@ -5,32 +5,23 @@ import java.util.*;
 
 import entity.Enumerators.SeatStatus;
 
-/**
- * It Represents the SeatingLayout of a Cinema
- * @author OOP SSP1 Lab Group 4
- * @version 30/10/2022
- */
+/** Represents the SeatingLayout of a cinema. */
 public class SeatingLayout implements Serializable {
-    /**
-     * seats
-     */
-	Seat[][] seats;
-    /**
-     * rows of seats
-     */
-	int rows;
-	/**
-	 * columns of seats
-	 */
+    /** The seat representation for this seating layout. */
+    Seat[][] seats;
+    /** The number of rows of seats in this seating layout. */
+    int rows;
+    /** The number of columns of seats in this seating layout. */
     int columns;
-    /**
-     * available seats
-     */
+    /** The available number of seats remaining in this seating layout. */
     int availableSeatsCount;
+
     /**
-     * Creates a SeatingLayout using the given attributes
-     * @param rows    The rows of the cinema
-     * @param columns The columns of the cinema
+     * Creates a seating layout with given attributes.
+     * By default, all initialized seats will have an unoccupied seat status.
+     * 
+     * @param rows    The number of rows of the seating layout.
+     * @param columns The number of columns of the seating layout.
      */
     public SeatingLayout(int rows, int columns) {
         this.rows = rows;
@@ -43,63 +34,85 @@ public class SeatingLayout implements Serializable {
         }
         this.availableSeatsCount = rows * columns;
     }
+
     /**
-     * Get the seats
-     * @return seats The seats in the cinema
+     * Gets the seat representation of this seating layout.
+     * 
+     * @return Seat representation of this seating layout.
      */
     public Seat[][] getSeats() {
         return seats;
     }
+
     /**
-     * The seats in the cinema
-     * @param seats The seats in the cinema
+     * Changes the seat representation of this seating layout.
+     * 
+     * @param seats New seat matrix.
      */
     public void setSeats(Seat[][] seats) {
         this.seats = seats;
     }
+
     /**
-     * Get the rows in the cinema
-     * @return rows The rows in the cinema
+     * Gets the number of rows of this seating layout.
+     * 
+     * @return Number of rows of this seating layout.
      */
     public int getRows() {
         return rows;
     }
+
     /**
-     * The rows in the cinema
-     * @param rows The rows in the cinema
+     * Changes the number of rows of this seating layout.
+     * 
+     * @param rows New number of rows.
      */
     public void setRows(int rows) {
         this.rows = rows;
     }
+
     /**
-     * Get the columns in the cinema
-     * @return columns The columns in the cinema
+     * Gets the number of columns of this seating layout.
+     * 
+     * @return Number of columns of this seating layout.
      */
     public int getColumns() {
         return columns;
     }
-   /**
-    * The columns in the cinema
-    * @param columns The columns in the cinema
-    */
+
+    /**
+     * Changes the number of columns of this seating layout.
+     * 
+     * @param columns New number of columns.
+     */
     public void setColumns(int columns) {
         this.columns = columns;
     }
+
     /**
-     * Get the number of seats available 
-     * @return availableSeatsCount The number of seats available 
+     * Gets the number of available seats in this seating layout.
+     * 
+     * @return Number of available seats in this seating layout.
      */
     public int getAvailableSeatsCount() {
         return availableSeatsCount;
     }
+
     /**
-     * The number of seats available 
-     * @param availableSeatsCount The number of seats available 
+     * Changes the number of available seats in this seating layout.
+     * 
+     * @param availableSeatsCount New number of available seats.
      */
     public void setAvailableSeatsCount(int availableSeatsCount) {
         this.availableSeatsCount = availableSeatsCount;
     }
-    
+
+    /**
+     * Compares 2 SeatingLayout instances to check if they are identical.
+     * 
+     * @return Returns true if all attributes of both seating layouts are equal,
+     *         else false.
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof SeatingLayout) {
@@ -111,9 +124,11 @@ public class SeatingLayout implements Serializable {
         }
         return false;
     }
+
     /**
-     * String displaying seating layout 
-     * @return string displaying seating layout 
+     * Returns a string displaying this seating layout.
+     * 
+     * @return String displaying this seating layout.
      */
     @Override
     public String toString() {
@@ -145,14 +160,15 @@ public class SeatingLayout implements Serializable {
 
         return seatsString + "\nNumber of Available Seats: " + availableSeatsCount + "\n";
     }
+
     /**
-     * Assigning of seats
-     * Sets a seat in given row and column to be OCCUPIED for the given showing
-     * Returns assigned seat if UNOCCUPIED seat is successfully set to OCCUPIED
-     * Returns null if seat is already OCCUPIED
-     * @param row    The row number of the seat
-     * @param column The column number of seat
-     * @return seats The row and column of seat
+     * Assigns a seat in this seating layout.
+     * Sets a seat in given row and column to be OCCUPIED for a showing.
+     * 
+     * @param row    Row number of the seat to be assigned.
+     * @param column Column number of the seat to be assigned.
+     * @return Returns assigned seat if UNOCCUPIED seat is successfully set to
+     *         OCCUPIED, else returns null if seat is already OCCUPIED.
      */
     public Seat assignSeat(int row, int column) {
         if (seats[row][column].getStatus() == SeatStatus.OCCUPIED) {
@@ -163,13 +179,14 @@ public class SeatingLayout implements Serializable {
         return seats[row][column];
     }
 
-    /** 
-     * Unassigning of seats, Sets a seat in given row and column to be UNOCCUPIED for the given showing
-     * Returns unassigned seat if OCCUPIED seat is successfully set to UNOCCUPIED
-     * Returns null if seat is already UNOCCUPIED
-     * @param row    The row number of seat
-     * @param column The column number of seat
-     * @return seats The row and column number of seat
+    /**
+     * Unassigns a seat in this seating layout.
+     * Sets a seat in given row and column to be UNOCCUPIED for a showing.
+     * 
+     * @param row    Row number of the seat to be unassigned.
+     * @param column Column number of the seat to be unassigned.
+     * @return Returns assigned seat if OCCUPIED seat is successfully set to
+     *         UNOCCUPIED, else returns null if seat is already UNOCCUPIED.
      */
     public Seat unassignSeat(int row, int column) {
         if (seats[row][column].getStatus() == SeatStatus.UNOCCUPIED) {
@@ -179,18 +196,22 @@ public class SeatingLayout implements Serializable {
         availableSeatsCount++;
         return seats[row][column];
     }
+
     /**
-     * It returns seat in given row and column
-     * @param row    The row number of seat
-     * @param column The column number of seat
-     * @return seats The row and column number of seat
+     * Returns the seat positioned in the given row and column.
+     * 
+     * @param row    Row number of the seat to return.
+     * @param column Column number of the seat to return.
+     * @return Seat in the given row and column.
      */
     public Seat getSeat(int row, int column) {
         return seats[row][column];
     }
+
     /**
-     * The new Seating Layout
-     * @return new seating layout
+     * Creates and returns a deep copy of this SeatingLayout.
+     * 
+     * @return A deep copy of this seating layout.
      */
     @Override
     public Object clone() {

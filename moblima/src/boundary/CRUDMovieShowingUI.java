@@ -6,19 +6,20 @@ import control.ShowingController.ShowingAttribute;
 import entity.*;
 import entity.Enumerators.ShowingStatus;
 import entity.Enumerators.User;
+
 /**
- * It is an Admin interface to create, update, delete, list Showings.
- * @author OOP LAB Group 4
- * @version 8/11/2022
+ * Represents the admin interface to create, update, delete, and list movies.
  */
 public class CRUDMovieShowingUI {
-	/**
-	 * The showing controller
-	 */
-	private static ShowingController showingController = new ShowingController();
+    /**
+     * The showing controller to be referenced.
+     */
+    private static ShowingController showingController = new ShowingController();
 
-    /** 
-     * The main Menu for CRUD Movie Showings displaying 5 options which are to create, update, remove movie showings, search/list showings and to return to admin menu.
+    /**
+     * Main menu for an admin for CRUD of movie showings. Displays 5 options: Create
+     * Movie Showing, Update Movie Showing, Delete Movie Showing, Search/List
+     * showings, Return to Admin Menu.
      */
     public static void main() {
         int selection;
@@ -51,8 +52,7 @@ public class CRUDMovieShowingUI {
     }
 
     /**
-     * Creates a Showing with user inputted attributes and adds it to the Showing database.
-     * 
+     * Prompts user to create a new showing entry in the showing database.
      */
     private static void createMovieShowing() {
         System.out.println("\nCREATING A MOVIE SHOWING...");
@@ -96,7 +96,8 @@ public class CRUDMovieShowingUI {
     }
 
     /**
-     * Updates a Showing with user inputted new attribute and updates the Showing's entry in the Showing database.
+     * Prompts user to select and update a showing entry with a new attribute value
+     * in the showing database.
      */
     private static void updateMovieShowing() {
         System.out.println("\nUPDATING A MOVIE SHOWING...");
@@ -179,7 +180,7 @@ public class CRUDMovieShowingUI {
     }
 
     /**
-     * Deletes a Showing with selected showing id and deletes the Showing's entry in the Showing database.
+     * Prompts user to select and delete a showing entry in the showing database.
      */
     private static void deleteMovieShowing() {
         System.out.println("\nDELETING A MOVIE SHOWING...");

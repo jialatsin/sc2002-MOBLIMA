@@ -5,49 +5,30 @@ import java.time.LocalDateTime;
 
 import boundary.InputHandler;
 
-/**
- * It Represents a Showing for a Movie
- * 
- * @author OP SSP1 Lab Group 4
- * @version 30/10/2022
- */
+/** Represents a Showing for a movie. */
 public class Showing implements Serializable {
-
-    /**
-     * id for show id
-     */
+    /** Unique identifier for this showing. */
     private int id;
-    /**
-     * for the seating layout of the movie
-     */
+    /** Current available seating layout for this showing. */
     private SeatingLayout seatingAvailability;
-    /**
-     * for the name of the movie
-     */
+    /** Movie being shown for this showing. */
     private Movie movie;
-    /**
-     * for the time when the show begins
-     */
+    /** Time when this showing begins. */
     private LocalDateTime showTime;
-    /**
-     * for which cinema the movie is going to be played
-     */
+    /** Cinema where this showing is being held. */
     private Cinema cinema;
-    /**
-     * cineplex for which cineplex the movie is going to be be played
-     */
+    /** Cineplex where this showing is being held. */
     private Cineplex cineplex;
 
     /**
-     * The current available seating layout for this Showing
+     * Creates a showing with the given attributes.
      * 
-     * @param id                  The unique id of the show
-     * @param seatingAvailability The available seats of the movie show
-     * @param movie               The movie name
-     * @param showtime            The time when the show starts
-     * @param cinema              The cinema where movie is going to be played
-     * @param cineplex            The cineplex where the movie is going to be be
-     *                            played
+     * @param id                  The unique id of the showing.
+     * @param seatingAvailability The seating availability of the showing.
+     * @param movie               The movie being shown.
+     * @param showtime            The time when the showing starts.
+     * @param cinema              The cinema where the showing is being held.
+     * @param cineplex            The cineplex where the showing is being held.
      */
     public Showing(int id, SeatingLayout seatingAvailability, Movie movie, LocalDateTime showtime, Cinema cinema,
             Cineplex cineplex) {
@@ -60,11 +41,11 @@ public class Showing implements Serializable {
     }
 
     /**
-     * String to display the showingid, movie name, showtime, cineplex and the
-     * cinema.
+     * Returns a string containing a brief description about this showing.
+     * String contains showing ID, movie title, movie ID, showtime, cineplex name,
+     * cinema code and cinema class.
      * 
-     * @return string to display the showingid, movie name, showtime, cineplex and
-     *         the cinema.
+     * @return String containing a brief description about this movie.
      */
     public String toString() {
         return "Showing ID: " + id
@@ -76,10 +57,10 @@ public class Showing implements Serializable {
     }
 
     /**
-     * Compare 2 Showing Instances to check if they are identical
+     * Compares 2 Showing instances to check if they are identical.
      * 
-     * @return boolean Return true if both showings are identical based on their
-     *         showingid, movie, show time, cinema and cineplex etc, else false
+     * @return Returns true if all attributes of both showings are equal, else
+     *         false.
      */
     @Override
     public boolean equals(Object obj) {
@@ -96,108 +77,108 @@ public class Showing implements Serializable {
     }
 
     /**
-     * Get the unique showid
+     * Gets the unique id for this showing.
      * 
-     * @return id The unique id of the show
+     * @return Unique id for this showing.
      */
     public int getId() {
         return id;
     }
 
     /**
-     * The unique showid
+     * Changes the unique id for this showing.
      * 
-     * @param id The unique id of the show
+     * @param id The input id.
      */
     public void setId(int id) {
         this.id = id;
     }
 
     /**
-     * Get the availability of the movie-seats
+     * Gets the seating availability for this showing.
      * 
-     * @return seatingAvailability The availability of the movie seats
+     * @return Seating availability for this showing.
      */
     public SeatingLayout getSeatingAvailability() {
         return seatingAvailability;
     }
 
     /**
-     * The availability of the movie-seats
+     * Changes the seating availability for this showing.
      * 
-     * @param seatingAvailability The availability of the movie seats
+     * @param seatingAvailability The input seating availability.
      */
     public void setSeatingAvailability(SeatingLayout seatingAvailability) {
         this.seatingAvailability = seatingAvailability;
     }
 
     /**
-     * Get the name of the movie
+     * Gets the movie for this showing.
      * 
-     * @return movie The name of the movie
+     * @return Movie for this showing.
      */
     public Movie getMovie() {
         return movie;
     }
 
     /**
-     * The movie name
+     * Changes the movie for this showing.
      * 
-     * @param movie The name of the movie
+     * @param movie The input movie.
      */
     public void setMovie(Movie movie) {
         this.movie = movie;
     }
 
     /**
-     * Get the when the show starts
+     * Gets the showtime for this showing.
      * 
-     * @return showTime The time when the show starts
+     * @return Showtime for this showing.
      */
     public LocalDateTime getShowTime() {
         return showTime;
     }
 
     /**
-     * The showTime of the movie
+     * Changes the showtime for this showing.
      * 
-     * @param showTime The showTime of the movie
+     * @param showTime The input showtime.
      */
     public void setShowTime(LocalDateTime showTime) {
         this.showTime = showTime;
     }
 
     /**
-     * The cinema where movie is going to be shown
+     * Gets the cinema for this showing.
      * 
-     * @return cinema The cinema where movie is going to be shown
+     * @return Cinema for this showing.
      */
     public Cinema getCinema() {
         return cinema;
     }
 
     /**
-     * The cinema where the movie is going to be shown
+     * Changes the cinema for this showing.
      * 
-     * @param cinema The cinema where the movie is going to be shown
+     * @param cinema The input cinema.
      */
     public void setCinema(Cinema cinema) {
         this.cinema = cinema;
     }
 
     /**
-     * The cineplex where the movie is going to be shown
+     * Gets the cineplex for this showing.
      * 
-     * @return cineplex The cineplex where the movie is going to be shown
+     * @return Cineplex for this showing.
      */
     public Cineplex getCineplex() {
         return cineplex;
     }
 
     /**
-     * The cineplex where the movie is going to be shown
+     * Changes the cineplex for this showing.
      * 
-     * @param cineplex The cineplex where the movie is going to be shown
+     * @param cineplex The input cineplex.
      */
     public void setCineplex(Cineplex cineplex) {
         this.cineplex = cineplex;

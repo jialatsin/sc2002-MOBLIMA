@@ -3,13 +3,13 @@ package boundary;
 import control.MainController;
 
 /**
- * It is a user interface for user to select if they are a MovieGoer or Admin.
- * @author OOP LAB Group 4
- * @version 8/11/2022
+ * Represents the main menu user interface for users to select if they are a
+ * moviegoer or admin.
  */
 public class MainUI {
-    /** 
-     * The main Menu of MOBLIMA displaying 3 options which are if the user is a movie-goer, admin or if he/she wishes to exit. 
+    /**
+     * Main menu of MOBLIMA that for users to access the application
+     * with. Displays 3 options: Movie Goer, Admin, Exit.
      */
     public static void main() {
         MainController.initializeDatabase();

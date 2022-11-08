@@ -2,7 +2,6 @@ package boundary;
 
 import java.util.ArrayList;
 
-import control.BookingController;
 import control.CineplexController;
 import control.MovieController;
 import control.ShowingController;
@@ -21,27 +20,28 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
- * It is used to take user input of custom-defined datatype which is Implemented for reuse in multiple methods.
- * @author OOP LAB Group 4
- * @version 8/11/2022
+ * Represents a UserHandler which is used to take user input of custom-defined
+ * datatypes.
+ * Implemented for reuse in multiple methods.
  */
 public class UserHandler {
-	/**
-	 * The movie controller
-	 */
+    /**
+     * The movie controller to be referenced.
+     */
     private static MovieController movieController = new MovieController();
     /**
-	 * The cineplex controller
-	 */
+     * The cineplex controller to be referenced.
+     */
     private static CineplexController cineplexController = new CineplexController();
     /**
-	 * The showing controller
-	 */
+     * The showing controller to be referenced.
+     */
     private static ShowingController showingController = new ShowingController();
 
     /**
      * Prompts user for an id (integer) input until correct input is given.
-     * @return id The Valid id
+     * 
+     * @return Returns a valid id.
      */
     public static int getIdFromUser() {
         System.out.println("Enter ID:");
@@ -50,8 +50,9 @@ public class UserHandler {
     }
 
     /**
-     * Prompts user for a title (String) input until correct input is given. 
-     * @return title The Valid title of the movie
+     * Prompts user for a title (string) input until correct input is given.
+     * 
+     * @return Returns a valid title.
      */
     public static String getTitleFromUser() {
         System.out.println("Enter title:");
@@ -60,8 +61,9 @@ public class UserHandler {
     }
 
     /**
-     * Prompts user for a synopsis (String) input until correct input is given.
-     * @return synopsis The Valid synopsis of the movie
+     * Prompts user for a synopsis (string) input until correct input is given.
+     * 
+     * @return Returns a valid synopsis.
      */
     public static String getSynopsisFromUser() {
         System.out.println("Enter synopsis:");
@@ -70,8 +72,9 @@ public class UserHandler {
     }
 
     /**
-     * Prompts user for a director (String) input until correct input is given.
-     * @return director The Valid directors of the movie
+     * Prompts user for a director (string) input until correct input is given.
+     * 
+     * @return Returns a valid director.
      */
     public static String getDirectorFromUser() {
         System.out.println("Enter director:");
@@ -80,8 +83,10 @@ public class UserHandler {
     }
 
     /**
-     * Prompts user to input a list of cast members (at least 2) until correct input is given.
-     * @return cast The Valid list of cast members in the movie. 
+     * Prompts user to input a list of cast members (at least 2) until correct input
+     * is given.
+     * 
+     * @return Returns a valid list of cast members.
      */
     public static ArrayList<String> getCastFromUser() {
         int selection;
@@ -99,8 +104,10 @@ public class UserHandler {
     }
 
     /**
-     * Prompts user to input a list of genres until correct input is given.
-     * @return genres The Valid list of genres of the movie
+     * Prompts user to input a list of genres until correct input
+     * is given.
+     * 
+     * @return Returns a valid list of genres.
      */
     public static ArrayList<String> getGenresFromUser() {
         int selection;
@@ -116,8 +123,10 @@ public class UserHandler {
     }
 
     /**
-     * Prompts user for a releaseDate (LocalDate) input of format ' dd/MM/yyyy ' until correct input is given.
-     * @return date The Valid release Date of the movie in the format ' dd/MM/yyyy '
+     * Prompts user for a release date input of format 'dd/MM/yyyy' until
+     * correct input is given.
+     * 
+     * @return Returns a valid release date.
      */
     public static LocalDate getReleaseDateFromUser() {
         System.out.println("Enter release date 'dd/MM/yyyy':");
@@ -126,8 +135,10 @@ public class UserHandler {
     }
 
     /**
-     * Prompts user for a endDate (LocalDate) input of format ' dd/MM/yyyy ' until correct input is given.
-     * @return date The Valid end Date of the movie in the format ' dd/MM/yyyy '
+     * Prompts user for a end date input of format 'dd/MM/yyyy' until
+     * correct input is given.
+     * 
+     * @return Returns a valid end date.
      */
     public static LocalDate getEndDateFromUser() {
         System.out.println("Enter end date 'dd/MM/yyyy':");
@@ -136,8 +147,10 @@ public class UserHandler {
     }
 
     /**
-     * Prompts user for a showTime (LocalDateTime) input of format ' dd/MM/yyyy HH:mm ' until correct input is given.
-     * @return showTime The Valid showTime of the movie in the format ' dd/MM/yyyy HH:mm '
+     * Prompts user for a showtime input of format 'dd/MM/yyyy HH:mm'
+     * until correct input is given.
+     * 
+     * @return Returns a valid showtime.
      */
     public static LocalDateTime getShowTimeFromUser() {
         System.out.println("\nEnter show timing 'dd/MM/yyyy HH:mm':");
@@ -146,8 +159,9 @@ public class UserHandler {
     }
 
     /**
-     * Prompts user to choose a ContentRating until correct input is given.
-     * @return contentRating The Valid ContentRating of the movie 
+     * Prompts user to choose a content rating until correct input is given.
+     * 
+     * @return Returns a valid content rating.
      */
     public static ContentRating getContentRatingFromUser() {
         int selection;
@@ -183,8 +197,9 @@ public class UserHandler {
     }
 
     /**
-     * Prompts user to choose a MovieType until correct input is given.
-     * @return movieType The Valid MovieType of the movie 
+     * Prompts user to choose a movie type until correct input is given.
+     * 
+     * @return Returns a valid movie type.
      */
     public static MovieType getMovieTypeFromUser() {
         int selection;
@@ -216,8 +231,10 @@ public class UserHandler {
     }
 
     /**
-     * Get a Movie by prompting user to input its ID until correct input is given.=
-     * @return movie The Movie with the selected ID
+     * Returns a movie by prompting user to input its movie id until correct input
+     * is given.
+     * 
+     * @return Returns movie with the selected movie id.
      */
     public static Movie getMovieFromUser() {
         System.out.println("\nEnter movie ID:");
@@ -231,8 +248,10 @@ public class UserHandler {
     }
 
     /**
-     * Get a Cineplex by prompting user to choose from a list of available Cineplexes.
-     * @return cineplex The Cineplex selected for the movie
+     * Returns a cineplex by prompting user to choose from a list of available
+     * cineplexes.
+     * 
+     * @return Returns the selected cineplex.
      */
     public static Cineplex getCineplexFromUser() {
         ArrayList<Cineplex> cineplexes = cineplexController.readFromDatabase();
@@ -255,9 +274,11 @@ public class UserHandler {
     }
 
     /**
-     * Get a Cinema by prompting user to choose from a list of available Cinema from a given Cineplex.
-     * @param cineplex To choose a Cinema from the given Cineplex. 
-     * @return cinema  The Selected Cinema from the given Cineplex.
+     * Returns a cinema by prompting user to choose from a list of available
+     * cinema from a given cineplex.
+     * 
+     * @param cineplex Given cineplex to select a cinema from.
+     * @return Returns the selected cinema.
      */
     public static Cinema getCinemaFromUser(Cineplex cineplex) {
         ArrayList<Cinema> cinemas = cineplex.getCinemas();
@@ -280,8 +301,12 @@ public class UserHandler {
     }
 
     /**
-     * Gets a Movie by prompting user for movie title, then prompts user to input movie ID from a list of movies with matching movie title, the User needs to input movie ID because multiple movies may have the same title, but each movie will have its own unique ID.
-     * @return move The movie selected byt the movie-goer
+     * Returns a movie by prompting user for movie title, then movie id from a list
+     * of movies with matching movie title.
+     * User needs to input movie id because multiple movies may have the same title,
+     * but each movie will have its own unique id.
+     * 
+     * @return Returns the selected movie.
      */
     public static Movie getMovieByTitleFromUser() {
         // Prompts user for movie title
@@ -312,8 +337,12 @@ public class UserHandler {
     }
 
     /**
-     * Gets a Showing by prompting user for Cineplex and Movie, then prompts user to input showing ID from a list of showings with matching cineplex and movie wherein User needs to input showing ID because there may be multiple showings for the same movie at the same cineplex.
-     * @return showing The showing selected by the movie-goer. 
+     * Returns a showing by prompting user for cineplex and movie, then showing id
+     * from a list of showings with matching cineplex and movie.
+     * User needs to input showing id because there may be multiple showings for the
+     * same movie at the same cineplex.
+     * 
+     * @return Returns the selected showing.
      */
     public static Showing getShowingFromUser() {
         Movie movie = getMovieByTitleFromUser();
@@ -375,8 +404,10 @@ public class UserHandler {
     }
 
     /**
-     * Get a CinemaClass by prompting user to choose from a list of available cinema classes.
-     * @return cinemaClass The cinema class selected by the movie-goer for the show. 
+     * Returns a cinema class by prompting user to choose from a list of available
+     * cinema classes.
+     * 
+     * @return Returns the selected cinema class.
      */
     public static CinemaClass getCinemaClassFromUser() {
         int selection;
@@ -404,8 +435,10 @@ public class UserHandler {
     }
 
     /**
-     * Get Age by prompting user to choose from a list of available age categories.
-     * @return age The Age category selected by the movie-goer
+     * Returns an age category by prompting user to choose from a list of available
+     * age categories.
+     * 
+     * @return Returns the selected age category.
      */
     public static Age getAgeFromUser() {
         int selection;
@@ -433,8 +466,10 @@ public class UserHandler {
     }
 
     /**
-     * Get Day by prompting user to choose from a list of available day categories.
-     * @return day The category of the day selected by the movie-goer. 
+     * Returns the type of day by prompting user to choose from a list of available
+     * types of day.
+     * 
+     * @return Returns the selected type of day.
      */
     public static Day getDayFromUser() {
         int selection;

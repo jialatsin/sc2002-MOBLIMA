@@ -5,19 +5,18 @@ import java.util.ArrayList;
 import control.MovieController;
 import entity.Movie;
 
-/** 
- * It is an user interface to list the top Movies, used by both Admin and MovieGoer.
- * @author OOP LAB Group 4
- * @version 8/11/2022
+/**
+ * Represents the user interface to list the top movies, used by both admin and
+ * moviegoer.
  */
 public class ListTopMovies {
-	/**
-	 * The movie controller
-	 */
+    /** The movie controller to be referenced. */
     private static MovieController movieController = new MovieController();
 
-    /** 
-     * The menu for List Top Movies, displaying 3 options which are List Top 5 movies by Ticket Sales, by Overall Review Rating and Logout to Main Menu. 
+    /**
+     * Main menu for for ranking top movies by different
+     * attributes. Displays 3 options: List Top 5 By Ticket Sale,
+     * List Top 5 By Overall Review Rating, Logout to Main Menu.
      */
     public static void main() {
         int selection;
@@ -42,8 +41,13 @@ public class ListTopMovies {
     }
 
     /**
-     * Sorts and prints the top movies in Movie database by their averageReviewRating, with the cutoff determined by movieCount and prints all movies in database if there are less movies than the ranking cutoff.
-     * @param movieCount The cutoff number of movies to be ranked (eg. movieCount = 5 for Top 5 Movies)
+     * Sorts and prints the top movies in the movie database by their
+     * averageReviewRating, with the cutoff determined by movieCount. Prints all
+     * movies available if there are less movies in the database than the ranking
+     * cutoff.
+     * 
+     * @param movieCount The cutoff number to be ranked (eg. movieCount = 5 for Top
+     *                   5 Movies).
      */
     private static void listTopMoviesByRating(int movieCount) {
         ArrayList<Movie> movies = movieController.readFromDatabase();
@@ -70,8 +74,13 @@ public class ListTopMovies {
     }
 
     /**
-     * Sorts and prints the top movies in Movie database by their ticketSales, with the cutoff determined by movieCount and prints all movies in database if there are less movies than the ranking cutoff.
-     * @param movieCount The cutoff number to be ranked (eg. movieCount = 5 for Top 5 Movies)
+     * Sorts and prints the top movies in Movie database by their
+     * ticketSales, with the cutoff determined by movieCount. Prints all
+     * movies available if there are less movies in the database than the ranking
+     * cutoff.
+     * 
+     * @param movieCount The cutoff number to be ranked (eg. movieCount = 5 for Top
+     *                   5 Movies).
      */
     private static void listTopMoviesBySales(int movieCount) {
         ArrayList<Movie> movies = movieController.readFromDatabase();

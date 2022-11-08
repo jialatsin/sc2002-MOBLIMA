@@ -7,24 +7,27 @@ import java.util.ArrayList;
 
 import entity.Holiday;
 import entity.Enumerators.Day;
+
 /**
- * It Represents the Holiday Controller 
- * @author OOP SSP1 Lab Group 4
- * @version 8/11/2022
+ * Represents a HolidayController which contains the logic for handling Holiday
+ * data.
  */
 public class HolidayController extends DatabaseController<Holiday> {
-	/** 
-     * File path name of holiday database file to access. 
+    /**
+     * Creates a HolidayController with the file path of the holiday database file
+     * to access.
      */
-	public HolidayController() {
+    public HolidayController() {
         super(MainController.FILEPATH_HOLIDAY);
     }
-	/**
-	 *Extracting Information of the holiday from the date input from the Database
-	 * @param date       The holiday date
-     * @return holiday   If successful, it extracts the information of the holiday by matching it with a date in the database, else null value is returned.
-	 */
-	
+
+    /**
+     * Returns a holiday by searching with the given date in the
+     * holiday database.
+     * 
+     * @param date Date of holiday to search for.
+     * @return Returns holiday with matching date if found in database, else null.
+     */
     public Holiday getHolidayByDate(LocalDate date) {
         ArrayList<Holiday> holidays = readFromDatabase();
         for (Holiday holiday : holidays) {
@@ -34,12 +37,13 @@ public class HolidayController extends DatabaseController<Holiday> {
         }
         return null;
     }
+
     /**
-     * Deletes the day of the holiday from the database
-     * @param date       The date of the holiday
-     * @return boolean   It returns true on successful deletion 
+     * Deletes holiday by searching with the given date in the holiday database.
+     * 
+     * @param date Date of holiday to be deleted.
+     * @return Returns true if holiday is successfully deleted, else false.
      */
-    // Returns true on successful deletion
     public boolean deleteHolidayByDate(LocalDate date) {
         ArrayList<Holiday> holidays = readFromDatabase();
         for (Holiday holiday : holidays) {
@@ -53,10 +57,12 @@ public class HolidayController extends DatabaseController<Holiday> {
     }
 
     /**
-     * Get the corresponding Day enumeration for the given date.
-     * @param date The date of the holiday 
-     * @return Enum 'HOLIDAY' if date is on a holiday, enum 'WEEKDAY' if date is on
-     *         a regular weekday, enum 'WEEKEND' if date is on a regular weekend
+     * Gets the corresponding type of day for the given date.
+     * 
+     * @param date Date to get corresponding type of day for.
+     * @return Returns Day enumerator 'HOLIDAY' if date is on a holiday, 'WEEKDAY'
+     *         if date is on a regular weekday, 'WEEKEND' if date is on a regular
+     *         weekend.
      */
     public Day getDayType(LocalDateTime date) {
         // Showtime is on a holiday

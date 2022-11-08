@@ -1,96 +1,102 @@
 package entity;
 
 import java.io.Serializable;
+
 import entity.Enumerators.CinemaClass;
 
 /**
- * It represents a Cinema that belongs to a Cineplex. 
- * @author OOP SSP1 Lab Group 4
- * @version 30/10/2022
+ * Represents a Cinema that belongs to a Cineplex.
  */
 public class Cinema implements Serializable {
-    
-	/**
-	 *  The cinema code identifier 
-	 *  code is the cinema code
-	 */
-	private String code;
-	/**
-	 *  seatingLayout is the seatingLayout of the movie
-	 */
-	private SeatingLayout seatingLayout;
-	/**
-	 *  cinemaClass is for the type of the cinema
-	 */
+    /** Unique code identifier of this cinema. */
+    private String code;
+    /** Seating layout template of this cinema. */
+    private SeatingLayout seatingLayout;
+    /** Class of this cinema. */
     private CinemaClass cinemaClass;
+
     /**
-     * Creates a Cinema with these given attributes
-     * @param code             The cinema code identifier
-     * @param seatingLayout    The cinema seating layout
-     * @param cinemaClass      The tye of cinema 
+     * Creates a Cinema with the given attributes.
+     * 
+     * @param code          The cinema code identifier.
+     * @param seatingLayout The cinema seating layout.
+     * @param cinemaClass   The cinema class.
      */
     public Cinema(String code, SeatingLayout seatingLayout, CinemaClass cinemaClass) {
         this.code = code;
         this.seatingLayout = seatingLayout;
         this.cinemaClass = cinemaClass;
     }
+
     /**
-     * String to return cinema code and its class
-     * @return String displaying cinema code and its class
+     * Returns a string containing this cinema's code and its class.
+     * 
+     * @return String containing this cinema's code and its class.
      */
     @Override
     public String toString() {
         return "Cinema [code=" + code + ", cinemaClass=" + cinemaClass + "]";
     }
+
     /**
-     * Get the cinema code 
-     * @return code The cinema code
+     * Gets the code of this cinema.
+     * 
+     * @return String containing this cinema's code.
      */
     public String getCode() {
         return code;
     }
-    /**
-     * The Cinema code
-     * @param code The cinema code
-     */
 
+    /**
+     * Changes the code of this cinema.
+     * 
+     * @param code The input cinema code.
+     */
     public void setCode(String code) {
         this.code = code;
     }
+
     /**
-     * Get the seating layout of the cinema
-     * @return seatingLayout The seating layout of the cinema
+     * Gets the seating layout template for this cinema.
+     * 
+     * @return Seating layout template of this cinema.
      */
     public SeatingLayout getSeatingLayout() {
         return (SeatingLayout) seatingLayout.clone();
     }
-    /**
-     * The seating layout of the cinema
-     * @param seatingLayout The seating layout of the cinema
-     */
 
+    /**
+     * Changes the seating layout template for this cinema.
+     * 
+     * @param seatingLayout The input seating layout.
+     */
     public void setSeatingLayout(SeatingLayout seatingLayout) {
         this.seatingLayout = seatingLayout;
     }
+
     /**
-     * Get the class of the cinema chosen by movie-goer
-     * @return cinemaClass The class of cinema chosen by movie-goer
+     * Gets the class of this cinema.
+     * 
+     * @return Class of this cinema.
      */
-    
     public CinemaClass getCinemaClass() {
         return cinemaClass;
     }
-    /**
-     * The class of the cinema chosen by movie-goer
-     * @param cinemaClass The class of cinema chosen by movie-goer
-     */
 
+    /**
+     * Changes the class of this cinema.
+     * 
+     * @param cinemaClass The input cinema class.
+     */
     public void setCinemaClass(CinemaClass cinemaClass) {
         this.cinemaClass = cinemaClass;
     }
+
     /**
-     * Compare 2 Cinema Instances to check if they are identical
-     * @return boolean      Return true if both cinemas are identical based on their cinemacode, seating layout and cinema class, else false
+     * Compares 2 Cinema instances to check if they are identical.
+     * 
+     * @return Returns true if all attributes of both cinemas are equal, else
+     *         false.
      */
     @Override
     public boolean equals(Object obj) {

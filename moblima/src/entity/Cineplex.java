@@ -4,87 +4,100 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * A Cineplex has a name identifier, a location and a list of cinemas that the cineplex contains. A Cineplex has at least 3 Cinemas. 
- * @author OOP SSP1 Lab Group 4
- * @version 30/10/2022
+ * Represents a Cineplex.
+ * A Cineplex has at least 3 Cinemas.
  */
 public class Cineplex implements Serializable {
-    /**
-     * The name of cineplex
-     */
-	private String name;
-	/**
-	 * The location of cineplex
-	 */
+    /** Name of this cineplex. */
+    private String name;
+    /** Location of this cineplex. */
     private String location;
-    /**
-     * The list of cinemas
-     */
+    /** List of cinemas in this cineplex. */
     private ArrayList<Cinema> cinemas;
+
     /**
-     * Creates a Cineplex with these given attributes. 
-     * @param name	    The name of the cineplex
-     * @param location	The location of the cineplex
-     * @param cinemas	The the list of cinemas
+     * Creates a Cineplex with the given attributes.
+     * 
+     * @param name     The cineplex name.
+     * @param location The cineplex locaiton.
+     * @param cinemas  The list of cinemas in the cineplex.
      */
     public Cineplex(String name, String location, ArrayList<Cinema> cinemas) {
         this.name = name;
         this.location = location;
         this.cinemas = cinemas;
     }
+
     /**
-     * String to display cineplex name, location and list of cinemas
-     * @return String displaying cineplex name, location and list of cinemas
+     * Returns a string containing this cineplex's name, location and list of
+     * cinemas.
+     * 
+     * @return String containing this cineplex's name, location and list of cinemas.
      */
     @Override
     public String toString() {
         return "Cineplex [name=" + name + ", location=" + location + ", cinemas=" + cinemas + "]";
     }
+
     /**
-     * Get the name of the cineplex
-     * @return name The name of the cineplex
+     * Gets the name of this cineplex.
+     * 
+     * @return String containing this cineplex's name.
      */
     public String getName() {
         return name;
     }
+
     /**
-     * The name of cineplex
-     * @param name The name of cineplex
+     * Changes the name of this cineplex.
+     * 
+     * @param name The input cineplex name.
      */
     public void setName(String name) {
         this.name = name;
     }
+
     /**
-     * Get the location of the cineplex
-     * @return location The location of the cineplex
+     * Gets the location of this cineplex.
+     * 
+     * @return String containing this cineplex's location.
      */
     public String getLocation() {
         return location;
     }
+
     /**
-     * The location of the cineplex 
-     * @param location The location of the cineplex
+     * Changes the location of this cineplex.
+     * 
+     * @param location The input cineplex location.
      */
     public void setLocation(String location) {
         this.location = location;
     }
+
     /**
-     * Get the list of cinemas in the cineplex
-     * @return cinemas The list of of cinemas in the cineplex
+     * Gets the location of this cineplex.
+     * 
+     * @return String containing this cineplex's location.
      */
     public ArrayList<Cinema> getCinemas() {
         return cinemas;
     }
+
     /**
-     * The list of cinemas in the cineplex
-     * @param cinemas The list of cinemas in the cineplex
+     * Changes the list of cinemas in this cineplex.
+     * 
+     * @param cinemas The input list of cinemas.
      */
     public void setCinemas(ArrayList<Cinema> cinemas) {
         this.cinemas = cinemas;
     }
+
     /**
-     * Compare 2 Cineplex Instances to check if they are identical
-     * @return boolean  Return true if both cineplexes are identical based on their name, location and cinemas, else false
+     * Compares 2 Cineplex instances to check if they are identical.
+     * 
+     * @return Returns true if all attributes of both cineplexes are equal, else
+     *         false.
      */
     @Override
     public boolean equals(Object obj) {

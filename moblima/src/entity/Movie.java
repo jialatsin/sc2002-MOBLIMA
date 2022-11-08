@@ -11,82 +11,55 @@ import entity.Enumerators.MovieType;
 import entity.Enumerators.ShowingStatus;
 
 /**
- * It Represents a Movie and its information 
- * @author OOP SSP1 Group 4
- * @version 8/11/2022
+ * Represents a Movie.
  */
 public class Movie implements Serializable {
 
-    /**
-     * id for unique movie id
-     */
-	private int id;
-	/**
-	 * title for movie name
-	 */
+    /** Unique identifier for this movie. */
+    private int id;
+    /** Title of this movie. */
     private String title;
-    /**
-     * synopsis for a summary of the movie
-     */
+    /** Brief summary of this movie. */
     private String synopsis;
-    /**
-     * director for the directors of the film
-     */
+    /** Director of this movie. */
     private String director;
-    /**
-     * cast for the names of the people who have acted in the movie
-     */
+    /** List of names of people who have acted in this movie. */
     private ArrayList<String> cast;
-    /**
-     * genres for the type of genre portrayed by the film
-     */
+    /** List of genres portrayed in this movie. */
     private ArrayList<String> genres;
-    /**
-     * releaseDate for when the film is going be released
-     */
+    /** Release date of this movie. */
     private LocalDate releaseDate;
-    /**
-     * endDate for when the film is going to end in the theatre
-     */
+    /** Date when this movie stops showing. */
     private LocalDate endDate;
-    /**
-     * contentRating is whether the movie is PG, NC17 etc.
-     */
+    /** Content rating of this movie (eg. PG, NC17). */
     private ContentRating contentRating;
-    /**
-     * movieType for the type of movie it is
-     */
+    /** Type of this movie (eg. Blockbuster 3D). */
     private MovieType movieType;
-    /**
-     * reviews for the movie reviews
-     */
+    /** List of reviews from moviegoers for this movie. */
     private ArrayList<Review> reviews = new ArrayList<Review>();
-    /**
-     * averageReviewRatings initialized to -1 
-     */
+    /** Average rating of all reviews for this movie. */
     private double averageReviewRating = -1;
-    /**
-     * ticketSales initialized as 0
-     */
+    /** Total tickets sold for this movie. */
     private int ticketSales = 0;
-    
+
     /**
-     * Creates a movie with the given attributes
-     * By default, a movie will have no reviews and no ticketSales on creation
-     * @param id            It is the unique movie id
-     * @param title         The name of the movie
-     * @param synopsis      The summary of the movie
-     * @param director      The directors of the film
-     * @param cast          The names of the people who have acted in the movie
-     * @param genres        The type of genre portrayed by the film
-     * @param releaseDate   The date when the film is going be released
-     * @param endDate       The date when the film is going to end in the theatre
-     * @param contentRating The content rating of the movie, whether it is PG, NC17 etc.
-     * @param movieType     The type of movie
+     * Creates a Movie with the given attributes.
+     * By default, a movie will have no reviews and no ticket sales on creation.
+     * 
+     * @param id            The unique id for the movie.
+     * @param title         The name of the movie.
+     * @param synopsis      The summary of the movie.
+     * @param director      The director of the movie.
+     * @param cast          The cast members of the movie.
+     * @param genres        The genres of the movie.
+     * @param releaseDate   The release date of the movie.
+     * @param endDate       The end date of the movie.
+     * @param contentRating The content rating of the movie.
+     * @param movieType     The type of movie.
      */
-    
     public Movie(int id, String title, String synopsis, String director, ArrayList<String> cast,
-            ArrayList<String> genres, LocalDate releaseDate, LocalDate endDate, ContentRating contentRating, MovieType movieType) {
+            ArrayList<String> genres, LocalDate releaseDate, LocalDate endDate, ContentRating contentRating,
+            MovieType movieType) {
         this.id = id;
         this.title = title;
         this.synopsis = synopsis;
@@ -98,11 +71,15 @@ public class Movie implements Serializable {
         this.contentRating = contentRating;
         this.movieType = movieType;
     }
+
     /**
-     * String containing a short description about this Movie to return when called
-     * Contains movie title, ID, release and end date, showing status, ticket sales
-     * and overall review rating
+     * Returns a string containing a brief description about this movie.
+     * String contains movie title, ID, release and end date, showing status, ticket
+     * sales and overall review rating.
+     * 
+     * @return String containing a brief description about this movie.
      */
+    @Override
     public String toString() {
         String movieString = "";
 
@@ -122,9 +99,12 @@ public class Movie implements Serializable {
 
         return movieString;
     }
+
     /**
-     * Compare 2 Movie Instances to check if they are identical
-     * @return boolean Return true if both movies are identical based on their title, synopsis, director, cast etc. else false
+     * Compares 2 Movie instances to check if they are identical.
+     * 
+     * @return Returns true if all attributes of both movies are equal, else
+     *         false.
      */
     @Override
     public boolean equals(Object obj) {
@@ -149,142 +129,180 @@ public class Movie implements Serializable {
     }
 
     /**
-     * Get the unique movieid
-     * @return id The unique movie id
+     * Gets the unique id for this movie.
+     * 
+     * @return Unique id for this movie.
      */
     public int getId() {
         return id;
     }
+
     /**
-     * Unique movieid
-     * @param id The unique movie id 
+     * Changes the unique id for this movie.
+     * 
+     * @param id The input id.
      */
     public void setId(int id) {
         this.id = id;
     }
+
     /**
-     * Get the title of the movie
-     * @return title The title of the movie
+     * Gets the title for this movie.
+     * 
+     * @return Title for this movie.
      */
     public String getTitle() {
         return title;
     }
+
     /**
-     * The title of the movie
-     * @param title The title of the movie
+     * Changes the title for this movie.
+     * 
+     * @param title The input title.
      */
     public void setTitle(String title) {
         this.title = title;
     }
+
     /**
-     * Get the brief summary of the movie
-     * @return synopsis The brief summary of the movie
+     * Gets the synopsis for this movie.
+     * 
+     * @return synopsis for this movie.
      */
     public String getSynopsis() {
         return synopsis;
     }
+
     /**
-     * The brief summary of the movie
-     * @param synopsis The brief summary of the movie
+     * Changes the synopsis for this movie.
+     * 
+     * @param synopsis The input synopsis.
      */
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
     }
+
     /**
-     * Get the names of the directors of the movies
-     * @return director The names of the directors of the movies
+     * Gets the director for this movie.
+     * 
+     * @return Director for this movie.
      */
     public String getDirector() {
         return director;
     }
+
     /**
-     * The names of the directors of the movies
-     * @param director The names of the directors of the movies
+     * Changes the director for this movie.
+     * 
+     * @param director The input director.
      */
     public void setDirector(String director) {
         this.director = director;
     }
+
     /**
-     * Get the cast names
-     * @return cast The cast names of the movie
+     * Gets the list of cast members for this movie.
+     * 
+     * @return List of cast members for this movie.
      */
     public ArrayList<String> getCast() {
         return cast;
     }
+
     /**
-     * The cast names
-     * @param cast The cast names of the movie
+     * Changes the list of cast members for this movie.
+     * 
+     * @param cast The input list of cast members.
      */
     public void setCast(ArrayList<String> cast) {
         this.cast = cast;
     }
+
     /**
-     * Get the genres of the movie
-     * @return genres The genres of the movie
+     * Gets the list of genres for this movie.
+     * 
+     * @return List of genres for this movie.
      */
     public ArrayList<String> getGenres() {
         return genres;
     }
+
     /**
-     * The genres of the movie
-     * @param genres The genres of the movie
+     * Changes the list of genres for this movie.
+     * 
+     * @param genres The input list of genres.
      */
     public void setGenres(ArrayList<String> genres) {
         this.genres = genres;
     }
+
     /**
-     * The release date of the movie
-     * @return release The release date of the movie
+     * Gets the release date for this movie.
+     * 
+     * @return Release date for this movie.
      */
     public LocalDate getReleaseDate() {
         return releaseDate;
     }
+
     /**
-     * The release date of the movie
-     * @param releaseDate The release date of the movie
+     * Changes the release date for this movie.
+     * 
+     * @param releaseDate The input release date.
      */
     public void setReleaseDate(LocalDate releaseDate) {
         this.releaseDate = releaseDate;
     }
+
     /**
-     * Get the end date of the movie as in the last date when the movie will be showed in the theatre
-     * @return end date of the movie as in the last date when the movie will be showed in the theatre
+     * Gets the end date for this movie.
+     * 
+     * @return End date for this movie.
      */
     public LocalDate getEndDate() {
         return endDate;
     }
+
     /**
-     * The end date of the movie as in the last date when the movie will be showed in the theatre
-     * @param endDate The end date of the movie as in the last date when the movie will be showed in the theatre
+     * Changes the end date for this movie.
+     * 
+     * @param endDate The input end date.
      */
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
-    /**
-     * Get the reviews of the movie
-     * @return reviews The reviews of the movie
-     */
 
+    /**
+     * Gets the list of reviews for this movie.
+     * 
+     * @return List of reviews for this movie.
+     */
     public ArrayList<Review> getReviews() {
         return reviews;
     }
+
     /**
-     * The reviews of the movie
-     * @param reviews The reviews of the movie
+     * Changes the list of reviews for this movie.
+     * 
+     * @param reviews The input list of reviews.
      */
     public void setReviews(ArrayList<Review> reviews) {
         this.reviews = reviews;
     }
+
     /**
-     * Get the average review rating of the movie
-     * @return averageRevieRating The average rewview rating of the movie
+     * Gets the average review rating for this movie.
+     * 
+     * @return Average review rating for this movie.
      */
     public double getAverageReviewRating() {
         return averageReviewRating;
     }
 
-    /**  
-     *   Average review rating is set to -1 if there are no reviews currently available
+    /**
+     * Calculates the average review rating for this movie.
+     * Average review rating is set to -1 if there are no reviews currently
+     * available.
      */
     public void setAverageReviewRating() {
         int reviewCount = reviews.size();
@@ -298,59 +316,71 @@ public class Movie implements Serializable {
         }
         this.averageReviewRating = reviewRating / reviewCount;
     }
-    /**
-     * Get the total ticket sales of the movie 
-     * @return ticketSales The total ticket sales of the movie
-     */
 
+    /**
+     * Gets the number of ticket sales for this movie.
+     * 
+     * @return Number of ticket sales for this movie.
+     */
     public int getTicketSales() {
         return ticketSales;
     }
+
     /**
-     * The total ticket sales of the movie
-     * @param ticketSales The total ticket sales of the movie
+     * Changes the number of ticket sales for this movie.
+     * 
+     * @param ticketSales The input number of ticket sales.
      */
     public void setTicketSales(int ticketSales) {
         this.ticketSales = ticketSales;
     }
+
     /**
-     * The the content rating of the movie as in whether its PG, NC17 etc.
-     * @return contentRating The content rating of the movie as in whether its PG, NC17 etc. 
+     * Gets the content rating for this movie.
+     * 
+     * @return Content rating for this movie.
      */
     public ContentRating getContentRating() {
         return contentRating;
     }
+
     /**
-     * The content rating of the movie as in whether its PG, NC17 etc.
-     * @param contentRating of the movie as in whether its PG, NC17 etc.
+     * Changes the content rating for this movie.
+     * 
+     * @param contentRating The input content rating.
      */
     public void setContentRating(ContentRating contentRating) {
         this.contentRating = contentRating;
     }
+
     /**
-     * Get the type of the movie
-     * @return movieType The Type of the movie
+     * Gets the type of this movie.
+     * 
+     * @return Type of this movie.
      */
     public MovieType getMovieType() {
         return movieType;
     }
+
     /**
-     * The type of the movie
-     * @param movieType The type of the movie
+     * Changes the type for this movie.
+     * 
+     * @param movieType The input movie type.
      */
     public void setMovieType(MovieType movieType) {
         this.movieType = movieType;
     }
-    
+
     /**
-     * Query the showing status of the movie
-     * Showing status is automatically derived from movie's releaseDate, endDate
-     * and the current LocalDate from the system clock
-     * Returns "END OF SHOWING" if current date is after movie end date
-     * Returns "NOW SHOWING" if current date is after release date and before end date
-     * Returns "PREVIEW" if current date is within 7 days before release date
-     * Returns "COMING SOON" if current date is more than 7 days before release date
-     * @return Showing Status of the movie
+     * Queries the showing status of the movie. Showing status is automatically
+     * derived from movie's releaseDate, endDate and the current LocalDate from the
+     * system clock.
+     * Returns "END OF SHOWING" if current date is after movie end date, "NOW
+     * SHOWING" if current date is after release date and before end date, "PREVIEW"
+     * if current date is within 7 days before release date, "COMING SOON" if
+     * current date is more than 7 days before release date.
+     * 
+     * @return Showing status of this movie.
      */
     public ShowingStatus getShowingStatus() {
         LocalDate current = LocalDate.now();
@@ -370,4 +400,3 @@ public class Movie implements Serializable {
         }
     }
 }
-

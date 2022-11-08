@@ -3,79 +3,92 @@ package entity;
 import java.io.Serializable;
 
 /**
- * It Represents a MovieGoer and their details are captured by the application upon booking of tickets. The moviegoer can can only read database records and create certain records (eg. reviews)
- * @author OOP SSP1 Lab Group 4
- * @version 07/11/2022
+ * Represents a MovieGoer.
+ * Details of the moviegoer are captured by the application upon booking of
+ * tickets. The moviegoer can only read database records and create certain
+ * records (eg. reviews).
  */
 public class MovieGoer implements Serializable {
-    /**
-     * name of the movie-goer
-     */
-	private String name;
-	/**
-	 * mobile number of the movie-goer
-	 */
+    /** Name of this moviegoer. */
+    private String name;
+    /** Mobile number of this moviegoer. */
     private String mobile;
-    /**
-     * email of the movie-goer
-     */
+    /** Email address of this moviegoer. */
     private String email;
+
     /**
-     * Creates Information of the MovieGoer using these given attributes
-     * @param name   The name of the movie-goer
-     * @param mobile The number of the movie-goer
-     * @param email  The email id of the movie-goer
+     * Creates a MovieGoer with the given attributes.
+     * 
+     * @param name   The moviegoer's name.
+     * @param mobile The moviegoer's mobile number.
+     * @param email  The moviegoer's email address.
      */
     public MovieGoer(String name, String mobile, String email) {
         this.name = name;
         this.mobile = mobile;
         this.email = email;
     }
+
     /**
-     * Get the name of the movie-goer
-     * @return name The name of the movie-goer
+     * Gets the name of this moviegoer.
+     * 
+     * @return String containing the name of this moviegoer.
      */
     public String getName() {
         return name;
     }
+
     /**
-     * The name of the movie-goer
-     * @param name The name of the movie-goer
+     * Changes the name of this moviegoer.
+     * 
+     * @param name The input name.
      */
     public void setName(String name) {
         this.name = name;
     }
+
     /**
-     * The mobile number of the movie-goer
-     * @return mobile The mobile number of the movie-goer
+     * Gets the mobile number of this moviegoer.
+     * 
+     * @return String containing the mobile number of this moviegoer.
      */
     public String getMobile() {
         return mobile;
     }
+
     /**
-     * The mobile number of the movie-goer
-     * @param mobile The mobile number of the movie-goer
+     * Changes the mobile number of this moviegoer.
+     * 
+     * @param mobile The input mobile number.
      */
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
+
     /**
-     * Get the email id of the movie goer
-     * @return email The email id of the movie goer
+     * Gets the email address of this moviegoer.
+     * 
+     * @return String containing the email address of this moviegoer.
      */
     public String getEmail() {
         return email;
     }
+
     /**
-     * The email id of the movie goer
-     * @param email The email id of the movie goer
+     * Changes the email address of this moviegoer.
+     * 
+     * @param email The input email address.
      */
     public void setEmail(String email) {
         this.email = email;
     }
+
     /**
-     * String to display the movie-goers name, mobile number and email id
-     * @return string displaying the movie-goers name, mobile number and email id
+     * Returns a string containing this moviegoer's name, mobile number and email
+     * address.
+     * 
+     * @return String containing this moviegoer's name, mobile number and email
+     *         address.
      */
     @Override
     public String toString() {

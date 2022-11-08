@@ -16,26 +16,21 @@ import entity.Enumerators.Day;
 import entity.Enumerators.MovieType;
 
 /**
- * It is an Admin interface to configure system settings related to Holidays, ticket prices and Admin accounts.
- * @author OOP LAB Group 4
- * @version 8/11/2022
+ * Represents the admin interface to configure system settings related to
+ * holidays, ticket prices and admin accounts.
  */
 public class SystemConfigUI {
-	/**
-	 * The holiday controller
-	 */
+    /** The holiday controller to be referenced. */
     private static HolidayController holidayController = new HolidayController();
-    /**
-	 * The price controller
-	 */
+    /** The price controller to be referenced. */
     private static PriceController priceController = new PriceController();
-    /**
-	 * The admin controller
-	 */
+    /** The admin controller to be referenced. */
     private static AdminController adminController = new AdminController();
 
-    /** 
-     * It is an Menu for Configure System Settings displaying 4 options which are managing holidays, ticket prices, admin accounts and return to admin menu.  
+    /**
+     * Menu that displays options to configure the system settings. Displays 4
+     * options: Manage Holidays, Manage Ticket Prices, Manage Admin Accounts, Return
+     * to Admin Menu.
      */
     public static void main() {
         int selection;
@@ -63,8 +58,10 @@ public class SystemConfigUI {
         } while (true);
     }
 
-    /** 
-     * It is a Menu displaying 4 options which are adding, deleting, viewing Holidays in Holiday database and return to system configuration menu. 
+    /**
+     * Menu for managing holidays in the holiday database. Displays 4 options: Add a
+     * Holiday, Delete a Holiday, View All Holidays, Return to System Configuration
+     * Menu.
      */
     private static void manageHolidays() {
         int selection;
@@ -117,8 +114,9 @@ public class SystemConfigUI {
         } while (true);
     }
 
-    /** 
-     * It is a Menu displaying 3 options for updating, viewing Prices in Price database and return to system configuration menu.  
+    /**
+     * Menu for managing ticket prices in the price database. Displays 3 options:
+     * Update a Ticket Price, View Price List, Return to System Configuration Menu.
      */
     private static void managePrices() {
         int selection;
@@ -142,8 +140,10 @@ public class SystemConfigUI {
         } while (true);
     }
 
-    /** 
-     * It is Menu for updating Prices in Price database displaying 5 options which are updating price according to movie type, cinema class, the age of movie-goer, day of week and base price of the movie ticket.  
+    /**
+     * Menu for updating prices in the price database. Displays 5 options: Update
+     * movieType fee, Update cinemaClass fee, Update movieGoerAge fee, Update
+     * dayOfWeek fee, Update base price.
      */
     private static void updatePrice() {
         int selection;
@@ -191,7 +191,9 @@ public class SystemConfigUI {
     }
 
     /**
-     * It is Menu for viewing all the current Prices in Price database where Regular 2D MovieType is taken as the base price, while all other prices are  additional fees added onto the base price.
+     * Displays all the current prices in the price database.
+     * Regular 2D MovieType is taken as the base price, while all other prices are
+     * additional fees added onto the base price.
      */
     private static void viewPriceList() {
         Map<PriceType, Double> priceList = priceController.getPriceList();
@@ -201,7 +203,9 @@ public class SystemConfigUI {
     }
 
     /**
-     * It is a Menu for creating, deleting and viewing Admins in Admin database displaying 4 options which are creating, deleting an admin, viewing all admins and returning to system configuration menu. 
+     * Menu for managing admin accounts in the admin database. Displays 4 options:
+     * Create an Admin, Delete an Admin, View All Admins, Return to System
+     * Configuration Menu.
      */
     private static void manageAdmin() {
         int selection;
