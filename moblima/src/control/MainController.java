@@ -15,26 +15,58 @@ import entity.Enumerators.MovieType;
 import entity.PriceType;
 
 /**
- * Contains path names of Database files to access, and initializes starting
- * data for some database files
+ * It Represents the Main Controller and it contains path names of Database files to access, and initializes starting data for some database files.
+ * @author OOP SSP1 Lab Group 4
+ * @version 8/11/2022
  */
 public class MainController {
+	 /**
+     * File name of admin Database file to access 
+     */
     public static final String FILEPATH_ADMIN = "moblima/db/admin.txt";
+    /**
+     * File name of movie Database file to access
+     */
     public static final String FILEPATH_MOVIE = "moblima/db/movie.txt";
+    /**
+     * File name of holiday Database file to access
+     */
     public static final String FILEPATH_HOLIDAY = "moblima/db/holiday.txt";
+    /**
+     * File name of cineplex Database file to access
+     */
     public static final String FILEPATH_CINEPLEX = "moblima/db/cineplex.txt";
+    /**
+     * File name of cinema Database file to access
+     */
     public static final String FILEPATH_CINEMA = "moblima/db/cinema.txt";
+    /**
+     * File name of showing Database file to access
+     */
     public static final String FILEPATH_SHOWING = "moblima/db/showing.txt";
+    /**
+     * File name of price Database file to access
+     */
     public static final String FILEPATH_PRICE = "moblima/db/price.txt";
+    /**
+     * File name of booking Database file to access
+     */
     public static final String FILEPATH_BOOKING = "moblima/db/booking.txt";
-
+    /**
+     * The cineplex controller 
+     */
     private static CineplexController cineplexController = new CineplexController();
+    /**
+     * The price controller 
+     */
     private static PriceController priceController = new PriceController();
+    /**
+     * The admin controller 
+     */
     private static AdminController adminController = new AdminController();
 
-    /*
-     * Creates starting data for admins, cineplexes and pricing if not already
-     * available in database
+    /**
+     * It Creates starting data for admins, cineplexes and pricing if not already available in database
      */
     public static void initializeDatabase() {
         // Initialize admin database
@@ -45,8 +77,10 @@ public class MainController {
             admins.add(admin);
             adminController.overwriteDatabase(admins);
         }
-
-        // Intiialize cineplex database
+        
+        /**
+         * Intiialize cineplex database
+         */
         ArrayList<Cineplex> cineplexes = new ArrayList<Cineplex>();
         cineplexes = cineplexController.readFromDatabase();
         if (cineplexes.size() == 0) {
