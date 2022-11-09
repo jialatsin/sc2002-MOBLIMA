@@ -229,7 +229,7 @@ public class Enumerators {
     }
 
     /**
-     * Defined for readability and easier referencing of Movie attributes.
+     * Enumerators for easier referencing of Movie attributes.
      * In the order of selection options provided to user when updating movie
      * attributes.
      */
@@ -271,7 +271,7 @@ public class Enumerators {
     }
 
     /**
-     * Defined for readability and easier referencing of Showing attributes.
+     * Enumerators for easier referencing of Showing attributes.
      * In the order of selection options provided to user when updating showing
      * attributes.
      */
