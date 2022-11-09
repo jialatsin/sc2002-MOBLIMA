@@ -7,6 +7,7 @@ import java.util.Comparator;
 
 import entity.*;
 import entity.Enumerators.ContentRating;
+import entity.Enumerators.MovieAttribute;
 import entity.Enumerators.MovieType;
 
 /**
@@ -76,48 +77,6 @@ public class MovieController extends DatabaseController<Movie> {
             }
         }
         return false;
-    }
-
-    /**
-     * Defined for readability and easier referencing of Movie attributes.
-     * In the order of selection options provided to user when updating movie
-     * attributes.
-     */
-    public enum MovieAttribute {
-        /** Unique identifier for the movie. */
-        ID,
-        /** Title of the movie. */
-        TITLE,
-        /** Synopsis of the movie. */
-        SYNOPSIS,
-        /** Director of the movie. */
-        DIRECTOR,
-        /** List of cast members for the movie. */
-        CAST,
-        /** List of genres for the movie. */
-        GENRES,
-        /** Release date of the movie. */
-        RELEASE_DATE,
-        /** Date when the movie stops showing. */
-        END_DATE,
-        /** Content rating of the movie (eg. PG, NC17). */
-        CONTENT_RATING,
-        /** Type of the movie (eg. Blockbuster 3D). */
-        MOVIE_TYPE,
-        /** Total tickets sold for the movie. */
-        TICKET_SALES;
-
-        /**
-         * Returns the mapping of the user input selection to the attribute enumerator.
-         * User selection starts from 1, but enumerator counting starts from 0.
-         * 
-         * @param i Input user selection.
-         * @return Returns the mapping of the user input selection to the attribute
-         *         enumerator.
-         */
-        public static MovieAttribute get(int i) {
-            return values()[i - 1]; // User selection starts from 1, but enum counting starts from 0
-        }
     }
 
     /**

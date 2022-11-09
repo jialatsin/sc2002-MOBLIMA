@@ -3,7 +3,7 @@ package boundary;
 import control.BookingController;
 import control.MovieController;
 import control.ShowingController;
-import control.ShowingController.ShowingAttribute;
+import entity.Enumerators.ShowingAttribute;
 
 import java.util.*;
 
@@ -68,7 +68,7 @@ public class MovieGoerUI {
                     viewBookingHistory();
                     break;
                 case 6: // List Top 5 Ranking Movies
-                    ListTopMovies.main();
+                    ListTopMoviesUI.main();
                     break;
                 case 7: // Add Review
                     addReview();
@@ -84,7 +84,7 @@ public class MovieGoerUI {
      * Overall reviewer rating will only be displayed if there are more than ONE
      * individual rating, else 'NaN' is displayed.
      */
-    public static void viewMovieDetails() {
+    private static void viewMovieDetails() {
         Movie movie = UserHandler.getMovieByTitleFromUser();
         if (movie == null)
             return;
@@ -131,7 +131,7 @@ public class MovieGoerUI {
      * Prompts user for a review to be added to a movie, and updates relevant
      * showings with the given updated movie.
      */
-    public static void addReview() {
+    private static void addReview() {
         Movie movie = UserHandler.getMovieByTitleFromUser();
         if (movie == null)
             return;
@@ -160,7 +160,7 @@ public class MovieGoerUI {
     /**
      * Prompts user for their email to view all of their previous bookings.
      */
-    public static void viewBookingHistory() {
+    private static void viewBookingHistory() {
         System.out.println("\nEnter email to view booking history for:");
         String email = InputHandler.scanEmail();
 

@@ -9,7 +9,7 @@ import entity.Movie;
  * Represents the user interface to list the top movies, used by both admin and
  * moviegoer.
  */
-public class ListTopMovies {
+public class ListTopMoviesUI {
     /** The movie controller to be referenced. */
     private static MovieController movieController = new MovieController();
 

@@ -45,7 +45,7 @@ public class AdminUI {
                     SystemConfigUI.main();
                     break;
                 case 4: // List Top 5 Ranking Movies
-                    ListTopMovies.main();
+                    ListTopMoviesUI.main();
                     break;
                 case 0: // Logout to Main Menu
                     return;

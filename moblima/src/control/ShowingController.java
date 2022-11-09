@@ -3,6 +3,7 @@ package control;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import entity.Enumerators.ShowingAttribute;
 
 import entity.*;
 
@@ -153,34 +154,6 @@ public class ShowingController extends DatabaseController<Showing> {
             }
         }
         overwriteDatabase(validShowings);
-    }
-
-    /**
-     * Defined for readability and easier referencing of Showing attributes.
-     * In the order of selection options provided to user when updating showing
-     * attributes.
-     */
-    public enum ShowingAttribute {
-        /** Unique identifier for the showing. */
-        ID,
-        /** Movie being shown. */
-        MOVIE,
-        /** Showtime of the showing. */
-        SHOWTIME,
-        /** Cinema where the showing is being held. */
-        CINEMA;
-
-        /**
-         * Returns the mapping of the user input selection to the attribute enumerator.
-         * User selection starts from 1, but enumerator counting starts from 0.
-         * 
-         * @param i Input user selection.
-         * @return Returns the mapping of the user input selection to the attribute
-         *         enumerator.
-         */
-        public static ShowingAttribute get(int i) {
-            return values()[i - 1]; // User selection starts from 1, but enum counting starts from 0
-        }
     }
 
     /**

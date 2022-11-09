@@ -5,12 +5,12 @@ import java.util.ArrayList;
 
 import control.MovieController;
 import control.ShowingController;
-import control.MovieController.MovieAttribute;
-import control.ShowingController.ShowingAttribute;
 import entity.Movie;
 import entity.Showing;
 import entity.Enumerators.ContentRating;
 import entity.Enumerators.MovieType;
+import entity.Enumerators.MovieAttribute;
+import entity.Enumerators.ShowingAttribute;
 
 /**
  * Represents the admin interface to create, update, delete, and list movies.

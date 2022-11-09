@@ -2,7 +2,7 @@ package boundary;
 
 import java.time.LocalDateTime;
 import control.*;
-import control.ShowingController.ShowingAttribute;
+import entity.Enumerators.ShowingAttribute;
 import entity.*;
 import entity.Enumerators.ShowingStatus;
 import entity.Enumerators.User;
